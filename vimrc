@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 16-Aug-2016.
+" Last Change: 04-Sep-2016.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -189,6 +189,9 @@ set cursorline
 
 " 列を強調表示
 set cursorcolumn
+
+" power_line に必須
+set t_Co=256
 "===========================================================================
 "---------------------------------------------------------------------------
 " 編集に関する設定:
@@ -385,8 +388,17 @@ NeoBundle 'scrooloose/nerdtree'
 " =====================
 
 " カラースキーム一覧表示に Unite.vim を使う
-  NeoBundle 'Shougo/unite.vim'
-  NeoBundle 'ujihisa/unite-colorscheme'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'ujihisa/unite-colorscheme'
+
+" HTMLを簡単作成 生成したい任意を入力後<C-y>
+NeoBundle 'mattn/emmet-vim'
+
+" ステータスラインをカッコよく
+NeoBundle 'itchyny/lightline.vim'
+
+"閉じカッコなどの入力補完
+NeoBundle 'cohama/lexima.vim'
 
 call neobundle#end()
 
@@ -400,3 +412,17 @@ NeoBundleCheck
 "-------------------------
 " End Neobundle Settings.
 "-------------------------
+
+"NERDTreeのブックマークを表示
+let g:NERDTreeShowBookmarks=1
+"NERDTreeを起動
+autocmd vimenter * NERDTree
+
+"キーマッピング
+inoremap <C-e> <Esc>$a
+inoremap <C-a> <Esc>^i
+noremap <C-e> <Esc>$
+noremap <C-a> <Esc>^
+
+"ヤンクした値がdやxで消えないように（復活させる）
+noremap PP "0p

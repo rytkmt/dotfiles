@@ -30,7 +30,7 @@ if (has("gui_running"))
     let s:beige       = "#FFE0C0"
 " 上書き"
     let s:base4       = "#232323"
-    let s:base3       = "#383838"
+    let s:base3       = "#484848"
     let s:base2       = "#464646"
     let s:base1       = "#B9B9B9"
     let s:base0       = "#D8D8D8"
@@ -102,16 +102,16 @@ exe "let s:fg_beige       = ' ".s:vmode."fg=".s:beige      ."'"
 "}}}
 
 exe "hi! Normal"                 .s:fg_base0       .s:bg_base4
-exe "hi! Comment"                .s:fg_gold
+exe "hi! Comment"                .s:fg_lime
 
 exe "hi! Constant"               .s:fg_yellow
-exe "hi! String"                 .s:fg_lime
+exe "hi! String"                 .s:fg_beige
 exe "hi! Character"              .s:fg_green
 
-exe "hi! Identifier"             .s:fg_lilac "gui=NONE, cterm=NONE"
+exe "hi! Identifier"             .s:fg_dark_blue "gui=NONE, cterm=NONE"
 exe "hi! Function"               .s:fg_light_red
 
-exe "hi! Statement"              .s:fg_orange "gui=NONE, cterm=NONE"
+exe "hi! Statement"              .s:fg_red "gui=NONE, cterm=NONE"
 hi! link Label String
 hi! link Exception PreProc
 
@@ -119,7 +119,7 @@ exe "hi! PreProc"                .s:fg_light_red
 hi! link Define Type
 exe "hi! Macro"                  .s:fg_beige
 
-exe "hi! Type"                   .s:fg_light_blue "gui=NONE, cterm=NONE"
+exe "hi! Type"                   .s:fg_orange "gui=NONE, cterm=NONE"
 hi! link StorageClass Identifier
 
 exe "hi! Special"                .s:fg_light_blue
@@ -191,6 +191,8 @@ exe "hi! _Comment" .s:fg_lime
 exe "hi! _Regexp" .s:fg_beige
 "【_Unknown】"
 exe "hi! _Unknown" .s:bg_yellow
+"【_Value】
+exe "hi! _Value" .s:fg_lilac
 
 " Diff {{{
 exe "hi! DiffAdd"                .s:fg_green       .s:bg_base4      "gui=underline, cterm=underline"
@@ -257,29 +259,16 @@ exe "hi! rubyConditional" .s:fg_red
 exe "hi! rubyControl" .s:fg_red
 " exception_rescue"
 exe "hi! rubyExceptional" .s:fg_red
-" method_exception_resque
-exe "hi! rubyMethodExceptional" .s:fg_red
 " yield "
 exe "hi! rubyKeyword" .s:fg_red
-" class end "
-exe "hi! rubyClass" .s:fg_red
-" module end "
-exe "hi! rubyModule" .s:fg_red
 " while end for end "
 exe "hi! rubyRepeat" .s:fg_red
 " for nm,val in some do <-- do "
 exe "hi! rubyOptionalDo" .s:fg_red
-" module_function :some <-- module_function "
-exe "hi! rubyAccess" .s:fg_red
-" attr "
-exe "hi! rubyAttribute" .s:fg_red
 " some = 0 if true <-- if "
 exe "hi! rubyConditionalModifier" .s:fg_red
 " begin some end until true <-- until "
 exe "hi! rubyRepeatModifier" .s:fg_red
-" def end "
-exe "hi! rubyDefine" .s:fg_red
-
 " -------- dark_blue -----------"
 
 " Person  Exception "
@@ -315,6 +304,20 @@ hi! link rubyDocumentation _Comment
 
 " ---------- green -------------"
 " ---------- yellow ------------"
+" def end "
+exe "hi! rubyDefine" .s:fg_yellow
+" method_exception_resque
+exe "hi! rubyMethodExceptional" .s:fg_yellow
+" class end "
+exe "hi! rubyClass" .s:fg_yellow
+" module end "
+exe "hi! rubyModule" .s:fg_yellow
+" module_function :some <-- module_function "
+exe "hi! rubyAccess" .s:fg_yellow
+" attr "
+exe "hi! rubyAttribute" .s:fg_yellow
+
+
 " ---------- beige ------------"
 
 "【_String】"
@@ -348,11 +351,11 @@ exe "hi! rubyInclude" .s:fg_orange
 
 " ----------- lilac -----------"
 " 3 "
-exe "hi! rubyInteger" .s:fg_lilac
+hi! link rubyInteger _Value
 " 1.0 "
-exe "hi! rubyFloat" .s:fg_lilac
+hi! link rubyFloat _Value
 " true false "
-exe "hi! rubyBoolean" .s:fg_lilac
+hi! link rubyBoolean _Value
 " ---------- ??? --------------"
 "【_Unknown】"
 hi! link rubyQuoteEscape _Unknown
@@ -627,7 +630,7 @@ hi! link cssPseudoClassLang _Unknown
 
 " javascript {{{
 " -------------- base0 -------------------- "
-" { } "
+" { } "dd
 exe "hi! javaScriptBraces" .s:fg_base0
 
 " alert() confirm() <-- alert confirm "
@@ -675,13 +678,13 @@ hi! link javaScriptStringS _String
 exe "hi! javaScriptType" .s:fg_dark_blue
 " -------------- lilac -------------------- "
 " 1 3 "
-exe "hi! javaScriptValue" .s:fg_lilac
+hi! link javaScriptValue _Value
 " 1 3 "
-exe "hi! javaScriptNumber" .s:fg_lilac
+hi! link javaScriptNumber _Value
 " true false "
-exe "hi! javaScriptBoolean" .s:fg_lilac
+hi! link javaScriptBoolean _Value
 " null "
-exe "hi! javaScriptNull" .s:fg_lilac
+hi! link javaScriptNull _Value
 " -------------- ??? ---------------------- "
 hi! link javaScriptRailsFunction _Unknown
 hi! link javaScriptTemplateVar _Unknown
@@ -701,7 +704,90 @@ hi! link javaScriptDebug _Unknown
 hi! link javaScriptConstant _Unknown
 " }}}
 
+" html {{{
+" -------------- base0 --------------
+" class="" name="" id="" <-- class name id
+exe "hi! htmlArg" .s:fg_base0
+" onclick="method(aa,bb)" <-- onclick="method ,
+exe "hi! htmlEvent" .s:fg_base0
+" <a href="aaa">here</a> <-- here
+exe "hi! htmlLink" .s:fg_base0
 
+exe "hi! javaScript" .s:fg_base0
+" ------------- red -----------------
+" <tag> </tag> <-- tag
+exe "hi! htmlTagName" .s:fg_red
+" <script> </script> <-- script
+exe "hi! htmlSpecialTagName" .s:fg_red
+" ------------- lime ----------------
+" 【_Comment】
+" <!-- comment --> <-- -- comment --
+hi! link htmlCommentPart _Comment
+" <!-- comment --> <-- <! >
+hi! link htmlComment _Comment
+hi! link htmlCssStyleComment _Comment
+" ------------- dark_blue -----------
+exe "hi! htmlSpecialChar" .s:fg_dark_blue
+
+" <tag> <div id=""> <-- < > \s =
+exe "hi! htmlTag" .s:fg_dark_blue
+" </tag> <-- </ >
+exe "hi! htmlEndTag" .s:fg_dark_blue
+" <script> <-- < >
+exe "hi! htmlScriptTag" .s:fg_dark_blue
+" -------------- beige --------------
+" "aa" 'aa'
+hi! link htmlString _String
+" -------------- lilac --------------
+" colspan=2 <-- 2
+hi! link htmlValue _Value
+" -------------- Error --------------
+"  
+hi! link htmlError Error
+hi! link htmlTagError Error
+hi! link htmlCommentError Error
+" ------------- Unknown -------------
+hi! link javaScriptExpression _Unknown
+hi! link htmlTagN _Unknown
+hi! link htmlCssDefinition _Unknown
+hi! link htmlPreStmt _Unknown
+hi! link htmlPreError _Unknown
+hi! link htmlPreAttr _Unknown
+hi! link htmlPreProc _Unknown
+hi! link htmlPreProcAttrError _Unknown
+hi! link htmlPreProcAttrName _Unknown
+hi! link htmlBoldUnderline _Unknown
+hi! link htmlBoldItalic _Unknown
+hi! link htmlBold _Unknown
+hi! link htmlBoldUnderlineItalic _Unknown
+hi! link htmlBoldItalicUnderline _Unknown
+hi! link htmlUnderlineBold _Unknown
+hi! link htmlUnderlineItalic _Unknown
+hi! link htmlUnderline _Unknown
+hi! link htmlUnderlineBoldItalic _Unknown
+hi! link htmlUnderlineItalicBold _Unknown
+hi! link htmlItalicBold _Unknown
+hi! link htmlItalicUnderline _Unknown
+hi! link htmlItalic _Unknown
+hi! link htmlItalicBoldUnderline _Unknown
+hi! link htmlItalicUnderlineBold _Unknown
+hi! link htmlHead _Unknown
+hi! link htmlEventSQ _Unknown
+hi! link htmlEventDQ _Unknown
+" ------------- Normal ----------------
+hi! link htmlLeadingSpace Normal
+hi! link htmlH1 Normal
+hi! link htmlH2 Normal
+hi! link htmlH3 Normal
+hi! link htmlH4 Normal
+hi! link htmlH5 Normal
+hi! link htmlH6 Normal
+hi! link htmlTitle Normal
+hi! link cssStyle Normal
+
+"}}}
+"
+"
 " yaml {{{
 "yamlKey        xxx cleared
 "yamlAnchor     xxx cleared
