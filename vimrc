@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 04-Sep-2016.
+" Last Change: 07-Sep-2016.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -413,7 +413,7 @@ NeoBundleCheck
 " End Neobundle Settings.
 "-------------------------
 
-"NERDTreeのブックマークを表示
+"NERDTreeのブックマーを表示
 let g:NERDTreeShowBookmarks=1
 "NERDTreeを起動
 autocmd vimenter * NERDTree
