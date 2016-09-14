@@ -99,6 +99,26 @@ exe "let s:fg_dark_blue   = ' ".s:vmode."fg=".s:dark_blue  ."'"
 exe "let s:fg_light_red   = ' ".s:vmode."fg=".s:light_red  ."'"
 exe "let s:fg_red         = ' ".s:vmode."fg=".s:red        ."'"
 exe "let s:fg_beige       = ' ".s:vmode."fg=".s:beige      ."'"
+
+exe "let s:sp_base4       = ' ".s:vmode."sp=".s:base4      ."'"
+exe "let s:sp_base3       = ' ".s:vmode."sp=".s:base3      ."'"
+exe "let s:sp_base2       = ' ".s:vmode."sp=".s:base2      ."'"
+exe "let s:sp_base1       = ' ".s:vmode."sp=".s:base1      ."'"
+exe "let s:sp_base0       = ' ".s:vmode."sp=".s:base0      ."'"
+exe "let s:sp_gold        = ' ".s:vmode."sp=".s:gold       ."'"
+exe "let s:sp_yellow      = ' ".s:vmode."sp=".s:yellow     ."'"
+exe "let s:sp_orange      = ' ".s:vmode."sp=".s:orange     ."'"
+exe "let s:sp_lime        = ' ".s:vmode."sp=".s:lime       ."'"
+exe "let s:sp_green       = ' ".s:vmode."sp=".s:green      ."'"
+exe "let s:sp_lilac       = ' ".s:vmode."sp=".s:lilac      ."'"
+exe "let s:sp_light_blue  = ' ".s:vmode."sp=".s:light_blue ."'"
+exe "let s:sp_dark_blue   = ' ".s:vmode."sp=".s:dark_blue  ."'"
+exe "let s:sp_light_red   = ' ".s:vmode."sp=".s:light_red  ."'"
+exe "let s:sp_red         = ' ".s:vmode."sp=".s:red        ."'"
+exe "let s:sp_beige       = ' ".s:vmode."sp=".s:beige      ."'"
+
+exe "let s:underline      = ' ".s:vmode."=underline'"
+exe "let s:bold      = ' ".s:vmode."=bold'"
 "}}}
 
 exe "hi! Normal"                 .s:fg_base0       .s:bg_base4
@@ -138,7 +158,7 @@ hi! link CursorColumn CursorLine
 exe "hi! ColorColumn"                              .s:bg_base2
 exe "hi! LineNr"                 .s:fg_base1
 exe "hi! CursorLineNr"           .s:fg_yellow      .s:bg_base3
-hi! link NonText LineNr
+exe "hi! NonText"                .s:fg_light_blue                       .s:bold
 
 exe "hi! Folded"                 .s:fg_base1       .s:bg_base4
 
