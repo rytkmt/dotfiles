@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 07-Sep-2016.
+" Last Change: 13-Sep-2016.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -30,7 +30,6 @@ scriptencoding utf-8
 "   :echo $HOME
 "   :echo $VIM
 "   :version
-echo 'macvim'
 "---------------------------------------------------------------------------
 " サイトローカルな設定($VIM/vimrc_local.vim)があれば読み込む。読み込んだ後に
 " 変数g:vimrc_local_finishに非0な値が設定されていた場合には、それ以上の設定
@@ -69,9 +68,11 @@ unlet! s:path
 " ファイルを読込むにトライする文字エンコードの順序を確定する。漢字コード自
 " 動判別機能を利用する場合には別途iconv.dllが必要。iconv.dllについては
 " README_w32j.txtを参照。ユーティリティスクリプトを読み込むことで設定される。
-source $VIM/plugins/kaoriya/encode_japan.vim
+"source $VIM/plugins/kaoriya/encode_japan.vim
 
 " メッセージを日本語にする (Windowsでは自動的に判断・設定されている)
+set encoding=utf-8
+set fileencodings=iso-2022-jp,cp932,sjis,euc-jp,utf-8
 if !(has('win32') || has('mac')) && has('multi_lang')
   if !exists('$LANG') || $LANG.'X' ==# 'X'
     if !exists('$LC_CTYPE') || $LC_CTYPE.'X' ==# 'X'
@@ -149,9 +150,9 @@ set shiftwidth=2
 set smartindent
 
 " 可視化した空白文字の表示形式について。
-set listchars=tab:»\ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
-"set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
-"set listchars=tab:>-,extends:>,trail:-,eol:<
+"if has('unix') || has('mac')
+"  set listchars=tab:»\ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+"endif
 
 "全角スペースをハイライト表示
 function! ZenkakuSpace()
@@ -192,6 +193,11 @@ set cursorcolumn
 
 " power_line に必須
 set t_Co=256
+
+" 挿入モードのIMEのデフォルト値
+set iminsert=0
+" 検索時のIMEのデフォルト値(-1はiminsertの値を参照するという意味)
+set imsearch=-1
 "===========================================================================
 "---------------------------------------------------------------------------
 " 編集に関する設定:
@@ -387,8 +393,12 @@ NeoBundle 'scrooloose/nerdtree'
 
 " =====================
 
-" カラースキーム一覧表示に Unite.vim を使う
 NeoBundle 'Shougo/unite.vim'
+
+" Unite の file_mruを使用するため
+NeoBundle 'Shougo/neomru.vim'
+
+" カラースキーム一覧表示に Unite.vim を使う
 NeoBundle 'ujihisa/unite-colorscheme'
 
 " HTMLを簡単作成 生成したい任意を入力後<C-y>
@@ -426,3 +436,13 @@ noremap <C-a> <Esc>^
 
 "ヤンクした値がdやxで消えないように（復活させる）
 noremap PP "0p
+
+" キーマップ用
+let mapleader = "\<Space>"
+map <Leader> <Nop>
+
+"--- Unite S ---
+nnoremap [unite] <Nop>
+nmap <Leader>u [unite]
+"--- Unite E ---
+"

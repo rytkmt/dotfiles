@@ -25,9 +25,9 @@ endif
 " scheme with the :colorscheme command, or by adding the line
 "   let macvim_skip_colorscheme=1
 " to ~/.vimrc.
-if !exists("macvim_skip_colorscheme") && !exists("colors_name")
-    colorscheme macvim
-endif
+"if !exists("macvim_skip_colorscheme") && !exists("colors_name")
+"    colorscheme macvim
+"endif
 
 " To make tabs more readable, the label only contains the tail of the file
 " name and the buffer modified flag.
@@ -196,6 +196,14 @@ unlet s:cpo_save
 "  set guifontset=a14,r14,k14
 "endif
 
+if has('win32')
+  " Windows
+  set guifont=MS_Gothic:h11
+elseif has('mac') || has('unix')
+  " Linux
+  set guifont=DejaVu\ Sans\ Mono\ 13
+endif
+
 "---------------------------------------------------------------------------
 " ウインドウに関する設定:
 "
@@ -297,3 +305,5 @@ unlet s:cpo_save
 "set imdisableactivate
 
 colorscheme mycolor
+
+set listchars=tab:»\ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
