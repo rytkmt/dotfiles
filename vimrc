@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 14-Sep-2016.
+" Last Change: 16-Sep-2016.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -182,8 +182,8 @@ set history=50
 "新しい行を作った時に高度な自動インデントを行う
 set smarttab
 
-" カーソルの回り込みができるようになる（行末で→を押すと、次の行へ）
-set whichwrap=b,s,[,],<,>
+" カーソルを行頭、行末で止まらないようにする
+set whichwrap=b,s,h,l,<,>,[,]
 
 " 行を強調表示
 set cursorline
@@ -198,6 +198,12 @@ set t_Co=256
 set iminsert=0
 " 検索時のIMEのデフォルト値(-1はiminsertの値を参照するという意味)
 set imsearch=-1
+
+" Windows でもパスの区切り文字を / にする
+set shellslash
+
+" コマンドラインモードでTABキーによるファイル名補完を有効にする
+set wildmenu wildmode=list:longest,full
 "===========================================================================
 "---------------------------------------------------------------------------
 " 編集に関する設定:
@@ -246,7 +252,8 @@ set title
 "
 " バックアップファイルを作成しない (次行の先頭の " を削除すれば有効になる)
 set nobackup
-
+" swapファイルを作成しない
+set noswapfile
 
 "---------------------------------------------------------------------------
 " ファイル名に大文字小文字の区別がないシステム用の設定:
@@ -398,6 +405,9 @@ NeoBundle 'Shougo/unite.vim'
 " Unite の file_mruを使用するため
 NeoBundle 'Shougo/neomru.vim'
 
+" Unite の history/yankを使用するため
+NeoBundle 'Shougo/neoyank.vim'
+
 " カラースキーム一覧表示に Unite.vim を使う
 NeoBundle 'ujihisa/unite-colorscheme'
 
@@ -412,6 +422,36 @@ NeoBundle 'cohama/lexima.vim'
 
 "railsプロジェクト内での移動
 NeoBundle 'tpope/vim-rails'
+
+"grepの拡張
+NeoBundle 'vim-scripts/grep.vim'
+
+" コメントON/OFFを手軽に実行
+NeoBundle 'tomtom/tcomment_vim'
+
+" インデントに色を付けて見やすくする
+NeoBundle 'nathanaelkane/vim-indent-guides'
+
+" ログファイルを色づけしてくれる
+NeoBundle 'vim-scripts/AnsiEsc.vim'
+
+" 行末の半角スペースを可視化
+NeoBundle 'bronson/vim-trailing-whitespace'
+
+" 設定はhttp://qiita.com/akase244/items/ce5e2e18ad5883e98a77を参照
+" NeoBundle 'Shougo/vimproc.vim', {
+" \ 'build' : {
+" \     'windows' : 'tools\\update-dll-mingw 64',
+" \     'cygwin' : 'make -f make_cygwin.mak',
+" \     'mac' : 'make -f make_mac.mak',
+" \     'linux' : 'make',
+" \     'unix' : 'gmake',
+" \    },
+" \ }
+" NeoBundle 'Shougo/vimshell.vim'
+
+"grepの高速化
+NeoBundle 'rking/ag.vim'
 
 call neobundle#end()
 
@@ -431,21 +471,126 @@ let g:NERDTreeShowBookmarks=1
 "NERDTreeを起動
 autocmd vimenter * NERDTree
 
-"キーマッピング
-inoremap <C-e> <Esc>$a
-inoremap <C-a> <Esc>^i
-noremap <C-e> <Esc>$
-noremap <C-a> <Esc>^
-
 "ヤンクした値がdやxで消えないように（復活させる）
 noremap PP "0p
 
+"検索のハイライトを消す
+noremap <ESC><ESC> :<C-u>noh<CR>
+
+" 表示行単位で上下移動するように
+nnoremap j gj
+nnoremap k gk
+nnoremap <Down> gj
+nnoremap <Up>   gk
+
+" 逆に普通の行単位で移動したい時のために逆の map も設定しておく
+nnoremap gj j
+nnoremap gk k
+
+" カーソル移動
+inoremap <C-a> <Esc>^i
+inoremap <C-e> <Esc>$a
+inoremap <C-j> <Esc>ji
+inoremap <C-k> <Esc>ki
+noremap <S-h>   ^
+noremap <S-j>   }
+noremap <S-k>   {
+noremap <S-l>   $
+noremap m %
+
+
 " キーマップ用
 let mapleader = "\<Space>"
-map <Leader> <Nop>
+map <Space> <Nop>
 
-"--- Unite S ---
+" ========== Unite S ==========
 nnoremap [unite] <Nop>
 nmap <Leader>u [unite]
-"--- Unite E ---
+
+let g:unite_source_history_yank_enable =1
+"最近開いたファイル履歴の保存数
+let g:unite_source_file_mru_limit = 50
+
+"nnoremap <silent> [unite]f :<C-u>Unite<Space>file<CR>
+nnoremap <silent> [unite]g :<C-u>Unite<Space>grep<CR>
+nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
+"nnoremap <silent> [unite]b :<C-u>Unite<Space>bookmark<CR>
+"nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
+nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
+nnoremap <silent> [unite]h :<C-u>Unite<Space>history/yank<CR>
+"nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
+"nnoremap <silent> [unite]c :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> [unite]r :UniteResume search-buffer<CR>
+nnoremap <silent> [unite]f :<C-u>Unite<Space>file/new<CR>
+nnoremap <silent> [unite]d :<C-u>Unite<Space>directory/new<CR>
+"uniteを開いている間のキーマッピング
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+  "ESCでuniteを終了
+  nmap <buffer> <ESC> <Plug>(unite_exit)
+  "入力モードのときjjでノーマルモードに移動
+  imap <buffer> jj <Plug>(unite_insert_leave)
+  "入力モードのときctrl+wでバックスラッシュも削除
+  imap <buffer> <C-w> <Plug>(unite_delete_backward_path)
+  "ctrl+jで縦に分割して開く
+  nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
+  inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
+  "ctrl+jで横に分割して開く
+  nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+  inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+  "ctrl+oでその場所に開く
+  nnoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
+  inoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
+endfunction
+
+
+" カーソル位置の単語をgrep検索
+nnoremap <silent> [unite]cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+
+" unite grep に ag(The Silver Searcher) を使う
+" if executable('ag')
+"   let g:unite_source_grep_command = 'ag'
+"   let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+"   let g:unite_source_grep_recursive_opt = ''
+" endif
+" ========== Unite E ==========
+" ========== grep.vim S ============
+if has("win32")
+  " Windows環境用のコード
+  let Grep_Path = 'C:\git_bin\grep.exe'
+  let Fgrep_Path = 'C:\git_bin\grep.exe -F'
+  let Egrep_Path = 'C:\git_bin\grep.exe -E'
+  let Grep_Find_Path = 'C:\git_bin\find.exe'
+  let Grep_Xargs_Path = 'C:\git_bin\xargs.exe'
+  let Grep_Shell_Quote_Char = '"'
+  let Grep_Skip_Dirs = '.svn'
+  let Grep_Skip_Files = '*.bak *~'
+endif
+  " ========== grep.vim E ============
+" ========== NERDTree S ==========
 "
+cd C:\Users\r_tsukamoto.ILL\workspace
+nnoremap [nerdtree] <Nop>
+nmap <Leader>n [nerdtree]
+nnoremap [nerdtree]n :<C-u>NERDTree<CR>
+
+autocmd FileType nerdtree call s:nerdtree_settings()
+function! s:nerdtree_settings()
+  nnoremap [nerdtree]b :<C-u>Bookmark<Space>
+  nnoremap [nerdtree]r :<C-u>BookmarkToRoot<Space>
+  nnoremap [nerdtree]o :<C-u>OpenBookmark<Space>
+  nnoremap [nerdtree]c :<C-u>ClearBookmarks<Space>
+endfunction
+" ========== NERDTree E ==========
+
+" ==========vim-indent-guides S ==========
+" vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
+let g:indent_guides_enable_on_vim_startup = 1
+autocmd VimEnter,ColorScheme,BufWinEnter * :hi IndentGuidesOdd  guibg=#303030
+autocmd VimEnter,ColorScheme,BufWinEnter * :hi IndentGuidesEven guibg=#383838
+" ==========vim-indent-guides E ==========
+
+
+" ==========vim-trailing-whitespace S ===========
+autocmd VimEnter,ColorScheme,BufWinEnter * :hi ExtraWhiteSpace guibg=#990000
+" ==========vim-trailing-whitespace E ===========

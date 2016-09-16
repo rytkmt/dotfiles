@@ -307,3 +307,4 @@ endif
 colorscheme mycolor
 
 set listchars=tab:»\ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+
