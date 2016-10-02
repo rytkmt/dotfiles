@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 16-Sep-2016.
+" Last Change: 27-Sep-2016.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -335,68 +335,69 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'scrooloose/nerdtree'
 
 " === カラースキーマ ===
-" solarized
-  NeoBundle 'altercation/vim-colors-solarized'
-" mustang
-  NeoBundle 'croaker/mustang-vim'
-" wombat
-  NeoBundle 'jeffreyiacono/vim-colors-wombat'
-" jellybeans
-  NeoBundle 'nanotech/jellybeans.vim'
-" lucius
-  NeoBundle 'vim-scripts/Lucius'
-" zenburn
-  NeoBundle 'vim-scripts/Zenburn'
-" mrkn256
-  NeoBundle 'mrkn/mrkn256.vim'
-" railscasts
-  NeoBundle 'jpo/vim-railscasts-theme'
-" pyte
-  NeoBundle 'therubymug/vim-pyte'
-" molokai
-  NeoBundle 'tomasr/molokai'
-" dracula
-  NeoBundle 'dracula/vim'
-" moriarty
-  NeoBundle 'aliou/moriarty.vim'
-" wwdc16
-  NeoBundle 'lifepillar/vim-wwdc16-theme'
-" leerkan
-  NeoBundle 'visi-pivi-sivi/leerkan-vim-colors'
-" wombat-256mod
-  NeoBundle 'michalbachowski/vim-wombat256mod'
-" ego
-  NeoBundle 'geetarista/ego.vim'
-" buddy
-  NeoBundle 'DrSpatula/vim-buddy'
-" tropikos
-  NeoBundle 'blackgate/tropikos-vim-theme'
-" penultimate
-  NeoBundle 'ivan-cukic/vim-colors-penultimate'
-" desertink
-  NeoBundle 'toupeira/vim-desertink'
-" wattslandia
-  NeoBundle 'thewatts/wattslandia'
-" znake
-  NeoBundle 'znake/znake-vim'
-" nerv-ous
-  NeoBundle 'vim-scripts/NERV-ous'
-" radicalgoodspeed
-  NeoBundle 'svjunic/RadicalGoodSpeed.vim'
-" rdark
-  NeoBundle 'vim-scripts/rdark'
-" lumberjack
-  NeoBundle 'yamafaktory/lumberjack.vim'
-" flattown
-  NeoBundle 'blerins/flattown'
-" lizard
-  NeoBundle 'gilsondev/lizard'
-" monokai
-  NeoBundle 'lsdr/monokai'
-" darkspectrum
-  NeoBundle 'vim-scripts/darkspectrum'
-" badwolf
-  NeoBundle 'sjl/badwolf'
+
+" " solarized
+"   NeoBundle 'altercation/vim-colors-solarized'
+" " mustang
+"   NeoBundle 'croaker/mustang-vim'
+" " wombat
+"   NeoBundle 'jeffreyiacono/vim-colors-wombat'
+" " jellybeans
+"   NeoBundle 'nanotech/jellybeans.vim'
+" " lucius
+"   NeoBundle 'vim-scripts/Lucius'
+" " zenburn
+"   NeoBundle 'vim-scripts/Zenburn'
+" " mrkn256
+"   NeoBundle 'mrkn/mrkn256.vim'
+" " railscasts
+"   NeoBundle 'jpo/vim-railscasts-theme'
+" " pyte
+"   NeoBundle 'therubymug/vim-pyte'
+" " molokai
+"   NeoBundle 'tomasr/molokai'
+" " dracula
+"   NeoBundle 'dracula/vim'
+" " moriarty
+"   NeoBundle 'aliou/moriarty.vim'
+" " wwdc16
+"   NeoBundle 'lifepillar/vim-wwdc16-theme'
+" " leerkan
+"   NeoBundle 'visi-pivi-sivi/leerkan-vim-colors'
+" " wombat-256mod
+"   NeoBundle 'michalbachowski/vim-wombat256mod'
+" " ego
+"   NeoBundle 'geetarista/ego.vim'
+" " buddy
+"   NeoBundle 'DrSpatula/vim-buddy'
+" " tropikos
+"   NeoBundle 'blackgate/tropikos-vim-theme'
+" " penultimate
+"   NeoBundle 'ivan-cukic/vim-colors-penultimate'
+" " desertink
+"   NeoBundle 'toupeira/vim-desertink'
+" " wattslandia
+"   NeoBundle 'thewatts/wattslandia'
+" " znake
+"   NeoBundle 'znake/znake-vim'
+" " nerv-ous
+"   NeoBundle 'vim-scripts/NERV-ous'
+" " radicalgoodspeed
+"   NeoBundle 'svjunic/RadicalGoodSpeed.vim'
+" " rdark
+"   NeoBundle 'vim-scripts/rdark'
+" " lumberjack
+"   NeoBundle 'yamafaktory/lumberjack.vim'
+" " flattown
+"   NeoBundle 'blerins/flattown'
+" " lizard
+"   NeoBundle 'gilsondev/lizard'
+" " monokai
+"   NeoBundle 'lsdr/monokai'
+" " darkspectrum
+"   NeoBundle 'vim-scripts/darkspectrum'
+" " badwolf
+"   NeoBundle 'sjl/badwolf'
 
 " =====================
 
@@ -426,11 +427,11 @@ NeoBundle 'tpope/vim-rails'
 "grepの拡張
 NeoBundle 'vim-scripts/grep.vim'
 
+"インデントを見やすく
+NeoBundle 'Yggdroot/indentLine'
+
 " コメントON/OFFを手軽に実行
 NeoBundle 'tomtom/tcomment_vim'
-
-" インデントに色を付けて見やすくする
-NeoBundle 'nathanaelkane/vim-indent-guides'
 
 " ログファイルを色づけしてくれる
 NeoBundle 'vim-scripts/AnsiEsc.vim'
@@ -547,14 +548,11 @@ endfunction
 " カーソル位置の単語をgrep検索
 nnoremap <silent> [unite]cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
 
-" unite grep に ag(The Silver Searcher) を使う
-" if executable('ag')
-"   let g:unite_source_grep_command = 'ag'
-"   let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
-"   let g:unite_source_grep_recursive_opt = ''
-" endif
 " ========== Unite E ==========
 " ========== grep.vim S ============
+nnoremap [grep] <Nop>
+nmap <Leader>g [grep]
+nnoremap [grep]r :<C-u>Rgrep<CR>
 if has("win32")
   " Windows環境用のコード
   let Grep_Path = 'C:\git_bin\grep.exe'
@@ -564,9 +562,14 @@ if has("win32")
   let Grep_Xargs_Path = 'C:\git_bin\xargs.exe'
   let Grep_Shell_Quote_Char = '"'
   let Grep_Skip_Dirs = '.svn'
+  let Grep_Default_Options = '-I'
   let Grep_Skip_Files = '*.bak *~'
 endif
   " ========== grep.vim E ============
+" ============ indentLine S ============
+let g:indentLine_color_gui = '#303640'
+let g:indentLine_char = '¦' "use ¦, ┆ or │
+" ============ indentLine E ============
 " ========== NERDTree S ==========
 "
 cd C:\Users\r_tsukamoto.ILL\workspace
@@ -582,13 +585,6 @@ function! s:nerdtree_settings()
   nnoremap [nerdtree]c :<C-u>ClearBookmarks<Space>
 endfunction
 " ========== NERDTree E ==========
-
-" ==========vim-indent-guides S ==========
-" vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
-let g:indent_guides_enable_on_vim_startup = 1
-autocmd VimEnter,ColorScheme,BufWinEnter * :hi IndentGuidesOdd  guibg=#303030
-autocmd VimEnter,ColorScheme,BufWinEnter * :hi IndentGuidesEven guibg=#383838
-" ==========vim-indent-guides E ==========
 
 
 " ==========vim-trailing-whitespace S ===========
