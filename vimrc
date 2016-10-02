@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 16-Sep-2016.
+" Last Change: 19-Sep-2016.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -568,8 +568,11 @@ if has("win32")
 endif
   " ========== grep.vim E ============
 " ========== NERDTree S ==========
-"
-cd C:\Users\r_tsukamoto.ILL\workspace
+"作業スペース
+if has("win32")
+  cd C:\Users\r_tsukamoto.ILL\workspace
+endif
+
 nnoremap [nerdtree] <Nop>
 nmap <Leader>n [nerdtree]
 nnoremap [nerdtree]n :<C-u>NERDTree<CR>
