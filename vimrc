@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 02-Oct-2016.
+" Last Change: 15-Oct-2016.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -254,6 +254,8 @@ set title
 set nobackup
 " swapファイルを作成しない
 set noswapfile
+" undoファイルを作成しない
+set noundofile
 
 "---------------------------------------------------------------------------
 " ファイル名に大文字小文字の区別がないシステム用の設定:
@@ -336,6 +338,8 @@ NeoBundle 'scrooloose/nerdtree'
 
 " === カラースキーマ ===
 
+" mycolor
+NeoBundle 'rytkmt/rytkmt_vim_settings'
 " " solarized
 "   NeoBundle 'altercation/vim-colors-solarized'
 " " mustang
@@ -503,6 +507,10 @@ noremap m %
 " キーマップ用
 let mapleader = "\<Space>"
 map <Space> <Nop>
+
+" コピペ
+map <Leader>c "*yy
+map <Leader>v "*p
 
 " ========== Unite S ==========
 nnoremap [unite] <Nop>
