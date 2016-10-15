@@ -1,6 +1,6 @@
 " mycolor color scheme
 
-let g:colors_name = "tropikos"
+let g:colors_name = "rytkmt"
 
 set background=dark
 hi clear
