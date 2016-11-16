@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 15-Oct-2016.
+" Last Change: 24-Oct-2016.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -455,9 +455,6 @@ NeoBundle 'bronson/vim-trailing-whitespace'
 " \ }
 " NeoBundle 'Shougo/vimshell.vim'
 
-"grepの高速化
-NeoBundle 'rking/ag.vim'
-
 call neobundle#end()
 
 " Required:
@@ -512,6 +509,11 @@ map <Space> <Nop>
 map <Leader>c "*yy
 map <Leader>v "*p
 
+"ヤンク文字で検索
+cmap <S-Space> <C-r>"
+"挿入モード終了
+imap <C-Space> <ESC>
+vmap <C-Space> <ESC>
 " ========== Unite S ==========
 nnoremap [unite] <Nop>
 nmap <Leader>u [unite]
@@ -553,9 +555,6 @@ function! s:unite_settings()
 endfunction
 
 
-" カーソル位置の単語をgrep検索
-nnoremap <silent> [unite]cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
-
 " ========== Unite E ==========
 " ========== grep.vim S ============
 nnoremap [grep] <Nop>
@@ -571,7 +570,7 @@ if has("win32")
   let Grep_Shell_Quote_Char = '"'
   let Grep_Skip_Dirs = '.svn'
   let Grep_Default_Options = '-I'
-  let Grep_Skip_Files = '*.bak *~'
+  let Grep_Skip_Files = '*.bak *~ *.log'
 endif
   " ========== grep.vim E ============
 " ============ indentLine S ============

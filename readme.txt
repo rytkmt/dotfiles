@@ -8,12 +8,10 @@ mkdir bundle
 
 (2)bundleの中にrytkmtのvim設定もcloneする
 cd bundle
-git clone https://github.com/rytkmt/vim
+git clone https://github.com/rytkmt/rytkmt_vim_settings.git
 
 (3) bundleの中にneobundleをcloneする
 git clone https://github.com/Shougo/neobundle.vim
-
-
 
 
 【2】vimrc などを紐付ける
@@ -26,8 +24,9 @@ cloneしたもののvimrc,gvimrcが読まれるようにシンボリックリン
 2.cdでvimの下に移動
 3.シンボリックリンクを貼る
 mklink vimrc (cloneしたvimrcのpath)
-mklink gvimrc (cloneしたvimrcのpath)
+mklink gvimrc (cloneしたgvimrcのpath)
 
+【3】grep用にリンクを貼る
+Cドライブの直下に「git_bin」という名前でGitのbinにディレクトリのシンボリックリンクを作成する
 
-
-
+mklink git_bin c:¥Program Files¥Git¥usr¥bin
