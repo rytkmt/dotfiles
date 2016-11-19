@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 24-Oct-2016.
+" Last Change: 16-Nov-2016.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -427,6 +427,9 @@ NeoBundle 'cohama/lexima.vim'
 
 "railsプロジェクト内での移動
 NeoBundle 'tpope/vim-rails'
+
+" ビジュアルモードの拡張
+NeoBundle 'terryma/vim-expand-region'
 
 "grepの拡張
 NeoBundle 'vim-scripts/grep.vim'
