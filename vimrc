@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 16-Nov-2016.
+" Last Change: 19-Nov-2016.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -580,6 +580,20 @@ endif
 let g:indentLine_color_gui = '#303640'
 let g:indentLine_char = '¦' "use ¦, ┆ or │
 " ============ indentLine E ============
+" ============vim-expand-region S ============
+"let g:expand_region_text_objects = {
+       'iw'  :0,
+       'iW'  :0,
+       'i"'  :0,
+       'i''' :0,
+      \ 'i]'  :1, " Support nesting of square brackets
+      \ 'ib'  :1, " Support nesting of parentheses
+      \ 'iB'  :1, " Support nesting of braces
+      \ 'il'  :0, " 'inside line'. Available through https://github.com/kana/vim-textobj-line
+      \ 'ip'  :0,
+      \ 'ie'  :0, " 'entire file'. Available through https://github.com/kana/vim-textobj-entire
+      \ }
+" ============vim-expand-region E ============
 " ========== NERDTree S ==========
 "作業スペース
 if has("win32")
