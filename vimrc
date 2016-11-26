@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 19-Nov-2016.
+" Last Change: 26-Nov-2016.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -431,6 +431,23 @@ NeoBundle 'tpope/vim-rails'
 " ビジュアルモードの拡張
 NeoBundle 'terryma/vim-expand-region'
 
+" ========== textobject S ==========
+
+" textobj のベース
+NeoBundle "kana/vim-textobj-user"
+
+" snake_case 上の word
+" a,w, i,w
+NeoBundle "h1mesuke/textobj-wiw"
+
+" 関数内
+" af, if
+NeoBundle "kana/vim-textobj-function"
+
+" カーソル行
+" al, il
+NeoBundle "kana/vim-textobj-line"
+" ========== textobject E ==========
 "grepの拡張
 NeoBundle 'vim-scripts/grep.vim'
 
@@ -516,7 +533,7 @@ map <Leader>v "*p
 cmap <S-Space> <C-r>"
 "挿入モード終了
 imap <C-Space> <ESC>
-vmap <C-Space> <ESC>
+vmap <nowait> <C-Space> <ESC>
 " ========== Unite S ==========
 nnoremap [unite] <Nop>
 nmap <Leader>u [unite]
@@ -581,18 +598,21 @@ let g:indentLine_color_gui = '#303640'
 let g:indentLine_char = '¦' "use ¦, ┆ or │
 " ============ indentLine E ============
 " ============vim-expand-region S ============
-"let g:expand_region_text_objects = {
-       'iw'  :0,
-       'iW'  :0,
-       'i"'  :0,
-       'i''' :0,
-      \ 'i]'  :1, " Support nesting of square brackets
-      \ 'ib'  :1, " Support nesting of parentheses
-      \ 'iB'  :1, " Support nesting of braces
-      \ 'il'  :0, " 'inside line'. Available through https://github.com/kana/vim-textobj-line
-      \ 'ip'  :0,
-      \ 'ie'  :0, " 'entire file'. Available through https://github.com/kana/vim-textobj-entire
+let g:expand_region_text_objects = {
+      \ 'i,w'  :0,
+      \ 'a,w'  :0,
+      \ 'iw'  :0,
+      \ 'a['  :0,
+      \ 'a"'  :0,
+      \ 'a'''  :0,
+      \ 'a('  :0,
+      \ 'a<'  :0,
+      \ 'iW'  :0,
+      \ 'if'  :0,
+      \ 'il'  :0,
       \ }
+map v <Plug>(expand_region_expand)
+map V <Plug>(expand_region_shrink)
 " ============vim-expand-region E ============
 " ========== NERDTree S ==========
 "作業スペース
