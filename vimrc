@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 26-Nov-2016.
+" Last Change: 29-Nov-2016.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -602,6 +602,11 @@ let g:expand_region_text_objects = {
       \ 'i,w'  :0,
       \ 'a,w'  :0,
       \ 'iw'  :0,
+      \ 'i['  :0,
+      \ 'i"'  :0,
+      \ 'i'''  :0,
+      \ 'i('  :0,
+      \ 'i<'  :0,
       \ 'a['  :0,
       \ 'a"'  :0,
       \ 'a'''  :0,
@@ -611,8 +616,8 @@ let g:expand_region_text_objects = {
       \ 'if'  :0,
       \ 'il'  :0,
       \ }
-map v <Plug>(expand_region_expand)
-map V <Plug>(expand_region_shrink)
+map <C-j> <Plug>(expand_region_expand)
+map <C-k> <Plug>(expand_region_shrink)
 " ============vim-expand-region E ============
 " ========== NERDTree S ==========
 "作業スペース
