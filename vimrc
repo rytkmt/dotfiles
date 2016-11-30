@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 26-Nov-2016.
+" Last Change: 01-Dec-2016.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -462,6 +462,9 @@ NeoBundle 'vim-scripts/AnsiEsc.vim'
 
 " 行末の半角スペースを可視化
 NeoBundle 'bronson/vim-trailing-whitespace'
+
+" mapのサブモード
+NeoBundle 'kana/vim-submode'
 
 " 設定はhttp://qiita.com/akase244/items/ce5e2e18ad5883e98a77を参照
 " NeoBundle 'Shougo/vimproc.vim', {
