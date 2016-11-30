@@ -532,6 +532,59 @@ map <Space> <Nop>
 map <Leader>c "*yy
 map <Leader>v "*p
 
+" ========== タブ操作 S ==========
+nmap <Leader>t [tab]
+" タブを閉じる
+nnoremap [tab]q :<C-u>tabc<CR>
+" 開いているタブ以外を閉じる
+nnoremap [tab]o :<C-u>tabo<CR>
+" 新規タブ
+nnoremap [tab]n :<C-u>tabnew<CR>
+" タブの詳細一覧
+nnoremap [tab]s :<C-u>tabs<CR>
+" タブ移動（左）
+nnoremap [tab]h gT<CR>
+" タブ移動（左端）
+nnoremap [tab]H :<C-u>tabr<CR>
+" タブ移動（右）
+nnoremap [tab]l gt<CR>
+" タブ移動（右端）
+nnoremap [tab]L :<C-u>tabl<CR>
+" タブ移動（番号）
+nnoremap [tab]1 :<C-u>tabn 1<CR>
+nnoremap [tab]2 :<C-u>tabn 2<CR>
+nnoremap [tab]3 :<C-u>tabn 3<CR>
+nnoremap [tab]4 :<C-u>tabn 4<CR>
+nnoremap [tab]5 :<C-u>tabn 5<CR>
+nnoremap [tab]6 :<C-u>tabn 6<CR>
+nnoremap [tab]7 :<C-u>tabn 7<CR>
+nnoremap [tab]8 :<C-u>tabn 8<CR>
+nnoremap [tab]9 :<C-u>tabn 9<CR>
+nnoremap [tab]10 :<C-u>tabn 10<CR>
+" ========== タブ操作 E ==========
+
+" ========= ウィンドウ操作 S =========
+nmap <Leader>w [window]
+
+" ウィンドウ遷移
+nnoremap [window]h <C-w>h
+nnoremap [window]j <C-w>j
+nnoremap [window]k <C-w>k
+nnoremap [window]l <C-w>l
+" ウィンドウ移動
+nnoremap [window]H <C-w>H
+nnoremap [window]J <C-w>J
+nnoremap [window]K <C-w>K
+nnoremap [window]L <C-w>L
+nnoremap [window]d <C-w>-<C-w>-<C-w>-<C-w>-<C-w>-<C-w>-<C-w>-<C-w>-
+nnoremap [window]u <C-w>+<C-w>+<C-w>+<C-w>+<C-w>+<C-w>+<C-w>+<C-w>+
+nnoremap [window]U <C-w>_
+nnoremap [window]. <C-w>><C-w>><C-w>><C-w>><C-w>><C-w>><C-w>><C-w>><C-w>>
+nnoremap [window], <C-w><<C-w><<C-w><<C-w><<C-w><<C-w><<C-w><<C-w><<C-w><
+" 幅最大化
+nnoremap [window]m <C-w>|
+" ========= ウィンドウ操作 E =========
+
 "ヤンク文字で検索
 cmap <S-Space> <C-r>"
 "挿入モード終了
@@ -605,6 +658,11 @@ let g:expand_region_text_objects = {
       \ 'i,w'  :0,
       \ 'a,w'  :0,
       \ 'iw'  :0,
+      \ 'i['  :0,
+      \ 'i"'  :0,
+      \ 'i'''  :0,
+      \ 'i('  :0,
+      \ 'i<'  :0,
       \ 'a['  :0,
       \ 'a"'  :0,
       \ 'a'''  :0,
@@ -614,8 +672,8 @@ let g:expand_region_text_objects = {
       \ 'if'  :0,
       \ 'il'  :0,
       \ }
-map v <Plug>(expand_region_expand)
-map V <Plug>(expand_region_shrink)
+map <silent> <C-j> <Plug>(expand_region_expand)
+map <silent> <C-k> <Plug>(expand_region_shrink)
 " ============vim-expand-region E ============
 " ========== NERDTree S ==========
 "作業スペース
