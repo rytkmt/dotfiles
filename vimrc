@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 02-Dec-2016.
+" Last Change: 03-Dec-2016.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -313,9 +313,9 @@ if kaoriya#switch#enabled('disable-vimdoc-ja')
 endif
 
 " vimproc: 同梱のvimprocを無効化する
-if kaoriya#switch#enabled('disable-vimproc')
-  let &rtp = join(filter(split(&rtp, ','), 'v:val !~ "[/\\\\]plugins[/\\\\]vimproc$"'), ',')
-endif
+" if kaoriya#switch#enabled('disable-vimproc')
+"   let &rtp = join(filter(split(&rtp, ','), 'v:val !~ "[/\\\\]plugins[/\\\\]vimproc$"'), ',')
+" endif
 
 " Copyright (C) 2009-2013 KaoriYa/MURAOKA Taro
 
@@ -467,15 +467,15 @@ NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'kana/vim-submode'
 
 " 設定はhttp://qiita.com/akase244/items/ce5e2e18ad5883e98a77を参照
-" NeoBundle 'Shougo/vimproc.vim', {
-" \ 'build' : {
-" \     'windows' : 'tools\\update-dll-mingw 64',
-" \     'cygwin' : 'make -f make_cygwin.mak',
-" \     'mac' : 'make -f make_mac.mak',
-" \     'linux' : 'make',
-" \     'unix' : 'gmake',
-" \    },
-" \ }
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw 64',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
 " NeoBundle 'Shougo/vimshell.vim'
 
 call neobundle#end()
@@ -703,3 +703,4 @@ endfunction
 " ==========vim-trailing-whitespace S ===========
 autocmd VimEnter,ColorScheme,BufWinEnter * :hi ExtraWhiteSpace guibg=#990000
 " ==========vim-trailing-whitespace E ===========
+set tags=C:\Users\r_tsukamoto.ILL\workspace\macau_v2_for_ui\tmp\tags
