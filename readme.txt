@@ -30,3 +30,7 @@ mklink gvimrc (cloneしたgvimrcのpath)
 Cドライブの直下に「git_bin」という名前でGitのbinにディレクトリのシンボリックリンクを作成する
 
 mklink git_bin c:¥Program Files¥Git¥usr¥bin
+
+【4】タグジャンプようにctagsを入れる
+http://hp.vector.co.jp/authors/VA025040/ctags/
+上記からバイナリ版をダウンロードしパスを通す
