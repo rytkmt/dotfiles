@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 02-Dec-2016.
+" Last Change: 03-Dec-2016.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -313,9 +313,9 @@ if kaoriya#switch#enabled('disable-vimdoc-ja')
 endif
 
 " vimproc: 同梱のvimprocを無効化する
-if kaoriya#switch#enabled('disable-vimproc')
-  let &rtp = join(filter(split(&rtp, ','), 'v:val !~ "[/\\\\]plugins[/\\\\]vimproc$"'), ',')
-endif
+" if kaoriya#switch#enabled('disable-vimproc')
+"   let &rtp = join(filter(split(&rtp, ','), 'v:val !~ "[/\\\\]plugins[/\\\\]vimproc$"'), ',')
+" endif
 
 " Copyright (C) 2009-2013 KaoriYa/MURAOKA Taro
 
@@ -467,15 +467,15 @@ NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'kana/vim-submode'
 
 " 設定はhttp://qiita.com/akase244/items/ce5e2e18ad5883e98a77を参照
-" NeoBundle 'Shougo/vimproc.vim', {
-" \ 'build' : {
-" \     'windows' : 'tools\\update-dll-mingw 64',
-" \     'cygwin' : 'make -f make_cygwin.mak',
-" \     'mac' : 'make -f make_mac.mak',
-" \     'linux' : 'make',
-" \     'unix' : 'gmake',
-" \    },
-" \ }
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw 64',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
 " NeoBundle 'Shougo/vimshell.vim'
 
 call neobundle#end()
@@ -536,10 +536,14 @@ map <Leader>v "*p
 nmap <Leader>t [tab]
 " タブを閉じる
 nnoremap [tab]q :<C-u>tabc<CR>
+call submode#enter_with('tab_close', 'n', '', '<Leader>tq', ':<C-u>tabc<CR>')
+call submode#map('tab_close', 'n', '', 'q', ':<C-u>tabc<CR>')
 " 開いているタブ以外を閉じる
 nnoremap [tab]o :<C-u>tabo<CR>
 " 新規タブ
 nnoremap [tab]n :<C-u>tabnew<CR>
+call submode#enter_with('tab_new', 'n', '', '<Leader>tn', ':<C-u>tabnew<CR>')
+call submode#map('tab_new', 'n', '', 'n', ':<C-u>tabnew<CR>')
 " タブの詳細一覧
 nnoremap [tab]s :<C-u>tabs<CR>
 " タブ移動（左）
@@ -550,6 +554,15 @@ nnoremap [tab]H :<C-u>tabr<CR>
 nnoremap [tab]l gt<CR>
 " タブ移動（右端）
 nnoremap [tab]L :<C-u>tabl<CR>
+" タブ移動サブモード
+call submode#enter_with('tab_move', 'n', '', '<Leader>th', 'gT')
+call submode#enter_with('tab_move', 'n', '', '<Leader>tl', 'gt')
+call submode#enter_with('tab_move', 'n', '', '<Leader>tH', ':<C-u>tabr<CR>')
+call submode#enter_with('tab_move', 'n', '', '<Leader>tL', ':<C-u>tabl<CR>')
+call submode#map('tab_move', 'n', '', 'h', 'gT')
+call submode#map('tab_move', 'n', '', 'H', ':<C-u>tabr<CR>')
+call submode#map('tab_move', 'n', '', 'l', 'gt')
+call submode#map('tab_move', 'n', '', 'L', ':<C-u>tabl<CR>')
 " タブ移動（番号）
 nnoremap [tab]1 :<C-u>tabn 1<CR>
 nnoremap [tab]2 :<C-u>tabn 2<CR>
@@ -576,6 +589,14 @@ nnoremap [window]H <C-w>H
 nnoremap [window]J <C-w>J
 nnoremap [window]K <C-w>K
 nnoremap [window]L <C-w>L
+call submode#enter_with('window_move', 'n', '', '<Leader>wh', '<C-w>h')
+call submode#enter_with('window_move', 'n', '', '<Leader>wj', '<C-w>j')
+call submode#enter_with('window_move', 'n', '', '<Leader>wk', '<C-w>k')
+call submode#enter_with('window_move', 'n', '', '<Leader>wl', '<C-w>l')
+call submode#map('window_move', 'n', '', 'h', '<C-w>h')
+call submode#map('window_move', 'n', '', 'j', '<C-w>j')
+call submode#map('window_move', 'n', '', 'k', '<C-w>k')
+call submode#map('window_move', 'n', '', 'l', '<C-w>l')
 " 高さ変更
 nnoremap [window]d 10<C-w>-
 nnoremap [window]u 10<C-w>+
@@ -588,6 +609,19 @@ nnoremap [window], 12<C-w><
 nnoremap [window]m <C-w><Bar>
 " 幅揃える
 nnoremap [window]= <C-w>=
+call submode#enter_with('window_size', 'n', '', '<Leader>wd', '10<C-w>-')
+call submode#enter_with('window_size', 'n', '', '<Leader>wu', '10<C-w>+')
+call submode#enter_with('window_size', 'n', '', '<Leader>wU', '<C-w>_')
+call submode#enter_with('window_size', 'n', '', '<Leader>w.', '12<C-w>>')
+call submode#enter_with('window_size', 'n', '', '<Leader>w,', '12<C-w><')
+call submode#enter_with('window_size', 'n', '', '<Leader>wm,', '<C-w><Bar>')
+call submode#enter_with('window_size', 'n', '', '<Leader>w=,', '<C-w>=')
+call submode#map('window_size', 'n', '', 'd', '10<C-w>-')
+call submode#map('window_size', 'n', '', 'u', '10<C-w>+')
+call submode#map('window_size', 'n', '', '.', '12<C-w>>')
+call submode#map('window_size', 'n', '', ',', '12<C-w><')
+call submode#map('window_size', 'n', '', 'm', '<C-w><Bar>')
+call submode#map('window_size', 'n', '', '=', '<C-w>=')
 " ========= ウィンドウ操作 E =========
 
 "ヤンク文字で検索
@@ -604,7 +638,7 @@ let g:unite_source_history_yank_enable =1
 let g:unite_source_file_mru_limit = 50
 
 "nnoremap <silent> [unite]f :<C-u>Unite<Space>file<CR>
-nnoremap <silent> [unite]g :<C-u>Unite<Space>grep<CR>
+" nnoremap <silent> [unite]g :<C-u>Unite<Space>grep<CR>
 nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
 "nnoremap <silent> [unite]b :<C-u>Unite<Space>bookmark<CR>
 "nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
@@ -612,18 +646,14 @@ nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
 nnoremap <silent> [unite]h :<C-u>Unite<Space>history/yank<CR>
 "nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
 "nnoremap <silent> [unite]c :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> [unite]r :UniteResume search-buffer<CR>
-nnoremap <silent> [unite]f :<C-u>Unite<Space>file/new<CR>
-nnoremap <silent> [unite]d :<C-u>Unite<Space>directory/new<CR>
+" nnoremap <silent> [unite]r :UniteResume search-buffer<CR>
+" nnoremap <silent> [unite]f :<C-u>Unite<Space>file/new<CR>
+" nnoremap <silent> [unite]d :<C-u>Unite<Space>directory/new<CR>
 "uniteを開いている間のキーマッピング
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
   "ESCでuniteを終了
   nmap <buffer> <ESC> <Plug>(unite_exit)
-  "入力モードのときjjでノーマルモードに移動
-  imap <buffer> jj <Plug>(unite_insert_leave)
-  "入力モードのときctrl+wでバックスラッシュも削除
-  imap <buffer> <C-w> <Plug>(unite_delete_backward_path)
   "ctrl+jで縦に分割して開く
   nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
   inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
@@ -677,8 +707,8 @@ let g:expand_region_text_objects = {
       \ 'if'  :0,
       \ 'il'  :0,
       \ }
-map <silent> <C-j> <Plug>(expand_region_expand)
-map <silent> <C-k> <Plug>(expand_region_shrink)
+map <silent> v <Plug>(expand_region_expand)
+map <silent> c <Plug>(expand_region_shrink)
 " ============vim-expand-region E ============
 " ========== NERDTree S ==========
 "作業スペース
