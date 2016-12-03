@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 01-Dec-2016.
+" Last Change: 02-Dec-2016.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -576,13 +576,18 @@ nnoremap [window]H <C-w>H
 nnoremap [window]J <C-w>J
 nnoremap [window]K <C-w>K
 nnoremap [window]L <C-w>L
-nnoremap [window]d <C-w>-<C-w>-<C-w>-<C-w>-<C-w>-<C-w>-<C-w>-<C-w>-
-nnoremap [window]u <C-w>+<C-w>+<C-w>+<C-w>+<C-w>+<C-w>+<C-w>+<C-w>+
+" 高さ変更
+nnoremap [window]d 10<C-w>-
+nnoremap [window]u 10<C-w>+
+" 高さ最大
 nnoremap [window]U <C-w>_
-nnoremap [window]. <C-w>><C-w>><C-w>><C-w>><C-w>><C-w>><C-w>><C-w>><C-w>>
-nnoremap [window], <C-w><<C-w><<C-w><<C-w><<C-w><<C-w><<C-w><<C-w><<C-w><
+" 幅変更
+nnoremap [window]. 12<C-w>>
+nnoremap [window], 12<C-w><
 " 幅最大化
-nnoremap [window]m <C-w>|
+nnoremap [window]m <C-w><Bar>
+" 幅揃える
+nnoremap [window]= <C-w>=
 " ========= ウィンドウ操作 E =========
 
 "ヤンク文字で検索
