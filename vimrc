@@ -733,3 +733,4 @@ endfunction
 " ==========vim-trailing-whitespace S ===========
 autocmd VimEnter,ColorScheme,BufWinEnter * :hi ExtraWhiteSpace guibg=#990000
 " ==========vim-trailing-whitespace E ===========
+set tags=C:\Users\r_tsukamoto.ILL\workspace\macau_v2_for_ui\tmp\tags
