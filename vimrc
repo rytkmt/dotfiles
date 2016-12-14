@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 03-Dec-2016.
+" Last Change: 14-Dec-2016.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -467,15 +467,15 @@ NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'kana/vim-submode'
 
 " 設定はhttp://qiita.com/akase244/items/ce5e2e18ad5883e98a77を参照
-NeoBundle 'Shougo/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw 64',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make -f make_mac.mak',
-\     'linux' : 'make',
-\     'unix' : 'gmake',
-\    },
-\ }
+" NeoBundle 'Shougo/vimproc.vim', {
+" \ 'build' : {
+" \     'windows' : 'tools\\update-dll-mingw 64',
+" \     'cygwin' : 'make -f make_cygwin.mak',
+" \     'mac' : 'make -f make_mac.mak',
+" \     'linux' : 'make',
+" \     'unix' : 'gmake',
+" \    },
+" \ }
 " NeoBundle 'Shougo/vimshell.vim'
 
 call neobundle#end()
@@ -495,6 +495,10 @@ NeoBundleCheck
 let g:NERDTreeShowBookmarks=1
 "NERDTreeを起動
 autocmd vimenter * NERDTree
+
+"submodeを抜け出すときのコマンドを有効に
+let g:submode_keep_leaving_key=1
+let g:submode_timeout=0
 
 "ヤンクした値がdやxで消えないように（復活させる）
 noremap PP "0p
@@ -574,6 +578,15 @@ nnoremap [tab]7 :<C-u>tabn 7<CR>
 nnoremap [tab]8 :<C-u>tabn 8<CR>
 nnoremap [tab]9 :<C-u>tabn 9<CR>
 nnoremap [tab]10 :<C-u>tabn 10<CR>
+nnoremap [tab]m :<C-u>call <SID>move_buf_to_new_tab()<CR>
+
+function! s:move_buf_to_new_tab()
+  let move_buf_to_new_tab_path = expand("%:p")
+  echom move_buf_to_new_tab_path
+  q
+  execute "tabe " . move_buf_to_new_tab_path
+endfunction
+
 " ========== タブ操作 E ==========
 
 " ========= ウィンドウ操作 S =========
@@ -590,12 +603,8 @@ nnoremap [window]J <C-w>J
 nnoremap [window]K <C-w>K
 nnoremap [window]L <C-w>L
 call submode#enter_with('window_move', 'n', '', '<Leader>wh', '<C-w>h')
-call submode#enter_with('window_move', 'n', '', '<Leader>wj', '<C-w>j')
-call submode#enter_with('window_move', 'n', '', '<Leader>wk', '<C-w>k')
 call submode#enter_with('window_move', 'n', '', '<Leader>wl', '<C-w>l')
 call submode#map('window_move', 'n', '', 'h', '<C-w>h')
-call submode#map('window_move', 'n', '', 'j', '<C-w>j')
-call submode#map('window_move', 'n', '', 'k', '<C-w>k')
 call submode#map('window_move', 'n', '', 'l', '<C-w>l')
 " 高さ変更
 nnoremap [window]d 10<C-w>-
