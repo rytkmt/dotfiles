@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 14-Dec-2016.
+" Last Change: 29-Dec-2016.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -467,16 +467,16 @@ NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'kana/vim-submode'
 
 " 設定はhttp://qiita.com/akase244/items/ce5e2e18ad5883e98a77を参照
-" NeoBundle 'Shougo/vimproc.vim', {
-" \ 'build' : {
-" \     'windows' : 'tools\\update-dll-mingw 64',
-" \     'cygwin' : 'make -f make_cygwin.mak',
-" \     'mac' : 'make -f make_mac.mak',
-" \     'linux' : 'make',
-" \     'unix' : 'gmake',
-" \    },
-" \ }
-" NeoBundle 'Shougo/vimshell.vim'
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw 64',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
+NeoBundle 'Shougo/vimshell.vim'
 
 call neobundle#end()
 
@@ -546,8 +546,6 @@ call submode#map('tab_close', 'n', '', 'q', ':<C-u>tabc<CR>')
 nnoremap [tab]o :<C-u>tabo<CR>
 " 新規タブ
 nnoremap [tab]n :<C-u>tabnew<CR>
-call submode#enter_with('tab_new', 'n', '', '<Leader>tn', ':<C-u>tabnew<CR>')
-call submode#map('tab_new', 'n', '', 'n', ':<C-u>tabnew<CR>')
 " タブの詳細一覧
 nnoremap [tab]s :<C-u>tabs<CR>
 " タブ移動（左）
@@ -580,10 +578,14 @@ nnoremap [tab]9 :<C-u>tabn 9<CR>
 nnoremap [tab]10 :<C-u>tabn 10<CR>
 nnoremap [tab]m :<C-u>call <SID>move_buf_to_new_tab()<CR>
 
+" 作業ウィンドウを別タブで開く
 function! s:move_buf_to_new_tab()
   let move_buf_to_new_tab_path = expand("%:p")
-  echom move_buf_to_new_tab_path
-  q
+  try
+    q
+  catch
+    return
+  endtry
   execute "tabe " . move_buf_to_new_tab_path
 endfunction
 
@@ -707,16 +709,18 @@ let g:expand_region_text_objects = {
       \ 'i'''  :0,
       \ 'i('  :0,
       \ 'i<'  :0,
+      \ 'i{'  :0,
       \ 'a['  :0,
       \ 'a"'  :0,
       \ 'a'''  :0,
       \ 'a('  :0,
       \ 'a<'  :0,
+      \ 'a{'  :0,
       \ 'iW'  :0,
       \ 'if'  :0,
       \ 'il'  :0,
       \ }
-map <silent> v <Plug>(expand_region_expand)
+vmap <silent> v <Plug>(expand_region_expand)
 map <silent> c <Plug>(expand_region_shrink)
 " ============vim-expand-region E ============
 " ========== NERDTree S ==========
