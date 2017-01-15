@@ -33,6 +33,7 @@ mklink git_bin c:¥Program Files¥Git¥usr¥bin
 
 【4】タグジャンプようにctagsを入れる
 http://hp.vector.co.jp/authors/VA025040/ctags/
+https://github.com/universal-ctags/ctags
 上記からバイナリ版をダウンロードしパスを通す
 
 【5】ctagsを非同期でファイル読み込み時などに更新するためvimprocの設定
