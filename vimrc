@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 12-Jan-2017.
+" Last Change: 15-Jan-2017.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -479,6 +479,12 @@ NeoBundle 'Shougo/vimproc.vim', {
 \ }
 NeoBundle 'Shougo/vimshell.vim'
 
+"tagsの更新
+NeoBundle 'soramugi/auto-ctags.vim'
+
+"プロジェクトのrootに移動
+NeoBundle 'airblade/vim-rooter'
+
 call neobundle#end()
 
 " Required:
@@ -744,7 +750,66 @@ endfunction
 " ========== NERDTree E ==========
 
 
-" ==========vim-trailing-whitespace S ===========
+" ========== vim-trailing-whitespace S ===========
 autocmd VimEnter,ColorScheme,BufWinEnter * :hi ExtraWhiteSpace guibg=#990000
-" ==========vim-trailing-whitespace E ===========
-set tags=C:\Users\r_tsukamoto.ILL\workspace\macau_v2_for_ui\tmp\tags
+" ========== vim-trailing-whitespace E ===========
+
+" ========== vim-rooter S ===========
+let g:rooter_manual_only = 1 "FindRootDirectory()
+let g:rooter_patterns = ['Rakefile', '.svn/', '.git/']
+" ========== vim-rooter E ===========
+
+function SetGemsTags()
+  let s:gempath_str = split(execute('! gem environment gempath'), '\r')[1]
+  let s:gempaths = split(s:gempath_str, ':')
+  let g:gem_tags = []
+  for gem_path in s:gempaths
+    let s:gem_root = gem_path . '/gems'
+    if(isdirectory(s:gem_root))
+      exe "cd " . s:gem_root
+      exe ":silent Ctags"
+
+      call add(g:gem_tags, s:gem_root . '/tags')
+    endif
+  endfor
+endfunction
+
+function SetTags()
+  let s:root_temp = FindRootDirectory()
+  "Rakefileの存在でrailsプロジェクトか判断
+  if filereadable(s:root_temp .'/Rakefile')
+    "gemsのtagの更新
+    if !exists('g:gem_tags')
+      call SetGemsTags()
+    endif
+
+    "projectが変わったときだけタグのセットをする
+    if exists('g:project_root') && s:root_temp == g:project_root
+    else
+      let g:project_root = s:root_temp
+      exe "cd " .g:project_root
+      exe ":silent Ctags"
+
+      let s:tags = copy(g:gem_tags)
+      call add(s:tags, g:project_root . '/tags')
+
+      let $CTAGS_STR = join(s:tags, ',')
+      set tags=$CTAGS_STR
+      silent !unset '$CTAGS_STR'
+
+    endif
+  endif
+endfunction
+
+function TagsUpdate()
+  exe ":Rooter"
+  exe ":silent Ctags"
+
+  call SetTags()
+endfunction
+
+autocmd BufEnter * call SetTags()
+
+nnoremap [tag] <Nop>
+nmap <Leader>t [tag]
+nnoremap [tag]u :<C-u>call TagsUpdate()
