@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 29-Dec-2016.
+" Last Change: 12-Jan-2017.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -72,7 +72,8 @@ unlet! s:path
 
 " メッセージを日本語にする (Windowsでは自動的に判断・設定されている)
 set encoding=utf-8
-set fileencodings=iso-2022-jp,cp932,sjis,euc-jp,utf-8
+set fileencodings=utf-8
+"set fileencodings=utf-8,iso-2022-jp,cp932,sjis,euc-jp
 if !(has('win32') || has('mac')) && has('multi_lang')
   if !exists('$LANG') || $LANG.'X' ==# 'X'
     if !exists('$LC_CTYPE') || $LC_CTYPE.'X' ==# 'X'
