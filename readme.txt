@@ -39,3 +39,11 @@ http://hp.vector.co.jp/authors/VA025040/ctags/
 
 http://qiita.com/akase244/items/ce5e2e18ad5883e98a77
 上記の手順通りに設定を行う
+
+【6】ctagsの設定ファイル
+.ctagsファイルにシンボリックリンクを貼る
+(windows)
+HOMEの下にctags.confという名前でシンボリックリンクを貼る
+
+(mac)
+HOMEの下に.ctagsという名前でシンボリックリンクを貼る
