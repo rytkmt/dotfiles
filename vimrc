@@ -72,7 +72,8 @@ unlet! s:path
 
 " メッセージを日本語にする (Windowsでは自動的に判断・設定されている)
 set encoding=utf-8
-set fileencodings=iso-2022-jp,cp932,sjis,euc-jp,utf-8
+set fileencodings=utf-8
+"set fileencodings=utf-8,iso-2022-jp,cp932,sjis,euc-jp
 if !(has('win32') || has('mac')) && has('multi_lang')
   if !exists('$LANG') || $LANG.'X' ==# 'X'
     if !exists('$LC_CTYPE') || $LC_CTYPE.'X' ==# 'X'
