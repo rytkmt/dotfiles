@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 15-Jan-2017.
+" Last Change: 29-Mar-2017.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -529,8 +529,10 @@ inoremap <C-e> <Esc>$a
 inoremap <C-j> <Esc>ji
 inoremap <C-k> <Esc>ki
 noremap <S-h>   ^
-noremap <S-j>   }
-noremap <S-k>   {
+noremap <S-j>   gjgjgjgj
+noremap <C-j>   }
+noremap <S-k>   gkgkgkgk
+noremap <C-k>   {
 noremap <S-l>   $
 noremap m %
 
@@ -542,6 +544,7 @@ map <Space> <Nop>
 " コピペ
 map <Leader>c "*yy
 map <Leader>v "*p
+imap <Leader>v "*p
 
 " ========== タブ操作 S ==========
 nmap <Leader>t [tab]
@@ -760,8 +763,17 @@ let g:rooter_patterns = ['Rakefile', '.svn/', '.git/']
 " ========== vim-rooter E ===========
 
 function SetGemsTags()
-  let s:gempath_str = split(execute('! gem environment gempath'), '\r')[1]
-  let s:gempaths = split(s:gempath_str, ':')
+
+  if has('win32')
+    let s:gempaths = []
+    let s:gempath_tmp = split(system('gem environment gempath'), ';')[1]
+    let s:gempath_tmp = strpart(s:gempath_tmp, 0, strlen(s:gempath_tmp) - 1)
+    call add(s:gempaths, s:gempath_tmp)
+  else
+    let s:gempath_str = split(system('! gem environment gempath'), '\r')[0]
+    let s:gempaths = split(s:gempath_str, ':')
+  endif
+
   let g:gem_tags = []
   for gem_path in s:gempaths
     let s:gem_root = gem_path . '/gems'
@@ -803,13 +815,13 @@ endfunction
 
 function TagsUpdate()
   exe ":Rooter"
-  exe ":silent Ctags"
+  exe ":Ctags"
 
   call SetTags()
 endfunction
 
-autocmd BufEnter * call SetTags()
+" autocmd BufEnter * call SetTags()
 
-nnoremap [tag] <Nop>
-nmap <Leader>t [tag]
-nnoremap [tag]u :<C-u>call TagsUpdate()
+nnoremap [ctag] <Nop>
+nmap <Leader>c [ctag]
+nnoremap [ctag]u :<C-u>call TagsUpdate()

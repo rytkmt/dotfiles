@@ -12,185 +12,203 @@ endif
 " GUI & hexadecimal palettes"{{{
 if (has("gui_running"))
     let s:vmode       = "gui"
-    let s:base4       = "#2b2b2b"
-    let s:base3       = "#353535"
-    let s:base2       = "#444444"
-    let s:base1       = "#AFAFAF"
-    let s:base0       = "#DFDFDF"
-    let s:gold        = "#AF8B5F"
-    let s:yellow      = "#DFDF5F"
-    let s:orange      = "#DF8B5F"
-    let s:lime        = "#B2DC93"
-    let s:green       = "#87AF5F"
-    let s:lilac       = "#9377B2"
-    let s:light_blue  = "#93B2DC"
-    let s:dark_blue   = "#5F87AF"
-    let s:light_red   = "#ECB2B2"
-    let s:red         = "#CF5F5F"
-    let s:beige       = "#FFE0C0"
+    let s:col1       = "#2b2b2b"
+    let s:col2       = "#353535"
+    let s:col3       = "#444444"
+    let s:col4       = "#AFAFAF"
+    let s:col5       = "#DFDFDF"
+    let s:col6        = "#AF8B5F"
+    let s:col7      = "#DFDF5F"
+    let s:col8      = "#DF8B5F"
+    let s:col9        = "#B2DC93"
+    let s:col10       = "#87AF5F"
+    let s:col11       = "#9377B2"
+    let s:col12  = "#93B2DC"
+    let s:col13   = "#5F87AF"
+    let s:col14   = "#ECB2B2"
+    let s:col15         = "#CF5F5F"
+    let s:col16       = "#FFE0C0"
 " 上書き"
-    let s:base4       = "#232323"
-    let s:base3       = "#484848"
-    let s:base2       = "#464646"
-    let s:base1       = "#B9B9B9"
-    let s:base0       = "#D8D8D8"
-    let s:gold        = "#94846a"
-    let s:yellow      = "#ffea00"
-    let s:orange      = "#c38743"
-    let s:lime        = "#769164"
-    let s:green       = "#475950"
-    let s:lilac       = "#9079ad"
-    let s:light_blue  = "#abced8"
-    let s:dark_blue   = "#507ea4"
-    let s:light_red   = "#d4acad"
-    let s:red         = "#ec6d71"
-    let s:beige       = "#ebe1a9"
+    let s:col1       = "#232323"
+    let s:col2       = "#484848"
+    let s:col3       = "#464646"
+    let s:col4       = "#B9B9B9"
+    let s:col5       = "#D8D8D8"
+    let s:col6        = "#94846a"
+    let s:col7      = "#ffea00"
+    let s:col8      = "#c38743"
+    let s:col9        = "#769164"
+    let s:col10       = "#475950"
+    let s:col11       = "#9079ad"
+    let s:col12  = "#abced8"
+    let s:col13   = "#507ea4"
+    let s:col14   = "#d4acad"
+    let s:col15         = "#ec6d71"
+    let s:col16       = "#ebe1a9"
+" 上書き"
+    let s:col1       = "#1c1b19" "黒
+    " let s:col2       = "#484848"
+    " let s:col3       = "#464646"
+    " let s:col4       = "#B9B9B9"
+    let s:col5       = "#ede4dd" "白
+    " let s:col6        = "#94846a"
+    let s:col7      = "#e04053" "ピンク
+    " let s:col8      = "#c38743"
+    let s:col9        = "#817870" "グレー
+    let s:col10       = "#9377B2" "紫
+    let s:col11       = "#98bc37" "緑
+    let s:col12  = "#abcee8" "水色
+    let s:col13   = "#5573a3" "青
+    let s:col14   = "#f4acad" "薄ピンク
+    let s:col15         = "#d75f00" "オレンジ
+    let s:col16       = "#ffc24b" "黄色
+
 else
     let s:vmode       = "cterm"
-    let s:base4       = "0"
-    let s:base3       = "8"
-    let s:base2       = "14"
-    let s:base1       = "15"
-    let s:base0       = "7"
-    let s:gold        = "11"
-    let s:yellow      = "3"
-    let s:orange      = "5"
-    let s:lime        = "2"
-    let s:green       = "10"
-    let s:lilac       = "6"
-    let s:light_blue  = "4"
-    let s:dark_blue   = "12"
-    let s:light_red   = "1"
-    let s:red         = "9"
-    let s:beige       = "13"
+    let s:col1       = "0"
+    let s:col2       = "8"
+    let s:col3       = "14"
+    let s:col4       = "15"
+    let s:col5       = "7"
+    let s:col6        = "11"
+    let s:col7      = "3"
+    let s:col8      = "5"
+    let s:col9        = "2"
+    let s:col10       = "10"
+    let s:col11       = "6"
+    let s:col12  = "4"
+    let s:col13   = "12"
+    let s:col14   = "1"
+    let s:col15         = "9"
+    let s:col16       = "13"
 endif
 " }}}
 " Highlighting primitives"{{{
-exe "let s:bg_base4       = ' ".s:vmode."bg=".s:base4      ."'"
-exe "let s:bg_base3       = ' ".s:vmode."bg=".s:base3      ."'"
-exe "let s:bg_base2       = ' ".s:vmode."bg=".s:base2      ."'"
-exe "let s:bg_base1       = ' ".s:vmode."bg=".s:base1      ."'"
-exe "let s:bg_base0       = ' ".s:vmode."bg=".s:base0      ."'"
-exe "let s:bg_gold        = ' ".s:vmode."bg=".s:gold       ."'"
-exe "let s:bg_yellow      = ' ".s:vmode."bg=".s:yellow     ."'"
-exe "let s:bg_orange      = ' ".s:vmode."bg=".s:orange     ."'"
-exe "let s:bg_lime        = ' ".s:vmode."bg=".s:lime       ."'"
-exe "let s:bg_green       = ' ".s:vmode."bg=".s:green      ."'"
-exe "let s:bg_lilac       = ' ".s:vmode."bg=".s:lilac      ."'"
-exe "let s:bg_light_blue  = ' ".s:vmode."bg=".s:light_blue ."'"
-exe "let s:bg_dark_blue   = ' ".s:vmode."bg=".s:dark_blue  ."'"
-exe "let s:bg_light_red   = ' ".s:vmode."bg=".s:light_red  ."'"
-exe "let s:bg_red         = ' ".s:vmode."bg=".s:red        ."'"
-exe "let s:bg_beige       = ' ".s:vmode."bg=".s:beige      ."'"
+exe "let s:bg_col1       = ' ".s:vmode."bg=".s:col1      ."'"
+exe "let s:bg_col2       = ' ".s:vmode."bg=".s:col2      ."'"
+exe "let s:bg_col3       = ' ".s:vmode."bg=".s:col3      ."'"
+exe "let s:bg_col4       = ' ".s:vmode."bg=".s:col4      ."'"
+exe "let s:bg_col5       = ' ".s:vmode."bg=".s:col5      ."'"
+exe "let s:bg_col6        = ' ".s:vmode."bg=".s:col6       ."'"
+exe "let s:bg_col7      = ' ".s:vmode."bg=".s:col7     ."'"
+exe "let s:bg_col8      = ' ".s:vmode."bg=".s:col8     ."'"
+exe "let s:bg_col9        = ' ".s:vmode."bg=".s:col9       ."'"
+exe "let s:bg_col10       = ' ".s:vmode."bg=".s:col10      ."'"
+exe "let s:bg_col11       = ' ".s:vmode."bg=".s:col11      ."'"
+exe "let s:bg_col12  = ' ".s:vmode."bg=".s:col12 ."'"
+exe "let s:bg_col13   = ' ".s:vmode."bg=".s:col13  ."'"
+exe "let s:bg_col14   = ' ".s:vmode."bg=".s:col14  ."'"
+exe "let s:bg_col15         = ' ".s:vmode."bg=".s:col15        ."'"
+exe "let s:bg_col16       = ' ".s:vmode."bg=".s:col16      ."'"
 
-exe "let s:fg_base4       = ' ".s:vmode."fg=".s:base4      ."'"
-exe "let s:fg_base3       = ' ".s:vmode."fg=".s:base3      ."'"
-exe "let s:fg_base2       = ' ".s:vmode."fg=".s:base2      ."'"
-exe "let s:fg_base1       = ' ".s:vmode."fg=".s:base1      ."'"
-exe "let s:fg_base0       = ' ".s:vmode."fg=".s:base0      ."'"
-exe "let s:fg_gold        = ' ".s:vmode."fg=".s:gold       ."'"
-exe "let s:fg_yellow      = ' ".s:vmode."fg=".s:yellow     ."'"
-exe "let s:fg_orange      = ' ".s:vmode."fg=".s:orange     ."'"
-exe "let s:fg_lime        = ' ".s:vmode."fg=".s:lime       ."'"
-exe "let s:fg_green       = ' ".s:vmode."fg=".s:green      ."'"
-exe "let s:fg_lilac       = ' ".s:vmode."fg=".s:lilac      ."'"
-exe "let s:fg_light_blue  = ' ".s:vmode."fg=".s:light_blue ."'"
-exe "let s:fg_dark_blue   = ' ".s:vmode."fg=".s:dark_blue  ."'"
-exe "let s:fg_light_red   = ' ".s:vmode."fg=".s:light_red  ."'"
-exe "let s:fg_red         = ' ".s:vmode."fg=".s:red        ."'"
-exe "let s:fg_beige       = ' ".s:vmode."fg=".s:beige      ."'"
+exe "let s:fg_col1       = ' ".s:vmode."fg=".s:col1      ."'"
+exe "let s:fg_col2       = ' ".s:vmode."fg=".s:col2      ."'"
+exe "let s:fg_col3       = ' ".s:vmode."fg=".s:col3      ."'"
+exe "let s:fg_col4       = ' ".s:vmode."fg=".s:col4      ."'"
+exe "let s:fg_col5       = ' ".s:vmode."fg=".s:col5      ."'"
+exe "let s:fg_col6        = ' ".s:vmode."fg=".s:col6       ."'"
+exe "let s:fg_col7      = ' ".s:vmode."fg=".s:col7     ."'"
+exe "let s:fg_col8      = ' ".s:vmode."fg=".s:col8     ."'"
+exe "let s:fg_col9        = ' ".s:vmode."fg=".s:col9       ."'"
+exe "let s:fg_col10       = ' ".s:vmode."fg=".s:col10      ."'"
+exe "let s:fg_col11       = ' ".s:vmode."fg=".s:col11      ."'"
+exe "let s:fg_col12  = ' ".s:vmode."fg=".s:col12 ."'"
+exe "let s:fg_col13   = ' ".s:vmode."fg=".s:col13  ."'"
+exe "let s:fg_col14   = ' ".s:vmode."fg=".s:col14  ."'"
+exe "let s:fg_col15         = ' ".s:vmode."fg=".s:col15        ."'"
+exe "let s:fg_col16       = ' ".s:vmode."fg=".s:col16      ."'"
 
-exe "let s:sp_base4       = ' ".s:vmode."sp=".s:base4      ."'"
-exe "let s:sp_base3       = ' ".s:vmode."sp=".s:base3      ."'"
-exe "let s:sp_base2       = ' ".s:vmode."sp=".s:base2      ."'"
-exe "let s:sp_base1       = ' ".s:vmode."sp=".s:base1      ."'"
-exe "let s:sp_base0       = ' ".s:vmode."sp=".s:base0      ."'"
-exe "let s:sp_gold        = ' ".s:vmode."sp=".s:gold       ."'"
-exe "let s:sp_yellow      = ' ".s:vmode."sp=".s:yellow     ."'"
-exe "let s:sp_orange      = ' ".s:vmode."sp=".s:orange     ."'"
-exe "let s:sp_lime        = ' ".s:vmode."sp=".s:lime       ."'"
-exe "let s:sp_green       = ' ".s:vmode."sp=".s:green      ."'"
-exe "let s:sp_lilac       = ' ".s:vmode."sp=".s:lilac      ."'"
-exe "let s:sp_light_blue  = ' ".s:vmode."sp=".s:light_blue ."'"
-exe "let s:sp_dark_blue   = ' ".s:vmode."sp=".s:dark_blue  ."'"
-exe "let s:sp_light_red   = ' ".s:vmode."sp=".s:light_red  ."'"
-exe "let s:sp_red         = ' ".s:vmode."sp=".s:red        ."'"
-exe "let s:sp_beige       = ' ".s:vmode."sp=".s:beige      ."'"
+exe "let s:sp_col1       = ' ".s:vmode."sp=".s:col1      ."'"
+exe "let s:sp_col2       = ' ".s:vmode."sp=".s:col2      ."'"
+exe "let s:sp_col3       = ' ".s:vmode."sp=".s:col3      ."'"
+exe "let s:sp_col4       = ' ".s:vmode."sp=".s:col4      ."'"
+exe "let s:sp_col5       = ' ".s:vmode."sp=".s:col5      ."'"
+exe "let s:sp_col6        = ' ".s:vmode."sp=".s:col6       ."'"
+exe "let s:sp_col7      = ' ".s:vmode."sp=".s:col7     ."'"
+exe "let s:sp_col8      = ' ".s:vmode."sp=".s:col8     ."'"
+exe "let s:sp_col9        = ' ".s:vmode."sp=".s:col9       ."'"
+exe "let s:sp_col10       = ' ".s:vmode."sp=".s:col10      ."'"
+exe "let s:sp_col11       = ' ".s:vmode."sp=".s:col11      ."'"
+exe "let s:sp_col12  = ' ".s:vmode."sp=".s:col12 ."'"
+exe "let s:sp_col13   = ' ".s:vmode."sp=".s:col13  ."'"
+exe "let s:sp_col14   = ' ".s:vmode."sp=".s:col14  ."'"
+exe "let s:sp_col15         = ' ".s:vmode."sp=".s:col15        ."'"
+exe "let s:sp_col16       = ' ".s:vmode."sp=".s:col16      ."'"
 
 exe "let s:underline      = ' ".s:vmode."=underline'"
 exe "let s:bold      = ' ".s:vmode."=bold'"
 "}}}
 
-exe "hi! Normal"                 .s:fg_base0       .s:bg_base4
-exe "hi! Comment"                .s:fg_lime
+exe "hi! Normal"                 .s:fg_col5       .s:bg_col1
+exe "hi! Comment"                .s:fg_col9
 
-exe "hi! Constant"               .s:fg_yellow
-exe "hi! String"                 .s:fg_beige
-exe "hi! Character"              .s:fg_green
+exe "hi! Constant"               .s:fg_col7
+exe "hi! String"                 .s:fg_col16
+exe "hi! Character"              .s:fg_col10
 
-exe "hi! Identifier"             .s:fg_dark_blue "gui=NONE, cterm=NONE"
-exe "hi! Function"               .s:fg_light_red
+exe "hi! Identifier"             .s:fg_col13 "gui=NONE, cterm=NONE"
+exe "hi! Function"               .s:fg_col10
 
-exe "hi! Statement"              .s:fg_red "gui=NONE, cterm=NONE"
+exe "hi! Statement"              .s:fg_col15 "gui=NONE, cterm=NONE"
 hi! link Label String
 hi! link Exception PreProc
 
-exe "hi! PreProc"                .s:fg_light_red
+exe "hi! PreProc"                .s:fg_col14
 hi! link Define Type
-exe "hi! Macro"                  .s:fg_beige
+exe "hi! Macro"                  .s:fg_col16
 
-exe "hi! Type"                   .s:fg_orange "gui=NONE, cterm=NONE"
+exe "hi! Type"                   .s:fg_col8 "gui=NONE, cterm=NONE"
 hi! link StorageClass Identifier
 
-exe "hi! Special"                .s:fg_light_blue
-exe "hi! SpecialChar"            .s:fg_green
-exe "hi! Tag"                    .s:fg_orange
-exe "hi! Delimiter"              .s:fg_base1
-exe "hi! SpecialComment"         .s:fg_base1
+exe "hi! Special"                .s:fg_col12
+exe "hi! SpecialChar"            .s:fg_col10
+exe "hi! Tag"                    .s:fg_col8
+exe "hi! Delimiter"              .s:fg_col4
+exe "hi! SpecialComment"         .s:fg_col4
 hi! link Debug Macro
 
-exe "hi! Error"                  .s:fg_base0       .s:bg_red
-exe "hi! Todo"                   .s:fg_yellow      .s:bg_base4
+exe "hi! Error"                  .s:fg_col5       .s:bg_col15
+exe "hi! Todo"                   .s:fg_col7      .s:bg_col1
 
-exe "hi! Cursor"                                   .s:bg_base1
-exe "hi! CursorLine"                               .s:bg_base3  " cterm=NONE"
+exe "hi! Cursor"                                   .s:bg_col4
+exe "hi! CursorLine"                               .s:bg_col2  " cterm=NONE"
 hi! link CursorColumn CursorLine
-exe "hi! ColorColumn"                              .s:bg_base2
-exe "hi! LineNr"                 .s:fg_base1
-exe "hi! CursorLineNr"           .s:fg_yellow      .s:bg_base3
-exe "hi! NonText"                .s:fg_light_blue                       .s:bold
+exe "hi! ColorColumn"                              .s:bg_col3
+exe "hi! LineNr"                 .s:fg_col4
+exe "hi! CursorLineNr"           .s:fg_col16      .s:bg_col2
+exe "hi! NonText"                .s:fg_col12
 
-exe "hi! Folded"                 .s:fg_base1       .s:bg_base4
+exe "hi! Folded"                 .s:fg_col4       .s:bg_col1
 
-exe "hi! PMenu"                  .s:fg_base0       .s:bg_base3
-exe "hi! PMenuSel"               .s:fg_base0       .s:bg_base2
-exe "hi! PMenuSBar"                                .s:bg_base2
-exe "hi! PMenuThumb"                               .s:bg_base0
+exe "hi! PMenu"                  .s:fg_col5       .s:bg_col2
+exe "hi! PMenuSel"               .s:fg_col5       .s:bg_col3
+exe "hi! PMenuSBar"                                .s:bg_col3
+exe "hi! PMenuThumb"                               .s:bg_col5
 
-exe "hi! Visual"                                   .s:bg_dark_blue
-exe "hi! Search"                 .s:fg_base0       .s:bg_dark_blue
+exe "hi! Visual"                                   .s:bg_col13
+exe "hi! Search"                 .s:fg_col5       .s:bg_col13
 hi! link IncSearch Search
 
-exe "hi! VertSplit"              .s:fg_base4       .s:bg_base1
-exe "hi! MatchParen"             .s:fg_light_red   .s:bg_base4      "gui=underline, cterm=underline"
-exe "hi! Title"                  .s:fg_yellow
-exe "hi! Directory"              .s:fg_lime
-exe "hi! SpecialKey"             .s:fg_base2
+exe "hi! VertSplit"              .s:fg_col1       .s:bg_col4
+exe "hi! MatchParen"             .s:fg_col14   .s:bg_col1      "gui=underline, cterm=underline"
+exe "hi! Title"                  .s:fg_col7
+exe "hi! Directory"              .s:fg_col9
+exe "hi! SpecialKey"             .s:fg_col3
 
-exe "hi! SpellBad"               .s:fg_light_red   .s:bg_base4      "gui=underline, cterm=underline"
+exe "hi! SpellBad"               .s:fg_col14   .s:bg_col1      "gui=underline, cterm=underline"
 
-exe "hi! FoldColumn"             .s:fg_base0       .s:bg_base2
-exe "hi! SignColumn"             .s:fg_base0       .s:bg_base2
+exe "hi! FoldColumn"             .s:fg_col5       .s:bg_col3
+exe "hi! SignColumn"             .s:fg_col5       .s:bg_col3
 
-exe "hi! Underlined"             .s:fg_light_blue
-exe "hi! Question"               .s:fg_lime
-exe "hi! WarningMsg"             .s:fg_light_red
-exe "hi! ErrorMsg"               .s:fg_base4       .s:bg_light_red
+exe "hi! Underlined"             .s:fg_col12
+exe "hi! Question"               .s:fg_col9
+exe "hi! WarningMsg"             .s:fg_col14
+exe "hi! ErrorMsg"               .s:fg_col1       .s:bg_col14
 
 
 "全角スペースをハイライト表示
 function! ZenkakuSpace()
-    exe "hi! ZenkakuSpace" .s:bg_red
+    exe "hi! ZenkakuSpace" .s:bg_col15
 endfunction
    
 if has('syntax')
@@ -204,114 +222,114 @@ endif
 
 
 "【_String】"
-exe "hi! _String" .s:fg_beige
+exe "hi! _String" .s:fg_col16
 "【_Comment】"
-exe "hi! _Comment" .s:fg_lime
+exe "hi! _Comment" .s:fg_col9
 "【_Regexp】"
-exe "hi! _Regexp" .s:fg_beige
+exe "hi! _Regexp" .s:fg_col16
 "【_Unknown】"
-exe "hi! _Unknown" .s:bg_yellow
+exe "hi! _Unknown" .s:bg_col7
 "【_Value】
-exe "hi! _Value" .s:fg_lilac
+exe "hi! _Value" .s:fg_col11
 
 " Diff {{{
-exe "hi! DiffAdd"                .s:fg_green       .s:bg_base4      "gui=underline, cterm=underline"
-exe "hi! DiffDelete"             .s:fg_light_red   .s:bg_base4
-exe "hi! DiffChange"             .s:fg_orange      .s:bg_base4      "gui=underline, cterm=underline"
-exe "hi! DiffText"               .s:fg_orange      .s:bg_base4      "gui=underline, cterm=underline"
+exe "hi! DiffAdd"                .s:fg_col10       .s:bg_col1      "gui=underline, cterm=underline"
+exe "hi! DiffDelete"             .s:fg_col14   .s:bg_col1
+exe "hi! DiffChange"             .s:fg_col8      .s:bg_col1      "gui=underline, cterm=underline"
+exe "hi! DiffText"               .s:fg_col8      .s:bg_col1      "gui=underline, cterm=underline"
 " }}}
 
 " Syntastic {{{
-exe "hi! SyntasticErrorSign"      .s:fg_light_red  .s:bg_base4
-exe "hi! SyntasticStyleErrorSign" .s:fg_light_red  .s:bg_base4
+exe "hi! SyntasticErrorSign"      .s:fg_col14  .s:bg_col1
+exe "hi! SyntasticStyleErrorSign" .s:fg_col14  .s:bg_col1
 " }}}
 
 " ruby {{{
 
-" --------- base0 --------------"
+" --------- col5 --------------"
 " #{ here } <-- here"
-exe "hi! rubyInterpolation" .s:fg_base0
+exe "hi! rubyInterpolation" .s:fg_col5
 " 3.times do |here| <-- here "
-exe "hi! rubyBlockParameter" .s:fg_base0
-" 3.times do |some, some2| <-- | , |"
-exe "hi! rubyBlockParameterList" .s:fg_base0
-" Class.method <-- . "
-exe "hi! rubyMethodDeclaration" .s:fg_base0
+exe "hi! rubyBlockParameter" .s:fg_col5
 " def here(name) <-- here "
-exe "hi! rubyFunction" .s:fg_base0
+exe "hi! rubyFunction" .s:fg_col5
 " def method(some) <-- (some) \s "
-exe "hi! rubyMethodBlock" .s:fg_base0
+exe "hi! rubyMethodBlock" .s:fg_col5
 " class Class <-- \s = "
-exe "hi! rubyBlock" .s:fg_base0
+exe "hi! rubyBlock" .s:fg_col5
 " some =   some >  "
-exe "hi! rubyDoBlock" .s:fg_base0
-" some = { name => '' , val => '' } <-- { } "
-exe "hi! rubyCurlyBlockDelimiter" .s:fg_base0
+exe "hi! rubyDoBlock" .s:fg_col5
 " { nm => '', val => ''} {|nm| here } <-- , \s here"
-exe "hi! rubyCurlyBlock" .s:fg_base0
-" [ 1, 2, 3] <-- [ ] "
-exe "hi! rubyArrayDelimiter" .s:fg_base0
-" [ 1, 2, 3] <-- , "
-exe "hi! rubyArrayLiteral" .s:fg_base0
+exe "hi! rubyCurlyBlock" .s:fg_col5
 " begin some_all end <-- some_all "
-exe "hi! rubyBlockExpression" .s:fg_base0
+exe "hi! rubyBlockExpression" .s:fg_col5
 " case here when 1 end <-- here \s "
-exe "hi! rubyCaseExpression" .s:fg_base0
+exe "hi! rubyCaseExpression" .s:fg_col5
+" [ 1, 2, 3] <-- , "
+exe "hi! rubyArrayLiteral" .s:fg_col5
 " if here else here end <-- here \s "
-exe "hi! rubyConditionalExpression" .s:fg_base0
+exe "hi! rubyConditionalExpression" .s:fg_col5
 " for here in here do <-- here \s "
-exe "hi! rubyOptionalDoLine" .s:fg_base0
+exe "hi! rubyOptionalDoLine" .s:fg_col5
 " while true here end <-- here \s "
-exe "hi! rubyRepeatExpression" .s:fg_base0
+exe "hi! rubyRepeatExpression" .s:fg_col5
 " eval(some) <-- eval"
-exe "hi! rubyEval" .s:fg_base0
+exe "hi! rubyEval" .s:fg_col5
 " raise "
-exe "hi! rubyException" .s:fg_base0
+exe "hi! rubyException" .s:fg_col5
 
-" -------- light_red ----------"
+" 3.times do |some, some2| <-- | , |"
+exe "hi! rubyBlockParameterList" .s:fg_col5
+" [ 1, 2, 3] <-- [ ] "
+exe "hi! rubyArrayDelimiter" .s:fg_col5
+" some = { name => '' , val => '' } <-- { } "
+exe "hi! rubyCurlyBlockDelimiter" .s:fg_col5
+" Class.method <-- . "
+exe "hi! rubyMethodDeclaration" .s:fg_col5
+" -------- col16 ----------"
 " :some "
-exe "hi! rubySymbol" .s:fg_beige
-" ---------- red --------------"
+exe "hi! rubySymbol" .s:fg_col16
+" ---------- col15 --------------"
 " =========== fg =============="
 " if end case when rescue
-exe "hi! rubyConditional" .s:fg_red
+exe "hi! rubyConditional" .s:fg_col15 .s:bold
 " do end begin rescue return"
-exe "hi! rubyControl" .s:fg_red
+exe "hi! rubyControl" .s:fg_col15 .s:bold
 " exception_rescue"
-exe "hi! rubyExceptional" .s:fg_red
+exe "hi! rubyExceptional" .s:fg_col15 .s:bold
 " yield "
-exe "hi! rubyKeyword" .s:fg_red
+exe "hi! rubyKeyword" .s:fg_col15 .s:bold
 " while end for end "
-exe "hi! rubyRepeat" .s:fg_red
+exe "hi! rubyRepeat" .s:fg_col15 .s:bold
 " for nm,val in some do <-- do "
-exe "hi! rubyOptionalDo" .s:fg_red
+exe "hi! rubyOptionalDo" .s:fg_col15 .s:bold
 " some = 0 if true <-- if "
-exe "hi! rubyConditionalModifier" .s:fg_red
+exe "hi! rubyConditionalModifier" .s:fg_col15 .s:bold
 " begin some end until true <-- until "
-exe "hi! rubyRepeatModifier" .s:fg_red
-" -------- dark_blue -----------"
+exe "hi! rubyRepeatModifier" .s:fg_col15 .s:bold
+" -------- col13 -----------"
 
 " Person  Exception "
-exe "hi! rubyConstant" .s:fg_dark_blue
+exe "hi! rubyConstant" .s:fg_col13
 " self __FILE__ "
-exe "hi! rubyPseudoVariable" .s:fg_dark_blue
+exe "hi! rubyPseudoVariable" .s:fg_col13
 " ARGV "
-exe "hi! rubyPredefinedConstant" .s:fg_dark_blue
+exe "hi! rubyPredefinedConstant" .s:fg_col13
 " #{ }"
-exe "hi! rubyInterpolationDelimiter" .s:fg_dark_blue
-" -------- light_blue ----------"
+exe "hi! rubyInterpolationDelimiter" .s:fg_col13
+" -------- col12 ----------"
 " @test"
-exe "hi! rubyInstanceVariable" .s:fg_light_blue
+exe "hi! rubyInstanceVariable" .s:fg_col12
 " @@test"
-exe "hi! rubyClassVariable" .s:fg_light_blue
+exe "hi! rubyClassVariable" .s:fg_col12
 " $test"
-exe "hi! rubyGlobalVariable" .s:fg_light_blue
+exe "hi! rubyGlobalVariable" .s:fg_col12
 " $1
-exe "hi! rubyPredefinedVariable" .s:fg_light_blue
+exe "hi! rubyPredefinedVariable" .s:fg_col12
 " / some / "
-exe "hi! rubyRegexpDelimiter" .s:fg_light_blue
+exe "hi! rubyRegexpDelimiter" .s:fg_col12
 
-" ---------- lime --------------"
+" ---------- col9 --------------"
 "【_Comment】"
 " comment_TODO
 hi! link rubyTodo _Comment
@@ -322,23 +340,22 @@ hi! link rubyComment _Comment
 " =begin some =end <-- all "
 hi! link rubyDocumentation _Comment
 
-" ---------- green -------------"
-" ---------- yellow ------------"
+" ---------- col7 ------------"
 " def end "
-exe "hi! rubyDefine" .s:fg_yellow
+exe "hi! rubyDefine" .s:fg_col7 .s:bold
 " method_exception_resque
-exe "hi! rubyMethodExceptional" .s:fg_yellow
+exe "hi! rubyMethodExceptional" .s:fg_col7 .s:bold
 " class end "
-exe "hi! rubyClass" .s:fg_yellow
+exe "hi! rubyClass" .s:fg_col7 .s:bold
 " module end "
-exe "hi! rubyModule" .s:fg_yellow
+exe "hi! rubyModule" .s:fg_col7 .s:bold
 " module_function :some <-- module_function "
-exe "hi! rubyAccess" .s:fg_yellow
+exe "hi! rubyAccess" .s:fg_col7 .s:bold
 " attr "
-exe "hi! rubyAttribute" .s:fg_yellow
+exe "hi! rubyAttribute" .s:fg_col7 .s:bold
 
 
-" ---------- beige ------------"
+" ---------- col16 ------------"
 
 "【_String】"
 " " " "
@@ -364,12 +381,12 @@ hi! link rubyRegexpDot _Regexp
 " / some_all /"
 hi! link rubyRegexp _Regexp
 
-" ----------- orange -----------"
+" ----------- col8 -----------"
 
 " extend require "
-exe "hi! rubyInclude" .s:fg_orange
+exe "hi! rubyInclude" .s:fg_col8
 
-" ----------- lilac -----------"
+" ----------- col11 -----------"
 " 3 "
 hi! link rubyInteger _Value
 " 1.0 "
@@ -381,7 +398,7 @@ hi! link rubyBoolean _Value
 hi! link rubyQuoteEscape _Unknown
 hi! link rubyInvalidVariable _Unknown
 hi! link rubyNoInterpolation _Unknown
-hi! link rubyDelimEscape _Unknown
+hi! link rubyDecol9scape _Unknown
 hi! link rubyNestedParentheses _Unknown
 hi! link rubyNestedCurlyBraces _Unknown
 hi! link rubyNestedAngleBrackets _Unknown
@@ -412,71 +429,71 @@ hi! link rubyError _Unknown
 " }}}
 
 " css {{{
-"------------- base0 -------------"
+"------------- col5 -------------"
 " selector{ } <-- { }"
-exe "hi! cssBraces" .s:fg_base0
+exe "hi! cssBraces" .s:fg_col5
 " #ff0000 red <-- ff0000 red "
-exe "hi! cssColor" .s:fg_base0
+exe "hi! cssColor" .s:fg_col5
 " rect(0px auto, auto auto) <-- \s auto"
-exe "hi! cssFunction" .s:fg_base0
+exe "hi! cssFunction" .s:fg_col5
 " propety: some <-- \s % "
-exe "hi! cssAttrRegion" .s:fg_base0
+exe "hi! cssAttrRegion" .s:fg_col5
 " none "
-exe "hi! cssCommonAttr" .s:fg_base0
+exe "hi! cssCommonAttr" .s:fg_col5
 " propety: some; <-- : ;"
-exe "hi! cssNoise" .s:fg_base0
+exe "hi! cssNoise" .s:fg_col5
 " url(some) <-- url( )"
-exe "hi! cssFunctionName" .s:fg_base0
+exe "hi! cssFunctionName" .s:fg_col5
 " scale(x,y) <-- , "
-exe "hi! cssFunctionComma" .s:fg_base0
+exe "hi! cssFunctionComma" .s:fg_col5
 " linear-gradient(left, #fff, rgba(255,0,0,0) <-- left "
-exe "hi! cssGradientAttr" .s:fg_base0
+exe "hi! cssGradientAttr" .s:fg_col5
 " background: #fff url(some) top center no-repeat <-- top center no-repeat; "
-exe "hi! cssBackgroundAttr" .s:fg_base0
+exe "hi! cssBackgroundAttr" .s:fg_col5
 " border:solid 1px #fff; <-- solid "
-exe "hi! cssBorderAttr" .s:fg_base0
+exe "hi! cssBorderAttr" .s:fg_col5
 " margin: auto; overflow: hidden "
-exe "hi! cssBoxAttr" .s:fg_base0
+exe "hi! cssBoxAttr" .s:fg_col5
 " font-family: Arial <-- Arial "
-exe "hi! cssFontAttr" .s:fg_base0
+exe "hi! cssFontAttr" .s:fg_col5
 " #FF0000 10px 2em 3Hz <-- # px em Hz"
-exe "hi! cssUnitDecorators" .s:fg_base0
+exe "hi! cssUnitDecorators" .s:fg_col5
 " @media (orientation: landscape){} <-- landscape"
-exe "hi! cssMediaAttr" .s:fg_base0
+exe "hi! cssMediaAttr" .s:fg_col5
 " @media screen, print <-- , "
-exe "hi! cssMediaComma" .s:fg_base0
+exe "hi! cssMediaComma" .s:fg_col5
 " @media screen and (max-width:480px) <-- \s : ( ) "
-exe "hi! cssInclude" .s:fg_base0
+exe "hi! cssInclude" .s:fg_col5
 " break-after:column; <-- column "
-exe "hi! cssMultiColumnAttr" .s:fg_base0
+exe "hi! cssMultiColumnAttr" .s:fg_col5
 " animation-iteration-count: infinite; <-- infinite "
-exe "hi! cssAnimationAttr" .s:fg_base0
+exe "hi! cssAnimationAttr" .s:fg_col5
 " list-style: square url('../images/ico32.gif') inside <-- insize squeare"
-exe "hi! cssListAttr" .s:fg_base0
+exe "hi! cssListAttr" .s:fg_col5
 " display:block; position:absolute; float:left <-- block absolute left "
-exe "hi! cssPositioningAttr" .s:fg_base0
+exe "hi! cssPositioningAttr" .s:fg_col5
 " page-break-inside: avoid; size:landscape; <-- avoid landscape "
-exe "hi! cssPrintAttr" .s:fg_base0
+exe "hi! cssPrintAttr" .s:fg_col5
 " page-break-before: always; <-- always "
-exe "hi! cssTableAttr" .s:fg_base0
+exe "hi! cssTableAttr" .s:fg_col5
 " frex-wrap:nowrap; word-break:break-all; text-decoration:underline <-- nowrap break-all underline "
-exe "hi! cssTextAttr" .s:fg_base0
+exe "hi! cssTextAttr" .s:fg_col5
 " transition : width 1s ease-out; transition:1s linear <-- ease-out linear "
-exe "hi! cssTransitionAttr" .s:fg_base0
+exe "hi! cssTransitionAttr" .s:fg_col5
 " content:some; zoom:1; cursor:pointer; <-- content zoom pointer "
-exe "hi! cssUIAttr" .s:fg_base0
+exe "hi! cssUIAttr" .s:fg_col5
 " interpolation-mode:bicubic <-- bicubic "
-exe "hi! cssIEUIAttr" .s:fg_base0
+exe "hi! cssIEUIAttr" .s:fg_col5
 " voice-family:male; <-- male"
-exe "hi! cssAuralAttr" .s:fg_base0
+exe "hi! cssAuralAttr" .s:fg_col5
 " , "
-exe "hi! cssAttrComma" .s:fg_base0
+exe "hi! cssAttrComma" .s:fg_col5
 " #aaa + .bbb > .test <-- + >  "
-exe "hi! cssSelectorOp" .s:fg_base0
+exe "hi! cssSelectorOp" .s:fg_col5
 " input[type=radio] <-- = "
-exe "hi! cssSelectorOp2" .s:fg_base0
+exe "hi! cssSelectorOp2" .s:fg_col5
 " @media screen and (min-width:480px) <-- and "
-exe "hi! cssMediaKeyword" .s:fg_base0
+exe "hi! cssMediaKeyword" .s:fg_col5
 
 "【_CSS_Value】"
 "z-index:2; line-height:1; <-- 2 1 (IntegerはNumberでもあるのでNumberが優先される
@@ -492,25 +509,17 @@ hi! link cssValueTime _CSS_Value
 " 14Hz 3kHz <-- 14 3 "
 hi! link cssValueFrequency _CSS_Value
 
-"------------- red ---------------"
+"------------- col15 ---------------"
 " !important "
-exe "hi! cssImportant" .s:fg_red
-"----------- light_red -----------"
-" .class <-- . "
-exe "hi! cssClassNameDot" .s:fg_light_red
-" .class <-- class "
-exe "hi! cssClassName" .s:fg_light_red
-" #id "
-exe "hi! cssIdentifier" .s:fg_light_red
-" .top_margin{} <-- _ "
-exe "hi! cssHacks" .s:fg_light_red
-"------------ orange -------------"
+exe "hi! cssImportant" .s:fg_col15 .s:bold
+"----------- col14 -----------"
+"------------ col8 -------------"
 " div ul "
-exe "hi! cssTagName" .s:fg_orange
+exe "hi! cssTagName" .s:fg_col8
 " @keyframes some { 0% {} 30%{} } <-- 0% 30% "
-exe "hi! cssKeyFrameSelector" .s:fg_orange
-"------------ yellow -------------"
-"------------ beige --------------"
+exe "hi! cssKeyFrameSelector" .s:fg_col8
+"------------ col7 -------------"
+"------------ col16 --------------"
 "【_String】"
 " content: "\2193"; <-- \2193
 hi! link cssUnicodeEscape _String
@@ -522,25 +531,33 @@ hi! link cssStringQQ _String
 hi! link cssSpecialCharQQ _String
 " '\\\\' "
 hi! link cssSpecialCharQ _String
-"------------- lime --------------"
+"------------- col9 --------------"
 "【_Comment】】"
 hi! link cssComment _Comment
-"------------ green --------------"
+"------------ col10 --------------"
 " @charset "
-exe "hi! cssIncludeKeyword" .s:fg_green
+exe "hi! cssIncludeKeyword" .s:fg_col10
 " @font-face "
-exe "hi! cssFontDescriptor" .s:fg_green
-"---------- light_blue -----------"
+exe "hi! cssFontDescriptor" .s:fg_col10
+" .class <-- . "
+exe "hi! cssClassNameDot" .s:fg_col10
+" .class <-- class "
+exe "hi! cssClassName" .s:fg_col10
+" #id "
+exe "hi! cssIdentifier" .s:fg_col10
+" .top_margin{} <-- _ "
+exe "hi! cssHacks" .s:fg_col10
+"---------- col12 -----------"
 " selector:pseudo-class{} <-- pseudo-class "
-exe "hi! cssPseudoClass" .s:fg_light_blue
+exe "hi! cssPseudoClass" .s:fg_col12
 " @page:first <-- :first "
-exe "hi! cssPagePseudo" .s:fg_light_blue
+exe "hi! cssPagePseudo" .s:fg_col12
 " input:checked div:hover <-- :checked :hover "
-exe "hi! cssPseudoClassId" .s:fg_light_blue
-"---------- dark_blue ------------"
+exe "hi! cssPseudoClassId" .s:fg_col12
+"---------- col13 ------------"
 
 "【_CSS_Property】"
-exe "hi! _CSS_Property" .s:fg_dark_blue
+exe "hi! _CSS_Property" .s:fg_col13
 " -moz- -webkit- "
 hi! link cssVendor _CSS_Property
 " animation-name animation-duration "
@@ -592,22 +609,22 @@ hi! link cssFlexibleBoxProp _CSS_Property
 " @media screen{ min-color: some} <-- min-color "
 hi! link cssMediaProp _CSS_Property
 
-"------------ lilac --------------"
+"------------ col11 --------------"
 " url(img/arw.png) <-- img/arw.png "
-exe "hi! cssURL" .s:fg_lilac
+exe "hi! cssURL" .s:fg_col11
 " url(sansation_light.woff) <-- sansation_light.woff "
-exe "hi! cssFontDescriptorFunction" .s:fg_lilac
+exe "hi! cssFontDescriptorFunction" .s:fg_col11
 " unicode-range: U+000-5FF, U+1e00-1fff, U+2000-2300;"
-exe "hi! cssFontDescriptorAttr" .s:fg_lilac
+exe "hi! cssFontDescriptorAttr" .s:fg_col11
 " content: open-quote <-- open quote "
-exe "hi! cssGeneratedContentAttr" .s:fg_lilac
+exe "hi! cssGeneratedContentAttr" .s:fg_col11
 
 " input[type=radio] <-- type radio "
-exe "hi! cssAttributeSelector" .s:fg_lilac
+exe "hi! cssAttributeSelector" .s:fg_col11
 " :lang(en) :lang(no) <-- en no "
-exe "hi! cssPseudoClassFn" .s:fg_lilac
+exe "hi! cssPseudoClassFn" .s:fg_col11
 " @media screen and print <-- screen print all "
-exe "hi! cssMediaType" .s:fg_lilac
+exe "hi! cssMediaType" .s:fg_col11
 "------------ ??? ----------------"
 "【_Unknown】"
 hi! link cssMediaBlock _Unknown
@@ -649,43 +666,43 @@ hi! link cssPseudoClassLang _Unknown
 
 
 " javascript {{{
-" -------------- base0 -------------------- "
+" -------------- col5 -------------------- "
 " { } "dd
-exe "hi! javaScriptBraces" .s:fg_base0
+exe "hi! javaScriptBraces" .s:fg_col5
 
 " alert() confirm() <-- alert confirm "
-exe "hi! javaScriptMessage" .s:fg_base0
+exe "hi! javaScriptMessage" .s:fg_col5
 " window "
-exe "hi! javaScriptGlobal" .s:fg_base0
+exe "hi! javaScriptGlobal" .s:fg_col5
 " document "
-exe "hi! javaScriptMember" .s:fg_base0
+exe "hi! javaScriptMember" .s:fg_col5
 " if() function() <-- ( ) "
-exe "hi! javaScriptParens" .s:fg_base0
-" ------------- light_red ----------------- "
+exe "hi! javaScriptParens" .s:fg_col5
+" ------------- col14 ----------------- "
 " new "
-exe "hi! javaScriptOperator" .s:fg_light_red
+exe "hi! javaScriptOperator" .s:fg_col14
 " return "
-exe "hi! javaScriptStatement" s:fg_light_red
+exe "hi! javaScriptStatement" s:fg_col14
 " break "
-exe "hi! javaScriptBranch" .s:fg_light_red
+exe "hi! javaScriptBranch" .s:fg_col14
 " var "
-exe "hi! javaScriptIdentifier" .s:fg_light_red
-" --------------- red --------------------- "
+exe "hi! javaScriptIdentifier" .s:fg_col14
+" --------------- col15 --------------------- "
 " function(){} <-- function "
-exe "hi! javaScriptFunction" .s:fg_red
+exe "hi! javaScriptFunction" .s:fg_col15 .s:bold
 " if else end "
-exe "hi! javaScriptConditional" .s:fg_red
+exe "hi! javaScriptConditional" .s:fg_col15 .s:bold
 " for "
-exe "hi! javaScriptRepeat" .s:fg_red
+exe "hi! javaScriptRepeat" .s:fg_col15 .s:bold
 " case "
-exe "hi! javaScriptLabel" .s:fg_red
-" --------------- lime -------------------- "
+exe "hi! javaScriptLabel" .s:fg_col15 .s:bold
+" --------------- col9 -------------------- "
 "【_Comment】"
 " //some "
 hi! link javaScriptLineComment _Comment
 " /* some */ "
 hi! link javaScriptComment _Comment
-" -------------- beige -------------------- "
+" -------------- col16 -------------------- "
 "【_String】"
 " /,/g "
 hi! link javaScriptRegexpString _String
@@ -693,10 +710,10 @@ hi! link javaScriptRegexpString _String
 hi! link javaScriptStringD _String
 " 'some' "
 hi! link javaScriptStringS _String
-" ------------- dark_blue ----------------- "
+" ------------- col13 ----------------- "
 " Date "
-exe "hi! javaScriptType" .s:fg_dark_blue
-" -------------- lilac -------------------- "
+exe "hi! javaScriptType" .s:fg_col13
+" -------------- col11 -------------------- "
 " 1 3 "
 hi! link javaScriptValue _Value
 " 1 3 "
@@ -725,40 +742,40 @@ hi! link javaScriptConstant _Unknown
 " }}}
 
 " html {{{
-" -------------- base0 --------------
+" -------------- col5 --------------
 " class="" name="" id="" <-- class name id
-exe "hi! htmlArg" .s:fg_base0
+exe "hi! htmlArg" .s:fg_col5
 " onclick="method(aa,bb)" <-- onclick="method ,
-exe "hi! htmlEvent" .s:fg_base0
+exe "hi! htmlEvent" .s:fg_col5
 " <a href="aaa">here</a> <-- here
-exe "hi! htmlLink" .s:fg_base0
+exe "hi! htmlLink" .s:fg_col5
 
-exe "hi! javaScript" .s:fg_base0
-" ------------- red -----------------
+exe "hi! javaScript" .s:fg_col5
+" ------------- col15 -----------------
 " <tag> </tag> <-- tag
-exe "hi! htmlTagName" .s:fg_red
+exe "hi! htmlTagName" .s:fg_col15
 " <script> </script> <-- script
-exe "hi! htmlSpecialTagName" .s:fg_red
-" ------------- lime ----------------
+exe "hi! htmlSpecialTagName" .s:fg_col15
+" ------------- col9 ----------------
 " 【_Comment】
 " <!-- comment --> <-- -- comment --
 hi! link htmlCommentPart _Comment
 " <!-- comment --> <-- <! >
 hi! link htmlComment _Comment
 hi! link htmlCssStyleComment _Comment
-" ------------- dark_blue -----------
-exe "hi! htmlSpecialChar" .s:fg_dark_blue
+" ------------- col13 -----------
+exe "hi! htmlSpecialChar" .s:fg_col13
 
 " <tag> <div id=""> <-- < > \s =
-exe "hi! htmlTag" .s:fg_dark_blue
+exe "hi! htmlTag" .s:fg_col13
 " </tag> <-- </ >
-exe "hi! htmlEndTag" .s:fg_dark_blue
+exe "hi! htmlEndTag" .s:fg_col13
 " <script> <-- < >
-exe "hi! htmlScriptTag" .s:fg_dark_blue
-" -------------- beige --------------
+exe "hi! htmlScriptTag" .s:fg_col13
+" -------------- col16 --------------
 " "aa" 'aa'
 hi! link htmlString _String
-" -------------- lilac --------------
+" -------------- col11 --------------
 " colspan=2 <-- 2
 hi! link htmlValue _Value
 " -------------- Error --------------
@@ -824,23 +841,23 @@ hi! link juliaVarargOperator Statement
 hi! link juliaRangeEnd Number
 hi! link juliaKeyword PreProc
 hi! link juliaParDelim Delimiter
-exe "hi! juliaStringVarsPla"     .s:fg_lime
-exe "hi! juliaStringVarDelim"    .s:fg_lime
-exe "hi! juliaStringVarsPar"     .s:fg_lime
+exe "hi! juliaStringVarsPla"     .s:fg_col9
+exe "hi! juliaStringVarDelim"    .s:fg_col9
+exe "hi! juliaStringVarsPar"     .s:fg_col9
 " }}}
 
 " NERDTree {{{
-exe "hi! NERDTreeCWD"            .s:fg_light_red
-exe "hi! NERDTreeDirSlash"       .s:fg_yellow
-exe "hi! NERDTreeHelp"           .s:fg_gold
-exe "hi! NERDTreeHelpTitle"      .s:fg_yellow
-exe "hi! NERDTreeHelpKey"        .s:fg_lilac
+exe "hi! NERDTreeCWD"            .s:fg_col14
+exe "hi! NERDTreeDirSlash"       .s:fg_col7
+exe "hi! NERDTreeHelp"           .s:fg_col6
+exe "hi! NERDTreeHelpTitle"      .s:fg_col7
+exe "hi! NERDTreeHelpKey"        .s:fg_col11
 " }}}
 
 " tex {{{
 hi! link TexMathDelim Macro
-exe "hi! TexMathOper"            .s:fg_light_blue
-exe "hi! TexCite"                .s:fg_lime
+exe "hi! TexMathOper"            .s:fg_col12
+exe "hi! TexCite"                .s:fg_col9
 " }}}
 
 " sh {{{
