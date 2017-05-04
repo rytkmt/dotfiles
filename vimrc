@@ -340,6 +340,8 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " NERDTreeを設定
 " NeoBundle 'scrooloose/nerdtree'
 
+" ファイラ
+NeoBundle 'Shougo/vimfiler'
 " === カラースキーマ ===
 
 " mycolor
@@ -515,6 +517,8 @@ NeoBundleCheck
 " "NERDTreeを起動
 " autocmd vimenter * NERDTree
 
+" VimFilerを起動
+autocmd vimenter * VimFilerExplorer
 "submodeを抜け出すときのコマンドを有効に
 let g:submode_keep_leaving_key=1
 let g:submode_timeout=0
