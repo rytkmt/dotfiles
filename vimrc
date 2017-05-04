@@ -517,8 +517,8 @@ NeoBundleCheck
 " "NERDTreeを起動
 " autocmd vimenter * NERDTree
 
-" VimFilerを起動
-autocmd vimenter * VimFilerExplorer
+
+
 "submodeを抜け出すときのコマンドを有効に
 let g:submode_keep_leaving_key=1
 let g:submode_timeout=0
@@ -683,8 +683,9 @@ let g:unite_source_file_mru_limit = 50
 
 "nnoremap <silent> [unite]f :<C-u>Unite<Space>file<CR>
 " nnoremap <silent> [unite]g :<C-u>Unite<Space>grep<CR>
-nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
-nnoremap <silent> [unite]B :<C-u>Unite<Space>bookmark<CR>
+nnoremap <silent> [unite]B :<C-u>Unite<Space>buffer<CR>
+nnoremap <silent> [unite]b :<C-u>Unite<Space>bookmark<CR>
+call unite#custom_default_action('source/bookmark/directory' , 'vimfiler')
 "nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
 nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
 " nnoremap <silent> [unite]y :<C-u>Unite<Space>history/yank<CR>
@@ -711,19 +712,24 @@ endfunction
 
 
 " ========== Unite E ==========
+" ========== VimFiler S ==========
+" VimFilerを起動
+" autocmd vimenter * VimFilerExplorer
+
+nmap <Leader>f :<C-u>VimFiler<CR>
+" ========== VimFiler E ==========
 " ========== restart S ==========
 " 終了時に保存するセッションオプションを設定する
-let g:restart_sessionoptions
-    \ = 'blank,buffers,curdir,folds,help,localoptions,tabpages'
+" let g:restart_sessionoptions
+"     \ = 'blank,buffers,curdir,folds,help,localoptions,tabpages'
 " :Restart 時に変数の定義を行う
 command!
 	\   -bar
 	\   RestartWithSession
 	\   | let g:restart_sessionoptions = 'blank,curdir,folds,help,localoptions,tabpages'
-        " \   | NERDTreeToggle
 	\   | Restart --cmd 'let g:restarted = 1'
   "if !exists("g:restarted") <-でrestartされていない初期のみ実行
-nnoremap res :<C-u>RestartWithSession
+nnoremap res :<C-u>RestartWithSession<CR>
 " ========== restart E ==========
 " ========== yankround S ==========
 nmap p <Plug>(yankround-p)
