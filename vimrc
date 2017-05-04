@@ -718,7 +718,7 @@ endfunction
 
 nmap <Leader>f :<C-u>VimFiler<CR>
 "ゴミ箱の使用
-let g：unite_kind_file_use_trashbox = 1
+let g:unite_kind_file_use_trashbox = 1
 " ========== VimFiler E ==========
 " ========== restart S ==========
 " 終了時に保存するセッションオプションを設定する
