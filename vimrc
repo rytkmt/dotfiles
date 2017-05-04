@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 29-Mar-2017.
+" Last Change: 04-May-2017.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -96,7 +96,8 @@ endif
 if has('keymap')
   " ローマ字仮名のkeymap
   "silent! set keymap=japanese
-  "set iminsert=0 imsearch=0
+  "インサートモード、検索モード時のIMEの初期値 0:off 1:on
+  set iminsert=0 imsearch=0
 endif
 " 非GUI日本語コンソールを使っている場合の設定
 if !has('gui_running') && &encoding != 'cp932' && &term == 'win32'
@@ -294,7 +295,9 @@ endif
 
 " WinではPATHに$VIMが含まれていないときにexeを見つけ出せないので修正
 if has('win32') && $PATH !~? '\(^\|;\)' . escape($VIM, '\\') . '\(;\|$\)'
-  let $PATH = $VIM . ';' . $PATH
+  if !exists("g:restarted")
+    let $PATH = $VIM . ';' . $PATH
+  endif
 endif
 
 if has('mac')
@@ -335,7 +338,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " 今後このあたりに追加のプラグインをどんどん書いて行きます！！"
 
 " NERDTreeを設定
-NeoBundle 'scrooloose/nerdtree'
+" NeoBundle 'scrooloose/nerdtree'
 
 " === カラースキーマ ===
 
@@ -467,16 +470,21 @@ NeoBundle 'bronson/vim-trailing-whitespace'
 " mapのサブモード
 NeoBundle 'kana/vim-submode'
 
+" 置換のプレビュー
+NeoBundle 'osyo-manga/vim-over'
+
+" yankの履歴の前後
+NeoBundle 'LeafCage/yankround.vim'
 " 設定はhttp://qiita.com/akase244/items/ce5e2e18ad5883e98a77を参照
-NeoBundle 'Shougo/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw 64',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make -f make_mac.mak',
-\     'linux' : 'make',
-\     'unix' : 'gmake',
-\    },
-\ }
+" NeoBundle 'Shougo/vimproc.vim', {
+" \ 'build' : {
+" \     'windows' : 'tools\\update-dll-mingw 64',
+" \     'cygwin' : 'make -f make_cygwin.mak',
+" \     'mac' : 'make -f make_mac.mak',
+" \     'linux' : 'make',
+" \     'unix' : 'gmake',
+" \    },
+" \ }
 NeoBundle 'Shougo/vimshell.vim'
 
 "tagsの更新
@@ -484,6 +492,9 @@ NeoBundle 'soramugi/auto-ctags.vim'
 
 "プロジェクトのrootに移動
 NeoBundle 'airblade/vim-rooter'
+
+"sessionに保存し現在の状態のまま再起動
+NeoBundle 'tyru/restart.vim'
 
 call neobundle#end()
 
@@ -498,10 +509,11 @@ NeoBundleCheck
 " End Neobundle Settings.
 "-------------------------
 
-"NERDTreeのブックマーを表示
-let g:NERDTreeShowBookmarks=1
-"NERDTreeを起動
-autocmd vimenter * NERDTree
+" "NERDTreeのブックマーを表示
+" let g:NERDTreeShowBookmarks=1
+
+" "NERDTreeを起動
+" autocmd vimenter * NERDTree
 
 "submodeを抜け出すときのコマンドを有効に
 let g:submode_keep_leaving_key=1
@@ -536,7 +548,9 @@ noremap <C-k>   {
 noremap <S-l>   $
 noremap m %
 
-
+"メタ文字扱いのオプションをvery magicを初期値に
+nnoremap / /\v
+nnoremap ? ?\v
 " キーマップ用
 let mapleader = "\<Space>"
 map <Space> <Nop>
@@ -546,6 +560,8 @@ map <Leader>c "*yy
 map <Leader>v "*p
 imap <Leader>v "*p
 
+" カラースキーマテスト
+nnoremap hitest :so $VIMRUNTIME/syntax/hitest.vim
 " ========== タブ操作 S ==========
 nmap <Leader>t [tab]
 " タブを閉じる
@@ -650,11 +666,14 @@ cmap <S-Space> <C-r>"
 "挿入モード終了
 imap <C-Space> <ESC>
 vmap <nowait> <C-Space> <ESC>
+" ========== NeoBundle S ==========
+let g:neobundle#log_filename = $VIM . 'neobundle.log'
+" ========== NeoBundle E ==========
 " ========== Unite S ==========
 nnoremap [unite] <Nop>
 nmap <Leader>u [unite]
 
-let g:unite_source_history_yank_enable =1
+" let g:unite_source_history_yank_enable =1
 "最近開いたファイル履歴の保存数
 let g:unite_source_file_mru_limit = 50
 
@@ -664,7 +683,7 @@ nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
 "nnoremap <silent> [unite]b :<C-u>Unite<Space>bookmark<CR>
 "nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
 nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
-nnoremap <silent> [unite]h :<C-u>Unite<Space>history/yank<CR>
+" nnoremap <silent> [unite]y :<C-u>Unite<Space>history/yank<CR>
 "nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
 "nnoremap <silent> [unite]c :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 " nnoremap <silent> [unite]r :UniteResume search-buffer<CR>
@@ -688,10 +707,37 @@ endfunction
 
 
 " ========== Unite E ==========
+" ========== restart S ==========
+" 終了時に保存するセッションオプションを設定する
+let g:restart_sessionoptions
+    \ = 'blank,buffers,curdir,folds,help,localoptions,tabpages'
+" :Restart 時に変数の定義を行う
+command!
+	\   -bar
+	\   RestartWithSession
+	\   | let g:restart_sessionoptions = 'blank,curdir,folds,help,localoptions,tabpages'
+        " \   | NERDTreeToggle
+	\   | Restart --cmd 'let g:restarted = 1'
+  "if !exists("g:restarted") <-でrestartされていない初期のみ実行
+nnoremap res :<C-u>RestartWithSession
+" ========== restart E ==========
+" ========== yankround S ==========
+nmap p <Plug>(yankround-p)
+nmap P <Plug>(yankround-P)
+nmap gp <Plug>(yankround-gp)
+nmap gP <Plug>(yankround-gP)
+nmap <C-p> <Plug>(yankround-prev)
+nmap <C-n> <Plug>(yankround-next)
+nnoremap <silent> [unite]y :<C-u>Unite<Space>yankround<CR>
+"yankのペーストにハイライトを使用するか
+let g:yankround_use_region_hl = 1
+autocmd ColorScheme * highlight YankRoundRegion gui=underline guifg=White guibg=Black
+" ========== yankround E ==========
 " ========== grep.vim S ============
 nnoremap [grep] <Nop>
 nmap <Leader>g [grep]
 nnoremap [grep]r :<C-u>Rgrep<CR>
+nnoremap [grep]e :<C-u>Regrep<CR>
 if has("win32")
   " Windows環境用のコード
   let Grep_Path = 'C:\git_bin\grep.exe'
@@ -701,7 +747,7 @@ if has("win32")
   let Grep_Xargs_Path = 'C:\git_bin\xargs.exe'
   let Grep_Shell_Quote_Char = '"'
   let Grep_Skip_Dirs = '.svn'
-  let Grep_Default_Options = '-I'
+  let Grep_Default_Options = '-I -G'
   let Grep_Skip_Files = '*.bak *~ *.log'
 endif
   " ========== grep.vim E ============
@@ -709,6 +755,9 @@ endif
 let g:indentLine_color_gui = '#303640'
 let g:indentLine_char = '¦' "use ¦, ┆ or │
 " ============ indentLine E ============
+" ============ vim-over S ============
+nnoremap <Leader>r :<C-u>OverCommandLine<CR>%s/\v
+" ============ vim-over E ============
 " ============vim-expand-region S ============
 let g:expand_region_text_objects = {
       \ 'i,w'  :0,
@@ -735,21 +784,21 @@ map <silent> c <Plug>(expand_region_shrink)
 " ============vim-expand-region E ============
 " ========== NERDTree S ==========
 "作業スペース
-if has("win32")
-  cd C:\Users\r_tsukamoto.ILL\workspace
-endif
+" if has("win32")
+"   cd C:\Users\r_tsukamoto.ILL\workspace
+" endif
 
-nnoremap [nerdtree] <Nop>
-nmap <Leader>n [nerdtree]
-nnoremap [nerdtree]n :<C-u>NERDTree<CR>
-
-autocmd FileType nerdtree call s:nerdtree_settings()
-function! s:nerdtree_settings()
-  nnoremap [nerdtree]b :<C-u>Bookmark<Space>
-  nnoremap [nerdtree]r :<C-u>BookmarkToRoot<Space>
-  nnoremap [nerdtree]o :<C-u>OpenBookmark<Space>
-  nnoremap [nerdtree]c :<C-u>ClearBookmarks<Space>
-endfunction
+" nnoremap [nerdtree] <Nop>
+" nmap <Leader>n [nerdtree]
+" nnoremap [nerdtree]n :<C-u>NERDTree<CR>
+"
+" autocmd FileType nerdtree call s:nerdtree_settings()
+" function! s:nerdtree_settings()
+"   nnoremap [nerdtree]b :<C-u>Bookmark<Space>
+"   nnoremap [nerdtree]r :<C-u>BookmarkToRoot<Space>
+"   nnoremap [nerdtree]o :<C-u>OpenBookmark<Space>
+"   nnoremap [nerdtree]c :<C-u>ClearBookmarks<Space>
+" endfunction
 " ========== NERDTree E ==========
 
 
