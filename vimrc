@@ -671,7 +671,7 @@ cmap <S-Space> <C-r>"
 imap <C-Space> <ESC>
 vmap <nowait> <C-Space> <ESC>
 " ========== NeoBundle S ==========
-let g:neobundle#log_filename = $VIM . 'neobundle.log'
+let g:neobundle#log_filename = $VIM . '/neobundle.log'
 " ========== NeoBundle E ==========
 " ========== Unite S ==========
 nnoremap [unite] <Nop>
@@ -684,7 +684,7 @@ let g:unite_source_file_mru_limit = 50
 "nnoremap <silent> [unite]f :<C-u>Unite<Space>file<CR>
 " nnoremap <silent> [unite]g :<C-u>Unite<Space>grep<CR>
 nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
-"nnoremap <silent> [unite]b :<C-u>Unite<Space>bookmark<CR>
+nnoremap <silent> [unite]B :<C-u>Unite<Space>bookmark<CR>
 "nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
 nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
 " nnoremap <silent> [unite]y :<C-u>Unite<Space>history/yank<CR>
