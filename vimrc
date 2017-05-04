@@ -727,7 +727,7 @@ command!
 	\   -bar
 	\   RestartWithSession
 	\   | let g:restart_sessionoptions = 'blank,curdir,folds,help,localoptions,tabpages'
-	\   | Restart --cmd 'let g:restarted = 1'
+	\   | Restart --cmd "let g:restarted = 1"
 nnoremap res :<C-u>RestartWithSession<CR>
 " ========== restart E ==========
 " ========== yankround S ==========
