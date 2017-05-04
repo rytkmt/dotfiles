@@ -717,18 +717,17 @@ endfunction
 " autocmd vimenter * VimFilerExplorer
 
 nmap <Leader>f :<C-u>VimFiler<CR>
+"ゴミ箱の使用
+let g：unite_kind_file_use_trashbox = 1
 " ========== VimFiler E ==========
 " ========== restart S ==========
 " 終了時に保存するセッションオプションを設定する
-" let g:restart_sessionoptions
-"     \ = 'blank,buffers,curdir,folds,help,localoptions,tabpages'
 " :Restart 時に変数の定義を行う
 command!
 	\   -bar
 	\   RestartWithSession
 	\   | let g:restart_sessionoptions = 'blank,curdir,folds,help,localoptions,tabpages'
 	\   | Restart --cmd 'let g:restarted = 1'
-  "if !exists("g:restarted") <-でrestartされていない初期のみ実行
 nnoremap res :<C-u>RestartWithSession<CR>
 " ========== restart E ==========
 " ========== yankround S ==========
