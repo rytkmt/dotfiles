@@ -504,6 +504,9 @@ NeoBundle 'tyru/restart.vim'
 "ruby true:false などの入れ替え
 NeoBundle 'AndrewRadev/switch.vim'
 
+"jkの移動スピードを高速化
+NeoBundle 'rhysd/accelerated-jk'
+
 call neobundle#end()
 
 " Required:
@@ -536,10 +539,10 @@ noremap PP "0p
 noremap <ESC><ESC> :<C-u>noh<CR>
 
 " 表示行単位で上下移動するように
-nnoremap j gj
-nnoremap k gk
-nnoremap <Down> gj
-nnoremap <Up>   gk
+" nnoremap j gj
+" nnoremap k gk
+" nnoremap <Down> gj
+" nnoremap <Up>   gk
 
 " 逆に普通の行単位で移動したい時のために逆の map も設定しておく
 nnoremap gj j
@@ -566,12 +569,12 @@ let mapleader = "\<Space>"
 map <Space> <Nop>
 
 " コピペ
-map <Leader>c "*yy
-map <Leader>v "*p
-imap <Leader>v "*p
+nmap <Leader>c "*yy
+nmap <Leader>v "*p
 
 " カラースキーマテスト
-nnoremap hitest :so $VIMRUNTIME/syntax/hitest.vim
+nmap <Leader>z [test]
+nnoremap [test]h :so $VIMRUNTIME/syntax/hitest.vim
 " ========== タブ操作 S ==========
 nmap <Leader>t [tab]
 " タブを閉じる
@@ -931,6 +934,14 @@ let g:switch_custom_definitions =
 \   },
 \]
 " ========== switch E ===========
+" ========== accelerated-jk S ===========
+let g:accelerated_jk_acceleration_limit = 100
+let g:accelerated_jk_acceleration_table = [5,8,12,16,20,22,24,25,26,27,28]
+nmap  j  <Plug>(accelerated_jk_gj_position)
+nmap  k  <Plug>(accelerated_jk_gk_position)
+nmap <Down> <Plug>(accelerated_jk_gj_position)
+nmap <Up>   <Plug>(accelerated_jk_gk_position)
+" ========== accelerated-jk E ===========
 function SetGemsTags()
 
   if has('win32')
