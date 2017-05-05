@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 04-May-2017.
+" Last Change: 05-May-2017.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -478,15 +478,15 @@ NeoBundle 'osyo-manga/vim-over'
 " yankの履歴の前後
 NeoBundle 'LeafCage/yankround.vim'
 " 設定はhttp://qiita.com/akase244/items/ce5e2e18ad5883e98a77を参照
-" NeoBundle 'Shougo/vimproc.vim', {
-" \ 'build' : {
-" \     'windows' : 'tools\\update-dll-mingw 64',
-" \     'cygwin' : 'make -f make_cygwin.mak',
-" \     'mac' : 'make -f make_mac.mak',
-" \     'linux' : 'make',
-" \     'unix' : 'gmake',
-" \    },
-" \ }
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw 64',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
 NeoBundle 'Shougo/vimshell.vim'
 
 "tagsの更新
@@ -497,6 +497,12 @@ NeoBundle 'airblade/vim-rooter'
 
 "sessionに保存し現在の状態のまま再起動
 NeoBundle 'tyru/restart.vim'
+
+"ruby true:false などの入れ替え
+NeoBundle 'AndrewRadev/switch.vim'
+
+"robocop用syntaxチェック
+NeoBundle 'scrooloose/syntastic'
 
 call neobundle#end()
 
@@ -820,6 +826,26 @@ let g:rooter_manual_only = 1 "FindRootDirectory()
 let g:rooter_patterns = ['Rakefile', '.svn/', '.git/']
 " ========== vim-rooter E ===========
 
+" ========== switch S ===========
+let g:switch_mapping = "-"
+" string に記号が含まれている場合は
+" string → 'string'
+" の変換はうまくいかないかも
+let g:switch_custom_definitions =
+\[
+\   {
+\         '\(\k\+\)'    : '''\1''',
+\       '''\(.\{-}\)''' :  '"\1"',
+\        '"\(.\{-}\)"'  :   '\1',
+\   },
+\]
+" ========== switch E ===========
+" ========== syntastic S ===========
+let g:syntastic_mode_map = { 'mode': 'passive' }
+let g:syntastic_ruby_checkers = ['rubocop']
+
+nmap <Leader>^ :<C-u>:SyntasticCheck<CR>
+" ========== syntastic E ===========
 function SetGemsTags()
 
   if has('win32')
