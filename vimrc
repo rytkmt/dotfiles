@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 05-May-2017.
+" Last Change: 06-May-2017.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -720,7 +720,7 @@ endfunction
 " ========== Unite E ==========
 " ========== VimFiler S ==========
 " VimFilerを起動
-autocmd vimenter * VimFilerExplorer
+autocmd vimenter * VimFilerExplorer -buffer-name=explorer
 
 let g:vimfiler_no_default_key_mappings = 1
 let g:vimfiler_tree_leaf_icon = ' '
@@ -729,7 +729,7 @@ let g:vimfiler_tree_closed_icon = '▸'
 let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '*'
 
-nmap <Leader>f :<C-u>VimFilerExplorer<CR>
+nmap <Leader>f :<C-u>VimFilerExplorer -buffer-name=explorer<CR>
 
 augroup vimfiler
   autocmd!
@@ -823,7 +823,7 @@ command!
 	\   -bar
 	\   RestartWithSession
 	\   | let g:restart_sessionoptions = 'blank,curdir,folds,help,localoptions,tabpages'
-	\   | :<C-u>call <SID>close(b:vimfiler)<CR>
+	\   | VimFilerClose explorer
 	\   | Restart --cmd "let g:restarted = 1"
 nnoremap res :<C-u>RestartWithSession<CR>
 " ========== restart E ==========
@@ -957,11 +957,14 @@ endfunction
 
 function SetTags()
   let s:root_temp = FindRootDirectory()
+  let s:tags_change = 0
+
   "Rakefileの存在でrailsプロジェクトか判断
   if filereadable(s:root_temp .'/Rakefile')
     "gemsのtagの更新
     if !exists('g:gem_tags')
       call SetGemsTags()
+      s:tags_change = 1
     endif
 
     "projectが変わったときだけタグのセットをする
@@ -970,21 +973,23 @@ function SetTags()
       let g:project_root = s:root_temp
       exe "cd " .g:project_root
       exe ":silent Ctags"
+      s:tags_change = 1
+    endif
 
+    "tagsに変更があれば更新
+    if s:tags_change == 1
       let s:tags = copy(g:gem_tags)
       call add(s:tags, g:project_root . '/tags')
-
       let $CTAGS_STR = join(s:tags, ',')
       set tags=$CTAGS_STR
       silent !unset '$CTAGS_STR'
-
     endif
   endif
 endfunction
 
 function TagsUpdate()
-  exe ":Rooter"
-  exe ":Ctags"
+  " exe ":Rooter"
+  " exe ":Ctags"
 
   call SetTags()
 endfunction
