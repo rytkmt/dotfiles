@@ -501,9 +501,6 @@ NeoBundle 'tyru/restart.vim'
 "ruby true:false などの入れ替え
 NeoBundle 'AndrewRadev/switch.vim'
 
-"robocop用syntaxチェック
-NeoBundle 'scrooloose/syntastic'
-
 call neobundle#end()
 
 " Required:
@@ -840,12 +837,6 @@ let g:switch_custom_definitions =
 \   },
 \]
 " ========== switch E ===========
-" ========== syntastic S ===========
-let g:syntastic_mode_map = { 'mode': 'passive' }
-let g:syntastic_ruby_checkers = ['rubocop']
-
-nmap <Leader>^ :<C-u>:SyntasticCheck<CR>
-" ========== syntastic E ===========
 function SetGemsTags()
 
   if has('win32')
