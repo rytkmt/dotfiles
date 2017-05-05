@@ -437,6 +437,9 @@ NeoBundle 'tpope/vim-rails'
 " ビジュアルモードの拡張
 NeoBundle 'terryma/vim-expand-region'
 
+"ruby用の％移動
+NeoBundle 'vim-scripts/ruby-matchit'
+
 " ========== textobject S ==========
 
 " textobj のベース
@@ -686,9 +689,9 @@ let g:unite_source_file_mru_limit = 50
 
 "nnoremap <silent> [unite]f :<C-u>Unite<Space>file<CR>
 " nnoremap <silent> [unite]g :<C-u>Unite<Space>grep<CR>
-nnoremap <silent> [unite]B :<C-u>Unite<Space>buffer<CR>
-nnoremap <silent> [unite]b :<C-u>Unite<Space>bookmark<CR>
-call unite#custom_default_action('source/bookmark/directory' , 'vimfiler')
+nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
+" nnoremap <silent> [unite]b :<C-u>Unite<Space>bookmark<CR>
+call unite#custom_default_action('source/bookmark/directory' , 'lcd')
 "nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
 nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
 " nnoremap <silent> [unite]y :<C-u>Unite<Space>history/yank<CR>
@@ -717,9 +720,99 @@ endfunction
 " ========== Unite E ==========
 " ========== VimFiler S ==========
 " VimFilerを起動
-" autocmd vimenter * VimFilerExplorer
+autocmd vimenter * VimFilerExplorer
 
-nmap <Leader>f :<C-u>VimFiler<CR>
+let g:vimfiler_no_default_key_mappings = 1
+let g:vimfiler_tree_leaf_icon = ' '
+let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_closed_icon = '▸'
+let g:vimfiler_file_icon = '-'
+let g:vimfiler_marked_file_icon = '*'
+
+nmap <Leader>f :<C-u>VimFilerExplorer<CR>
+
+augroup vimfiler
+  autocmd!
+  autocmd FileType vimfiler call s:vimfiler_settings()
+augroup END
+
+function! s:vimfiler_settings()
+  " 移動
+  nmap <buffer> j <Plug>(vimfiler_loop_cursor_down)
+  nmap <buffer> k <Plug>(vimfiler_loop_cursor_up)
+  nmap <buffer> l <Plug>(vimfiler_smart_l)
+  nmap <buffer> h <Plug>(vimfiler_smart_h)
+  nmap <buffer> o <Plug>(vimfiler_smart_l)
+  nmap <buffer> O <Plug>(vimfiler_expand_tree_recursive)
+  nmap <buffer> u <Plug>(vimfiler_switch_to_parent_directory)
+  nmap <buffer> ~ <Plug>(vimfiler_switch_to_home_directory)
+  nmap <buffer> \ <Plug>(vimfiler_switch_to_root_directory)
+  nmap <buffer> & <Plug>(vimfiler_switch_to_project_directory)
+  nmap <buffer> q <Plug>(vimfiler_hide)
+
+  " 特殊
+  " 隠しファイル表示・非表示
+  nmap <buffer> . <Plug>(vimfiler_toggle_visible_ignore_files)
+  " 外部のプログラムで実行
+  nmap <buffer> X <Plug>(vimfiler_execute_system_associated)
+  " エクスプローラーで開く
+  nmap <buffer> E <Plug>(vimfiler_execute_external_filer)
+  " シェルの起動
+  nmap <buffer> H <Plug>(vimfiler_popup_shell)
+  " 外部コマンドの実行
+  nmap <buffer> ! <Plug>(vimfiler_execute_shell_command)
+  " 追加アクション
+  nmap <buffer> A <Plug>(vimfiler_choose_action)
+  " ヘルプ
+  nmap <buffer> ? <Plug>(vimfiler_help)
+  " findコマンド
+  nmap <buffer> F <Plug>(vimfiler_find)
+  " cd
+  nmap <buffer> cd <Plug>(vimfiler_cd_vim_current_dir)
+  " safeモード切り替え
+  nmap <buffer> gs <Plug>(vimfiler_toggle_safe_mode)
+  nmap <buffer> gS <Plug>(vimfiler_toggle_simple_mode)
+  nnoremap <silent><buffer> b :<C-u>Unite<Space>bookmark<CR>
+
+  " マーク
+  nmap <buffer> <S-Space> <Plug>(vimfiler_toggle_mark_current_line)
+  vmap <buffer> <Space> <Plug>(vimfiler_toggle_mark_selected_lines)
+  nmap <buffer> * <Plug>(vimfiler_toggle_mark_all_lines)
+  nmap <buffer> C <Plug>(vimfiler_clear_mark_all_lines)
+
+  " ファイル編集
+  nmap <buffer> mc <Plug>(vimfiler_copy_file)
+  nmap <buffer> mm <Plug>(vimfiler_move_file)
+  nmap <buffer> md <Plug>(vimfiler_delete_file)
+  nmap <buffer> mr <Plug>(vimfiler_rename_file)
+
+  " ファイル作成
+  nmap <buffer> ad <Plug>(vimfiler_make_directory)
+  nmap <buffer> af <Plug>(vimfiler_new_file)
+
+  " ファイルクリップ
+  nmap <buffer> cc <Plug>(vimfiler_clipboard_copy_file)
+  nmap <buffer> cm <Plug>(vimfiler_clipboard_move_file)
+  nmap <buffer> cp <Plug>(vimfiler_clipboard_paste)
+  nmap <buffer> yy <Plug>(vimfiler_yank_full_path)
+
+
+  " オープンは，<CR>(enter キー)
+  nmap <buffer><expr> <CR> vimfiler#smart_cursor_map(
+          \ "\<Plug>(vimfiler_cd_file)",
+          \ "\<Plug>(vimfiler_open_file_in_another_vimfiler)")
+
+  " マークは，<S-Space>
+  nmap <silent><buffer> <S-Space> <Plug>(vimfiler_toggle_mark_current_line)
+  vmap <silent><buffer> <S-Space> <Plug>(vimfiler_toggle_mark_selected_lines)
+
+  " ウィンドウを分割して開く
+  nmap <silent><buffer><expr> s vimfiler#do_switch_action('split')
+  nmap <silent><buffer><expr> v vimfiler#do_switch_action('vsplit')
+
+  " 閉じる，<Esc> 2 回叩き
+  nmap <buffer> <Esc><Esc> <Plug>(vimfiler_exit)
+endfunction
 "ゴミ箱の使用
 let g:unite_kind_file_use_trashbox = 1
 " ========== VimFiler E ==========
@@ -730,6 +823,7 @@ command!
 	\   -bar
 	\   RestartWithSession
 	\   | let g:restart_sessionoptions = 'blank,curdir,folds,help,localoptions,tabpages'
+	\   | :<C-u>call <SID>close(b:vimfiler)<CR>
 	\   | Restart --cmd "let g:restarted = 1"
 nnoremap res :<C-u>RestartWithSession<CR>
 " ========== restart E ==========
