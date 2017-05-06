@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 06-May-2017.
+" Last Change: 07-May-2017.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -506,6 +506,9 @@ NeoBundle 'AndrewRadev/switch.vim'
 
 "jkの移動スピードを高速化
 NeoBundle 'rhysd/accelerated-jk'
+
+"コマンド出力をバッファにキャプチャ :Capture {command}
+NeoBundle 'tyru/capture.vim'
 
 call neobundle#end()
 
