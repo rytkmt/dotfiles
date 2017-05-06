@@ -51,3 +51,26 @@ HOMEの下に.ctagsという名前でシンボリックリンクを貼る
 【7】fontの設定
 http://www.rs.tus.ac.jp/yyusa/ricty_diminished.html
 よりfontをダウンロード
+
+
+-- mapping --
+
+" コピペ
+<Leader>c "*yy
+<Leader>v "*p
+" カラースキーマテスト
+<Leader>z [test]
+" タブ操作
+<Leader>t [tab]
+" ウィンドウ操作
+<Leader>w [window]
+" Unite操作
+<Leader>u [unite]
+" VimFiler
+<Leader>f :<C-u>VimFilerExplorer -buffer-name=explorer<CR>
+" Grep
+<Leader>g [grep]
+" 置換
+<Leader>r :<C-u>OverCommandLine<CR>%s/\v
+" ctags
+<Leader>j [ctag]

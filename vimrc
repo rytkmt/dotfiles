@@ -569,7 +569,7 @@ let mapleader = "\<Space>"
 map <Space> <Nop>
 
 " コピペ
-nmap <Leader>c "*yy
+nmap <Leader>y "*yy
 nmap <Leader>v "*p
 
 " カラースキーマテスト
@@ -1008,5 +1008,5 @@ endfunction
 " autocmd BufEnter * call SetTags()
 
 nnoremap [ctag] <Nop>
-nmap <Leader>c [ctag]
+nmap <Leader>j [ctag]
 nnoremap [ctag]u :<C-u>call TagsUpdate()<CR>
