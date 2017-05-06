@@ -196,14 +196,15 @@ unlet s:cpo_save
 "  set guifontset=a14,r14,k14
 "endif
 
-if has('win32')
-  " Windows
-  set guifont=MS_Gothic:h11
-elseif has('mac') || has('unix')
-  " Linux
-  set guifont=DejaVu\ Sans\ Mono\ 13
-endif
+" if has('win32')
+"   " Windows
+"   set guifont=MS_Gothic:h11
+" elseif has('mac') || has('unix')
+"   " Linux
+"   set guifont=DejaVu\ Sans\ Mono\ 13
+" endif
 
+set guifont=Ricty\ Diminished\ Discord\ Regular:h13
 "---------------------------------------------------------------------------
 " ウインドウに関する設定:
 "

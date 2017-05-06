@@ -47,3 +47,7 @@ HOMEの下にctags.confという名前でシンボリックリンクを貼る
 
 (mac)
 HOMEの下に.ctagsという名前でシンボリックリンクを貼る
+
+【7】fontの設定
+http://www.rs.tus.ac.jp/yyusa/ricty_diminished.html
+よりfontをダウンロード

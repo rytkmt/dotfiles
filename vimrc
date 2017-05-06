@@ -1009,4 +1009,4 @@ endfunction
 
 nnoremap [ctag] <Nop>
 nmap <Leader>c [ctag]
-nnoremap [ctag]u :<C-u>call TagsUpdate()
+nnoremap [ctag]u :<C-u>call TagsUpdate()<CR>
