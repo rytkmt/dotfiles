@@ -975,16 +975,19 @@ function SetTags()
     "gemsのtagの更新
     if !exists('g:gem_tags')
       call SetGemsTags()
-      s:tags_change = 1
+      let s:tags_change = 1
     endif
 
     "projectが変わったときだけタグのセットをする
     if exists('g:project_root') && s:root_temp == g:project_root
     else
-      let g:project_root = s:root_temp
-      exe "cd " .g:project_root
-      exe ":silent Ctags"
-      s:tags_change = 1
+      "tagsがなければ作成
+      if !filereadable(s:root_temp .'/tags')
+        let g:project_root = s:root_temp
+        exe "cd " .g:project_root
+        exe ":silent Ctags"
+      endif
+      let s:tags_change = 1
     endif
 
     "tagsに変更があれば更新
@@ -994,19 +997,40 @@ function SetTags()
       let $CTAGS_STR = join(s:tags, ',')
       set tags=$CTAGS_STR
       silent !unset '$CTAGS_STR'
+      echom 'tag set!'
     endif
   endif
 endfunction
 
-function TagsUpdate()
-  " exe ":Rooter"
-  " exe ":Ctags"
+function UpdateTags()
+  let s:root_temp = FindRootDirectory()
 
-  call SetTags()
+  "Rakefileの存在でrailsプロジェクトか判断
+  if filereadable(s:root_temp .'/Rakefile')
+    "gemsのtagの更新
+    if !exists('g:gem_tags')
+      call SetGemsTags()
+    endif
+
+    "projectが変わったときだけタグのセットをする
+    let g:project_root = s:root_temp
+    exe "cd " .g:project_root
+    exe ":silent Ctags"
+
+    let s:tags = copy(g:gem_tags)
+    call add(s:tags, g:project_root . '/tags')
+    let $CTAGS_STR = join(s:tags, ',')
+    set tags=$CTAGS_STR
+    silent !unset '$CTAGS_STR'
+  endif
+
 endfunction
-
-" autocmd BufEnter * call SetTags()
+autocmd BufEnter * call SetTags()
 
 nnoremap [ctag] <Nop>
 nmap <Leader>j [ctag]
-nnoremap [ctag]u :<C-u>call TagsUpdate()<CR>
+nnoremap [ctag]u :<C-u>call UpdateTags()<CR>
+nnoremap [ctag]j <C-]>
+nnoremap [ctag]k <C-t>
+nnoremap [ctag]l :<C-u>tselect<CR>
+nnoremap [ctag]; :<C-u>tags<CR>

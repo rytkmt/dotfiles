@@ -204,7 +204,7 @@ unlet s:cpo_save
 "   set guifont=DejaVu\ Sans\ Mono\ 13
 " endif
 
-set guifont=Ricty\ Diminished\ Discord\ Regular:h13
+set guifont=Ricty\ Diminished\ Discord\ Regular:h12
 "---------------------------------------------------------------------------
 " ウインドウに関する設定:
 "

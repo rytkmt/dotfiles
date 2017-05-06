@@ -9,6 +9,7 @@
 --exclude=*.class
 --exclude=*.xml
 --exclude=*.css
+--exclude=*.vim
 --exclude=*public\\ext\\*
 --exclude=*public\\ext\\*
 --exclude=db
