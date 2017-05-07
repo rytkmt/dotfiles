@@ -510,6 +510,9 @@ NeoBundle 'rhysd/accelerated-jk'
 "コマンド出力をバッファにキャプチャ :Capture {command}
 NeoBundle 'tyru/capture.vim'
 
+"囲み文字の変更
+NeoBundle 'tpope/vim-surround'
+
 call neobundle#end()
 
 " Required:
@@ -923,19 +926,11 @@ let g:rooter_manual_only = 1 "FindRootDirectory()
 let g:rooter_patterns = ['Rakefile', '.svn/', '.git/']
 " ========== vim-rooter E ===========
 
-" ========== switch S ===========
+" ========== switch S ==========
 let g:switch_mapping = "-"
 " string に記号が含まれている場合は
 " string → 'string'
 " の変換はうまくいかないかも
-let g:switch_custom_definitions =
-\[
-\   {
-\         '\(\k\+\)'    : '''\1''',
-\       '''\(.\{-}\)''' :  '"\1"',
-\        '"\(.\{-}\)"'  :   '\1',
-\   },
-\]
 " ========== switch E ===========
 " ========== accelerated-jk S ===========
 let g:accelerated_jk_acceleration_limit = 100
