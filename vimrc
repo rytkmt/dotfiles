@@ -493,7 +493,7 @@ NeoBundle 'Shougo/vimproc.vim', {
 NeoBundle 'Shougo/vimshell.vim'
 
 "tagsの更新
-NeoBundle 'soramugi/auto-ctags.vim'
+" NeoBundle 'soramugi/auto-ctags.vim'
 
 "プロジェクトのrootに移動
 NeoBundle 'airblade/vim-rooter'
@@ -731,7 +731,14 @@ endfunction
     let t:tab_name = g:vimfiler_tab_idx
     let g:vimfiler_tab_idx = g:vimfiler_tab_idx + 1
   endif
-  exe ":VimFilerExplorer -buffer-name=" . t:tab_name . " C:\/Users\/r_tsukamoto.ILL\/workspace"
+
+  let s:vimfiler_default_dir = ''
+  if has('win32')
+    let s:vimfiler_default_dir = 'C:\/Users\/r_tsukamoto.ILL\/workspace'
+  else
+    let s:vimfiler_default_dir = '/Applications/MacVim.app/Contents/Resources/vim/bundle/rytkmt_vim_settings'
+  endif
+  exe ":VimFilerExplorer -buffer-name=" . t:tab_name . " " . s:vimfiler_default_dir
 endfunction
 " VimFilerを起動
 autocmd vimenter * call _VimFilerOpen()
@@ -829,6 +836,93 @@ endfunction
 "ゴミ箱の使用
 let g:unite_kind_file_use_trashbox = 1
 " ========== VimFiler E ==========
+" ========== vimproc S ==========
+set updatetime=100
+
+
+augroup vimproc-async-receive-test
+augroup END
+
+
+" コマンド終了時に呼ばれる関数
+function! s:receive_vimproc_result(callback, ...)
+    if !has_key(s:, "vimproc")
+        return
+    endif
+    let vimproc = s:vimproc
+    try
+        if !vimproc.stdout.eof
+            let s:result .= vimproc.stdout.read()
+        endif
+        if !vimproc.stderr.eof
+            let s:result .= vimproc.stderr.read()
+        endif
+        if !(vimproc.stdout.eof && vimproc.stderr.eof)
+            return 0
+        endif
+    catch
+        echom v:throwpoint
+    endtry
+
+    let a:arg_str = ''
+    let a:args = []
+    call add(a:args, 's:result')
+    if len(a:000) > 0
+      for var in a:000
+        call add(a:args, var)
+      endfor
+    endif
+    let a:arg_str = "(" . join(a:args, ', "') . '")'
+    " 終了時に呼ぶ
+    exe "call " . a:callback . a:arg_str
+    
+    augroup vimproc-async-receive-test
+        autocmd!
+    augroup END
+
+    call vimproc.stdout.close()
+    call vimproc.stderr.close()
+    call vimproc.waitpid()
+    unlet s:vimproc
+    unlet s:result
+endfunction
+
+function! s:system_async(cmd, callback, ...)
+    let cmd = a:cmd
+    echom "----async----"
+    echom cmd
+    let vimproc = vimproc#pgroup_open(cmd)
+    call vimproc.stdin.close()
+    
+    let s:vimproc = vimproc
+    let s:result = ""
+ 
+    let a:arg_str = ''
+    let a:args = []
+    call add(a:args, a:callback)
+    if len(a:000) > 0
+      for var in a:000
+        call add(a:args, var)
+      endfor
+    endif
+    let a:arg_str = join(a:args, '", "')
+echom "---arg_str---"
+echom a:arg_str
+    augroup vimproc-async-receive-test
+        execute "autocmd! CursorHold,CursorHoldI * call"
+\               "s:receive_vimproc_result(\"" . a:arg_str . "\")"
+    augroup END
+endfunction
+
+" function Test()
+"   call s:system_async('pwd', 'Test2', '/Applications/MacVim.app/Contents')
+" endfunction
+"
+" function Test2(result, dir)
+"   echom a:result
+"   echom a:dir
+" endfunction
+" ========== vimproc E ==========
 " ========== restart S ==========
 " 終了時に保存するセッションオプションを設定する
 " :Restart 時に変数の定義を行う
@@ -936,105 +1030,189 @@ let g:switch_mapping = "-"
 " string → 'string'
 " の変換はうまくいかないかも
 " ========== switch E ===========
-function SetGemsTags()
+" function SetGemsTags(update)
+"
+"   if has('win32')
+"     let s:gempaths = []
+"     let s:gempath_tmp = split(system('gem environment gempath'), ';')[1]
+"     let s:gempath_tmp = strpart(s:gempath_tmp, 0, strlen(s:gempath_tmp) - 1)
+"     call add(s:gempaths, s:gempath_tmp)
+"   else
+"     let s:gempath_str = split(system('! gem environment gempath'), '\r')[0]
+"     let s:gempaths = split(s:gempath_str, ':')
+"   endif
+"
+"   let g:gem_tags = []
+"   for gem_path in s:gempaths
+"     let s:gem_root = gem_path . '/gems'
+"     if(isdirectory(s:gem_root))
+"       exe "cd " . s:gem_root
+"       if !filereadable(s:gem_root . '/tags')
+"         call s:system_async ":silent Ctags"
+"       endif
+"
+"       call add(g:gem_tags, s:gem_root . '/tags')
+"     endif
+"   endfor
+" endfunction
+"
+function CheckTags(do_update)
+  let s:root_temp = FindRootDirectory()
+  let s:tags_change = 0
+"
+  "Rakefileの存在でrailsプロジェクトか判断
+  if filereadable(s:root_temp .'/Rakefile')
+    "gemsのtagの更新
+    if !exists('g:gem_tags')
+      call SetGemsTags(a:do_update)
+      let s:tags_change = 1
+    endif
 
-  if has('win32')
-    let s:gempaths = []
-    let s:gempath_tmp = split(system('gem environment gempath'), ';')[1]
-    let s:gempath_tmp = strpart(s:gempath_tmp, 0, strlen(s:gempath_tmp) - 1)
-    call add(s:gempaths, s:gempath_tmp)
-  else
-    let s:gempath_str = split(system('! gem environment gempath'), '\r')[0]
-    let s:gempaths = split(s:gempath_str, ':')
-  endif
-
-  let g:gem_tags = []
-  for gem_path in s:gempaths
-    let s:gem_root = gem_path . '/gems'
-    if(isdirectory(s:gem_root))
-      exe "cd " . s:gem_root
-      if !exists(s:gem_root . '/tags')
-        exe ":silent Ctags"
+    "projectが変わったときだけタグのセットをする
+    if exists('g:project_root') && s:root_temp == g:project_root && a:do_update == 0
+    else
+      let g:project_root = s:root_temp
+      let a:project_tag_path = s:root_temp . '/tags'
+      if filereadable(a:project_tag_path) && a:do_update == 1
+        if has('win32')
+          call system("DEL " . a:project_tag_path)
+        else
+          call system("rm " . a:project_tag_path)
+        endif
       endif
 
-      call add(g:gem_tags, s:gem_root . '/tags')
+      "tagsがあればセット
+      if filereadable(a:project_tag_path)
+        let g:project_tag = a:project_tag_path
+      "tagsがなければ作成
+      else
+        if has('win32')
+          call s:system_async("cd " . s:root_temp . " && ctags -R", "SetProjectTag", a:project_tag_path)
+        else
+          call s:system_async("cd " . s:root_temp . " | ctags -R", "SetProjectTag", a:project_tag_path)
+        endif
+        " SetProjectTagで更新されるためクリア
+        let s:tags_change = 0
+      endif
     endif
-  endfor
+
+    if exists('s:tags_change') && s:tags_change > 0
+      SetTags()
+    endif
+  endif
+endfunction
+
+function SetProjectTags(result, tag_path)
+  echom a:result
+
+  let g:project_tag = a:tag_path
+  SetTags()
 endfunction
 
 function SetTags()
-  let s:root_temp = FindRootDirectory()
-  let s:tags_change = 0
-
-  "Rakefileの存在でrailsプロジェクトか判断
-  if filereadable(s:root_temp .'/Rakefile')
-    "gemsのtagの更新
-    if !exists('g:gem_tags')
-      " call SetGemsTags()
-      let s:tags_change = 1
-    endif
-
-    "projectが変わったときだけタグのセットをする
-    if exists('g:project_root') && s:root_temp == g:project_root
-    else
-      let g:project_root = s:root_temp
-      "tagsがなければ作成
-      if !filereadable(s:root_temp .'/tags')
-        exe "cd " .g:project_root
-        " exe ":silent Ctags"
-        echom 'no project tags!'
-      endif
-      let s:tags_change = 1
-    endif
-
-    "tagsに変更があれば更新
-    if s:tags_change == 1
-      let s:tags = []
-      if exists('g:gem_tags')
-        let s:tags = copy(g:gem_tags)
-      endif
-      if exists(g:project_root . '/tags')
-        call add(s:tags, g:project_root . '/tags')
-      endif
-
-      if !(s:tags == [])
-        let $CTAGS_STR = join(s:tags, ',')
-        set tags=$CTAGS_STR
-        silent !unlet '$CTAGS_STR'
-        echom 'tag set!'
-      endif
-    endif
+  let s:tags = []
+  if exists('g:gem_tags')
+    let s:tags = s:tags + g:gem_tags
   endif
-endfunction
+  if exists('g:project_tag')
+    call add(s:tags, g:project_tag)
+  endif
 
-function UpdateTags()
-  let s:root_temp = FindRootDirectory()
-
-  "Rakefileの存在でrailsプロジェクトか判断
-  if filereadable(s:root_temp .'/Rakefile')
-    "gemsのtagの更新
-    if !exists('g:gem_tags')
-      call SetGemsTags()
-    endif
-
-    "projectが変わったときだけタグのセットをする
-    let g:project_root = s:root_temp
-    exe "cd " .g:project_root
-    exe ":silent Ctags"
-
-    let s:tags = copy(g:gem_tags)
-    call add(s:tags, g:project_root . '/tags')
+  if !(s:tags == [])
     let $CTAGS_STR = join(s:tags, ',')
     set tags=$CTAGS_STR
     silent !unlet '$CTAGS_STR'
   endif
-
 endfunction
-autocmd BufEnter * call SetTags()
+"
+" function UpdateTags()
+"   let s:root_temp = FindRootDirectory()
+"
+"   "Rakefileの存在でrailsプロジェクトか判断
+"   if filereadable(s:root_temp .'/Rakefile')
+"     "gemsのtagの更新
+"     if !exists('g:gem_tags')
+"       call SetGemsTags()
+"     endif
+"
+"     "projectが変わったときだけタグのセットをする
+"     let g:project_root = s:root_temp
+"     exe "cd " .g:project_root
+"     exe ":silent Ctags"
+"
+"     let s:tags = copy(g:gem_tags)
+"     call add(s:tags, g:project_root . '/tags')
+"     let $CTAGS_STR = join(s:tags, ',')
+"     set tags=$CTAGS_STR
+"     silent !unlet '$CTAGS_STR'
+"   endif
+"
+" endfunction
+
+function! SetGemTags(do_update)
+  " 更新 ではなく、かつ既にgem用のtag配列が存在すれば処理しない
+  if(a:do_update == 0 && exists("g:gem_tags"))
+    return
+  endif
+
+  " 既にgem用タグの更新中であれば処理しない
+  if(exists("g:gem_update_target_count") && g:gem_update_target_count > 0)
+    return
+  endif
+
+  let a:gempaths = []
+  if has('win32')
+    let a:gempaths = split(system('gem environment gempath'), ';')[1]
+  else
+    " 配列で返るため明示的に0指定(要素は1つのため問題なし)
+    let a:gempaths = split(split(system('! gem environment gempath'), '\r')[0], ':')
+  endif
+
+  let g:gem_tags = []
+  let g:gem_update_target_count = 0
+  for gem_path in a:gempaths
+    let a:gem_root = substitute(gem_path, '\n', '', 'g') . '/gems'
+    let a:gem_tag_path = a:gem_root . '/tags'
+    if(isdirectory(a:gem_root))
+      echom "hoi"
+      if filereadable(a:gem_tag_path) && a:do_update == 1
+        if has('win32')
+          call system("DEL " . a:gem_tag_path)
+        else
+          call system("rm " . a:gem_tag_path)
+        endif
+      endif
+      if filereadable(a:gem_tag_path)
+        call add(g:gem_tags, a:gem_tag_path)
+      else
+        let g:gem_update_target_count = g:gem_update_target_count + 1
+        if has('win32')
+          call s:system_async("cd " . a:gem_root . " && ctags -R", "AddGemTags", a:gem_tag_path)
+        else
+          call s:system_async("cd " . a:gem_root . " | ctags -R", "AddGemTags", a:gem_tag_path)
+        endif
+      endif
+    endif
+  endfor
+endfunction
+
+function! AddGemTags(result, tag_path)
+  echom a:result
+  call add(g:gem_tags, a:tag_path)
+  let g:gem_update_target_count = g:gem_update_target_count - 1
+endfunction
+
+
+
+
+
+
+
+autocmd BufEnter * call CheckTags()
 
 nnoremap [ctag] <Nop>
 nmap <Leader>j [ctag]
-nnoremap [ctag]u :<C-u>call UpdateTags()<CR>
+" nnoremap [ctag]u :<C-u>call UpdateTags()<CR>
 nnoremap [ctag]j <C-]>
 nnoremap [ctag]k <C-t>
 nnoremap [ctag]l :<C-u>tselect<CR>
