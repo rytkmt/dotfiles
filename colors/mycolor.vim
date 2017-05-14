@@ -53,12 +53,12 @@ if (has("gui_running"))
     let s:col5       = "#ede4dd" "白
     " let s:col6        = "#94846a"
     let s:col7      = "#e04053" "ピンク
-    " let s:col8      = "#c38743"
+    let s:col8      = "#cd9152" "ベージュ
     let s:col9        = "#817870" "グレー
     let s:col10       = "#9377B2" "紫
     let s:col11       = "#98bc37" "緑
     let s:col12  = "#abcee8" "水色
-    let s:col13   = "#5573a3" "青
+    let s:col13   = "#6583b3" "青
     let s:col14   = "#f4acad" "薄ピンク
     let s:col15         = "#d75f00" "オレンジ
     let s:col16       = "#ffc24b" "黄色

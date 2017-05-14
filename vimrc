@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 07-May-2017.
+" Last Change: 14-May-2017.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -504,9 +504,6 @@ NeoBundle 'tyru/restart.vim'
 "ruby true:false などの入れ替え
 NeoBundle 'AndrewRadev/switch.vim'
 
-"jkの移動スピードを高速化
-NeoBundle 'rhysd/accelerated-jk'
-
 "コマンド出力をバッファにキャプチャ :Capture {command}
 NeoBundle 'tyru/capture.vim'
 
@@ -575,7 +572,7 @@ let mapleader = "\<Space>"
 map <Space> <Nop>
 
 " コピペ
-nmap <Leader>y "*yy
+nmap <Leader>c "*yy
 nmap <Leader>v "*p
 
 " カラースキーマテスト
@@ -728,8 +725,16 @@ endfunction
 
 " ========== Unite E ==========
 " ========== VimFiler S ==========
+  let g:vimfiler_tab_idx = 1
+  function! _VimFilerOpen()
+  if !exists("t:tab_name")
+    let t:tab_name = g:vimfiler_tab_idx
+    let g:vimfiler_tab_idx = g:vimfiler_tab_idx + 1
+  endif
+  exe ":VimFilerExplorer -buffer-name=" . t:tab_name . " C:\/Users\/r_tsukamoto.ILL\/workspace"
+endfunction
 " VimFilerを起動
-autocmd vimenter * VimFilerExplorer -buffer-name=explorer
+autocmd vimenter * call _VimFilerOpen()
 
 let g:vimfiler_no_default_key_mappings = 1
 let g:vimfiler_tree_leaf_icon = ' '
@@ -737,8 +742,7 @@ let g:vimfiler_tree_opened_icon = '▾'
 let g:vimfiler_tree_closed_icon = '▸'
 let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '*'
-
-nmap <Leader>f :<C-u>VimFilerExplorer -buffer-name=explorer<CR>
+nmap <Leader>f :<C-u>call _VimFilerOpen()<CR>
 
 augroup vimfiler
   autocmd!
@@ -932,14 +936,6 @@ let g:switch_mapping = "-"
 " string → 'string'
 " の変換はうまくいかないかも
 " ========== switch E ===========
-" ========== accelerated-jk S ===========
-let g:accelerated_jk_acceleration_limit = 100
-let g:accelerated_jk_acceleration_table = [5,8,12,16,20,22,24,25,26,27,28]
-nmap  j  <Plug>(accelerated_jk_gj_position)
-nmap  k  <Plug>(accelerated_jk_gk_position)
-nmap <Down> <Plug>(accelerated_jk_gj_position)
-nmap <Up>   <Plug>(accelerated_jk_gk_position)
-" ========== accelerated-jk E ===========
 function SetGemsTags()
 
   if has('win32')
@@ -957,7 +953,9 @@ function SetGemsTags()
     let s:gem_root = gem_path . '/gems'
     if(isdirectory(s:gem_root))
       exe "cd " . s:gem_root
-      exe ":silent Ctags"
+      if !exists(s:gem_root . '/tags')
+        exe ":silent Ctags"
+      endif
 
       call add(g:gem_tags, s:gem_root . '/tags')
     endif
@@ -972,30 +970,39 @@ function SetTags()
   if filereadable(s:root_temp .'/Rakefile')
     "gemsのtagの更新
     if !exists('g:gem_tags')
-      call SetGemsTags()
+      " call SetGemsTags()
       let s:tags_change = 1
     endif
 
     "projectが変わったときだけタグのセットをする
     if exists('g:project_root') && s:root_temp == g:project_root
     else
+      let g:project_root = s:root_temp
       "tagsがなければ作成
       if !filereadable(s:root_temp .'/tags')
-        let g:project_root = s:root_temp
         exe "cd " .g:project_root
-        exe ":silent Ctags"
+        " exe ":silent Ctags"
+        echom 'no project tags!'
       endif
       let s:tags_change = 1
     endif
 
     "tagsに変更があれば更新
     if s:tags_change == 1
-      let s:tags = copy(g:gem_tags)
-      call add(s:tags, g:project_root . '/tags')
-      let $CTAGS_STR = join(s:tags, ',')
-      set tags=$CTAGS_STR
-      silent !unset '$CTAGS_STR'
-      echom 'tag set!'
+      let s:tags = []
+      if exists('g:gem_tags')
+        let s:tags = copy(g:gem_tags)
+      endif
+      if exists(g:project_root . '/tags')
+        call add(s:tags, g:project_root . '/tags')
+      endif
+
+      if !(s:tags == [])
+        let $CTAGS_STR = join(s:tags, ',')
+        set tags=$CTAGS_STR
+        silent !unlet '$CTAGS_STR'
+        echom 'tag set!'
+      endif
     endif
   endif
 endfunction
@@ -1019,7 +1026,7 @@ function UpdateTags()
     call add(s:tags, g:project_root . '/tags')
     let $CTAGS_STR = join(s:tags, ',')
     set tags=$CTAGS_STR
-    silent !unset '$CTAGS_STR'
+    silent !unlet '$CTAGS_STR'
   endif
 
 endfunction
