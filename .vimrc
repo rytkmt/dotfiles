@@ -158,7 +158,9 @@ set smartindent
 
 "全角スペースをハイライト表示
 function! ZenkakuSpace()
+  if(!exists('b:zenkaku_hilight_off'))
     highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
+  endif
 endfunction
    
 if has('syntax')
@@ -546,6 +548,13 @@ let g:submode_timeout=0
 "ヤンクした値がdやxで消えないように（復活させる）
 noremap PP "0p
 
+vnoremap d "_d
+nnoremap dd "_dd
+nnoremap s "_s
+vnoremap s "_s
+noremap D "_D
+noremap x "_x
+noremap t x
 "検索のハイライトを消す
 noremap <ESC><ESC> :<C-u>noh<CR>
 
@@ -564,12 +573,12 @@ inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
-noremap <S-h>   ^
+noremap <S-h>   ^zH
 noremap <S-j>  4gj
 noremap <C-j>   }
 noremap <S-k>  4gk
 noremap <C-k>   {
-noremap <S-l>   $
+noremap <S-l>   $zL
 noremap m %
 
 "メタ文字扱いのオプションをvery magicを初期値に
@@ -591,6 +600,7 @@ nnoremap [unite] <Nop>
 nmap <Leader>u [unite]
 
 nmap <Leader>f [filer]
+nmap <Leader>F [filer2]
 
 nnoremap [search] <Nop>
 nmap <Leader>s [search]
@@ -598,7 +608,9 @@ nmap <Leader>s [search]
 nmap <Leader>r [replace]
 
 nnoremap [ctag] <Nop>
+vnoremap [ctag] <Nop>
 nmap <Leader>g [ctag]
+vmap <Leader>g [ctag]
 
 "=================================
 "     _     _  _     _
@@ -756,30 +768,35 @@ endfunction
 " ========== Unite E ==========
 " ========== VimFiler S ==========
   let g:vimfiler_tab_idx = 1
-  function! _VimFilerOpen()
+function! _VimFilerOpen(init)
   if !exists("t:tab_name")
     let t:tab_name = g:vimfiler_tab_idx
     let g:vimfiler_tab_idx = g:vimfiler_tab_idx + 1
   endif
 
   let s:vimfiler_default_dir = ''
-  if has('win32')
-    let s:vimfiler_default_dir = 'C:/Users/r_tsukamoto.ILL/workspace'
-  else
-    let s:vimfiler_default_dir = '/Applications/MacVim.app/Contents/Resources/vim/bundle/rytkmt_vim_settings'
+  
+  if(a:init)
+    if has('win32')
+      let s:vimfiler_default_dir = 'C:/Users/r_tsukamoto.ILL/workspace'
+    else
+      let s:vimfiler_default_dir = '/Users/Ryo/programs/vim/rytkmt_vim_settings'
+    endif
   endif
-  exe ":VimFilerExplorer -buffer-name=" . t:tab_name . " " . s:vimfiler_default_dir
+
+  exe ":VimFilerExplorer -fnamewidth=200 -buffer-name=" . t:tab_name . " " . s:vimfiler_default_dir
 endfunction
 " VimFilerを起動
-autocmd vimenter * call _VimFilerOpen()
+autocmd vimenter * call _VimFilerOpen(1)
 
 let g:vimfiler_no_default_key_mappings = 1
-let g:vimfiler_tree_leaf_icon = ' '
-let g:vimfiler_tree_opened_icon = '▾'
-let g:vimfiler_tree_closed_icon = '▸'
-let g:vimfiler_file_icon = '-'
+" let g:vimfiler_tree_leaf_icon = ' '
+" let g:vimfiler_tree_opened_icon = '▾'
+" let g:vimfiler_tree_closed_icon = '▸'
+" let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '*'
-nmap [filer] :<C-u>call _VimFilerOpen()<CR>
+nmap [filer] :<C-u>call _VimFilerOpen(0)<CR>
+nmap [filer2] :<C-u>call _VimFilerOpen(1)<CR>
 
 augroup vimfiler
   autocmd!
@@ -792,6 +809,7 @@ function! s:vimfiler_settings()
   nmap <buffer> k <Plug>(vimfiler_loop_cursor_up)
   nmap <buffer> l <Plug>(vimfiler_smart_l)
   nmap <buffer> h <Plug>(vimfiler_smart_h)
+  nmap <buffer> x <Plug>(vimfiler_smart_h)
   nmap <buffer> o <Plug>(vimfiler_smart_l)
   nmap <buffer> O <Plug>(vimfiler_expand_tree_recursive)
   nmap <buffer> u <Plug>(vimfiler_switch_to_parent_directory)
@@ -808,11 +826,13 @@ function! s:vimfiler_settings()
   " エクスプローラーで開く
   nmap <buffer> E <Plug>(vimfiler_execute_external_filer)
   " シェルの起動
-  nmap <buffer> H <Plug>(vimfiler_popup_shell)
+  nmap <buffer> SH <Plug>(vimfiler_popup_shell)
   " 外部コマンドの実行
   nmap <buffer> ! <Plug>(vimfiler_execute_shell_command)
   " 追加アクション
   nmap <buffer> A <Plug>(vimfiler_choose_action)
+  " ブックマーク
+  nmap <silent><buffer><expr> B vimfiler#do_action('bookmark')
   " ヘルプ
   nmap <buffer> ? <Plug>(vimfiler_help)
   " findコマンド
@@ -864,6 +884,12 @@ function! s:vimfiler_settings()
 
   " 閉じる，<Esc> 2 回叩き
   nmap <buffer> <Esc><Esc> <Plug>(vimfiler_exit)
+
+  " 全角スペースのハイライトをオフ
+  let b:zenkaku_hilight_off = 1
+
+  " 無視リスト
+  let g:vimfiler_ignore_pattern = ['^\.git$', '^\.DS_Store$', '^\.svn']
 endfunction
 "ゴミ箱の使用
 let g:unite_kind_file_use_trashbox = 1
@@ -968,11 +994,17 @@ nnoremap res :<C-u>RestartWithSession<CR>
 " ========== restart E ==========
 " ========== yankround S ==========
 nmap p <Plug>(yankround-p)
+vmap p <Plug>(yankround-p)
 nmap P <Plug>(yankround-P)
+vmap P <Plug>(yankround-P)
 nmap gp <Plug>(yankround-gp)
+vmap gp <Plug>(yankround-gp)
 nmap gP <Plug>(yankround-gP)
+vmap gP <Plug>(yankround-gP)
 nmap <C-p> <Plug>(yankround-prev)
+vmap <C-p> <Plug>(yankround-prev)
 nmap <C-n> <Plug>(yankround-next)
+vmap <C-n> <Plug>(yankround-next)
 nnoremap <silent> [unite]y :<C-u>Unite<Space>yankround<CR>
 "yankのペーストにハイライトを使用するか
 let g:yankround_use_region_hl = 1
@@ -1056,10 +1088,11 @@ let g:rooter_patterns = ['Rakefile', '.svn/', '.git/']
 
 " ========== switch S ==========
 let g:switch_mapping = "-"
-" let g:switch_custom_definitions =
-"   \ [
-"   \   switch#NormalizedCase(['one', 'two'])
-"   \ ]
+let g:switch_custom_definitions =
+  \ [
+  \   switch#NormalizedCase(['if', 'unless']),
+  \   switch#NormalizedCase(['==', '!='])
+  \ ]
 " ========== switch E ===========
 " function SetGemsTags(update)
 "
@@ -1247,3 +1280,6 @@ nnoremap [ctag]j <C-]>
 nnoremap [ctag]k <C-t>
 nnoremap [ctag]l :<C-u>tselect<CR>
 nnoremap [ctag]; :<C-u>tags<CR>
+nnoremap [ctag]v :vsp<CR>:exe("tjump " . expand("<cword>"))<CR>
+nnoremap [ctag]s :exe("stj " . expand("<cword>"))<CR>
+vnoremap [ctag]j g<C-]>
