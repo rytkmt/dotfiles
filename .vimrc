@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 02-Jun-2017.
+" Last Change: 05-Jun-2017.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -97,7 +97,7 @@ if has('keymap')
   " ローマ字仮名のkeymap
   "silent! set keymap=japanese
   "インサートモード、検索モード時のIMEの初期値 0:off 1:on
-  set iminsert=0 imsearch=0
+  " set iminsert=0 imsearch=0
 endif
 " 非GUI日本語コンソールを使っている場合の設定
 if !has('gui_running') && &encoding != 'cp932' && &term == 'win32'
@@ -326,11 +326,19 @@ endif
 "---------------------------
 " Start Neobundle Settings.
 "---------------------------
+if(!(isdirectory($VIM . '/bundle')))
+  exe ':! mkdir $VIM/bundle'
+endif
+
+if(isdirectory($VIM . '/bundle') && !(isdirectory($VIM . '/bundle/neobundle.vim')))
+  exe ':! git clone https://github.com/Shougo/neobundle.vim.git ' . $VIM . '/bundle/neobundle.vim'
+endif
+
 " bundleで管理するディレクトリを指定
 set runtimepath+=$VIM/bundle/neobundle.vim/
 
 " Required:
-call neobundle#begin(expand('$VIM/bundle/'))
+call neobundle#begin(expand($VIM . '/bundle/'))
 
 " neobundle自体をneobundleで管理
 NeoBundleFetch 'Shougo/neobundle.vim'
