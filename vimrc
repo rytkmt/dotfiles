@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 15-May-2017.
+" Last Change: 02-Jun-2017.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -552,10 +552,10 @@ nnoremap gj j
 nnoremap gk k
 
 " カーソル移動
-inoremap <C-a> <Esc>^i
-inoremap <C-e> <Esc>$a
-inoremap <C-j> <Esc>ji
-inoremap <C-k> <Esc>ki
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
 noremap <S-h>   ^
 noremap <S-j>   gjgjgjgj
 noremap <C-j>   }
@@ -575,11 +575,37 @@ map <Space> <Nop>
 nmap <Leader>c "*yy
 nmap <Leader>v "*p
 
-" カラースキーマテスト
 nmap <Leader>z [test]
-nnoremap [test]h :so $VIMRUNTIME/syntax/hitest.vim
-" ========== タブ操作 S ==========
 nmap <Leader>t [tab]
+nmap <Leader>w [window]
+
+nnoremap [unite] <Nop>
+nmap <Leader>u [unite]
+
+nmap <Leader>f [filer]
+
+nnoremap [search] <Nop>
+nmap <Leader>s [search]
+
+nmap <Leader>r [replace]
+
+nnoremap [ctag] <Nop>
+nmap <Leader>g [ctag]
+
+"=================================
+"     _     _  _     _
+"  q  W  e  R  T  y  U  i  o  p
+"      _     _  _
+"   a  S  d  F  G  h  j  k  l
+"    _
+"    Z  x  c  v  b  n  m
+"
+"=================================
+
+nnoremap [test]h :so $VIMRUNTIME/syntax/hitest.vim
+nnoremap [test]s :sp<CR>:VimShellBufferDir<CR>
+nnoremap [test]r ::VimShellInteractive irb<CR>
+" ========== タブ操作 S ==========
 " タブを閉じる
 nnoremap [tab]q :<C-u>tabc<CR>
 call submode#enter_with('tab_close', 'n', '', '<Leader>tq', ':<C-u>tabc<CR>')
@@ -634,7 +660,6 @@ endfunction
 " ========== タブ操作 E ==========
 
 " ========= ウィンドウ操作 S =========
-nmap <Leader>w [window]
 
 " ウィンドウ遷移
 nnoremap [window]h <C-w>h
@@ -646,10 +671,10 @@ nnoremap [window]H <C-w>H
 nnoremap [window]J <C-w>J
 nnoremap [window]K <C-w>K
 nnoremap [window]L <C-w>L
-call submode#enter_with('window_move', 'n', '', '<Leader>wh', '<C-w>h')
-call submode#enter_with('window_move', 'n', '', '<Leader>wl', '<C-w>l')
-call submode#map('window_move', 'n', '', 'h', '<C-w>h')
-call submode#map('window_move', 'n', '', 'l', '<C-w>l')
+call submode#enter_with('window', 'n', '', '<Leader>wh', '<C-w>h')
+call submode#enter_with('window', 'n', '', '<Leader>wl', '<C-w>l')
+call submode#map('window', 'n', '', 'h', '<C-w>h')
+call submode#map('window', 'n', '', 'l', '<C-w>l')
 " 高さ変更
 nnoremap [window]d 10<C-w>-
 nnoremap [window]u 10<C-w>+
@@ -662,19 +687,18 @@ nnoremap [window], 12<C-w><
 nnoremap [window]m <C-w><Bar>
 " 幅揃える
 nnoremap [window]= <C-w>=
-call submode#enter_with('window_size', 'n', '', '<Leader>wd', '10<C-w>-')
-call submode#enter_with('window_size', 'n', '', '<Leader>wu', '10<C-w>+')
-call submode#enter_with('window_size', 'n', '', '<Leader>wU', '<C-w>_')
-call submode#enter_with('window_size', 'n', '', '<Leader>w.', '12<C-w>>')
-call submode#enter_with('window_size', 'n', '', '<Leader>w,', '12<C-w><')
-call submode#enter_with('window_size', 'n', '', '<Leader>wm,', '<C-w><Bar>')
-call submode#enter_with('window_size', 'n', '', '<Leader>w=,', '<C-w>=')
-call submode#map('window_size', 'n', '', 'd', '10<C-w>-')
-call submode#map('window_size', 'n', '', 'u', '10<C-w>+')
-call submode#map('window_size', 'n', '', '.', '12<C-w>>')
-call submode#map('window_size', 'n', '', ',', '12<C-w><')
-call submode#map('window_size', 'n', '', 'm', '<C-w><Bar>')
-call submode#map('window_size', 'n', '', '=', '<C-w>=')
+call submode#enter_with('window', 'n', '', '<Leader>wd', '10<C-w>-')
+call submode#enter_with('window', 'n', '', '<Leader>wu', '10<C-w>+')
+call submode#enter_with('window', 'n', '', '<Leader>wU', '<C-w>_')
+call submode#enter_with('window', 'n', '', '<Leader>w.', '12<C-w>>')
+call submode#enter_with('window', 'n', '', '<Leader>w,', '12<C-w><')
+call submode#enter_with('window', 'n', '', '<Leader>w=,', '<C-w>=')
+call submode#map('window', 'n', '', 'd', '10<C-w>-')
+call submode#map('window', 'n', '', 'u', '10<C-w>+')
+call submode#map('window', 'n', '', 'm', '<C-w><Bar>')
+call submode#map('window', 'n', '', '.', '12<C-w>>')
+call submode#map('window', 'n', '', ',', '12<C-w><')
+call submode#map('window', 'n', '', '=', '<C-w>=')
 " ========= ウィンドウ操作 E =========
 
 "ヤンク文字で検索
@@ -686,8 +710,6 @@ vmap <nowait> <C-Space> <ESC>
 let g:neobundle#log_filename = $VIM . '/neobundle.log'
 " ========== NeoBundle E ==========
 " ========== Unite S ==========
-nnoremap [unite] <Nop>
-nmap <Leader>u [unite]
 
 " let g:unite_source_history_yank_enable =1
 "最近開いたファイル履歴の保存数
@@ -749,7 +771,7 @@ let g:vimfiler_tree_opened_icon = '▾'
 let g:vimfiler_tree_closed_icon = '▸'
 let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '*'
-nmap <Leader>f :<C-u>call _VimFilerOpen()<CR>
+nmap [filer] :<C-u>call _VimFilerOpen()<CR>
 
 augroup vimfiler
   autocmd!
@@ -793,6 +815,8 @@ function! s:vimfiler_settings()
   nmap <buffer> gs <Plug>(vimfiler_toggle_safe_mode)
   nmap <buffer> gS <Plug>(vimfiler_toggle_simple_mode)
   nnoremap <silent><buffer> b :<C-u>Unite<Space>bookmark<CR>
+  " maskモード
+  nmap <buffer> M <Plug>(vimfiler_set_current_mask)
 
   " マーク
   nmap <buffer> <S-Space> <Plug>(vimfiler_toggle_mark_current_line)
@@ -947,10 +971,8 @@ let g:yankround_use_region_hl = 1
 autocmd ColorScheme * highlight YankRoundRegion gui=underline guifg=White guibg=Black
 " ========== yankround E ==========
 " ========== grep.vim S ============
-nnoremap [grep] <Nop>
-nmap <Leader>g [grep]
-nnoremap [grep]r :<C-u>Rgrep<CR>
-nnoremap [grep]e :<C-u>Regrep<CR>
+nnoremap [search]r :<C-u>Rgrep<CR>
+nnoremap [search]e :<C-u>Regrep<CR>
 if has("win32")
   " Windows環境用のコード
   let Grep_Path = 'C:\git_bin\grep.exe'
@@ -969,7 +991,7 @@ let g:indentLine_color_gui = '#303640'
 let g:indentLine_char = '¦' "use ¦, ┆ or │
 " ============ indentLine E ============
 " ============ vim-over S ============
-nnoremap <Leader>r :<C-u>OverCommandLine<CR>%s/\v
+nnoremap [replace] :<C-u>OverCommandLine<CR>%s/\v
 " ============ vim-over E ============
 " ============vim-expand-region S ============
 let g:expand_region_text_objects = {
@@ -1026,9 +1048,10 @@ let g:rooter_patterns = ['Rakefile', '.svn/', '.git/']
 
 " ========== switch S ==========
 let g:switch_mapping = "-"
-" string に記号が含まれている場合は
-" string → 'string'
-" の変換はうまくいかないかも
+" let g:switch_custom_definitions =
+"   \ [
+"   \   switch#NormalizedCase(['one', 'two'])
+"   \ ]
 " ========== switch E ===========
 " function SetGemsTags(update)
 "
@@ -1211,8 +1234,6 @@ endfunction
 
 autocmd BufEnter * call CheckTags(0)
 
-nnoremap [ctag] <Nop>
-nmap <Leader>j [ctag]
 " nnoremap [ctag]u :<C-u>call UpdateTags()<CR>
 nnoremap [ctag]j <C-]>
 nnoremap [ctag]k <C-t>
