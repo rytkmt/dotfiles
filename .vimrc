@@ -437,7 +437,7 @@ NeoBundle 'mattn/emmet-vim'
 NeoBundle 'itchyny/lightline.vim'
 
 "閉じカッコなどの入力補完
-NeoBundle 'cohama/lexima.vim'
+" NeoBundle 'cohama/lexima.vim'
 
 "railsプロジェクト内での移動
 NeoBundle 'tpope/vim-rails'
@@ -565,9 +565,9 @@ inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 noremap <S-h>   ^
-noremap <S-j>   gjgjgjgj
+noremap <S-j>  4gj
 noremap <C-j>   }
-noremap <S-k>   gkgkgkgk
+noremap <S-k>  4gk
 noremap <C-k>   {
 noremap <S-l>   $
 noremap m %
@@ -580,7 +580,7 @@ let mapleader = "\<Space>"
 map <Space> <Nop>
 
 " コピペ
-nmap <Leader>c "*yy
+vmap <Leader>c "*y
 nmap <Leader>v "*p
 
 nmap <Leader>z [test]
