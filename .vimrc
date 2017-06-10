@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 05-Jun-2017.
+" Last Change: 10-Jun-2017.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -520,6 +520,9 @@ NeoBundle 'tyru/capture.vim'
 "囲み文字の変更
 NeoBundle 'tpope/vim-surround'
 
+"入力補完
+NeoBundle 'Shougo/neocomplete.vim'
+
 call neobundle#end()
 
 " Required:
@@ -546,15 +549,27 @@ let g:submode_keep_leaving_key=1
 let g:submode_timeout=0
 
 "ヤンクした値がdやxで消えないように（復活させる）
-noremap PP "0p
+nnoremap PP "0p
+vnoremap PP "0p
 
 vnoremap d "_d
 nnoremap dd "_dd
+nnoremap de "_de
+nnoremap dL "_d$
+nnoremap dw "_dw
 nnoremap s "_s
 vnoremap s "_s
-noremap D "_D
+nnoremap D "_D
 noremap x "_x
-noremap t x
+nnoremap tt dd
+nnoremap te de
+nnoremap tL d$
+nnoremap tw dw
+nnoremap T D
+vnoremap t x
+nnoremap y%p :<C-u>redi! @"> \| echo expand("%") \| redi END<CR>
+nnoremap y%d :<C-u>redi! @"> \| echo expand("%:h") \| redi END<CR>
+nnoremap y%f :<C-u>redi! @"> \| echo expand("%:t") \| redi END<CR>
 "検索のハイライトを消す
 noremap <ESC><ESC> :<C-u>noh<CR>
 
@@ -573,12 +588,16 @@ inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
-noremap <S-h>   ^zH
+noremap <S-h>   ^
 noremap <S-j>  4gj
 noremap <C-j>   }
 noremap <S-k>  4gk
 noremap <C-k>   {
-noremap <S-l>   $zL
+noremap <S-l>   $
+noremap zl zL
+noremap zh zH
+noremap zj 4<C-e>
+noremap zk 4<C-y>
 noremap m %
 
 "メタ文字扱いのオプションをvery magicを初期値に
@@ -596,19 +615,20 @@ nmap <Leader>z [test]
 nmap <Leader>t [tab]
 nmap <Leader>w [window]
 
-nnoremap [unite] <Nop>
+nmap [unite] <Nop>
+
 nmap <Leader>u [unite]
 
 nmap <Leader>f [filer]
 nmap <Leader>F [filer2]
 
-nnoremap [search] <Nop>
+nmap [search] <Nop>
 nmap <Leader>s [search]
 
 nmap <Leader>r [replace]
 
-nnoremap [ctag] <Nop>
-vnoremap [ctag] <Nop>
+nmap [ctag] <Nop>
+vmap [ctag] <Nop>
 nmap <Leader>g [ctag]
 vmap <Leader>g [ctag]
 
@@ -617,14 +637,19 @@ vmap <Leader>g [ctag]
 "  q  W  e  R  T  y  U  i  o  p
 "      _     _  _
 "   a  S  d  F  G  h  j  k  l
-"    _
-"    Z  x  c  v  b  n  m
+"    _     _  _
+"    Z  x  C  V  b  n  m
 "
 "=================================
 
 nnoremap [test]h :so $VIMRUNTIME/syntax/hitest.vim
 nnoremap [test]s :sp<CR>:VimShellBufferDir<CR>
 nnoremap [test]r ::VimShellInteractive irb<CR>
+nnoremap [test]v :<C-u>tabedit $MYVIMRC<CR>
+if has('win32')
+  let $MEMO = $HOME . '/workspace/sql.sql'
+  nnoremap [test]q :<C-u>tabedit $MEMO<CR>
+endif
 " ========== タブ操作 S ==========
 " タブを閉じる
 nnoremap [tab]q :<C-u>tabc<CR>
@@ -729,6 +754,9 @@ vmap <nowait> <C-Space> <ESC>
 " ========== NeoBundle S ==========
 let g:neobundle#log_filename = $VIM . '/neobundle.log'
 " ========== NeoBundle E ==========
+" ========== NeoComplete S ==========
+let g:neocomplete#enable_at_startup = 1
+" ========== NeoComplete E ==========
 " ========== Unite S ==========
 
 " let g:unite_source_history_yank_enable =1
@@ -1055,7 +1083,8 @@ let g:expand_region_text_objects = {
       \ 'il'  :0,
       \ }
 vmap <silent> v <Plug>(expand_region_expand)
-map <silent> c <Plug>(expand_region_shrink)
+vmap <silent> c <Plug>(expand_region_shrink)
+nmap <silent> c <Plug>(expand_region_shrink)
 " ============vim-expand-region E ============
 " ========== NERDTree S ==========
 "作業スペース
