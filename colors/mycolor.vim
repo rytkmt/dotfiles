@@ -47,11 +47,11 @@ if (has("gui_running"))
     let s:col16       = "#ebe1a9"
 " 上書き"
     let s:col1       = "#1c1b19" "黒
-    " let s:col2       = "#484848"
+    let s:col2       = "#323232"
     " let s:col3       = "#464646"
     " let s:col4       = "#B9B9B9"
     let s:col5       = "#ede4dd" "白
-    " let s:col6        = "#94846a"
+    let s:col6        = "#769164"
     let s:col7      = "#e04053" "ピンク
     let s:col8      = "#cd9152" "ベージュ
     let s:col9        = "#817870" "グレー
@@ -171,7 +171,7 @@ exe "hi! Error"                  .s:fg_col5       .s:bg_col15
 exe "hi! Todo"                   .s:fg_col7      .s:bg_col1
 
 exe "hi! Cursor"                                   .s:bg_col4
-exe "hi! CursorLine"                               .s:bg_col2  " cterm=NONE"
+exe "hi! CursorLine"                               .s:bg_col3  " cterm=NONE"
 hi! link CursorColumn CursorLine
 exe "hi! ColorColumn"                              .s:bg_col3
 exe "hi! LineNr"                 .s:fg_col4
@@ -180,8 +180,8 @@ exe "hi! NonText"                .s:fg_col12
 
 exe "hi! Folded"                 .s:fg_col4       .s:bg_col1
 
-exe "hi! PMenu"                  .s:fg_col5       .s:bg_col2
-exe "hi! PMenuSel"               .s:fg_col5       .s:bg_col3
+exe "hi! PMenu"                  .s:fg_col6       .s:bg_col2
+exe "hi! PMenuSel"               .s:fg_col10       .s:bg_col3
 exe "hi! PMenuSBar"                                .s:bg_col3
 exe "hi! PMenuThumb"                               .s:bg_col5
 
@@ -629,7 +629,7 @@ exe "hi! cssMediaType" .s:fg_col11
 "【_Unknown】"
 hi! link cssMediaBlock _Unknown
 hi! link cssError _Unknown
-hi! link cssDefinition _Unknown
+" hi! link cssDefinition _Unknown
 hi! link cssPageWrap _Unknown
 hi! link cssPage _Unknown
 hi! link cssPageMargin _Unknown
