@@ -523,6 +523,9 @@ NeoBundle 'tpope/vim-surround'
 "入力補完
 NeoBundle 'Shougo/neocomplete.vim'
 
+"色表示
+NeoBundle 'gko/vim-coloresque'
+
 call neobundle#end()
 
 " Required:
@@ -755,200 +758,218 @@ vmap <nowait> <C-Space> <ESC>
 let g:neobundle#log_filename = $VIM . '/neobundle.log'
 " ========== NeoBundle E ==========
 " ========== NeoComplete S ==========
-" 起動時に有効化
-let g:neocomplete#enable_at_startup = 1
-" 大文字が入力されるまで大文字小文字の区別を無視する
-let g:neocomplete#enable_smart_case = 1
-" _(アンダースコア)区切りの補完を有効化
-let g:neocomplete#enable_underbar_completion = 1
-let g:neocomplete#enable_camel_case_completion  =  1
-" ポップアップメニューで表示される候補の数
-let g:neocomplete#max_list = 20
-" シンタックスをキャッシュするときの最小文字長
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-" 補完を表示する最小文字数
-let g:neocomplete#auto_completion_start_length = 2
-" preview window を閉じない
-let g:neocomplete#enable_auto_close_preview = 0
-autocmd InsertLeave * silent! pclose!
+if neobundle#tap('neocomplete.vim')
+  " 起動時に有効化
+  let g:neocomplete#enable_at_startup = 1
+  " 大文字が入力されるまで大文字小文字の区別を無視する
+  let g:neocomplete#enable_smart_case = 1
+  " _(アンダースコア)区切りの補完を有効化
+  let g:neocomplete#enable_underbar_completion = 1
+  let g:neocomplete#enable_camel_case_completion  =  1
+  " ポップアップメニューで表示される候補の数
+  let g:neocomplete#max_list = 20
+  " シンタックスをキャッシュするときの最小文字長
+  let g:neocomplete#sources#syntax#min_keyword_length = 3
+  " 補完を表示する最小文字数
+  let g:neocomplete#auto_completion_start_length = 2
+  " preview window を閉じない
+  let g:neocomplete#enable_auto_close_preview = 0
+  autocmd InsertLeave * silent! pclose!
 
-let g:neocomplete#max_keyword_width = 10000
+  let g:neocomplete#max_keyword_width = 10000
 
-if !exists('g:neocomplete#delimiter_patterns')
-    let g:neocomplete#delimiter_patterns= {}
+  if !exists('g:neocomplete#delimiter_patterns')
+      let g:neocomplete#delimiter_patterns= {}
+    endif
+    let g:neocomplete#delimiter_patterns.ruby = ['::']
+  let s:neco_dicts_dir = $VIM . '/bundle/rytkmt_vim_settings/dicts'
+  if isdirectory(s:neco_dicts_dir)
+    let g:neocomplete#sources#dictionary#dictionaries = {
+    \   'ruby': s:neco_dicts_dir . '/ruby.dict'
+    \ }
   endif
-  let g:neocomplete#delimiter_patterns.ruby = ['::']
-let s:neco_dicts_dir = $VIM . 'bundle/rytkmt_vim_settings/dicts'
-if isdirectory(s:neco_dicts_dir)
-  let g:neocomplete#sources#dictionary#dictionaries = {
-  \   'ruby': s:neco_dicts_dir . '/ruby.dict'
-  \ }
+  let g:neocomplete#data_directory = $HOME . '/.vim/cache/neocomplete'
+  "候補の選択
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  " autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  
+  call neobundle#untap()
 endif
 " ========== NeoComplete E ==========
 " ========== Unite S ==========
+if(neobundle#tap('unite.vim'))
+  " let g:unite_source_history_yank_enable =1
+  "最近開いたファイル履歴の保存数
+  let g:unite_source_file_mru_limit = 50
 
-" let g:unite_source_history_yank_enable =1
-"最近開いたファイル履歴の保存数
-let g:unite_source_file_mru_limit = 50
-
-"nnoremap <silent> [unite]f :<C-u>Unite<Space>file<CR>
-" nnoremap <silent> [unite]g :<C-u>Unite<Space>grep<CR>
-nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
-" nnoremap <silent> [unite]b :<C-u>Unite<Space>bookmark<CR>
-call unite#custom_default_action('source/bookmark/directory' , 'lcd')
-"nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
-nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
-" nnoremap <silent> [unite]y :<C-u>Unite<Space>history/yank<CR>
-"nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
-"nnoremap <silent> [unite]c :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-" nnoremap <silent> [unite]r :UniteResume search-buffer<CR>
-" nnoremap <silent> [unite]f :<C-u>Unite<Space>file/new<CR>
-" nnoremap <silent> [unite]d :<C-u>Unite<Space>directory/new<CR>
-"uniteを開いている間のキーマッピング
-autocmd FileType unite call s:unite_settings()
-function! s:unite_settings()
-  "ESCでuniteを終了
-  nmap <buffer> <ESC> <Plug>(unite_exit)
-  "ctrl+jで縦に分割して開く
-  nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
-  inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
-  "ctrl+jで横に分割して開く
-  nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
-  inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
-  "ctrl+oでその場所に開く
-  nnoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
-  inoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
-endfunction
-
+  "nnoremap <silent> [unite]f :<C-u>Unite<Space>file<CR>
+  " nnoremap <silent> [unite]g :<C-u>Unite<Space>grep<CR>
+  nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
+  " nnoremap <silent> [unite]b :<C-u>Unite<Space>bookmark<CR>
+  call unite#custom_default_action('source/bookmark/directory' , 'lcd')
+  "nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
+  nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
+  " nnoremap <silent> [unite]y :<C-u>Unite<Space>history/yank<CR>
+  "nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
+  "nnoremap <silent> [unite]c :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+  " nnoremap <silent> [unite]r :UniteResume search-buffer<CR>
+  " nnoremap <silent> [unite]f :<C-u>Unite<Space>file/new<CR>
+  " nnoremap <silent> [unite]d :<C-u>Unite<Space>directory/new<CR>
+  "uniteを開いている間のキーマッピング
+  autocmd FileType unite call s:unite_settings()
+  function! s:unite_settings()
+    "ESCでuniteを終了
+    nmap <buffer> <ESC> <Plug>(unite_exit)
+    "ctrl+jで縦に分割して開く
+    nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
+    inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
+    "ctrl+jで横に分割して開く
+    nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+    inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+    "ctrl+oでその場所に開く
+    nnoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
+    inoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
+  endfunction
+  call neobundle#untap()
+endif
 
 " ========== Unite E ==========
 " ========== VimFiler S ==========
+if(neobundle#tap('vimfiler'))
   let g:vimfiler_tab_idx = 1
-function! _VimFilerOpen(init)
-  if !exists("t:tab_name")
-    let t:tab_name = g:vimfiler_tab_idx
-    let g:vimfiler_tab_idx = g:vimfiler_tab_idx + 1
-  endif
-
-  let s:vimfiler_default_dir = ''
-  
-  if(a:init)
-    if has('win32')
-      let s:vimfiler_default_dir = 'C:/Users/r_tsukamoto.ILL/workspace'
-    else
-      let s:vimfiler_default_dir = '/Users/Ryo/programs/vim/rytkmt_vim_settings'
+  function! _VimFilerOpen(init)
+    if !exists("t:tab_name")
+      let t:tab_name = g:vimfiler_tab_idx
+      let g:vimfiler_tab_idx = g:vimfiler_tab_idx + 1
     endif
-  endif
 
-  exe ":VimFilerExplorer -fnamewidth=200 -buffer-name=" . t:tab_name . " " . s:vimfiler_default_dir
-endfunction
-" VimFilerを起動
-autocmd vimenter * call _VimFilerOpen(1)
+    let s:vimfiler_default_dir = ''
+    
+    if(a:init)
+      if has('win32')
+        let s:vimfiler_default_dir = 'C:/Users/r_tsukamoto.ILL/workspace'
+      else
+        let s:vimfiler_default_dir = '/Users/Ryo/programs/vim/rytkmt_vim_settings'
+      endif
+    endif
 
-let g:vimfiler_no_default_key_mappings = 1
-" let g:vimfiler_tree_leaf_icon = ' '
-" let g:vimfiler_tree_opened_icon = '▾'
-" let g:vimfiler_tree_closed_icon = '▸'
-" let g:vimfiler_file_icon = '-'
-let g:vimfiler_marked_file_icon = '*'
-nmap [filer] :<C-u>call _VimFilerOpen(0)<CR>
-nmap [filer2] :<C-u>call _VimFilerOpen(1)<CR>
+    exe ":VimFilerExplorer -fnamewidth=200 -buffer-name=" . t:tab_name . " " . s:vimfiler_default_dir
+  endfunction
+  " VimFilerを起動
+  autocmd vimenter * call _VimFilerOpen(1)
 
-augroup vimfiler
-  autocmd!
-  autocmd FileType vimfiler call s:vimfiler_settings()
-augroup END
+  let g:vimfiler_no_default_key_mappings = 1
+  " let g:vimfiler_tree_leaf_icon = ' '
+  " let g:vimfiler_tree_opened_icon = '▾'
+  " let g:vimfiler_tree_closed_icon = '▸'
+  " let g:vimfiler_file_icon = '-'
+  let g:vimfiler_marked_file_icon = '*'
+  nmap [filer] :<C-u>call _VimFilerOpen(0)<CR>
+  nmap [filer2] :<C-u>call _VimFilerOpen(1)<CR>
 
-function! s:vimfiler_settings()
-  " 移動
-  nmap <buffer> j <Plug>(vimfiler_loop_cursor_down)
-  nmap <buffer> k <Plug>(vimfiler_loop_cursor_up)
-  nmap <buffer> l <Plug>(vimfiler_smart_l)
-  nmap <buffer> h <Plug>(vimfiler_smart_h)
-  nmap <buffer> x <Plug>(vimfiler_smart_h)
-  nmap <buffer> o <Plug>(vimfiler_smart_l)
-  nmap <buffer> O <Plug>(vimfiler_expand_tree_recursive)
-  nmap <buffer> u <Plug>(vimfiler_switch_to_parent_directory)
-  nmap <buffer> ~ <Plug>(vimfiler_switch_to_home_directory)
-  nmap <buffer> \ <Plug>(vimfiler_switch_to_root_directory)
-  nmap <buffer> & <Plug>(vimfiler_switch_to_project_directory)
-  nmap <buffer> q <Plug>(vimfiler_hide)
+  augroup vimfiler
+    autocmd!
+    autocmd FileType vimfiler call s:vimfiler_settings()
+  augroup END
 
-  " 特殊
-  " 隠しファイル表示・非表示
-  nmap <buffer> . <Plug>(vimfiler_toggle_visible_ignore_files)
-  " 外部のプログラムで実行
-  nmap <buffer> X <Plug>(vimfiler_execute_system_associated)
-  " エクスプローラーで開く
-  nmap <buffer> E <Plug>(vimfiler_execute_external_filer)
-  " シェルの起動
-  nmap <buffer> SH <Plug>(vimfiler_popup_shell)
-  " 外部コマンドの実行
-  nmap <buffer> ! <Plug>(vimfiler_execute_shell_command)
-  " 追加アクション
-  nmap <buffer> A <Plug>(vimfiler_choose_action)
-  " ブックマーク
-  nmap <silent><buffer><expr> B vimfiler#do_action('bookmark')
-  " ヘルプ
-  nmap <buffer> ? <Plug>(vimfiler_help)
-  " findコマンド
-  nmap <buffer> F <Plug>(vimfiler_find)
-  " cd
-  nmap <buffer> cd <Plug>(vimfiler_cd_vim_current_dir)
-  " safeモード切り替え
-  nmap <buffer> gs <Plug>(vimfiler_toggle_safe_mode)
-  nmap <buffer> gS <Plug>(vimfiler_toggle_simple_mode)
-  nnoremap <silent><buffer> b :<C-u>Unite<Space>bookmark<CR>
-  " maskモード
-  nmap <buffer> M <Plug>(vimfiler_set_current_mask)
+  function! s:vimfiler_settings()
+    " 移動
+    nmap <buffer> j <Plug>(vimfiler_loop_cursor_down)
+    nmap <buffer> k <Plug>(vimfiler_loop_cursor_up)
+    nmap <buffer> l <Plug>(vimfiler_smart_l)
+    nmap <buffer> h <Plug>(vimfiler_smart_h)
+    nmap <buffer> x <Plug>(vimfiler_smart_h)
+    nmap <buffer> o <Plug>(vimfiler_smart_l)
+    nmap <buffer> O <Plug>(vimfiler_expand_tree_recursive)
+    nmap <buffer> u <Plug>(vimfiler_switch_to_parent_directory)
+    nmap <buffer> ~ <Plug>(vimfiler_switch_to_home_directory)
+    nmap <buffer> \ <Plug>(vimfiler_switch_to_root_directory)
+    nmap <buffer> & <Plug>(vimfiler_switch_to_project_directory)
+    nmap <buffer> q <Plug>(vimfiler_hide)
 
-  " マーク
-  nmap <buffer> <S-Space> <Plug>(vimfiler_toggle_mark_current_line)
-  vmap <buffer> <Space> <Plug>(vimfiler_toggle_mark_selected_lines)
-  nmap <buffer> * <Plug>(vimfiler_toggle_mark_all_lines)
-  nmap <buffer> C <Plug>(vimfiler_clear_mark_all_lines)
+    " 特殊
+    " 隠しファイル表示・非表示
+    nmap <buffer> . <Plug>(vimfiler_toggle_visible_ignore_files)
+    " 外部のプログラムで実行
+    nmap <buffer> X <Plug>(vimfiler_execute_system_associated)
+    " エクスプローラーで開く
+    nmap <buffer> E <Plug>(vimfiler_execute_external_filer)
+    " シェルの起動
+    nmap <buffer> SH <Plug>(vimfiler_popup_shell)
+    " 外部コマンドの実行
+    nmap <buffer> ! <Plug>(vimfiler_execute_shell_command)
+    " 追加アクション
+    nmap <buffer> A <Plug>(vimfiler_choose_action)
+    " ブックマーク
+    nmap <silent><buffer><expr> B vimfiler#do_action('bookmark')
+    " ヘルプ
+    nmap <buffer> ? <Plug>(vimfiler_help)
+    " findコマンド
+    nmap <buffer> F <Plug>(vimfiler_find)
+    " cd
+    nmap <buffer> cd <Plug>(vimfiler_cd_vim_current_dir)
+    " safeモード切り替え
+    nmap <buffer> gs <Plug>(vimfiler_toggle_safe_mode)
+    nmap <buffer> gS <Plug>(vimfiler_toggle_simple_mode)
+    nnoremap <silent><buffer> b :<C-u>Unite<Space>bookmark<CR>
+    " maskモード
+    nmap <buffer> M <Plug>(vimfiler_set_current_mask)
 
-  " ファイル編集
-  nmap <buffer> mc <Plug>(vimfiler_copy_file)
-  nmap <buffer> mm <Plug>(vimfiler_move_file)
-  nmap <buffer> md <Plug>(vimfiler_delete_file)
-  nmap <buffer> mr <Plug>(vimfiler_rename_file)
+    " マーク
+    nmap <buffer> <S-Space> <Plug>(vimfiler_toggle_mark_current_line)
+    vmap <buffer> <Space> <Plug>(vimfiler_toggle_mark_selected_lines)
+    nmap <buffer> * <Plug>(vimfiler_toggle_mark_all_lines)
+    nmap <buffer> C <Plug>(vimfiler_clear_mark_all_lines)
 
-  " ファイル作成
-  nmap <buffer> ad <Plug>(vimfiler_make_directory)
-  nmap <buffer> af <Plug>(vimfiler_new_file)
+    " ファイル編集
+    nmap <buffer> mc <Plug>(vimfiler_copy_file)
+    nmap <buffer> mm <Plug>(vimfiler_move_file)
+    nmap <buffer> md <Plug>(vimfiler_delete_file)
+    nmap <buffer> mr <Plug>(vimfiler_rename_file)
 
-  " ファイルクリップ
-  nmap <buffer> cc <Plug>(vimfiler_clipboard_copy_file)
-  nmap <buffer> cm <Plug>(vimfiler_clipboard_move_file)
-  nmap <buffer> cp <Plug>(vimfiler_clipboard_paste)
-  nmap <buffer> yy <Plug>(vimfiler_yank_full_path)
+    " ファイル作成
+    nmap <buffer> ad <Plug>(vimfiler_make_directory)
+    nmap <buffer> af <Plug>(vimfiler_new_file)
+
+    " ファイルクリップ
+    nmap <buffer> cc <Plug>(vimfiler_clipboard_copy_file)
+    nmap <buffer> cm <Plug>(vimfiler_clipboard_move_file)
+    nmap <buffer> cp <Plug>(vimfiler_clipboard_paste)
+    nmap <buffer> yy <Plug>(vimfiler_yank_full_path)
 
 
-  " オープンは，<CR>(enter キー)
-  nmap <buffer><expr> <CR> vimfiler#smart_cursor_map(
-          \ "\<Plug>(vimfiler_cd_file)",
-          \ "\<Plug>(vimfiler_open_file_in_another_vimfiler)")
+    " オープンは，<CR>(enter キー)
+    nmap <buffer><expr> <CR> vimfiler#smart_cursor_map(
+            \ "\<Plug>(vimfiler_cd_file)",
+            \ "\<Plug>(vimfiler_open_file_in_another_vimfiler)")
 
-  " マークは，<S-Space>
-  nmap <silent><buffer> <S-Space> <Plug>(vimfiler_toggle_mark_current_line)
-  vmap <silent><buffer> <S-Space> <Plug>(vimfiler_toggle_mark_selected_lines)
+    " マークは，<S-Space>
+    nmap <silent><buffer> <S-Space> <Plug>(vimfiler_toggle_mark_current_line)
+    vmap <silent><buffer> <S-Space> <Plug>(vimfiler_toggle_mark_selected_lines)
 
-  " ウィンドウを分割して開く
-  nmap <silent><buffer><expr> s vimfiler#do_switch_action('split')
-  nmap <silent><buffer><expr> v vimfiler#do_switch_action('vsplit')
+    " ウィンドウを分割して開く
+    nmap <silent><buffer><expr> s vimfiler#do_switch_action('split')
+    nmap <silent><buffer><expr> v vimfiler#do_switch_action('vsplit')
 
-  " 閉じる，<Esc> 2 回叩き
-  nmap <buffer> <Esc><Esc> <Plug>(vimfiler_exit)
+    " 閉じる，<Esc> 2 回叩き
+    nmap <buffer> <Esc><Esc> <Plug>(vimfiler_exit)
 
-  " 全角スペースのハイライトをオフ
-  let b:zenkaku_hilight_off = 1
+    " 全角スペースのハイライトをオフ
+    let b:zenkaku_hilight_off = 1
 
-  " 無視リスト
-  let g:vimfiler_ignore_pattern = ['^\.git$', '^\.DS_Store$', '^\.svn']
-endfunction
-"ゴミ箱の使用
-let g:unite_kind_file_use_trashbox = 1
+    " 無視リスト
+    let g:vimfiler_ignore_pattern = ['^\.git$', '^\.DS_Store$', '^\.svn']
+  endfunction
+  "ゴミ箱の使用
+  let g:unite_kind_file_use_trashbox = 1
+  call neobundle#untap()
+endif
 " ========== VimFiler E ==========
 " ========== vimproc S ==========
 set updatetime=100
