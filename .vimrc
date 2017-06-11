@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 10-Jun-2017.
+" Last Change: 11-Jun-2017.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -526,6 +526,13 @@ NeoBundle 'Shougo/neocomplete.vim'
 "色表示
 NeoBundle 'gko/vim-coloresque'
 
+"()、{}、if endの補完
+NeoBundle "kana/vim-smartinput"
+NeoBundle "cohama/vim-smartinput-endwise"
+
+"閉じタグの補完
+NeoBundle "alvan/vim-closetag"
+
 call neobundle#end()
 
 " Required:
@@ -560,6 +567,7 @@ nnoremap dd "_dd
 nnoremap de "_de
 nnoremap dL "_d$
 nnoremap dw "_dw
+inoremap <C-d> <C-o>"_dd
 nnoremap s "_s
 vnoremap s "_s
 nnoremap D "_D
@@ -602,6 +610,14 @@ noremap zh zH
 noremap zj 4<C-e>
 noremap zk 4<C-y>
 noremap m %
+
+" ruby if endの%移動
+source $VIMRUNTIME/macros/matchit.vim
+augroup matchit
+  au!
+  au FileType ruby let b:match_words = '\<\(module\|class\|def\|begin\|do\|if\|unless\|case\)\>:\<\(elsif\|when\|rescue\)\>:\<\(else\|ensure\)\>:\<end\>'
+augroup END
+nmap m %
 
 "メタ文字扱いのオプションをvery magicを初期値に
 nnoremap / /\v
@@ -754,6 +770,16 @@ cmap <S-Space> <C-r>"
 "挿入モード終了
 imap <C-Space> <ESC>
 vmap <nowait> <C-Space> <ESC>
+
+if neobundle#tap('vim-smartinput-endwise')
+  call smartinput_endwise#define_default_rules()
+  call neobundle#untap()
+endif
+
+if neobundle#tap('vim-closetag')
+  let g:closetag_filenames = "*.html,*.xhtml,*.phtml"
+  call neobundle#untap()
+endif
 " ========== NeoBundle S ==========
 let g:neobundle#log_filename = $VIM . '/neobundle.log'
 " ========== NeoBundle E ==========
