@@ -868,4 +868,16 @@ hi! link shQuote String
 hi! link markdownUrl String
 " }}}
 
-
+" vimfiler {{{
+exe "hi! vimfilerLeaf"  .s:fg_col13
+exe "hi! vimfilerNonMark"  .s:fg_col4
+" exe "hi! vimfilerMark"  .s:fg_col11
+" exe "hi! vimfilerCurrentDirectory"  .s:fg_col11
+" exe "hi! vimfilerStatus"  .s:fg_col11
+" exe "hi! vimfilerDirectory"  .s:fg_col11
+exe "hi! vimfilerNormalFile"  .s:fg_col5
+exe "hi! vimfilerMarkedFile"  .s:fg_col16
+exe "hi! vimfilerOpenedFile"  .s:fg_col15
+exe "hi! vimfilerClosedFile"  .s:fg_col6
+exe "hi! vimfilerROFile"  .s:fg_col9
+" }}}
