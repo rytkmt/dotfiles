@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 11-Jun-2017.
+" Last Change: 24-Jun-2017.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -629,6 +629,7 @@ map <Space> <Nop>
 " コピペ
 vmap <Leader>c "*y
 nmap <Leader>v "*p
+vmap <Leader>v "*p
 
 nmap <Leader>z [test]
 nmap <Leader>t [tab]
@@ -909,6 +910,11 @@ if(neobundle#tap('vimfiler'))
     nmap <buffer> j <Plug>(vimfiler_loop_cursor_down)
     nmap <buffer> k <Plug>(vimfiler_loop_cursor_up)
     nmap <buffer> l <Plug>(vimfiler_smart_l)
+    " オープンは，<CR>(enter キー)
+    nmap <buffer> <CR> <Plug>(vimfiler_smart_l)
+    nmap <buffer><expr> L vimfiler#smart_cursor_map(
+            \ "\<Plug>(vimfiler_cd_file)",
+            \ "\<Plug>(vimfiler_open_file_in_another_vimfiler)")
     nmap <buffer> h <Plug>(vimfiler_smart_h)
     nmap <buffer> x <Plug>(vimfiler_smart_h)
     nmap <buffer> o <Plug>(vimfiler_smart_l)
@@ -917,7 +923,10 @@ if(neobundle#tap('vimfiler'))
     nmap <buffer> ~ <Plug>(vimfiler_switch_to_home_directory)
     nmap <buffer> \ <Plug>(vimfiler_switch_to_root_directory)
     nmap <buffer> & <Plug>(vimfiler_switch_to_project_directory)
+
+    " 閉じる
     nmap <buffer> q <Plug>(vimfiler_hide)
+    nmap <buffer> Q <Plug>(vimfiler_exit)
 
     " 特殊
     " 隠しファイル表示・非表示
@@ -957,6 +966,7 @@ if(neobundle#tap('vimfiler'))
     nmap <buffer> mc <Plug>(vimfiler_copy_file)
     nmap <buffer> mm <Plug>(vimfiler_move_file)
     nmap <buffer> md <Plug>(vimfiler_delete_file)
+    nmap <buffer> df <Plug>(vimfiler_delete_file)
     nmap <buffer> mr <Plug>(vimfiler_rename_file)
 
     " ファイル作成
@@ -970,10 +980,6 @@ if(neobundle#tap('vimfiler'))
     nmap <buffer> yy <Plug>(vimfiler_yank_full_path)
 
 
-    " オープンは，<CR>(enter キー)
-    nmap <buffer><expr> <CR> vimfiler#smart_cursor_map(
-            \ "\<Plug>(vimfiler_cd_file)",
-            \ "\<Plug>(vimfiler_open_file_in_another_vimfiler)")
 
     " マークは，<S-Space>
     nmap <silent><buffer> <S-Space> <Plug>(vimfiler_toggle_mark_current_line)
@@ -982,9 +988,6 @@ if(neobundle#tap('vimfiler'))
     " ウィンドウを分割して開く
     nmap <silent><buffer><expr> s vimfiler#do_switch_action('split')
     nmap <silent><buffer><expr> v vimfiler#do_switch_action('vsplit')
-
-    " 閉じる，<Esc> 2 回叩き
-    nmap <buffer> <Esc><Esc> <Plug>(vimfiler_exit)
 
     " 全角スペースのハイライトをオフ
     let b:zenkaku_hilight_off = 1
