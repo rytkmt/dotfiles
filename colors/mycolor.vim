@@ -211,16 +211,7 @@ exe "hi! WarningMsg"             .s:fg_col14
 exe "hi! ErrorMsg"               .s:fg_col1       .s:bg_col14
 
 "全角スペースをハイライト表示
-function! ZenkakuSpace()
-  if(!exists('b:zenkaku_hilight_off'))
-    hi link ZenkakuSpace Error
-  endif
-endfunction
-let s:aa = '　'
-if has('syntax')
-  autocmd BufWinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
-  autocmd WinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
-endif
+hi link ZenkakuSpace Error
 
 "【_String】"
 exe "hi! _String" .s:fg_col16

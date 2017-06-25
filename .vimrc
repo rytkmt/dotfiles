@@ -312,6 +312,11 @@ endif
 "---------------------------
 " Start Neobundle Settings.
 "---------------------------
+if has('syntax')
+  autocmd BufWinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
+  autocmd WinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
+endif
+
 if(!(isdirectory($VIM . '/bundle')))
   exe ':! mkdir $VIM/bundle'
 endif
