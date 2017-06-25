@@ -62,6 +62,7 @@ if (has("gui_running"))
     let s:col14   = "#f4acad" "薄ピンク
     let s:col15         = "#d75f00" "オレンジ
     let s:col16       = "#ffc24b" "黄色
+    let s:col17       = "#ffea00" "黄色鮮やか
 
 else
     let s:vmode       = "cterm"
@@ -81,6 +82,7 @@ else
     let s:col14   = "1"
     let s:col15         = "9"
     let s:col16       = "13"
+    let s:col17       = "13"
 endif
 " }}}
 " Highlighting primitives"{{{
@@ -100,6 +102,7 @@ exe "let s:bg_col13   = ' ".s:vmode."bg=".s:col13  ."'"
 exe "let s:bg_col14   = ' ".s:vmode."bg=".s:col14  ."'"
 exe "let s:bg_col15         = ' ".s:vmode."bg=".s:col15        ."'"
 exe "let s:bg_col16       = ' ".s:vmode."bg=".s:col16      ."'"
+exe "let s:bg_col17       = ' ".s:vmode."bg=".s:col17      ."'"
 
 exe "let s:fg_col1       = ' ".s:vmode."fg=".s:col1      ."'"
 exe "let s:fg_col2       = ' ".s:vmode."fg=".s:col2      ."'"
@@ -117,6 +120,7 @@ exe "let s:fg_col13   = ' ".s:vmode."fg=".s:col13  ."'"
 exe "let s:fg_col14   = ' ".s:vmode."fg=".s:col14  ."'"
 exe "let s:fg_col15         = ' ".s:vmode."fg=".s:col15        ."'"
 exe "let s:fg_col16       = ' ".s:vmode."fg=".s:col16      ."'"
+exe "let s:fg_col17       = ' ".s:vmode."fg=".s:col17      ."'"
 
 exe "let s:sp_col1       = ' ".s:vmode."sp=".s:col1      ."'"
 exe "let s:sp_col2       = ' ".s:vmode."sp=".s:col2      ."'"
@@ -134,6 +138,7 @@ exe "let s:sp_col13   = ' ".s:vmode."sp=".s:col13  ."'"
 exe "let s:sp_col14   = ' ".s:vmode."sp=".s:col14  ."'"
 exe "let s:sp_col15         = ' ".s:vmode."sp=".s:col15        ."'"
 exe "let s:sp_col16       = ' ".s:vmode."sp=".s:col16      ."'"
+exe "let s:sp_col17       = ' ".s:vmode."sp=".s:col17      ."'"
 
 exe "let s:underline      = ' ".s:vmode."=underline'"
 exe "let s:bold      = ' ".s:vmode."=bold'"
@@ -190,7 +195,7 @@ exe "hi! Search"                 .s:fg_col5       .s:bg_col13
 hi! link IncSearch Search
 
 exe "hi! VertSplit"              .s:fg_col1       .s:bg_col4
-exe "hi! MatchParen"             .s:fg_col14   .s:bg_col1      "gui=underline, cterm=underline"
+exe "hi! MatchParen"             .s:fg_col17      "gui=underline,bold, cterm=underline,bold"
 exe "hi! Title"                  .s:fg_col7
 exe "hi! Directory"              .s:fg_col9
 exe "hi! SpecialKey"             .s:fg_col3

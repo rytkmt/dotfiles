@@ -444,8 +444,12 @@ NeoBundle 'tpope/vim-rails'
 NeoBundle 'terryma/vim-expand-region'
 
 "ruby用の％移動
-NeoBundle 'vim-scripts/ruby-matchit'
+" NeoBundle 'vim-scripts/ruby-matchit'
+" bug-fixのpull requestがあったので下記を読み込み
+NeoBundle 'stevemadere/ruby-matchit'
 
+"%移動の対応するもののハイライト
+NeoBundle 'vimtaku/hl_matchit.vim'
 " ========== textobject S ==========
 
 " textobj のベース
@@ -1191,6 +1195,12 @@ let g:indentLine_char = '¦' "use ¦, ┆ or │
 " ============ vim-over S ============
 nnoremap [replace] :<C-u>OverCommandLine<CR>%s/\v
 " ============ vim-over E ============
+" ============ hl_matchit S ============
+let g:hl_matchit_enable_on_vim_startup = 1
+let g:hl_matchit_hl_groupname = 'MatchParen'
+let g:hl_matchit_speed_level = 1
+let g:hl_matchit_allow_ft = 'ruby,vim' " blah..blah..
+" ============ hl_matchit E ============
 " ============vim-expand-region S ============
 let g:expand_region_text_objects = {
       \ 'i,w'  :0,
