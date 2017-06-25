@@ -1033,8 +1033,8 @@ function! LightlineReadonly()
   return &ft != 'vimfiler' && &ft !~? 'help' && &readonly ? 'RO' : ''
 endfunction
 function! LightlineFilename()
-  return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-      \ (&ft == 'vimfiler' ? split(b:vimfiler.current_dir, "/")[-1] :
+    return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+      \ (&ft == 'vimfiler' ? len(b:vimfiler.current_dir) > 1 ? split(b:vimfiler.current_dir, "/")[-1] : '' :
       \  &ft == 'unite' ? unite#get_status_string() :
       \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
       \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
@@ -1284,64 +1284,76 @@ let g:switch_custom_definitions =
 "
 function CheckTags(do_update)
   let l:root_temp = FindRootDirectory()
-  let l:tags_change = 0
-"
+
   "Rakefileの存在でrailsプロジェクトか判断
   if filereadable(l:root_temp .'/Rakefile')
     "gemsのtagの更新
-    if !exists('g:gem_tags')
+    if !exists('g:gem_tags') || a:do_update == 1
       call SetGemTags(a:do_update)
-      let l:tags_change = 1
     endif
 
     "projectが変わったときだけタグのセットをする
     if exists('g:project_root') && l:root_temp == g:project_root && a:do_update == 0
     else
       let g:project_root = l:root_temp
-      let a:project_tag_path = l:root_temp . '/tags'
-      if filereadable(a:project_tag_path) && a:do_update == 1
-        " if has('win32')
-        "   call system("DEL " . a:project_tag_path)
-        " else
-        "   call system("rm " . a:project_tag_path)
-        " endif
+      let l:project_tag_path = l:root_temp . '/tags'
+      if filereadable(l:project_tag_path) && a:do_update == 1
+        if has('win32')
+          call system("DEL " . l:project_tag_path)
+        else
+          call system("rm " . l:project_tag_path)
+        endif
       endif
 
       "tagsがあればセット
-      if filereadable(a:project_tag_path)
-        let g:project_tag = a:project_tag_path
+      if filereadable(l:project_tag_path)
+        let g:project_tag = l:project_tag_path
+        call SetTags()
       "tagsがなければ作成
       else
-        " if has('win32')
-        "   echom 'up'
-        "   call s:system_async("CD " . l:root_temp . " && ctags -R", "SetProjectTag", a:project_tag_path)
-        " else
-        "   call s:system_async("cd " . l:root_temp . " | ctags -R", "SetProjectTag", a:project_tag_path)
-        " endif
+        if !exists("g:project_tag_updating") || g:project_tag_updating == 0
+          let g:project_tag_updating = 1
+          if has('win32')
+            echom 'up'
+            call s:system_async("CD " . l:root_temp . " && ctags -R", "SetProjectTag", l:project_tag_path)
+          else
+            call s:system_async("cd " . l:root_temp . " | ctags -R", "SetProjectTag", l:project_tag_path)
+          endif
+        endif
         " " SetProjectTagで更新されるためクリア
         " let l:tags_change = 0
       endif
     endif
 
-    if exists('l:tags_change') && l:tags_change > 0
-      call SetTags()
-    endif
+    " if exists('l:tags_change') && l:tags_change > 0
+    "   call SetTags()
+    " endif
   endif
 endfunction
 
-function SetProjectTags(result, tag_path)
+function SetProjectTag(result, tag_path)
+  echom 'SetProjectTag'
   echom a:result
-
-  let g:project_tag = a:tag_path
+  if filereadable(a:tag_path)
+    let g:project_tag = a:tag_path
+  endif
+  let g:project_tag_updating = 0
   call SetTags()
 endfunction
 
 function SetTags()
+  echom 'SetTags'
   let l:tags = []
   if exists('g:gem_tags')
+    echom 'g:gem_tags'
+    for xx in g:gem_tags
+      echom xx
+    endfor
     let l:tags = l:tags + g:gem_tags
   endif
   if exists('g:project_tag')
+    echom 'g:project_tag'
+    echom g:project_tag
     call add(l:tags, g:project_tag)
   endif
 
@@ -1387,37 +1399,37 @@ function! SetGemTags(do_update)
     return
   endif
 
-  let a:gempaths = []
+  let l:gempaths = []
   if has('win32')
-    let a:gempaths = split(system('gem environment gempath'), ';')
+    let l:gempaths = split(system('gem environment gempath'), ';')
   else
     " 配列で返るため明示的に0指定(要素は1つのため問題なし)
-    let a:gempaths = split(split(system('! gem environment gempath'), '\r')[0], ':')
+    let l:gempaths = split(split(system('! gem environment gempath'), '\r')[0], ':')
   endif
 
   let g:gem_tags = []
   let g:gem_update_target_count = 0
-  for gem_path in a:gempaths
-    let a:gem_root = substitute(gem_path, '\n', '', 'g') . '/gems'
-    let a:gem_tag_path = a:gem_root . '/tags'
-    if(isdirectory(a:gem_root))
-      if filereadable(a:gem_tag_path) && a:do_update == 1
-        " if has('win32')
-        "   call system("DEL " . a:gem_tag_path)
-        " else
-        "   call system("rm " . a:gem_tag_path)
-        " endif
+  for gem_path in l:gempaths
+    let l:gem_root = substitute(gem_path, '\n', '', 'g') . '/gems'
+    let l:gem_tag_path = l:gem_root . '/tags'
+    if(isdirectory(l:gem_root))
+      if filereadable(l:gem_tag_path) && a:do_update == 1
+        if has('win32')
+          call system("DEL " . l:gem_tag_path)
+        else
+          call system("rm " . l:gem_tag_path)
+        endif
       endif
-      if filereadable(a:gem_tag_path)
-        call add(g:gem_tags, a:gem_tag_path)
+      if filereadable(l:gem_tag_path)
+        call add(g:gem_tags, l:gem_tag_path)
       else
-        " let g:gem_update_target_count = g:gem_update_target_count + 1
-        " if has('win32')
-        "   echom 'down'
-        "   call s:system_async("CD " . a:gem_root . " && ctags -R", "AddGemTags", a:gem_tag_path)
-        " else
-        "   call s:system_async("cd " . a:gem_root . " | ctags -R", "AddGemTags", a:gem_tag_path)
-        " endif
+        let g:gem_update_target_count = g:gem_update_target_count + 1
+        if has('win32')
+          echom 'down'
+          call s:system_async("CD " . l:gem_root . " && ctags -R", "AddGemTags", l:gem_tag_path)
+        else
+          call s:system_async("cd " . l:gem_root . " | ctags -R", "AddGemTags", l:gem_tag_path)
+        endif
       endif
     endif
   endfor
@@ -1425,17 +1437,16 @@ endfunction
 
 function! AddGemTags(result, tag_path)
   echom a:result
-  call add(g:gem_tags, a:tag_path)
+  if filereadable(a:tag_path)
+    call add(g:gem_tags, a:tag_path)
+  endif
   let g:gem_update_target_count = g:gem_update_target_count - 1
+  if g:gem_update_target_count == 0
+    call SetTags()
+  endif
 endfunction
 
-
-
-
-
-
-
-autocmd BufEnter * call CheckTags(0)
+autocmd BufEnter,WinEnter * call CheckTags(0)
 
 " nnoremap [ctag]u :<C-u>call UpdateTags()<CR>
 nnoremap [ctag]j <C-]>
