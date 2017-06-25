@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 24-Jun-2017.
+" Last Change: 25-Jun-2017.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -159,17 +159,13 @@ set smartindent
 "全角スペースをハイライト表示
 function! ZenkakuSpace()
   if(!exists('b:zenkaku_hilight_off'))
-    highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
+    hi link ZenkakuSpace Error
   endif
 endfunction
-
+let s:aa = '　'
 if has('syntax')
-    augroup ZenkakuSpace
-        autocmd!
-        autocmd ColorScheme       * call ZenkakuSpace()
-        autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
-    augroup END
-    call ZenkakuSpace()
+  autocmd BufWinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
+  autocmd WinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
 endif
 
 " "0"で始まる数値を、8進数として扱わないようにする
@@ -814,6 +810,7 @@ if neobundle#tap('neocomplete.vim')
     \   'ruby': s:neco_dicts_dir . '/ruby.dict'
     \ }
   endif
+  unlet s:neco_dicts_dir
   let g:neocomplete#data_directory = $HOME . '/.vim/cache/neocomplete'
   "候補の選択
   inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -877,19 +874,19 @@ if(neobundle#tap('vimfiler'))
       let g:vimfiler_is_new = 1
     endif
 
-    let s:vimfiler_default_dir = ''
+    let l:vimfiler_default_dir = ''
 
     if(a:type == 1 && (a:init || g:vimfiler_is_new))
       if has('win32')
-        let s:vimfiler_default_dir = 'C:/Users/r_tsukamoto.ILL/workspace'
+        let l:vimfiler_default_dir = 'C:/Users/r_tsukamoto.ILL/workspace'
       else
-        let s:vimfiler_default_dir = '/Users/Ryo/programs/vim/rytkmt_vim_settings'
+        let l:vimfiler_default_dir = '/Users/Ryo/programs/vim/rytkmt_vim_settings'
       endif
     elseif(a:type == 2)
-      let s:vimfiler_default_dir = expand("%:p:h")
+      let l:vimfiler_default_dir = expand("%:p:h")
     endif
 
-    exe ":VimFilerExplorer -fnamewidth=200 -buffer-name=" . t:tab_name . " " . s:vimfiler_default_dir
+    exe ":VimFilerExplorer -fnamewidth=200 -buffer-name=" . t:tab_name . " " . l:vimfiler_default_dir
   endfunction
   " VimFilerを起動
   autocmd vimenter * call _VimFilerOpen(1,1)
@@ -965,6 +962,7 @@ if(neobundle#tap('vimfiler'))
     nmap <buffer> mc <Plug>(vimfiler_copy_file)
     nmap <buffer> mm <Plug>(vimfiler_move_file)
     nmap <buffer> md <Plug>(vimfiler_delete_file)
+    nmap <buffer> df <Plug>(vimfiler_delete_file)
     nmap <buffer> mr <Plug>(vimfiler_rename_file)
 
     " ファイル作成
@@ -1037,7 +1035,7 @@ function! LightlineReadonly()
 endfunction
 function! LightlineFilename()
   return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-      \ (&ft == 'vimfiler' ? b:vimfiler.current_dir :
+      \ (&ft == 'vimfiler' ? split(b:vimfiler.current_dir, "/")[-1] :
       \  &ft == 'unite' ? unite#get_status_string() :
       \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
       \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
@@ -1051,13 +1049,6 @@ endfunction
 function! LightlineFileencoding()
   return &ft == 'vimfiler' ? '' : &encoding
 endfunction
-"
-
-" let g:lightline = {
-"       \ 'active': {
-"       \   'left': [ ['mode', 'paste'], ['readonly', 'filename', 'modified'] ]
-"       \ },
-"       \ 'component_function': {
 " ========== lightline E ==========
 " ========== vimproc S ==========
 set updatetime=100
@@ -1075,10 +1066,10 @@ function! s:receive_vimproc_result(callback, ...)
     let vimproc = s:vimproc
     try
         if !vimproc.stdout.eof
-            let s:result .= vimproc.stdout.read()
+            let s:vimproc_result .= vimproc.stdout.read()
         endif
         if !vimproc.stderr.eof
-            let s:result .= vimproc.stderr.read()
+            let s:vimproc_result .= vimproc.stderr.read()
         endif
         if !(vimproc.stdout.eof && vimproc.stderr.eof)
             return 0
@@ -1089,7 +1080,7 @@ function! s:receive_vimproc_result(callback, ...)
 
     let a:arg_str = ''
     let a:args = []
-    call add(a:args, 's:result')
+    call add(a:args, 's:vimproc_result')
     if len(a:000) > 0
       for var in a:000
         call add(a:args, var)
@@ -1107,7 +1098,7 @@ function! s:receive_vimproc_result(callback, ...)
     call vimproc.stderr.close()
     call vimproc.waitpid()
     unlet s:vimproc
-    unlet s:result
+    unlet s:vimproc_result
 endfunction
 
 function! s:system_async(cmd, callback, ...)
@@ -1118,7 +1109,7 @@ function! s:system_async(cmd, callback, ...)
     call vimproc.stdin.close()
 
     let s:vimproc = vimproc
-    let s:result = ""
+    let s:vimproc_result = ""
 
     let a:arg_str = ''
     let a:args = []
@@ -1263,46 +1254,46 @@ let g:switch_custom_definitions =
 " function SetGemsTags(update)
 "
 "   if has('win32')
-"     let s:gempaths = []
-"     let s:gempath_tmp = split(system('gem environment gempath'), ';')[1]
-"     let s:gempath_tmp = strpart(s:gempath_tmp, 0, strlen(s:gempath_tmp) - 1)
-"     call add(s:gempaths, s:gempath_tmp)
+"     let l:gempaths = []
+"     let l:gempath_tmp = split(system('gem environment gempath'), ';')[1]
+"     let l:gempath_tmp = strpart(l:gempath_tmp, 0, strlen(l:gempath_tmp) - 1)
+"     call add(l:gempaths, l:gempath_tmp)
 "   else
-"     let s:gempath_str = split(system('! gem environment gempath'), '\r')[0]
-"     let s:gempaths = split(s:gempath_str, ':')
+"     let l:gempath_str = split(system('! gem environment gempath'), '\r')[0]
+"     let l:gempaths = split(l:gempath_str, ':')
 "   endif
 "
 "   let g:gem_tags = []
-"   for gem_path in s:gempaths
-"     let s:gem_root = gem_path . '/gems'
-"     if(isdirectory(s:gem_root))
-"       exe "cd " . s:gem_root
-"       if !filereadable(s:gem_root . '/tags')
+"   for gem_path in l:gempaths
+"     let l:gem_root = gem_path . '/gems'
+"     if(isdirectory(l:gem_root))
+"       exe "cd " . l:gem_root
+"       if !filereadable(l:gem_root . '/tags')
 "         call s:system_async ":silent Ctags"
 "       endif
 "
-"       call add(g:gem_tags, s:gem_root . '/tags')
+"       call add(g:gem_tags, l:gem_root . '/tags')
 "     endif
 "   endfor
 " endfunction
 "
 function CheckTags(do_update)
-  let s:root_temp = FindRootDirectory()
-  let s:tags_change = 0
+  let l:root_temp = FindRootDirectory()
+  let l:tags_change = 0
 "
   "Rakefileの存在でrailsプロジェクトか判断
-  if filereadable(s:root_temp .'/Rakefile')
+  if filereadable(l:root_temp .'/Rakefile')
     "gemsのtagの更新
     if !exists('g:gem_tags')
       call SetGemTags(a:do_update)
-      let s:tags_change = 1
+      let l:tags_change = 1
     endif
 
     "projectが変わったときだけタグのセットをする
-    if exists('g:project_root') && s:root_temp == g:project_root && a:do_update == 0
+    if exists('g:project_root') && l:root_temp == g:project_root && a:do_update == 0
     else
-      let g:project_root = s:root_temp
-      let a:project_tag_path = s:root_temp . '/tags'
+      let g:project_root = l:root_temp
+      let a:project_tag_path = l:root_temp . '/tags'
       if filereadable(a:project_tag_path) && a:do_update == 1
         " if has('win32')
         "   call system("DEL " . a:project_tag_path)
@@ -1318,16 +1309,16 @@ function CheckTags(do_update)
       else
         " if has('win32')
         "   echom 'up'
-        "   call s:system_async("CD " . s:root_temp . " && ctags -R", "SetProjectTag", a:project_tag_path)
+        "   call s:system_async("CD " . l:root_temp . " && ctags -R", "SetProjectTag", a:project_tag_path)
         " else
-        "   call s:system_async("cd " . s:root_temp . " | ctags -R", "SetProjectTag", a:project_tag_path)
+        "   call s:system_async("cd " . l:root_temp . " | ctags -R", "SetProjectTag", a:project_tag_path)
         " endif
         " " SetProjectTagで更新されるためクリア
-        " let s:tags_change = 0
+        " let l:tags_change = 0
       endif
     endif
 
-    if exists('s:tags_change') && s:tags_change > 0
+    if exists('l:tags_change') && l:tags_change > 0
       call SetTags()
     endif
   endif
@@ -1341,39 +1332,39 @@ function SetProjectTags(result, tag_path)
 endfunction
 
 function SetTags()
-  let s:tags = []
+  let l:tags = []
   if exists('g:gem_tags')
-    let s:tags = s:tags + g:gem_tags
+    let l:tags = l:tags + g:gem_tags
   endif
   if exists('g:project_tag')
-    call add(s:tags, g:project_tag)
+    call add(l:tags, g:project_tag)
   endif
 
-  if !(s:tags == [])
-    let $CTAGS_STR = join(s:tags, ',')
+  if !(l:tags == [])
+    let $CTAGS_STR = join(l:tags, ',')
     set tags=$CTAGS_STR
     silent !unlet '$CTAGS_STR'
   endif
 endfunction
 "
 " function UpdateTags()
-"   let s:root_temp = FindRootDirectory()
+"   let l:root_temp = FindRootDirectory()
 "
 "   "Rakefileの存在でrailsプロジェクトか判断
-"   if filereadable(s:root_temp .'/Rakefile')
+"   if filereadable(l:root_temp .'/Rakefile')
 "     "gemsのtagの更新
 "     if !exists('g:gem_tags')
 "       call SetGemsTags()
 "     endif
 "
 "     "projectが変わったときだけタグのセットをする
-"     let g:project_root = s:root_temp
+"     let g:project_root = l:root_temp
 "     exe "cd " .g:project_root
 "     exe ":silent Ctags"
 "
-"     let s:tags = copy(g:gem_tags)
-"     call add(s:tags, g:project_root . '/tags')
-"     let $CTAGS_STR = join(s:tags, ',')
+"     let l:tags = copy(g:gem_tags)
+"     call add(l:tags, g:project_root . '/tags')
+"     let $CTAGS_STR = join(l:tags, ',')
 "     set tags=$CTAGS_STR
 "     silent !unlet '$CTAGS_STR'
 "   endif
