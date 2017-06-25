@@ -162,7 +162,7 @@ function! ZenkakuSpace()
     highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
   endif
 endfunction
-   
+
 if has('syntax')
     augroup ZenkakuSpace
         autocmd!
@@ -578,9 +578,9 @@ nnoremap tL d$
 nnoremap tw dw
 nnoremap T D
 vnoremap t x
-nnoremap y%p :<C-u>redi! @"> \| echo expand("%") \| redi END<CR>
-nnoremap y%d :<C-u>redi! @"> \| echo expand("%:h") \| redi END<CR>
 nnoremap y%f :<C-u>redi! @"> \| echo expand("%:t") \| redi END<CR>
+nnoremap y%p :<C-u>redi! @"> \| echo expand("%:p") \| redi END<CR>
+nnoremap y%d :<C-u>redi! @"> \| echo expand("%:p:h") \| redi END<CR>
 "検索のハイライトを消す
 noremap <ESC><ESC> :<C-u>noh<CR>
 
@@ -639,8 +639,8 @@ nmap [unite] <Nop>
 
 nmap <Leader>u [unite]
 
+nmap [filer] <Nop>
 nmap <Leader>f [filer]
-nmap <Leader>F [filer2]
 
 nmap [search] <Nop>
 nmap <Leader>s [search]
@@ -825,7 +825,7 @@ if neobundle#tap('neocomplete.vim')
   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
   " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
   " autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-  
+
   call neobundle#untap()
 endif
 " ========== NeoComplete E ==========
@@ -870,26 +870,30 @@ endif
 " ========== VimFiler S ==========
 if(neobundle#tap('vimfiler'))
   let g:vimfiler_tab_idx = 1
-  function! _VimFilerOpen(init)
+  let g:vimfiler_is_new = 0
+  function! _VimFilerOpen(init, type)
     if !exists("t:tab_name")
       let t:tab_name = g:vimfiler_tab_idx
       let g:vimfiler_tab_idx = g:vimfiler_tab_idx + 1
+      let g:vimfiler_is_new = 1
     endif
 
     let s:vimfiler_default_dir = ''
-    
-    if(a:init)
+
+    if(a:type == 1 && (a:init || g:vimfiler_is_new))
       if has('win32')
         let s:vimfiler_default_dir = 'C:/Users/r_tsukamoto.ILL/workspace'
       else
         let s:vimfiler_default_dir = '/Users/Ryo/programs/vim/rytkmt_vim_settings'
       endif
+    elseif(a:type == 2)
+      let s:vimfiler_default_dir = expand("%:p:h")
     endif
 
     exe ":VimFilerExplorer -fnamewidth=200 -buffer-name=" . t:tab_name . " " . s:vimfiler_default_dir
   endfunction
   " VimFilerを起動
-  autocmd vimenter * call _VimFilerOpen(1)
+  autocmd vimenter * call _VimFilerOpen(1,1)
 
   let g:vimfiler_no_default_key_mappings = 1
   " let g:vimfiler_tree_leaf_icon = ' '
@@ -897,8 +901,9 @@ if(neobundle#tap('vimfiler'))
   " let g:vimfiler_tree_closed_icon = '▸'
   " let g:vimfiler_file_icon = '-'
   let g:vimfiler_marked_file_icon = '*'
-  nmap [filer] :<C-u>call _VimFilerOpen(0)<CR>
-  nmap [filer2] :<C-u>call _VimFilerOpen(1)<CR>
+  nmap [filer]f :<C-u>call _VimFilerOpen(0,1)<CR>
+  nmap [filer]d :<C-u>call _VimFilerOpen(1,1)<CR>
+  nmap [filer]b :<C-u>call _VimFilerOpen(1,2)<CR>
 
   augroup vimfiler
     autocmd!
@@ -906,6 +911,9 @@ if(neobundle#tap('vimfiler'))
   augroup END
 
   function! s:vimfiler_settings()
+    setlocal nonumber
+    setlocal nocursorcolumn
+    echom vimfiler#helper#_get_file_directory()
     " 移動
     nmap <buffer> j <Plug>(vimfiler_loop_cursor_down)
     nmap <buffer> k <Plug>(vimfiler_loop_cursor_up)
@@ -1000,6 +1008,60 @@ if(neobundle#tap('vimfiler'))
   call neobundle#untap()
 endif
 " ========== VimFiler E ==========
+" ========== lightline S ==========
+
+let g:lightline = {
+\  'active': {
+\    'left': [['mode', 'paste'], ['filename']],
+\    'right': [['row'], ['fileencoding']]
+\  },
+\  'inactive': {
+\    'left': [['filename']],
+\    'right': [['row'], ['fileencoding']]
+\  },
+\  'component_function': {
+\    'mode': 'LightlineMode',
+\    'paste' : 'LightlinePaste',
+\    'readonly' : 'LightlineReadonly',
+\    'filename' : 'LightlineFilename',
+\    'modified' : 'LightlineModified',
+\    'row' : 'LightlineRow',
+\    'fileencoding': 'LightlineFileencoding'
+\  }
+\}
+function! LightlineMode()
+  return &ft == 'vimfiler' ? '' : lightline#mode()
+endfunction
+function! LightlinePaste()
+  return &ft == 'vimfiler' ? '' : &paste ? "PASTE" : ""
+endfunction
+function! LightlineReadonly()
+  return &ft != 'vimfiler' && &ft !~? 'help' && &readonly ? 'RO' : ''
+endfunction
+function! LightlineFilename()
+  return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+      \ (&ft == 'vimfiler' ? b:vimfiler.current_dir :
+      \  &ft == 'unite' ? unite#get_status_string() :
+      \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+      \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+endfunction
+function! LightlineModified()
+  return &modifiable && &modified ? '+' : ''
+endfunction
+function! LightlineRow()
+  return &ft == 'vimfiler' ? '' : line(".") . "/" . line("$")
+endfunction
+function! LightlineFileencoding()
+  return &ft == 'vimfiler' ? '' : &encoding
+endfunction
+"
+
+" let g:lightline = {
+"       \ 'active': {
+"       \   'left': [ ['mode', 'paste'], ['readonly', 'filename', 'modified'] ]
+"       \ },
+"       \ 'component_function': {
+" ========== lightline E ==========
 " ========== vimproc S ==========
 set updatetime=100
 
@@ -1039,7 +1101,7 @@ function! s:receive_vimproc_result(callback, ...)
     let a:arg_str = "(" . join(a:args, ', "') . '")'
     " 終了時に呼ぶ
     exe "call " . a:callback . a:arg_str
-    
+
     augroup vimproc-async-receive-test
         autocmd!
     augroup END
@@ -1057,10 +1119,10 @@ function! s:system_async(cmd, callback, ...)
     echom cmd
     let vimproc = vimproc#pgroup_open(cmd)
     call vimproc.stdin.close()
-    
+
     let s:vimproc = vimproc
     let s:result = ""
- 
+
     let a:arg_str = ''
     let a:args = []
     call add(a:args, a:callback)
