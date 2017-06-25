@@ -195,7 +195,7 @@ exe "hi! Search"                 .s:fg_col5       .s:bg_col13
 hi! link IncSearch Search
 
 exe "hi! VertSplit"              .s:fg_col1       .s:bg_col4
-exe "hi! MatchParen"             .s:fg_col17      "gui=underline,bold, cterm=underline,bold"
+exe "hi! MatchParen"             .s:fg_col17      "guibg=NONE, gui=underline,bold, cterm=underline,bold"
 exe "hi! Title"                  .s:fg_col7
 exe "hi! Directory"              .s:fg_col9
 exe "hi! SpecialKey"             .s:fg_col3
