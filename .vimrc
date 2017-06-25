@@ -156,18 +156,6 @@ set smartindent
 "  set listchars=tab:»\ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 "endif
 
-"全角スペースをハイライト表示
-function! ZenkakuSpace()
-  if(!exists('b:zenkaku_hilight_off'))
-    hi link ZenkakuSpace Error
-  endif
-endfunction
-let s:aa = '　'
-if has('syntax')
-  autocmd BufWinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
-  autocmd WinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
-endif
-
 " "0"で始まる数値を、8進数として扱わないようにする
 set nrformats-=octal
 

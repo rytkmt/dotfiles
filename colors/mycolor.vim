@@ -195,7 +195,7 @@ exe "hi! Search"                 .s:fg_col5       .s:bg_col13
 hi! link IncSearch Search
 
 exe "hi! VertSplit"              .s:fg_col1       .s:bg_col4
-exe "hi! MatchParen"             .s:fg_col17      "guibg=NONE, gui=underline,bold, cterm=underline,bold"
+exe "hi! MatchParen"             .s:fg_col17      .s:bg_col1 "gui=underline,bold, cterm=underline,bold"
 exe "hi! Title"                  .s:fg_col7
 exe "hi! Directory"              .s:fg_col9
 exe "hi! SpecialKey"             .s:fg_col3
@@ -210,21 +210,17 @@ exe "hi! Question"               .s:fg_col9
 exe "hi! WarningMsg"             .s:fg_col14
 exe "hi! ErrorMsg"               .s:fg_col1       .s:bg_col14
 
-
 "全角スペースをハイライト表示
 function! ZenkakuSpace()
-    exe "hi! ZenkakuSpace" .s:bg_col15
+  if(!exists('b:zenkaku_hilight_off'))
+    hi link ZenkakuSpace Error
+  endif
 endfunction
-   
+let s:aa = '　'
 if has('syntax')
-    augroup ZenkakuSpace
-        autocmd!
-        autocmd ColorScheme       * call ZenkakuSpace()
-        autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
-    augroup END
-    call ZenkakuSpace()
+  autocmd BufWinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
+  autocmd WinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
 endif
-
 
 "【_String】"
 exe "hi! _String" .s:fg_col16
