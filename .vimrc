@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version vimrc file.
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 25-Jun-2017.
+" Last Change: 26-Jun-2017.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 " 解説:
@@ -1311,23 +1311,18 @@ function CheckTags(do_update)
         call SetTags()
       "tagsがなければ作成
       else
-        if !exists("g:project_tag_updating") || g:project_tag_updating == 0
-          let g:project_tag_updating = 1
-          if has('win32')
-            echom 'up'
-            call s:system_async("CD " . l:root_temp . " && ctags -R", "SetProjectTag", l:project_tag_path)
-          else
-            call s:system_async("cd " . l:root_temp . " | ctags -R", "SetProjectTag", l:project_tag_path)
-          endif
-        endif
-        " " SetProjectTagで更新されるためクリア
-        " let l:tags_change = 0
+        " if !exists("g:project_tag_updating") || g:project_tag_updating == 0
+        "   let g:project_tag_updating = 1
+        "   if has('win32')
+        "     echom 'up'
+        "     call s:system_async("cd " . l:root_temp . " && ctags -R", "SetProjectTag", l:project_tag_path)
+        "   else
+        "     call s:system_async("cd " . l:root_temp . " | ctags -R", "SetProjectTag", l:project_tag_path)
+        "   endif
+        " endif
       endif
     endif
 
-    " if exists('l:tags_change') && l:tags_change > 0
-    "   call SetTags()
-    " endif
   endif
 endfunction
 
