@@ -324,8 +324,6 @@ NeoBundle 'vim-scripts/AnsiEsc.vim'
 NeoBundle 'bronson/vim-trailing-whitespace'
 " mapのサブモード
 NeoBundle 'kana/vim-submode'
-" 置換のプレビュー
-NeoBundle 'osyo-manga/vim-over'
 " yankの履歴の前後
 NeoBundle 'LeafCage/yankround.vim'
 " 設定はhttp://qiita.com/akase244/items/ce5e2e18ad5883e98a77を参照
@@ -351,8 +349,6 @@ NeoBundle 'tyru/capture.vim'
 NeoBundle 'tpope/vim-surround'
 "入力補完
 NeoBundle 'Shougo/neocomplete.vim'
-"色表示
-NeoBundle 'gko/vim-coloresque'
 "()、{}、if endの補完
 NeoBundle "kana/vim-smartinput"
 NeoBundle "cohama/vim-smartinput-endwise"
@@ -640,7 +636,8 @@ if neobundle#tap('neocomplete.vim') "{{{
   "候補の選択
   inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
   inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
-
+  " 補完候補が表示されている場合は確定。そうでない場合は改行
+  inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "\<CR>"
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
@@ -997,10 +994,6 @@ if(neobundle#tap('indentLine')) "{{{
   let g:indentLine_char = '¦' "use ¦, ┆ or │
   call neobundle#untap()
 endif "}}}
-if(neobundle#tap('vim-over')) "{{{
-  nnoremap [replace] :<C-u>OverCommandLine<CR>%s/\v
-  call neobundle#untap()
-endif "}}}
 if(neobundle#tap('hl_matchit.vim')) "{{{
   let g:hl_matchit_enable_on_vim_startup = 1
   let g:hl_matchit_hl_groupname = 'MatchParen'
@@ -1108,14 +1101,15 @@ endif "}}}
     if !exists('w:current_project')
       return
     endif
+    unlet w:project_tag
 
     if filereadable(w:current_project . '/tags')
-      let w:set_project_tag = w:current_project . '/tags'
+      let w:project_tag = w:current_project . '/tags'
     endif
 
     let l:set_tags = []
-    if exists('w:set_project_tag')
-      call add(l:set_tags, w:set_project_tag)
+    if exists('w:project_tag')
+      call add(l:set_tags, w:project_tag)
     endif
 
     if len(g:gem_tags) > 0
