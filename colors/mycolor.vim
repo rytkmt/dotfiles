@@ -9,47 +9,13 @@ if exists("syntax_on")
   syntax reset
 endif
 
-" GUI & hexadecimal palettes"{{{
+" + 色の設定 {{{
 if (has("gui_running"))
     let s:vmode       = "gui"
-    let s:col1       = "#2b2b2b"
-    let s:col2       = "#353535"
-    let s:col3       = "#444444"
-    let s:col4       = "#AFAFAF"
-    let s:col5       = "#DFDFDF"
-    let s:col6        = "#AF8B5F"
-    let s:col7      = "#DFDF5F"
-    let s:col8      = "#DF8B5F"
-    let s:col9        = "#B2DC93"
-    let s:col10       = "#87AF5F"
-    let s:col11       = "#9377B2"
-    let s:col12  = "#93B2DC"
-    let s:col13   = "#5F87AF"
-    let s:col14   = "#ECB2B2"
-    let s:col15         = "#CF5F5F"
-    let s:col16       = "#FFE0C0"
-" 上書き"
-    let s:col1       = "#232323"
-    let s:col2       = "#484848"
-    let s:col3       = "#464646"
-    let s:col4       = "#B9B9B9"
-    let s:col5       = "#D8D8D8"
-    let s:col6        = "#94846a"
-    let s:col7      = "#ffea00"
-    let s:col8      = "#c38743"
-    let s:col9        = "#769164"
-    let s:col10       = "#475950"
-    let s:col11       = "#9079ad"
-    let s:col12  = "#abced8"
-    let s:col13   = "#507ea4"
-    let s:col14   = "#d4acad"
-    let s:col15         = "#ec6d71"
-    let s:col16       = "#ebe1a9"
-" 上書き"
     let s:col1       = "#1c1b19" "黒
     let s:col2       = "#323232"
-    " let s:col3       = "#464646"
-    " let s:col4       = "#B9B9B9"
+    let s:col3       = "#464646"
+    let s:col4       = "#B9B9B9"
     let s:col5       = "#ede4dd" "白
     let s:col6        = "#769164"
     let s:col7      = "#e04053" "ピンク
@@ -63,7 +29,6 @@ if (has("gui_running"))
     let s:col15         = "#d75f00" "オレンジ
     let s:col16       = "#ffc24b" "黄色
     let s:col17       = "#ffea00" "黄色鮮やか
-
 else
     let s:vmode       = "cterm"
     let s:col1       = "0"
@@ -85,7 +50,7 @@ else
     let s:col17       = "13"
 endif
 " }}}
-" Highlighting primitives"{{{
+" + highlight設定用変数の定義 {{{
 exe "let s:bg_col1       = ' ".s:vmode."bg=".s:col1      ."'"
 exe "let s:bg_col2       = ' ".s:vmode."bg=".s:col2      ."'"
 exe "let s:bg_col3       = ' ".s:vmode."bg=".s:col3      ."'"
@@ -143,7 +108,7 @@ exe "let s:sp_col17       = ' ".s:vmode."sp=".s:col17      ."'"
 exe "let s:underline      = ' ".s:vmode."=underline'"
 exe "let s:bold      = ' ".s:vmode."=bold'"
 "}}}
-
+" + 基本のhighlight {{{
 exe "hi! Normal"                 .s:fg_col5       .s:bg_col1
 exe "hi! Comment"                .s:fg_col9
 
@@ -210,9 +175,8 @@ exe "hi! Question"               .s:fg_col9
 exe "hi! WarningMsg"             .s:fg_col14
 exe "hi! ErrorMsg"               .s:fg_col1       .s:bg_col14
 
-"全角スペースをハイライト表示
-hi link ZenkakuSpace Error
-
+" }}}
+" + その他highlight {{{
 "【_String】"
 exe "hi! _String" .s:fg_col16
 "【_Comment】"
@@ -224,19 +188,21 @@ exe "hi! _Unknown" .s:bg_col7
 "【_Value】
 exe "hi! _Value" .s:fg_col11
 
-" Diff {{{
+"全角スペースをハイライト表示
+hi link ZenkakuSpace Error
+"}}}
+" + filetype毎のhighlight {{{
+" ++ Diff {{{
 exe "hi! DiffAdd"                .s:fg_col10       .s:bg_col1      "gui=underline, cterm=underline"
 exe "hi! DiffDelete"             .s:fg_col14   .s:bg_col1
 exe "hi! DiffChange"             .s:fg_col8      .s:bg_col1      "gui=underline, cterm=underline"
 exe "hi! DiffText"               .s:fg_col8      .s:bg_col1      "gui=underline, cterm=underline"
 " }}}
-
-" Syntastic {{{
+" ++ Syntastic {{{
 exe "hi! SyntasticErrorSign"      .s:fg_col14  .s:bg_col1
 exe "hi! SyntasticStyleErrorSign" .s:fg_col14  .s:bg_col1
 " }}}
-
-" ruby {{{
+" ++ ruby {{{
 
 " --------- col5 --------------"
 " #{ here } <-- here"
@@ -419,8 +385,7 @@ hi! link rubyIdentifier _Unknown
 hi! link rubyPredefinedIdentifier _Unknown
 hi! link rubyError _Unknown
 " }}}
-
-" css {{{
+" ++ css {{{
 "------------- col5 -------------"
 " selector{ } <-- { }"
 exe "hi! cssBraces" .s:fg_col5
@@ -655,9 +620,7 @@ hi! link cssTransformAttr _Unknown
 hi! link cssRenderAttr  _Unknown
 hi! link cssPseudoClassLang _Unknown
 "}}}
-
-
-" javascript {{{
+" ++ javascript {{{
 " -------------- col5 -------------------- "
 " { } "dd
 exe "hi! javaScriptBraces" .s:fg_col5
@@ -732,8 +695,7 @@ hi! link javaScrParenError _Unknown
 hi! link javaScriptDebug _Unknown
 hi! link javaScriptConstant _Unknown
 " }}}
-
-" html {{{
+" ++ html {{{
 " -------------- col5 --------------
 " class="" name="" id="" <-- class name id
 exe "hi! htmlArg" .s:fg_col5
@@ -815,17 +777,14 @@ hi! link htmlTitle Normal
 hi! link cssStyle Normal
 
 "}}}
-"
-"
-" yaml {{{
+" ++ yaml {{{
 "yamlKey        xxx cleared
 "yamlAnchor     xxx cleared
 "yamlAlias      xxx cleared
 "yamlDocumentHeader xxx cleared
 
 "}}}
-
-" julia {{{
+" ++ julia {{{
 hi! link juliaAssignOperator Statement
 hi! link juliaTypeOperator Statement
 hi! link juliaRangeOperator Statement
@@ -837,30 +796,25 @@ exe "hi! juliaStringVarsPla"     .s:fg_col9
 exe "hi! juliaStringVarDelim"    .s:fg_col9
 exe "hi! juliaStringVarsPar"     .s:fg_col9
 " }}}
-
-" NERDTree {{{
+" ++ NERDTree {{{
 exe "hi! NERDTreeCWD"            .s:fg_col14
 exe "hi! NERDTreeDirSlash"       .s:fg_col7
 exe "hi! NERDTreeHelp"           .s:fg_col6
 exe "hi! NERDTreeHelpTitle"      .s:fg_col7
 exe "hi! NERDTreeHelpKey"        .s:fg_col11
 " }}}
-
-" tex {{{
+" ++ tex {{{
 hi! link TexMathDelim Macro
 exe "hi! TexMathOper"            .s:fg_col12
 exe "hi! TexCite"                .s:fg_col9
 " }}}
-
-" sh {{{
+" ++ sh {{{
 hi! link shQuote String
 " }}}
-
-" markdown {{{
+" ++ markdown {{{
 hi! link markdownUrl String
 " }}}
-
-" vimfiler {{{
+" ++ vimfiler {{{
 exe "hi! vimfilerLeaf"  .s:fg_col13
 exe "hi! vimfilerNonMark"  .s:fg_col4
 " exe "hi! vimfilerMark"  .s:fg_col11
@@ -873,3 +827,10 @@ exe "hi! vimfilerOpenedFile"  .s:fg_col15
 exe "hi! vimfilerClosedFile"  .s:fg_col6
 exe "hi! vimfilerROFile"  .s:fg_col9
 " }}}
+" ++ lightline {{{
+exe "hi! LightlineLeft_normal_1" .s:fg_col15 .s:bg_col2
+exe "hi! LightlineRight_normal_2" .s:fg_col3 .s:bg_col15
+hi! link LightlineRight_active_2 LightlineRight_normal_2
+hi! link LightlineRight_inactive_2 LightlineRight_normal_2
+" ++ }}}
+" +}}}

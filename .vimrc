@@ -354,7 +354,8 @@ NeoBundle "kana/vim-smartinput"
 NeoBundle "cohama/vim-smartinput-endwise"
 "閉じタグの補完
 NeoBundle "alvan/vim-closetag"
-
+"色表示
+NeoBundle "gko/vim-coloresque"
 call neobundle#end()
 
 " Required:
@@ -636,8 +637,6 @@ if neobundle#tap('neocomplete.vim') "{{{
   "候補の選択
   inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
   inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
-  " 補完候補が表示されている場合は確定。そうでない場合は改行
-  inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "\<CR>"
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
@@ -824,11 +823,11 @@ if(neobundle#tap('lightline.vim')) "{{{
   let g:lightline = {
   \  'active': {
   \    'left': [['mode', 'paste'], ['filename']],
-  \    'right': [['row'], ['fileencoding']]
+  \    'right': [['row'], ['fileencoding'], ['projecttag']]
   \  },
   \  'inactive': {
   \    'left': [['filename']],
-  \    'right': [['row'], ['fileencoding']]
+  \    'right': [['row'], ['fileencoding'], ['projecttag']]
   \  },
   \  'component_function': {
   \    'mode': 'LightlineMode',
@@ -837,7 +836,8 @@ if(neobundle#tap('lightline.vim')) "{{{
   \    'filename' : 'LightlineFilename',
   \    'modified' : 'LightlineModified',
   \    'row' : 'LightlineRow',
-  \    'fileencoding': 'LightlineFileencoding'
+  \    'fileencoding': 'LightlineFileencoding',
+  \    'projecttag': 'LightlineProjecttag'
   \  }
   \}
   function! LightlineMode()
@@ -865,7 +865,9 @@ if(neobundle#tap('lightline.vim')) "{{{
   function! LightlineFileencoding()
     return &ft == 'vimfiler' ? '' : &encoding
   endfunction
-
+  function! LightlineProjecttag()
+    return exists('w:project_tag') ? 'T' : ''
+  endfunction
   call neobundle#untap()
 endif "}}}
 if(neobundle#tap('vimproc.vim')) "{{{
@@ -1065,7 +1067,11 @@ endif "}}}
 
       if !exists('w:current_project') || w:current_project != l:open_project
         let w:current_project = l:open_project
-        call s:changeProject()
+        call s:ChangeProject()
+      endif
+    else
+      if exists('w:project_tag')
+        unlet w:project_tag
       endif
     endif
   endfunction
@@ -1101,7 +1107,9 @@ endif "}}}
     if !exists('w:current_project')
       return
     endif
-    unlet w:project_tag
+    if exists('w:project_tag')
+      unlet w:project_tag
+    endif
 
     if filereadable(w:current_project . '/tags')
       let w:project_tag = w:current_project . '/tags'
@@ -1112,14 +1120,14 @@ endif "}}}
       call add(l:set_tags, w:project_tag)
     endif
 
-    if len(g:gem_tags) > 0
+    if exists('g:gem_tags') && len(g:gem_tags) > 0
       for gem_tag in g:gem_tags
         call add(l:set_tags, gem_tag)
       endfor
     endif
 
     if len(l:set_tags) > 0
-      setlocal tags=join(l:set_tags, ',')
+      let &l:tags=join(l:set_tags, ',')
     endif
   endfunction
 
