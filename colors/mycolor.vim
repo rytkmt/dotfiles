@@ -827,10 +827,4 @@ exe "hi! vimfilerOpenedFile"  .s:fg_col15
 exe "hi! vimfilerClosedFile"  .s:fg_col6
 exe "hi! vimfilerROFile"  .s:fg_col9
 " }}}
-" ++ lightline {{{
-exe "hi! LightlineLeft_normal_1" .s:fg_col15 .s:bg_col2
-exe "hi! LightlineRight_normal_2" .s:fg_col3 .s:bg_col15
-hi! link LightlineRight_active_2 LightlineRight_normal_2
-hi! link LightlineRight_inactive_2 LightlineRight_normal_2
-" ++ }}}
 " +}}}

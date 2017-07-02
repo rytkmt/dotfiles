@@ -840,6 +840,8 @@ if(neobundle#tap('lightline.vim')) "{{{
   \    'projecttag': 'LightlineProjecttag'
   \  }
   \}
+  let s:default_palette = g:lightline#colorscheme#default#palette
+  let s:p = s:default_palette
   function! LightlineMode()
     return &ft == 'vimfiler' ? '' : lightline#mode()
   endfunction
@@ -868,6 +870,8 @@ if(neobundle#tap('lightline.vim')) "{{{
   function! LightlineProjecttag()
     return exists('w:project_tag') ? 'T' : ''
   endfunction
+  let s:p.normal.right[2] = ['#323232', '#d75f00', 1, 1]
+	let g:lightline#colorscheme#yourcolorscheme#palette = s:p
   call neobundle#untap()
 endif "}}}
 if(neobundle#tap('vimproc.vim')) "{{{
