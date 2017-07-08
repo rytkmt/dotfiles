@@ -1,7 +1,7 @@
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 02-Jul-2017.
+" Last Change: 08-Jul-2017.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 " + kaoriya default settings {{{
@@ -176,7 +176,7 @@ set whichwrap=b,s,h,l,<,>,[,]
 " 行を強調表示
 set cursorline
 " 列を強調表示
-set cursorcolumn
+" set cursorcolumn
 " power_line に必須
 set t_Co=256
 " 挿入モードのIMEのデフォルト値
@@ -356,6 +356,13 @@ NeoBundle "cohama/vim-smartinput-endwise"
 NeoBundle "alvan/vim-closetag"
 "色表示
 NeoBundle "gko/vim-coloresque"
+
+"辞書
+NeoBundle 'thinca/vim-ref'
+
+"commandのエイリアス
+NeoBundle 'tyru/vim-altercmd'
+
 call neobundle#end()
 
 " Required:
@@ -1050,6 +1057,38 @@ if(neobundle#tap('switch.vim')) "{{{
     \   switch#NormalizedCase(['==', '!='])
     \ ]
   call neobundle#untap()
+endif "}}}
+if(neobundle#tap('vim-ref')) "{{{
+  " vim-ref のバッファを q で閉じられるようにする
+  autocmd FileType ref-* nnoremap <buffer> <silent> q :<C-u>close<CR>
+
+  " 辞書定義
+  let g:ref_source_webdict_sites = {
+  \   'je': {
+  \     'url': 'http://dictionary.infoseek.ne.jp/jeword/%s',
+  \   },
+  \   'ej': {
+  \     'url': 'http://dictionary.infoseek.ne.jp/ejword/%s',
+  \   },
+  \ }
+
+  " デフォルトサイト
+  let g:ref_source_webdict_sites.default = 'ej'
+
+  " 出力に対するフィルタ
+  " 最初の数行を削除
+  function! g:ref_source_webdict_sites.je.filter(output)
+    return join(split(a:output, "\n")[15 :], "\n")
+  endfunction
+
+  function! g:ref_source_webdict_sites.ej.filter(output)
+    return join(split(a:output, "\n")[15 :], "\n")
+  endfunction
+endif "}}}
+if(neobundle#tap('vim-altercmd')) "{{{
+  call altercmd#load()
+  CAlterCommand ej Ref webdict ej
+  CAlterCommand je Ref webdict je
 endif "}}}
 " + ctags系 {{{
   function s:CheckProject()

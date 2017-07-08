@@ -1,6 +1,6 @@
 " mycolor color scheme
 
-let g:colors_name = "rytkmt"
+let g:colors_name = expand('<sfile>:t:r')
 
 set background=dark
 hi clear
@@ -8,27 +8,26 @@ hi clear
 if exists("syntax_on")
   syntax reset
 endif
-
 " + 色の設定 {{{
 if (has("gui_running"))
     let s:vmode       = "gui"
-    let s:col1       = "#1c1b19" "黒
-    let s:col2       = "#323232"
-    let s:col3       = "#464646"
-    let s:col4       = "#B9B9B9"
-    let s:col5       = "#ede4dd" "白
-    let s:col6        = "#769164"
-    let s:col7      = "#e04053" "ピンク
-    let s:col8      = "#cd9152" "ベージュ
+    let s:col1       = "#222529" "黒
+    let s:col2       = "#323842"
+    let s:col3       = "#515960"
+    let s:col4       = "#d7dbe2"
+    let s:col5       = "#fdf4ed" "白
+    let s:col6        = "#88c0d0" "緑みの水色
+    let s:col7      = "#645f87" "濃い紫
+    let s:col8      = "#bf6971" "オレンジ赤
     let s:col9        = "#817870" "グレー
-    let s:col10       = "#9377B2" "紫
-    let s:col11       = "#98bc37" "緑
-    let s:col12  = "#abcee8" "水色
-    let s:col13   = "#6583b3" "青
-    let s:col14   = "#f4acad" "薄ピンク
-    let s:col15         = "#d75f00" "オレンジ
-    let s:col16       = "#ffc24b" "黄色
-    let s:col17       = "#ffea00" "黄色鮮やか
+    let s:col10       = "#81a1c5" "水色
+    let s:col11       = "#709d6c" "緑
+    let s:col12  = "#d5b875" "黃
+    let s:col13   = "#c18675" "オレンジ
+    let s:col14   = "#b48ead" "薄ピンク
+    let s:col15         = "#7e8bb8" "紫みの青
+    let s:col16       = "#a3be8c" "黄緑
+    let s:col17       = "#b15e7c" "赤ピンク
 else
     let s:vmode       = "cterm"
     let s:col1       = "0"
@@ -50,6 +49,7 @@ else
     let s:col17       = "13"
 endif
 " }}}
+"
 " + highlight設定用変数の定義 {{{
 exe "let s:bg_col1       = ' ".s:vmode."bg=".s:col1      ."'"
 exe "let s:bg_col2       = ' ".s:vmode."bg=".s:col2      ."'"
@@ -142,21 +142,20 @@ exe "hi! Todo"                   .s:fg_col7      .s:bg_col1
 
 exe "hi! Cursor"                                   .s:bg_col4
 exe "hi! CursorLine"                               .s:bg_col3  " cterm=NONE"
-hi! link CursorColumn CursorLine
-exe "hi! ColorColumn"                              .s:bg_col3
-exe "hi! LineNr"                 .s:fg_col4
-exe "hi! CursorLineNr"           .s:fg_col16      .s:bg_col2
-exe "hi! NonText"                .s:fg_col12
+exe "hi! CursorColumn"                                 "gui=NONE cterm=NONE"
+exe "hi! LineNr"                 .s:fg_col3
+exe "hi! CursorLineNr"           .s:fg_col5      .s:bg_col2
+exe "hi! NonText"                .s:fg_col3
 
 exe "hi! Folded"                 .s:fg_col4       .s:bg_col1
 
-exe "hi! PMenu"                  .s:fg_col6       .s:bg_col2
+exe "hi! PMenu"                  .s:fg_col11       .s:bg_col2
 exe "hi! PMenuSel"               .s:fg_col10       .s:bg_col3
 exe "hi! PMenuSBar"                                .s:bg_col3
-exe "hi! PMenuThumb"                               .s:bg_col5
+exe "hi! PMenuThumb"                               .s:bg_col4
 
-exe "hi! Visual"                                   .s:bg_col13
-exe "hi! Search"                 .s:fg_col5       .s:bg_col13
+exe "hi! Visual"                 .s:fg_col2       .s:bg_col15 .s:bold
+exe "hi! Search"                 .s:fg_col1       .s:bg_col6
 hi! link IncSearch Search
 
 exe "hi! VertSplit"              .s:fg_col1       .s:bg_col4
@@ -213,6 +212,8 @@ exe "hi! rubyBlockParameter" .s:fg_col5
 exe "hi! rubyFunction" .s:fg_col5
 " def method(some) <-- (some) \s "
 exe "hi! rubyMethodBlock" .s:fg_col5
+" defined?(some) <-- defined?
+hi! link rubyOperator .s:fg_col5
 " class Class <-- \s = "
 exe "hi! rubyBlock" .s:fg_col5
 " some =   some >  "
@@ -351,6 +352,10 @@ hi! link rubyInteger _Value
 hi! link rubyFloat _Value
 " true false "
 hi! link rubyBoolean _Value
+" Module::Method <- ::
+hi! link rubyModuleDeclaration _Value
+" Class::Method <- ::
+hi! link rubyClassDeclaration _Value
 " ---------- ??? --------------"
 "【_Unknown】"
 hi! link rubyQuoteEscape _Unknown
@@ -371,9 +376,6 @@ hi! link rubyHeredocStart _Unknown
 hi! link rubyHeredoc _Unknown
 hi! link rubyAliasDeclaration2 _Unknown
 hi! link rubyAliasDeclaration _Unknown
-hi! link rubyOperator _Unknown
-hi! link rubyClassDeclaration _Unknown
-hi! link rubyModuleDeclaration _Unknown
 hi! link rubyBeginEnd _Unknown
 hi! link rubySharpBang _Unknown
 hi! link rubySpaceError _Unknown
@@ -823,8 +825,8 @@ exe "hi! vimfilerNonMark"  .s:fg_col4
 " exe "hi! vimfilerDirectory"  .s:fg_col11
 exe "hi! vimfilerNormalFile"  .s:fg_col5
 exe "hi! vimfilerMarkedFile"  .s:fg_col16
-exe "hi! vimfilerOpenedFile"  .s:fg_col15
-exe "hi! vimfilerClosedFile"  .s:fg_col6
+exe "hi! vimfilerOpenedFile"  .s:fg_col11
+exe "hi! vimfilerClosedFile"  .s:fg_col15
 exe "hi! vimfilerROFile"  .s:fg_col9
 " }}}
 " +}}}
