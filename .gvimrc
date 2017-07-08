@@ -305,7 +305,7 @@ endif
 "set noimdisable
 "set imdisableactivate
 
-colorscheme mycolor
+colorscheme rytkmt
 
 set listchars=tab:»\ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 

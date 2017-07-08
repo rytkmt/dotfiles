@@ -102,6 +102,8 @@ set ignorecase
 set smartcase
 "インクリメンタルサーチを行う
 set incsearch
+"検索結果をハイライト
+set hlsearch
 " ++ }}}
 " ++ 編集に関する設定: {{{
 "
@@ -123,7 +125,6 @@ set wildmenu
 set formatoptions+=mM
 " ++ }}}
 " ++ GUI固有ではない画面表示の設定: {{{
-"
 " 行番号を非表示 (number:表示)
 set number
 " ルーラーを表示 (noruler:非表示)
@@ -355,7 +356,7 @@ NeoBundle "cohama/vim-smartinput-endwise"
 "閉じタグの補完
 NeoBundle "alvan/vim-closetag"
 "色表示
-NeoBundle "gko/vim-coloresque"
+" NeoBundle "gko/vim-coloresque"
 
 "辞書
 NeoBundle 'thinca/vim-ref'
@@ -688,12 +689,14 @@ if(neobundle#tap('unite.vim')) "{{{
   call neobundle#untap()
 endif "}}}
 if(neobundle#tap('vimfiler')) "{{{
-  let g:vimfiler_tab_idx = 1
+  let g:vimfiler_tab_cnt = 1
   let g:vimfiler_is_new = 0
   function! _VimFilerOpen(init, type)
     if !exists("t:tab_name")
-      let t:tab_name = g:vimfiler_tab_idx
-      let g:vimfiler_tab_idx = g:vimfiler_tab_idx + 1
+      " タブ番号保持
+      let t:tab_name = g:vimfiler_tab_cnt
+      let g:vimfiler_tab_cnt = g:vimfiler_tab_cnt + 1
+
       let g:vimfiler_is_new = 1
     endif
 
@@ -705,11 +708,17 @@ if(neobundle#tap('vimfiler')) "{{{
       else
         let l:vimfiler_default_dir = '/Users/Ryo/programs/vim/rytkmt_vim_settings'
       endif
+      exe ":VimFilerExplorer -fnamewidth=200 -buffer-name=" . t:tab_name . " " . l:vimfiler_default_dir
     elseif(a:type == 2)
+      " カレントディレクトリ
       let l:vimfiler_default_dir = expand("%:p:h")
+      exe ":VimFilerExplorer -fnamewidth=200 -buffer-name=" . t:tab_name . " " . l:vimfiler_default_dir
+    elseif(a:type == 3)
+      " カレントディレクトリ
+      let l:vimfiler_default_dir = expand("%:p:h")
+      exe ":VimFiler -buffer-name=" . t:tab_name . " " . l:vimfiler_default_dir
     endif
 
-    exe ":VimFilerExplorer -fnamewidth=200 -buffer-name=" . t:tab_name . " " . l:vimfiler_default_dir
   endfunction
   " VimFilerを起動
   autocmd vimenter * call _VimFilerOpen(1,1)
@@ -723,6 +732,7 @@ if(neobundle#tap('vimfiler')) "{{{
   nmap [filer]f :<C-u>call _VimFilerOpen(0,1)<CR>
   nmap [filer]d :<C-u>call _VimFilerOpen(1,1)<CR>
   nmap [filer]b :<C-u>call _VimFilerOpen(1,2)<CR>
+  nmap [filer]u :<C-u>call _VimFilerOpen(1,3)<CR>
 
   augroup vimfiler
     autocmd!
@@ -877,6 +887,8 @@ if(neobundle#tap('lightline.vim')) "{{{
   function! LightlineProjecttag()
     return exists('w:project_tag') ? 'T' : ''
   endfunction
+  let s:p.normal.left[1] = ['#b15e7c', '#222529', 1, 1]
+  let s:p.inactive.left[0] = ['#b15e7c', '#222529', 1, 1]
   let s:p.normal.right[2] = ['#323232', '#d75f00', 1, 1]
 	let g:lightline#colorscheme#yourcolorscheme#palette = s:p
   call neobundle#untap()

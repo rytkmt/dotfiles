@@ -213,7 +213,7 @@ exe "hi! rubyFunction" .s:fg_col5
 " def method(some) <-- (some) \s "
 exe "hi! rubyMethodBlock" .s:fg_col5
 " defined?(some) <-- defined?
-hi! link rubyOperator .s:fg_col5
+exe "hi! rubyOperator" .s:fg_col5
 " class Class <-- \s = "
 exe "hi! rubyBlock" .s:fg_col5
 " some =   some >  "
