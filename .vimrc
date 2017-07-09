@@ -1,7 +1,7 @@
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 08-Jul-2017.
+" Last Change: 09-Jul-2017.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 " + kaoriya default settings {{{
@@ -450,6 +450,7 @@ vmap <nowait> <C-Space> <ESC>
 "ヤンクした値がdやxで消えないように（復活させる）
 nnoremap PP "0p
 vnoremap PP "0p
+nnoremap ZZ <Nop>
 
 vnoremap d "_d
 nnoremap dd "_dd
@@ -470,8 +471,9 @@ vnoremap t x
 nnoremap y%f :<C-u>redi! @"> \| echo expand("%:t") \| redi END<CR>
 nnoremap y%p :<C-u>redi! @"> \| echo expand("%:p") \| redi END<CR>
 nnoremap y%d :<C-u>redi! @"> \| echo expand("%:p:h") \| redi END<CR>
-"検索のハイライトを消す
 noremap <ESC><ESC> :<C-u>noh<CR>
+cmap <C-j> <LEFT>
+cmap <C-k> <RIGHT>
 
 " 逆に普通の行単位で移動したい時のために逆の map も設定しておく
 nnoremap gj j
@@ -508,6 +510,8 @@ augroup matchit
   au FileType ruby let b:match_words = '\<\(module\|class\|def\|begin\|do\|if\|unless\|case\)\>:\<\(elsif\|when\|rescue\)\>:\<\(else\|ensure\)\>:\<end\>'
 augroup END
 nmap m %
+nnoremap M m
+nnoremap ;v `[v]`
 
 "メタ文字扱いのオプションをvery magicを初期値に
 nnoremap / /\v
@@ -524,7 +528,7 @@ vmap <Leader>v "*p
 nmap <Leader>z [test]
 nmap <Leader>t [tab]
 nmap <Leader>w [window]
-
+nmap <Leader>q [ref]
 nmap [unite] <Nop>
 
 nmap <Leader>u [unite]
@@ -658,6 +662,8 @@ if(neobundle#tap('unite.vim')) "{{{
   "最近開いたファイル履歴の保存数
   let g:unite_source_file_mru_limit = 50
 
+  " 入力モードで開始する
+  let g:unite_enable_start_insert=1
   "nnoremap <silent> [unite]f :<C-u>Unite<Space>file<CR>
   " nnoremap <silent> [unite]g :<C-u>Unite<Space>grep<CR>
   nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
@@ -667,6 +673,7 @@ if(neobundle#tap('unite.vim')) "{{{
   nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
   " nnoremap <silent> [unite]y :<C-u>Unite<Space>history/yank<CR>
   "nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
+  nnoremap <silent> [unite]r :<C-u>Unite<Space>file_rec<CR>
   "nnoremap <silent> [unite]c :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
   " nnoremap <silent> [unite]r :UniteResume search-buffer<CR>
   " nnoremap <silent> [unite]f :<C-u>Unite<Space>file/new<CR>
@@ -676,16 +683,23 @@ if(neobundle#tap('unite.vim')) "{{{
   function! s:unite_settings()
     "ESCでuniteを終了
     nmap <buffer> <ESC> <Plug>(unite_exit)
-    "ctrl+jで縦に分割して開く
-    nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
-    inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
-    "ctrl+jで横に分割して開く
-    nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
-    inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+    "ctrl+sで縦に分割して開く
+    nnoremap <silent> <buffer> <expr> <C-s> unite#do_action('split')
+    inoremap <silent> <buffer> <expr> <C-s> unite#do_action('split')
+    "ctrl+v横に分割して開く
+    nnoremap <silent> <buffer> <expr> <C-v> unite#do_action('vsplit')
+    inoremap <silent> <buffer> <expr> <C-v> unite#do_action('vsplit')
     "ctrl+oでその場所に開く
     nnoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
     inoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
+
+    " 単語単位からパス単位で削除するように変更
+    imap <buffer> <C-w> <Plug>(unite_delete_backward_path)
+    " ESCキーを2回押すと終了する
+    nmap <silent><buffer> <ESC><ESC> q
+    imap <silent><buffer> <ESC><ESC> <ESC>q
   endfunction
+
   call neobundle#untap()
 endif "}}}
 if(neobundle#tap('vimfiler')) "{{{
@@ -834,6 +848,7 @@ if(neobundle#tap('vimfiler')) "{{{
   endfunction
   "ゴミ箱の使用
   let g:unite_kind_file_use_trashbox = 1
+  let g:vimfiler_enable_auto_cd = 1
   call neobundle#untap()
 endif "}}}
 if(neobundle#tap('lightline.vim')) "{{{
@@ -1096,11 +1111,14 @@ if(neobundle#tap('vim-ref')) "{{{
   function! g:ref_source_webdict_sites.ej.filter(output)
     return join(split(a:output, "\n")[15 :], "\n")
   endfunction
+
+  nmap <expr> [ref]j ':Ref webdict je<Space>'
+  nmap <expr> [ref]e ':Ref webdict ej '.expand("<cword>")
 endif "}}}
 if(neobundle#tap('vim-altercmd')) "{{{
-  call altercmd#load()
-  CAlterCommand ej Ref webdict ej
-  CAlterCommand je Ref webdict je
+  " call altercmd#load()
+  " CAlterCommand ej Ref webdict ej
+  " CAlterCommand je Ref webdict je
 endif "}}}
 " + ctags系 {{{
   function s:CheckProject()

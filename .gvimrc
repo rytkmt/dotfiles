@@ -203,7 +203,11 @@ elseif has('mac') || has('unix')
   " Linux
 endif
 try
-  set guifont=Ricty_Diminished:h11
+  if has('win32')
+    set guifont=Ricty_Diminished:h11
+  else
+    set guifont=Ricty_Diminished:h13
+  endif
 endtry
 "---------------------------------------------------------------------------
 " ウインドウに関する設定:
