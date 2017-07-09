@@ -201,10 +201,10 @@ if has('win32')
   set guifont=MS_Gothic:h11
 elseif has('mac') || has('unix')
   " Linux
-  set guifont=DejaVu\ Sans\ Mono\ 13
 endif
-
-" set guifont=Ricty\ Diminished\ Discord\ Regular:h10
+try
+  set guifont=Ricty_Diminished:h11
+endtry
 "---------------------------------------------------------------------------
 " ウインドウに関する設定:
 "
