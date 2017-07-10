@@ -1,7 +1,7 @@
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 09-Jul-2017.
+" Last Change: 10-Jul-2017.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 " + kaoriya default settings {{{
@@ -494,7 +494,6 @@ noremap zl zL
 noremap zh zH
 noremap zj 4<C-e>
 noremap zk 4<C-y>
-noremap m %
 
 nnoremap <silent> い i
 nnoremap <silent> あ a
@@ -510,8 +509,11 @@ augroup matchit
   au FileType ruby let b:match_words = '\<\(module\|class\|def\|begin\|do\|if\|unless\|case\)\>:\<\(elsif\|when\|rescue\)\>:\<\(else\|ensure\)\>:\<end\>'
 augroup END
 nmap m %
+" マーク
 nnoremap M m
-nnoremap ;v `[v]`
+nnoremap MM :<C-u>marks<CR>
+" 前回変更点をVモードで選択
+nnoremap gv `[v]`
 
 "メタ文字扱いのオプションをvery magicを初期値に
 nnoremap / /\v
