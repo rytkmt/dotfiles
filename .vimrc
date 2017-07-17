@@ -1,7 +1,7 @@
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 10-Jul-2017.
+" Last Change: 13-Jul-2017.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 " + kaoriya default settings {{{
@@ -509,11 +509,13 @@ augroup matchit
   au FileType ruby let b:match_words = '\<\(module\|class\|def\|begin\|do\|if\|unless\|case\)\>:\<\(elsif\|when\|rescue\)\>:\<\(else\|ensure\)\>:\<end\>'
 augroup END
 nmap m %
+vmap m %
 " マーク
 nnoremap M m
 nnoremap MM :<C-u>marks<CR>
 " 前回変更点をVモードで選択
 nnoremap gv `[v]`
+nnoremap <C-h> :h<Space>
 
 "メタ文字扱いのオプションをvery magicを初期値に
 nnoremap / /\v
@@ -665,7 +667,8 @@ if(neobundle#tap('unite.vim')) "{{{
   let g:unite_source_file_mru_limit = 50
 
   " 入力モードで開始する
-  let g:unite_enable_start_insert=1
+  " let g:unite_enable_start_insert=1
+
   "nnoremap <silent> [unite]f :<C-u>Unite<Space>file<CR>
   " nnoremap <silent> [unite]g :<C-u>Unite<Space>grep<CR>
   nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
@@ -675,7 +678,7 @@ if(neobundle#tap('unite.vim')) "{{{
   nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
   " nnoremap <silent> [unite]y :<C-u>Unite<Space>history/yank<CR>
   "nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
-  nnoremap <silent> [unite]r :<C-u>Unite<Space>file_rec<CR>
+  nnoremap <silent> [unite]r :<C-u>Unite<Space>file_rec -start-insert<CR>
   "nnoremap <silent> [unite]c :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
   " nnoremap <silent> [unite]r :UniteResume search-buffer<CR>
   " nnoremap <silent> [unite]f :<C-u>Unite<Space>file/new<CR>
@@ -1123,7 +1126,7 @@ if(neobundle#tap('vim-altercmd')) "{{{
   " CAlterCommand je Ref webdict je
 endif "}}}
 " + ctags系 {{{
-  function s:CheckProject()
+  function! s:CheckProject()
     if(!neobundle#is_installed('vim-rooter') || !neobundle#is_installed('vimproc.vim'))
       return
     endif
@@ -1142,6 +1145,7 @@ endif "}}}
 
       if !exists('w:current_project') || w:current_project != l:open_project
         let w:current_project = l:open_project
+        exe ':cd ' . w:current_project
         call s:ChangeProject()
       endif
     else
@@ -1151,7 +1155,7 @@ endif "}}}
     endif
   endfunction
 
-  function s:SetGemPaths()
+  function! s:SetGemPaths()
     let l:gem_paths = []
     if has('win32')
       let l:gem_paths = split(system('gem environment gempath'), ';')
@@ -1169,7 +1173,7 @@ endif "}}}
     endfor
   endfunction
 
-  function s:SetGemTags()
+  function! s:SetGemTags()
     let g:gem_tags = []
     for gem_path in g:gem_paths
       if filereadable(gem_path . '/tags')
@@ -1178,7 +1182,7 @@ endif "}}}
     endfor
   endfunction
 
-  function s:ChangeProject()
+  function! s:ChangeProject()
     if !exists('w:current_project')
       return
     endif
@@ -1206,7 +1210,7 @@ endif "}}}
     endif
   endfunction
 
-  function s:GenerateProjectTag()
+  function! s:GenerateProjectTag()
     let l:project = FindRootDirectory()
     if filereadable(l:project .'/Rakefile')
       " tagファイルを削除
@@ -1235,7 +1239,7 @@ endif "}}}
     endif
   endfunction
 
-  function s:GeneratedProjectTag()
+  function! s:GeneratedProjectTag()
     echom 'tag generate!!!'
   endfunction
   autocmd BufEnter,WinEnter * call s:CheckProject()
