@@ -1,7 +1,7 @@
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 21-Jul-2017.
+" Last Change: 22-Jul-2017.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 " + kaoriya default settings {{{
@@ -212,7 +212,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/vimfiler'
 " ++ カラースキーマ {{{
 " mycolor
-NeoBundle 'rytkmt/rytkmt_vim_settings'
+NeoBundle 'rytkmt/dotfiles'
 " " solarized
 "   NeoBundle 'altercation/vim-colors-solarized'
 " " mustang
@@ -648,7 +648,7 @@ if neobundle#tap('neocomplete.vim') "{{{
       let g:neocomplete#delimiter_patterns= {}
     endif
     let g:neocomplete#delimiter_patterns.ruby = ['::']
-  let s:neco_dicts_dir = $VIM . '/bundle/rytkmt_vim_settings/dicts'
+  let s:neco_dicts_dir = $VIM . '/bundle/dotfiles/dicts'
   if isdirectory(s:neco_dicts_dir)
     let g:neocomplete#sources#dictionary#dictionaries = {
     \   'ruby': s:neco_dicts_dir . '/ruby.dict'
@@ -738,7 +738,7 @@ if(neobundle#tap('vimfiler')) "{{{
       if has('win32')
         let l:vimfiler_default_dir = 'C:/Users/r_tsukamoto.ILL/workspace'
       else
-        let l:vimfiler_default_dir = '/Users/Ryo/programs/vim/rytkmt_vim_settings'
+        let l:vimfiler_default_dir = '/Users/Ryo/programs/vim/dotfiles'
       endif
       exe ":VimFilerExplorer -fnamewidth=200 -buffer-name=" . t:tab_name . " " . l:vimfiler_default_dir
     elseif(a:type == 2)
