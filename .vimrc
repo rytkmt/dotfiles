@@ -95,6 +95,9 @@ endif
 " ++ }}}
 " + }}}
 " + vim standard settings {{{
+augroup MyAutoCmd
+  autocmd!
+augroup END
 " ++ 検索の挙動に関する設定:{{{
 " 検索時に大文字小文字を無視 (noignorecase:無視しない)
 set ignorecase
@@ -152,7 +155,7 @@ set shiftwidth=2
 " 改行時などに、自動でインデントを設定してくれる
 set smartindent
 "vim設定をグループ化して閉じる
-autocmd FileType vim setlocal foldmethod=marker
+autocmd MyAutoCmd FileType vim setlocal foldmethod=marker
 " ++ }}}
 " ++ ファイル操作に関する設定: {{{
 "
@@ -530,7 +533,7 @@ vmap <Leader>c "*y
 nmap <Leader>v "*p
 vmap <Leader>v "*p
 
-nmap <Leader>z [test]
+nmap <Leader>z [other]
 nmap <Leader>t [tab]
 nmap <Leader>w [window]
 nmap <Leader>q [ref]
@@ -562,22 +565,24 @@ vmap <Leader>g [ctag]
 "
 "=================================
 
-nnoremap [test]h :so $VIMRUNTIME/syntax/hitest.vim
-nnoremap [test]s :sp<CR>:VimShellBufferDir<CR>
-nnoremap [test]r ::VimShellInteractive irb<CR>
-nnoremap [test]v :<C-u>tabedit $MYVIMRC<CR>
+nnoremap [other]h :so $VIMRUNTIME/syntax/hitest.vim
+nnoremap [other]s :sp<CR>:VimShellBufferDir<CR>
+nnoremap [other]r ::VimShellInteractive irb<CR>
+nnoremap [other]v :<C-u>tabedit $MYVIMRC<CR>
+nnoremap [other]l :<C-u>so ~/.vimrc<CR>:<C-u>so ~/.gvimrc<CR>
 nnoremap [edit]s :e ++enc=shift_jis<CR>
 nnoremap [edit]u :e ++enc=utf-8<CR>
 nnoremap [edit]e :e ++enc=euc-jp<CR>
 
 if has('win32')
   let $MEMO = $HOME . '/workspace/sql.sql'
-  nnoremap [test]q :<C-u>tabedit $MEMO<CR>
+  nnoremap [other]q :<C-u>tabedit $MEMO<CR>
 endif
 if has('syntax')
-  autocmd BufWinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
-  autocmd WinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
+  autocmd MyAutoCmd BufWinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
+  autocmd MyAutoCmd WinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
 endif
+autocmd MyAutoCmd FileType help nnoremap q :q<CR>
 " ++ }}}
 " +}}}
 if neobundle#tap('vim-submode') "{{{
@@ -640,7 +645,7 @@ if neobundle#tap('neocomplete.vim') "{{{
   let g:neocomplete#auto_completion_start_length = 2
   " preview window を閉じない
   let g:neocomplete#enable_auto_close_preview = 0
-  autocmd InsertLeave * silent! pclose!
+  autocmd MyAutoCmd InsertLeave * silent! pclose!
 
   let g:neocomplete#max_keyword_width = 10000
 
@@ -659,11 +664,11 @@ if neobundle#tap('neocomplete.vim') "{{{
   "候補の選択
   inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
   inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  " autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  autocmd MyAutoCmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd MyAutoCmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd MyAutoCmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  " autocmd MyAutoCmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  " autocmd MyAutoCmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
   call neobundle#untap()
 endif "}}}
@@ -697,7 +702,7 @@ if(neobundle#tap('unite.vim')) "{{{
   " nnoremap <silent> [unite]f :<C-u>Unite<Space>file/new<CR>
   " nnoremap <silent> [unite]d :<C-u>Unite<Space>directory/new<CR>
   "uniteを開いている間のキーマッピング
-  autocmd FileType unite call s:unite_settings()
+  autocmd MyAutoCmd  FileType unite call s:unite_settings()
   function! s:unite_settings()
     "ESCでuniteを終了
     nmap <buffer> <ESC> <Plug>(unite_exit)
@@ -753,7 +758,7 @@ if(neobundle#tap('vimfiler')) "{{{
 
   endfunction
   " VimFilerを起動
-  autocmd vimenter * call _VimFilerOpen(1,1)
+  autocmd MyAutoCmd VimEnter * call _VimFilerOpen(1,1)
 
   let g:vimfiler_no_default_key_mappings = 1
   " let g:vimfiler_tree_leaf_icon = ' '
@@ -766,10 +771,7 @@ if(neobundle#tap('vimfiler')) "{{{
   nmap [filer]b :<C-u>call _VimFilerOpen(1,2)<CR>
   nmap [filer]u :<C-u>call _VimFilerOpen(1,3)<CR>
 
-  augroup vimfiler
-    autocmd!
-    autocmd FileType vimfiler call s:vimfiler_settings()
-  augroup END
+  autocmd MyAutoCmd FileType vimfiler call s:vimfiler_settings()
 
   function! s:vimfiler_settings()
     setlocal nonumber
@@ -964,7 +966,7 @@ if(neobundle#tap('vimproc.vim')) "{{{
       exe "call " . a:callback . a:arg_str
 
       augroup vimproc-async-receive-test
-          autocmd!
+        autocmd!
       augroup END
 
       call vimproc.stdout.close()
@@ -1027,7 +1029,7 @@ if(neobundle#tap('yankround.vim')) "{{{
   nnoremap <silent> [unite]y :<C-u>Unite<Space>yankround<CR>
   "yankのペーストにハイライトを使用するか
   let g:yankround_use_region_hl = 1
-  autocmd ColorScheme * highlight YankRoundRegion gui=underline guifg=White guibg=Black
+  autocmd MyAutoCmd ColorScheme * highlight YankRoundRegion gui=underline guifg=White guibg=Black
   call neobundle#untap()
 endif "}}}
 if(neobundle#tap('grep.vim')) "{{{
@@ -1086,7 +1088,7 @@ if(neobundle#tap('vim-expand-region')) "{{{
   call neobundle#untap()
 endif "}}}
 if(neobundle#tap('vim-trailing-whitespace')) "{{{
-  autocmd VimEnter,ColorScheme,BufWinEnter * :hi ExtraWhiteSpace guibg=#990000
+  autocmd MyAutoCmd VimEnter,ColorScheme,BufWinEnter * :hi ExtraWhiteSpace guibg=#990000
   call neobundle#untap()
 endif "}}}
 if(neobundle#tap('vim-rooter')) "{{{
@@ -1105,7 +1107,7 @@ if(neobundle#tap('switch.vim')) "{{{
 endif "}}}
 if(neobundle#tap('vim-ref')) "{{{
   " vim-ref のバッファを q で閉じられるようにする
-  autocmd FileType ref-* nnoremap <buffer> <silent> q :<C-u>close<CR>
+  autocmd MyAutoCmd FileType ref-* nnoremap <buffer> <silent> q :<C-u>close<CR>
 
   " 辞書定義
   let g:ref_source_webdict_sites = {
@@ -1255,7 +1257,7 @@ endif "}}}
   function! s:GeneratedProjectTag()
     echom 'tag generate!!!'
   endfunction
-  autocmd BufEnter,WinEnter * call s:CheckProject()
+  autocmd MyAutoCmd BufEnter,WinEnter * call s:CheckProject()
 
   " nnoremap [ctag]u :<C-u>call UpdateTags()<CR>
   nnoremap [ctag]j <C-]>
