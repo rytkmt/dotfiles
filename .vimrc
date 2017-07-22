@@ -1,7 +1,7 @@
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 13-Jul-2017.
+" Last Change: 21-Jul-2017.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 " + kaoriya default settings {{{
@@ -442,6 +442,7 @@ nnoremap [window]= <C-w>=
 
 "ヤンク文字で検索
 cmap <S-Space> <C-r>"
+cmap <C-Space> <C-r>*
 "挿入モード終了
 imap <C-Space> <ESC>
 vmap <nowait> <C-Space> <ESC>
@@ -533,6 +534,7 @@ nmap <Leader>z [test]
 nmap <Leader>t [tab]
 nmap <Leader>w [window]
 nmap <Leader>q [ref]
+nmap <Leader>e [edit]
 nmap [unite] <Nop>
 
 nmap <Leader>u [unite]
@@ -551,8 +553,8 @@ nmap <Leader>g [ctag]
 vmap <Leader>g [ctag]
 
 "=================================
-"     _     _  _     _
-"  q  W  e  R  T  y  U  i  o  p
+"     _  _  _  _     _
+"  q  W  E  R  T  y  U  i  o  p
 "      _     _  _
 "   a  S  d  F  G  h  j  k  l
 "    _     _  _
@@ -564,6 +566,10 @@ nnoremap [test]h :so $VIMRUNTIME/syntax/hitest.vim
 nnoremap [test]s :sp<CR>:VimShellBufferDir<CR>
 nnoremap [test]r ::VimShellInteractive irb<CR>
 nnoremap [test]v :<C-u>tabedit $MYVIMRC<CR>
+nnoremap [edit]s :e ++enc=shift_jis<CR>
+nnoremap [edit]u :e ++enc=utf-8<CR>
+nnoremap [edit]e :e ++enc=euc-jp<CR>
+
 if has('win32')
   let $MEMO = $HOME . '/workspace/sql.sql'
   nnoremap [test]q :<C-u>tabedit $MEMO<CR>
@@ -678,7 +684,14 @@ if(neobundle#tap('unite.vim')) "{{{
   nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
   " nnoremap <silent> [unite]y :<C-u>Unite<Space>history/yank<CR>
   "nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
-  nnoremap <silent> [unite]r :<C-u>Unite<Space>file_rec -start-insert<CR>
+  function! CallUniteFileRec()
+    if exists('w:current_project')
+      exe ':Unite file_rec -start-insert -path=' .w:current_project
+    else
+      echo 'not found project!'
+    endif
+  endfunction
+  nnoremap <silent> [unite]r :<C-u>call CallUniteFileRec()<CR>
   "nnoremap <silent> [unite]c :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
   " nnoremap <silent> [unite]r :UniteResume search-buffer<CR>
   " nnoremap <silent> [unite]f :<C-u>Unite<Space>file/new<CR>
