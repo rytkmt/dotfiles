@@ -9,7 +9,7 @@ if exists("syntax_on")
   syntax reset
 endif
 " + 色の設定 {{{
-if (has("gui_running"))
+if (has("gui_running")) || has('gui')
     let s:vmode       = "gui"
     let s:col1       = "#222529" "黒
     let s:col2       = "#323842"
