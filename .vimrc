@@ -1,7 +1,7 @@
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 22-Jul-2017.
+" Last Change: 26-Jul-2017.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 " + kaoriya default settings {{{
@@ -582,7 +582,7 @@ if has('syntax')
   autocmd MyAutoCmd BufWinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
   autocmd MyAutoCmd WinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
 endif
-autocmd MyAutoCmd FileType help nnoremap q :q<CR>
+" autocmd MyAutoCmd FileType help nnoremap q :q<CR>
 " ++ }}}
 " +}}}
 if neobundle#tap('vim-submode') "{{{
