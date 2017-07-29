@@ -469,5 +469,5 @@ autocmd MyAutoCmd FileType help nnoremap q :q<CR>
   nnoremap [ctag]s :exe("stj " . expand("<cword>"))<CR>
   vnoremap [ctag]j g<C-]>
 " }}}
-colorscheme lucius
+colorscheme rytkmt
 filetype plugin indent on
