@@ -9,7 +9,7 @@ if exists("syntax_on")
   syntax reset
 endif
 " + 色の設定 {{{
-if (has("gui_running"))
+if (has("gui_running")) || has('gui')
     let s:vmode       = "gui"
     let s:col1       = "#222529" "黒
     let s:col2       = "#323842"
@@ -30,23 +30,23 @@ if (has("gui_running"))
     let s:col17       = "#b15e7c" "赤ピンク
 else
     let s:vmode       = "cterm"
-    let s:col1       = "0"
-    let s:col2       = "8"
-    let s:col3       = "14"
-    let s:col4       = "15"
-    let s:col5       = "7"
-    let s:col6        = "11"
-    let s:col7      = "3"
-    let s:col8      = "5"
-    let s:col9        = "2"
-    let s:col10       = "10"
-    let s:col11       = "6"
-    let s:col12  = "4"
-    let s:col13   = "12"
-    let s:col14   = "1"
-    let s:col15         = "9"
-    let s:col16       = "13"
-    let s:col17       = "13"
+    let s:col1       = "235" "#262626
+    let s:col2       = "237" "#3a3a3a
+    let s:col3       = "240" "#585858
+    let s:col4       = "253" "#dadada
+    let s:col5       = "230" "#ffffd7
+    let s:col6        = "116" "#87d7d7
+    let s:col7      = "60" "#5f5f87
+    let s:col8      = "131" "#af5f5f
+    let s:col9        = "102" "#878787
+    let s:col10       = "110" "#87afd7
+    let s:col11       = "71" "#5faf5f
+    let s:col12  = "223" "#ffd7af
+    let s:col13   = "137" "#af875f
+    let s:col14   = "182" "#d7afd7
+    let s:col15         = "68" "#5f87d7
+    let s:col16       = "151" "#afd7af
+    let s:col17       = "211" "#ff87af
 endif
 " }}}
 "
