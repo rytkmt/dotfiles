@@ -1,0 +1,138 @@
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+hook_post_update = '''
+  if dein#util#_is_windows()
+    let cmd = 'tools\\update-dll-mingw'
+  elseif dein#util#_is_cygwin()
+    let cmd = 'make -f make_cygwin.mak'
+  elseif executable('gmake')
+    let cmd = 'gmake'
+  else
+    let cmd = 'make'
+  endif
+  let g:dein#plugin.build = cmd
+'''
+
+[[plugins]]
+repo = 'Shougo/vimfiler'
+hook_add = '''
+source $XDG_CONFIG_HOME/nvim/plugins/vimfiler.rc.vim
+'''
+
+[[plugins]]
+repo = 'rytkmt/dotfiles'
+
+[[plugins]]
+repo = 'jonathanfilip/vim-lucius'
+
+[[plugins]]
+repo = 'joshdick/onedark.vim'
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+
+[[plugins]]
+repo = 'kana/vim-submode'
+
+[[plugins]]
+repo = 'Shougo/vimshell'
+if = "!has('nvim')"
+hook_add = '''
+source ~/.config/nvim/plugins/vimshell.rc.vim
+'''
+
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+
+[[plugins]]
+repo = 'Shougo/neoyank.vim'
+
+[[plugins]]
+repo = 'ujihisa/unite-colorscheme'
+
+[[plugins]]
+repo = 'mattn/emmet-vim'
+
+[[plugins]]
+repo = 'cohama/lexima.vim'
+
+[[plugins]]
+repo = 'tpope/vim-rails'
+
+[[plugins]]
+repo = 'terryma/vim-expand-region'
+
+[[plugins]]
+repo = 'vim-scripts/ruby-matchit'
+
+[[plugins]]
+repo = 'stevemadere/ruby-matchit'
+
+[[plugins]]
+repo = 'vimtaku/hl_matchit.vim'
+
+[[plugins]]
+repo = "kana/vim-textobj-user"
+
+[[plugins]]
+repo = "h1mesuke/textobj-wiw"
+
+[[plugins]]
+repo = "kana/vim-textobj-function"
+[[plugins]]
+repo = "kana/vim-textobj-line"
+
+[[plugins]]
+repo = 'vim-scripts/grep.vim'
+
+[[plugins]]
+repo = 'tomtom/tcomment_vim'
+
+[[plugins]]
+repo = 'vim-scripts/AnsiEsc.vim'
+
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]]
+repo = 'LeafCage/yankround.vim'
+
+[[plugins]]
+repo = 'airblade/vim-rooter'
+
+[[plugins]]
+repo = 'AndrewRadev/switch.vim'
+
+[[plugins]]
+repo = 'tyru/capture.vim'
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'Shougo/neocomplete.vim'
+
+[[plugins]]
+repo = "kana/vim-smartinput"
+
+[[plugins]]
+repo = "cohama/vim-smartinput-endwise"
+
+[[plugins]]
+repo = "alvan/vim-closetag"
+
+[[plugins]]
+repo = 'thinca/vim-ref'
+
+[[plugins]]
+repo = 'tyru/vim-altercmd'
+
+[[plugins]]
+repo = 'gko/vim-coloresque'
