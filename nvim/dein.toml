@@ -18,6 +18,7 @@ source $XDG_CONFIG_HOME/nvim/plugins/vimproc.vim.rc.vim
 
 [[plugins]]
 repo = 'Shougo/vimfiler'
+if = "!has('nvim')"
 hook_add = '''
 source $XDG_CONFIG_HOME/nvim/plugins/vimfiler.rc.vim
 '''
@@ -26,16 +27,12 @@ source $XDG_CONFIG_HOME/nvim/plugins/vimfiler.rc.vim
 repo = 'rytkmt/dotfiles'
 
 [[plugins]]
-repo = 'jonathanfilip/vim-lucius'
-
-[[plugins]]
-repo = 'joshdick/onedark.vim'
-
-[[plugins]]
 repo = 'Shougo/unite.vim'
+if = "!has('nvim')"
 hook_add = '''
 source $XDG_CONFIG_HOME/nvim/plugins/unite.vim.rc.vim
 '''
+
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 hook_add = '''
@@ -64,9 +61,11 @@ source $XDG_CONFIG_HOME/nvim/plugins/vimshell.rc.vim
 
 [[plugins]]
 repo = 'Shougo/neomru.vim'
+if = "!has('nvim')"
 
 [[plugins]]
 repo = 'Shougo/neoyank.vim'
+if = "!has('nvim')"
 
 [[plugins]]
 repo = 'ujihisa/unite-colorscheme'
@@ -151,6 +150,7 @@ repo = 'tpope/vim-surround'
 
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
+if = "!has('nvim')"
 hook_add = '''
 source $XDG_CONFIG_HOME/nvim/plugins/neocomplete.vim.rc.vim
 '''
