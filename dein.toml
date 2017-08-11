@@ -1,0 +1,186 @@
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+hook_post_update = '''
+  if dein#util#_is_windows()
+    let cmd = 'tools\\update-dll-mingw'
+  elseif dein#util#_is_cygwin()
+    let cmd = 'make -f make_cygwin.mak'
+  elseif executable('gmake')
+    let cmd = 'gmake'
+  else
+    let cmd = 'make'
+  endif
+  let g:dein#plugin.build = cmd
+'''
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vimproc.vim.rc.vim
+'''
+
+[[plugins]]
+repo = 'Shougo/vimfiler'
+if = "!has('nvim')"
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vimfiler.rc.vim
+'''
+
+[[plugins]]
+repo = 'rytkmt/dotfiles'
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+if = "!has('nvim')"
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/unite.vim.rc.vim
+'''
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/lightline.vim.rc.vim
+'''
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/indentLine.rc.vim
+'''
+
+[[plugins]]
+repo = 'kana/vim-submode'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-submode.rc.vim
+'''
+
+[[plugins]]
+repo = 'Shougo/vimshell'
+if = "!has('nvim')"
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vimshell.rc.vim
+'''
+
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+if = "!has('nvim')"
+
+[[plugins]]
+repo = 'Shougo/neoyank.vim'
+if = "!has('nvim')"
+
+[[plugins]]
+repo = 'ujihisa/unite-colorscheme'
+
+[[plugins]]
+repo = 'mattn/emmet-vim'
+
+[[plugins]]
+repo = 'cohama/lexima.vim'
+
+[[plugins]]
+repo = 'tpope/vim-rails'
+
+[[plugins]]
+repo = 'terryma/vim-expand-region'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-expand-region.rc.vim
+'''
+
+[[plugins]]
+repo = 'stevemadere/ruby-matchit'
+
+[[plugins]]
+repo = 'vimtaku/hl_matchit.vim'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/hl_matchit.vim.rc.vim
+'''
+
+[[plugins]]
+repo = "kana/vim-textobj-user"
+
+[[plugins]]
+repo = "h1mesuke/textobj-wiw"
+
+[[plugins]]
+repo = "kana/vim-textobj-function"
+[[plugins]]
+repo = "kana/vim-textobj-line"
+
+[[plugins]]
+repo = 'vim-scripts/grep.vim'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/grep.vim.rc.vim
+'''
+
+[[plugins]]
+repo = 'tomtom/tcomment_vim'
+
+[[plugins]]
+repo = 'vim-scripts/AnsiEsc.vim'
+
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-trailing-whitespace.rc.vim
+'''
+
+
+[[plugins]]
+repo = 'LeafCage/yankround.vim'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/yankround.vim.rc.vim
+'''
+
+[[plugins]]
+repo = 'airblade/vim-rooter'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-rooter.rc.vim
+'''
+
+[[plugins]]
+repo = 'AndrewRadev/switch.vim'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/switch.vim.rc.vim
+'''
+
+[[plugins]]
+repo = 'tyru/capture.vim'
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'Shougo/neocomplete.vim'
+if = "!has('nvim')"
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/neocomplete.vim.rc.vim
+'''
+
+[[plugins]]
+repo = "kana/vim-smartinput"
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-smartinput-endwise.rc.vim
+'''
+
+[[plugins]]
+repo = "cohama/vim-smartinput-endwise"
+
+[[plugins]]
+repo = "alvan/vim-closetag"
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-closetag.rc.vim
+'''
+
+[[plugins]]
+repo = 'thinca/vim-ref'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-ref.rc.vim
+'''
+
+[[plugins]]
+repo = 'tyru/vim-altercmd'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-altercmd.rc.vim
+'''
+
+[[plugins]]
+repo = 'gko/vim-coloresque'
