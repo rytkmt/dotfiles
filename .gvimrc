@@ -307,7 +307,7 @@ endtry
 "
 "let $SSH_ASKPASS = simplify($VIM . '/../../MacOS') . '/macvim-askpass'
 "let $SUDO_ASKPASS = $SSH_ASKPASS
-"set noimdisable
+set imdisable
 "set imdisableactivate
 
 colorscheme rytkmt

@@ -1,0 +1,9 @@
+
+[[plugins]]
+repo = 'Shougo/neocomplete.vim'
+if = "!has('nvim')"
+on_i = 1
+hook_post_source = '''
+source $XDG_CONFIG_HOME/plugins/neocomplete.vim.rc.vim
+'''
+

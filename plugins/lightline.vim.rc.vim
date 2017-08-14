@@ -1,11 +1,12 @@
 let g:lightline = {
+\  'colorscheme': 'one',
 \  'active': {
 \    'left': [['mode', 'paste'], ['filename']],
-\    'right': [['row'], ['fileencoding'], ['projecttag']]
+\    'right': [['row'], ['fileencoding'], ['filetype'], ['projecttag']]
 \  },
 \  'inactive': {
 \    'left': [['filename']],
-\    'right': [['row'], ['fileencoding'], ['projecttag']]
+\    'right': [['row'], ['fileencoding'], ['filetype'], ['projecttag']]
 \  },
 \  'component_function': {
 \    'mode': 'LightlineMode',
@@ -15,6 +16,7 @@ let g:lightline = {
 \    'modified' : 'LightlineModified',
 \    'row' : 'LightlineRow',
 \    'fileencoding': 'LightlineFileencoding',
+\    'filetype': 'LightlineFiletype',
 \    'projecttag': 'LightlineProjecttag'
 \  }
 \}
@@ -45,6 +47,9 @@ endfunction
 function! LightlineFileencoding()
   return &ft == 'vimfiler' ? '' : &encoding
 endfunction
+function! LightlineFiletype()
+  return &ft == 'vimfiler' ? '' : (&ft == '' ? 'no_ft' : &ft)
+endfunction
 function! LightlineProjecttag()
   return exists('w:project_tag') ? 'T' : ''
 endfunction
@@ -52,3 +57,5 @@ let s:p.normal.left[1] = ['#b15e7c', '#222529', 1, 1]
 let s:p.inactive.left[0] = ['#b15e7c', '#222529', 1, 1]
 let s:p.normal.right[2] = ['#323232', '#d75f00', 1, 1]
 let g:lightline#colorscheme#yourcolorscheme#palette = s:p
+call lightline#init()
+call lightline#update()
