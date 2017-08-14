@@ -1,1 +1,1 @@
-exe "so " . fnamemodify(resolve(expand('<sfile>:p')), ':h') . '/../vimrc.vim'
+exe "so $XDG_CONFIG_HOME/vimrc.vim"
