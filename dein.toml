@@ -1,4 +1,4 @@
-# == deinの書き方 ==
+# -- deinの書き方 --
 # hook_add: プラグインが dein.vim によって追加されたとき
 # hook_source: プラグインが読み込まれる直前
 # hook_post_source: プラグインが読み込まれた直後
@@ -6,7 +6,7 @@
 #
 #
 #
-# ==================
+# ------------------
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
 hook_post_update = '''
@@ -130,12 +130,11 @@ hook_add = '''
 au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-trailing-whitespace.rc.vim
 '''
 
-
-[[plugins]]
-repo = 'LeafCage/yankround.vim'
-hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/yankround.vim.rc.vim
-'''
+# [[plugins]]
+# repo = 'LeafCage/yankround.vim'
+# hook_add = '''
+# au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/yankround.vim.rc.vim
+# '''
 
 [[plugins]]
 repo = 'airblade/vim-rooter'
@@ -185,5 +184,17 @@ au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-altercmd.rc.v
 [[plugins]]
 repo = 'cespare/vim-toml'
 
+[[plugins]]
+repo = 'maralla/vim-toml-enhance'
+hook_add = '''
+au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-toml-enhance.rc.vim
+'''
+
 #[[plugins]]
 #repo = 'gko/vim-coloresque'
+
+[[plugins]]
+repo = 'ctrlpvim/ctrlp.vim'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/ctrlp.vim.rc.vim
+'''

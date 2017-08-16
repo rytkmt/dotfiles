@@ -365,12 +365,13 @@ noremap zh zH
 noremap zj 4<C-e>
 noremap zk 4<C-y>
 
-" nnoremap <silent> い i
-" nnoremap <silent> あ a
-" nnoremap <silent> お o
-" nnoremap <silent> っｄ dd
-" nnoremap <silent> う u
-" nnoremap <silent> ：ｗｑ :wq
+nnoremap <expr> c* ':%s/\<' . expand('<cword>') . '\>/'
+vnoremap <expr> c* ':s/\<' . expand('<cword>') . '\>/'
+
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
 
 " ruby if endの%移動
 source $VIMRUNTIME/macros/matchit.vim
