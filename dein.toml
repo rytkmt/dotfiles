@@ -27,6 +27,7 @@ au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vimproc.vim.rc.vi
 
 [[plugins]]
 repo = 'Shougo/vimfiler'
+if = "!has('nvim')"
 hook_add = '''
 au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vimfiler.rc.vim
 '''
@@ -201,3 +202,12 @@ source $XDG_CONFIG_HOME/plugins/ctrlp.vim.rc.vim
 
 [[plugins]]
 repo = 'lilydjwg/colorizer'
+
+[[plugins]]
+repo = 'Shougo/neosnippet'
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+hook_add = '''
+au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/neosnippet.rc.vim
+'''
