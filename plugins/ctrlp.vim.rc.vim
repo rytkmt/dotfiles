@@ -1,3 +1,7 @@
+nmap [ctrlp]f :<C-u>CtrlP<CR>
+nmap [ctrlp]b :<C-u>CtrlPBuffer<CR>
+nmap [ctrlp]m :<C-u>CtrlPMRU<CR>
+
 " キャッシュディレクトリ
 let g:ctrlp_cache_dir = $HOME.'/.vim/cache/ctrlp'
 " キャッシュを終了時に削除しない

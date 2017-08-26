@@ -1,7 +1,7 @@
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 21-Aug-2017.
+" Last Change: 26-Aug-2017.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 " + kaoriya default settings {{{
@@ -422,10 +422,12 @@ nmap [ctag] <Nop>
 vmap [ctag] <Nop>
 nmap <Leader>g [ctag]
 vmap <Leader>g [ctag]
+nmap <Leader>p [ctrlp]
+nmap [ctrlp] <Nop>
 
 "=================================
-"     _  _  _  _     _
-"  q  W  E  R  T  y  U  i  o  p
+"     _  _  _  _     _        _
+"  q  W  E  R  T  y  U  i  o  P
 "      _     _  _
 "   a  S  d  F  G  h  j  k  l
 "    _     _  _

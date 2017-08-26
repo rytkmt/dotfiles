@@ -1,6 +1,6 @@
 " let g:unite_source_history_yank_enable =1
 "最近開いたファイル履歴の保存数
-let g:unite_source_file_mru_limit = 50
+" let g:unite_source_file_mru_limit = 50
 
 " 入力モードで開始する
 " let g:unite_enable_start_insert=1
@@ -11,17 +11,17 @@ nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
 " nnoremap <silent> [unite]b :<C-u>Unite<Space>bookmark<CR>
 call unite#custom_default_action('source/bookmark/directory' , 'lcd')
 "nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
-nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
-" nnoremap <silent> [unite]y :<C-u>Unite<Space>history/yank<CR>
+" nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
+nnoremap <silent> [unite]y :<C-u>Unite<Space>history/yank<CR>
 "nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
-function! CallUniteFileRec()
-  if exists('w:current_project')
-    exe ':Unite file_rec -start-insert -path=' .w:current_project
-  else
-    echo 'not found project!'
-  endif
-endfunction
-nnoremap <silent> [unite]r :<C-u>call CallUniteFileRec()<CR>
+" function! CallUniteFileRec()
+"   if exists('w:current_project')
+"     exe ':Unite file_rec -start-insert -path=' .w:current_project
+"   else
+"     echo 'not found project!'
+"   endif
+" endfunction
+" nnoremap <silent> [unite]r :<C-u>call CallUniteFileRec()<CR>
 "nnoremap <silent> [unite]c :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 " nnoremap <silent> [unite]r :UniteResume search-buffer<CR>
 " nnoremap <silent> [unite]f :<C-u>Unite<Space>file/new<CR>

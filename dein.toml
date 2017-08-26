@@ -146,7 +146,7 @@ au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-rooter.rc.vim
 [[plugins]]
 repo = 'AndrewRadev/switch.vim'
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/switch.vim.rc.vim
+source $XDG_CONFIG_HOME/plugins/switch.vim.rc.vim
 '''
 
 [[plugins]]
