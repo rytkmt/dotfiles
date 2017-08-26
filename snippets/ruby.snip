@@ -1,8 +1,22 @@
 snippet rescue-ex
+options head
   rescue => ex
 
 snippet rescue-ex-p
+options head
   rescue => ex
     p ex.class
     p ex.message
     p ex.backtrace
+
+snippet pex
+options head
+  p ex.class
+  p ex.message
+  p ex.backtrace
+
+snippet     test_my_method
+options     head
+  require "#{MACAU_ROOT}/../test_my_method"
+  include TestMyMethod
+  init_log({"name" => "#{MACAU_ROOT}/log/test.log", "benchmark" => true})

@@ -3,7 +3,7 @@ let g:ctrlp_cache_dir = $HOME.'/.vim/cache/ctrlp'
 " キャッシュを終了時に削除しない
 let g:ctrlp_clear_cache_on_exit = 0
 " scanする最大ファイル数
-let g:ctrlp_max_files = 1000
+let g:ctrlp_max_files = 10000
 " mruの最大保存数
 let g:ctrlp_mruf_max = 50
 " 遅延再描画

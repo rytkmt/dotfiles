@@ -1,7 +1,7 @@
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 14-Aug-2017.
+" Last Change: 21-Aug-2017.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 " + kaoriya default settings {{{
@@ -240,7 +240,7 @@ endif
 " filetype on
 colorscheme rytkmt
 filetype plugin indent on
-set imdisable
+set noimdisable
 " }}}
 " コマンド{{{
 " ++ タブ操作 {{{
@@ -321,6 +321,7 @@ vmap <nowait> <C-Space> <ESC>
 nnoremap PP "0p
 vnoremap PP "0p
 nnoremap ZZ <Nop>
+nnoremap <C-z> <Nop>
 
 vnoremap d "_d
 nnoremap dd "_dd
@@ -435,7 +436,7 @@ vmap <Leader>g [ctag]
 nnoremap [other]h :so $VIMRUNTIME/syntax/hitest.vim
 nnoremap [other]s :sp<CR>:VimShellBufferDir<CR>
 nnoremap [other]r ::VimShellInteractive irb<CR>
-nnoremap [other]v :<C-u>tabedit $MYVIMRC<CR>
+nnoremap [other]v :<C-u>tabedit $XDG_CONFIG_HOME/vimrc.vim<CR>
 nnoremap [other]l :<C-u>so ~/.vimrc<CR>:<C-u>so ~/.gvimrc<CR>
 nnoremap [edit]s :e ++enc=shift_jis<CR>
 nnoremap [edit]u :e ++enc=utf-8<CR>
