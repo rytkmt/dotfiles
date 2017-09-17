@@ -9,8 +9,7 @@ if exists("syntax_on")
   syntax reset
 endif
 " + 色の設定 {{{
-if (has("gui_running")) || has('gui')
-  echom 'gui'
+if (has("gui_running")) || has('gui') || has('nvim')
     let s:vmode       = "gui"
     let s:col1       = "#222529" "黒
     let s:col2       = "#323842"
@@ -30,7 +29,6 @@ if (has("gui_running")) || has('gui')
     let s:col16       = "#a3be8c" "黄緑
     let s:col17       = "#b15e7c" "赤ピンク
 else
-  echom 'cui'
     let s:vmode       = "cterm"
     let s:col1       = "235" "#262626
     let s:col2       = "237" "#3a3a3a
