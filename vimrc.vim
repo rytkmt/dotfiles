@@ -1,7 +1,7 @@
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 26-Aug-2017.
+" Last Change: 06-Sep-2017.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 " + kaoriya default settings {{{
@@ -366,13 +366,8 @@ noremap zh zH
 noremap zj 4<C-e>
 noremap zk 4<C-y>
 
-nnoremap <expr> c* ':%s/\<' . expand('<cword>') . '\>/'
-vnoremap <expr> c* ':s/\<' . expand('<cword>') . '\>/'
-
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap * *zz
-nnoremap # #zz
+nnoremap <expr> <C-s> ':%s/\<' . expand('<cword>') . '\>/'
+vnoremap <expr> <C-s> ':s/\<' . expand('<cword>') . '\>/'
 
 " ruby if endの%移動
 source $VIMRUNTIME/macros/matchit.vim
@@ -453,6 +448,9 @@ endif
 "  autocmd MyAutoCmd WinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
 "endif
 " autocmd MyAutoCmd FileType help nnoremap q :q<CR>
+" ++ }}}
+" ++ ファイルタイプ別{{{
+autocmd MyAutoCmd FileType help nnoremap <buffer> q :q<CR>
 " ++ }}}
 " +}}}
 " + ctags系 {{{
