@@ -1,7 +1,7 @@
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 26-Aug-2017.
+" Last Change: 02-Sep-2017.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 " + kaoriya default settings {{{
@@ -138,6 +138,8 @@ set showmatch
 set wildmenu
 " テキスト挿入中の自動折り返しを日本語に対応させる
 set formatoptions+=mM
+
+set virtualedit+=block
 " ++ }}}
 " ++ GUI固有ではない画面表示の設定: {{{
 " 行番号を非表示 (number:表示)
@@ -203,6 +205,10 @@ set imsearch=-1
 set shellslash
 " コマンドラインモードでTABキーによるファイル名補完を有効にする
 set wildmenu wildmode=list:longest,full
+
+" 画面分割時の位置
+set splitbelow
+set splitright
 " ++ }}}
 " + }}}
 " + dein {{{
@@ -387,7 +393,7 @@ nnoremap M m
 nnoremap MM :<C-u>marks<CR>
 " 前回変更点をVモードで選択
 nnoremap gv `[v]`
-nnoremap <C-h> :h<Space>
+nnoremap <expr> <C-h> ':h ' . expand('<cword>')
 
 "メタ文字扱いのオプションをvery magicを初期値に
 nnoremap / /\v
