@@ -154,6 +154,9 @@ repo = 'tyru/capture.vim'
 
 [[plugins]]
 repo = 'tpope/vim-surround'
+hook_add = '''
+au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-surround.rc.vim
+'''
 
 [[plugins]]
 repo = "kana/vim-smartinput"

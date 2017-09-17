@@ -7,7 +7,7 @@
 
 "nnoremap <silent> [unite]f :<C-u>Unite<Space>file<CR>
 " nnoremap <silent> [unite]g :<C-u>Unite<Space>grep<CR>
-nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
+" nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
 " nnoremap <silent> [unite]b :<C-u>Unite<Space>bookmark<CR>
 call unite#custom_default_action('source/bookmark/directory' , 'lcd')
 "nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
