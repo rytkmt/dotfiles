@@ -1,7 +1,7 @@
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 06-Sep-2017.
+" Last Change: 02-Oct-2017.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 " + kaoriya default settings {{{
@@ -447,7 +447,9 @@ nnoremap [edit]e :e ++enc=euc-jp<CR>
 
 if has('win32')
   let $MEMO = $HOME . '/workspace/sql.sql'
+  let $TESTRB = $HOME . '/workspace/test.rb'
   nnoremap [other]q :<C-u>tabedit $MEMO<CR>
+  nnoremap [other]t :<C-u>tabedit $TESTRB<CR>
 endif
 "if has('syntax')
 "  autocmd MyAutoCmd BufWinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
