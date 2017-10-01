@@ -27,7 +27,6 @@ au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vimproc.vim.rc.vi
 
 [[plugins]]
 repo = 'Shougo/vimfiler'
-if = "!has('nvim')"
 hook_add = '''
 au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vimfiler.rc.vim
 '''
@@ -40,7 +39,6 @@ repo = 'rakr/vim-one'
 
 [[plugins]]
 repo = 'Shougo/unite.vim'
-if = "!has('nvim')"
 hook_add = '''
 au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/unite.vim.rc.vim
 '''

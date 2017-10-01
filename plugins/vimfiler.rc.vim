@@ -15,7 +15,10 @@ function! _VimFilerOpen(init, type)
     if has('win32')
       let l:vimfiler_default_dir = 'C:/Users/r_tsukamoto.ILL/workspace'
     else
-      let l:vimfiler_default_dir = '/Users/Ryo/programs/vim/dotfiles'
+      let l:vimfiler_default_dir = $XDG_CONFIG_HOME
+    endif
+    if !isdirectory(l:vimfiler_default_dir)
+      let l:vimfiler_default_dir = $HOME
     endif
     exe ":VimFilerExplorer -fnamewidth=200 -buffer-name=" . t:tab_name . " " . l:vimfiler_default_dir
   elseif(a:type == 2)
@@ -27,7 +30,6 @@ function! _VimFilerOpen(init, type)
     let l:vimfiler_default_dir = expand("%:p:h")
     exe ":VimFiler -buffer-name=" . t:tab_name . " " . l:vimfiler_default_dir
   endif
-
 endfunction
 " VimFilerを起動
 autocmd MyAutoCmd VimEnter * call _VimFilerOpen(1,1)
