@@ -87,7 +87,7 @@ endif
 set formatexpr=autofmt#japanese#formatexpr()
 
 " vimdoc-ja: 日本語ヘルプを無効化する.
-if !has('nvim') && kaoriya#switch#enabled('disable-vimdoc-ja')
+if has('win32') && kaoriya#switch#enabled('disable-vimdoc-ja')
   let &rtp = join(filter(split(&rtp, ','), 'v:val !~ "[/\\\\]plugins[/\\\\]vimdoc-ja"'), ',')
 endif
 
@@ -428,11 +428,13 @@ vmap <Leader>g [ctag]
 nmap <Leader>p [ctrlp]
 nmap [ctrlp] <Nop>
 
+nmap [denite] <Nop>
+nmap <Leader>d [denite]
 "=================================
 "     _  _  _  _     _        _
 "  q  W  E  R  T  y  U  i  o  P
-"      _     _  _
-"   a  S  d  F  G  h  j  k  l
+"      _  _  _  _
+"   a  S  D  F  G  h  j  k  l
 "    _     _  _
 "    Z  x  C  V  b  n  m
 "
