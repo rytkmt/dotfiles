@@ -1,3 +1,7 @@
+[[plugins]]
+repo = 'Shougo/neosnippet'
+on_i = 1
+depends = ['neosnippet-snippets']
 
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
@@ -7,3 +11,10 @@ hook_post_source = '''
 source $XDG_CONFIG_HOME/plugins/neocomplete.vim.rc.vim
 '''
 
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+if = "has('nvim')"
+on_i = 1
+hook_post_source = '''
+source $XDG_CONFIG_HOME/plugins/deoplete.rc.vim
+'''

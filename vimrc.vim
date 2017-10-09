@@ -1,7 +1,7 @@
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 06-Oct-2017.
+" Last Change: 10-Oct-2017.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 " + kaoriya default settings {{{
@@ -87,7 +87,7 @@ endif
 set formatexpr=autofmt#japanese#formatexpr()
 
 " vimdoc-ja: 日本語ヘルプを無効化する.
-if !has('nvim') && kaoriya#switch#enabled('disable-vimdoc-ja')
+if has('win32') && kaoriya#switch#enabled('disable-vimdoc-ja')
   let &rtp = join(filter(split(&rtp, ','), 'v:val !~ "[/\\\\]plugins[/\\\\]vimdoc-ja"'), ',')
 endif
 
@@ -431,11 +431,13 @@ nmap [ctrlp] <Nop>
 
 nnoremap [previm] <Nop>
 nmap <Leader>; [previm]
+nmap [denite] <Nop>
+nmap <Leader>d [denite]
 "=================================
 "     _  _  _  _     _        _  _
 "  q  W  E  R  T  y  U  i  o  P  @
-"      _     _  _
-"   a  S  d  F  G  h  j  k  l
+"      _  _  _  _
+"   a  S  D  F  G  h  j  k  l
 "    _     _  _
 "    Z  x  C  V  b  n  m
 "

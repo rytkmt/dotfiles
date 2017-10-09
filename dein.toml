@@ -204,8 +204,6 @@ source $XDG_CONFIG_HOME/plugins/ctrlp.vim.rc.vim
 [[plugins]]
 repo = 'lilydjwg/colorizer'
 
-[[plugins]]
-repo = 'Shougo/neosnippet'
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
@@ -220,4 +218,11 @@ repo = 'tyru/open-browser.vim'
 repo = 'kannokanno/previm'
 hook_add = '''
 au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/previm.rc.vim
+'''
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+if = "has('nvim')"
+hook_add = '''
+au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/denite.rc.vim
 '''
