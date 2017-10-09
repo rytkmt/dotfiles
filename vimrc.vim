@@ -1,7 +1,7 @@
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 02-Oct-2017.
+" Last Change: 06-Oct-2017.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 " + kaoriya default settings {{{
@@ -62,6 +62,9 @@ endif
 " コンソール版で環境変数$DISPLAYが設定されていると起動が遅くなる件へ対応
 if !has('gui_running') && has('xterm_clipboard')
   set clipboard=exclude:cons\\\|linux\\\|cygwin\\\|rxvt\\\|screen
+endif
+if has('nvim')
+  set clipboard+=unnamed
 endif
 
 " プラットホーム依存の特別な設定
@@ -343,6 +346,7 @@ nnoremap tt dd
 nnoremap te de
 nnoremap tL d$
 nnoremap tw dw
+nnoremap <C-c> viws
 nnoremap T D
 vnoremap t x
 nnoremap y%f :<C-u>redi! @"> \| echo expand("%:t") \| redi END<CR>
@@ -387,7 +391,6 @@ vmap m %
 nnoremap M m
 nnoremap MM :<C-u>marks<CR>
 " 前回変更点をVモードで選択
-nnoremap gv `[v]`
 nnoremap <expr> <C-h> ':h ' . expand('<cword>')
 
 "メタ文字扱いのオプションをvery magicを初期値に
@@ -426,9 +429,11 @@ vmap <Leader>g [ctag]
 nmap <Leader>p [ctrlp]
 nmap [ctrlp] <Nop>
 
+nnoremap [previm] <Nop>
+nmap <Leader>; [previm]
 "=================================
-"     _  _  _  _     _        _
-"  q  W  E  R  T  y  U  i  o  P
+"     _  _  _  _     _        _  _
+"  q  W  E  R  T  y  U  i  o  P  @
 "      _     _  _
 "   a  S  d  F  G  h  j  k  l
 "    _     _  _

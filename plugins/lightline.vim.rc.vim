@@ -32,11 +32,11 @@ function! LightlineReadonly()
   return &ft != 'vimfiler' && &ft !~? 'help' && &readonly ? 'RO' : ''
 endfunction
 function! LightlineFilename()
-    return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-      \ (&ft == 'vimfiler' ? len(b:vimfiler.current_dir) > 1 ? split(b:vimfiler.current_dir, "/")[-1] : '' :
-      \  &ft == 'unite' ? unite#get_status_string() :
-      \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-      \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+  return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+    \ (&ft == 'vimfiler' ? len(b:vimfiler.current_dir) > 1 ? split(b:vimfiler.current_dir, "/")[-1] : '' :
+    \  &ft == 'unite' ? unite#get_status_string() :
+    \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+    \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
 endfunction
 function! LightlineModified()
   return &modifiable && &modified ? '+' : ''
