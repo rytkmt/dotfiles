@@ -215,6 +215,12 @@ au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/neosnippet.rc.vim
 repo = 'tyru/open-browser.vim'
 
 [[plugins]]
+repo = 'rcmdnk/vim-markdown'
+hook_add = '''
+au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-markdown.rc.vim
+'''
+
+[[plugins]]
 repo = 'kannokanno/previm'
 hook_add = '''
 au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/previm.rc.vim
