@@ -860,9 +860,9 @@ exe "hi! mkdRule" .s:reverse
 exe "hi! mkdURL" .s:fg_col12
 exe "hi! mkdID" .s:fg_col12
 exe "hi! mkdIDDelimiter" .s:fg_col15
+exe "hi! markdownCodeDelimiter" .s:fg_col11
 
 " なぞ
-exe "hi! markdownCodeDelimiter" .s:bg_col14
 exe "hi! markdownUrl" .s:bg_col14
 exe "hi! mkdIndentCode0" .s:bg_col14
 exe "hi! mkdIndentCode1" .s:bg_col14
