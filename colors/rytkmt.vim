@@ -107,6 +107,11 @@ exe "let s:sp_col17       = ' ".s:vmode."sp=".s:col17      ."'"
 
 exe "let s:underline      = ' ".s:vmode."=underline'"
 exe "let s:bold      = ' ".s:vmode."=bold'"
+exe "let s:undercurl      = ' ".s:vmode."=undercurl'"
+exe "let s:reverse      = ' ".s:vmode."=reverse'"
+exe "let s:inverse      = ' ".s:vmode."=inverse'"
+exe "let s:italic      = ' ".s:vmode."=italic'"
+exe "let s:standout      = ' ".s:vmode."=standout'"
 "}}}
 " + 基本のhighlight {{{
 exe "hi! Normal"                 .s:fg_col5       .s:bg_col1
@@ -769,12 +774,12 @@ hi! link htmlEventSQ _Unknown
 hi! link htmlEventDQ _Unknown
 " ------------- Normal ----------------
 hi! link htmlLeadingSpace Normal
-hi! link htmlH1 Normal
-hi! link htmlH2 Normal
-hi! link htmlH3 Normal
-hi! link htmlH4 Normal
-hi! link htmlH5 Normal
-hi! link htmlH6 Normal
+exe "hi! htmlH1" .s:bg_col8 .s:fg_col2
+exe "hi! htmlH2" .s:fg_col8 .s:underline
+exe "hi! htmlH3" .s:bg_col14 .s:fg_col2
+exe "hi! htmlH4" .s:fg_col14
+exe "hi! htmlH5" .s:bg_col13 .s:fg_col2
+exe "hi! htmlH6" .s:fg_col13
 hi! link htmlTitle Normal
 hi! link cssStyle Normal
 
@@ -813,9 +818,6 @@ exe "hi! TexCite"                .s:fg_col9
 " ++ sh {{{
 hi! link shQuote String
 " }}}
-" ++ markdown {{{
-hi! link markdownUrl String
-" }}}
 " ++ vimfiler {{{
 exe "hi! vimfilerLeaf"  .s:fg_col13
 exe "hi! vimfilerNonMark"  .s:fg_col4
@@ -829,4 +831,45 @@ exe "hi! vimfilerOpenedFile"  .s:fg_col11
 exe "hi! vimfilerClosedFile"  .s:fg_col15
 exe "hi! vimfilerROFile"  .s:fg_col9
 " }}}
+" ++ markdown {{{
+
+"
+hi! link mkdBlockquote Comment
+exe "hi! mkdItalic" .s:fg_col7 .s:italic
+exe "hi! mkdBold" .s:fg_col7 .s:bold
+exe "hi! mkdBoldItalic" .s:fg_col7 .s:bold .s:italic
+hi! link mkdCode String
+exe "hi! mkdCodeDelimiter" .s:fg_col11 .s:bold
+exe "hi! mkdDelimiter" .s:fg_col11 .s:bold
+exe "hi! mkdFootnotes" .s:fg_col12
+exe "hi! mkdFootnotesDelimiter" .s:fg_col10
+hi! link mkdIndentCode String
+exe "hi! mkdInlineCodeDelimiter" .s:fg_col11 .s:bold
+exe "hi! mkdInlineURL" .s:fg_col12
+exe "hi! mkdLineBreak" .s:bg_col12
+exe "hi! mkdLink" .s:fg_col13
+exe "hi! mkdLinkDef" .s:fg_col13 .s:underline
+exe "hi! mkdLinkDefTarget" .s:fg_col12
+exe "hi! mkdLinkDelimiter" .s:fg_col11
+exe "hi! mkdLinkTitle" .s:fg_col5
+exe "hi! mkdListBlock0" .s:fg_col5
+exe "hi! mkdListBlock1" .s:fg_col5
+exe "hi! mkdListBlock2" .s:fg_col5
+exe "hi! mkdListItem" .s:fg_col15
+exe "hi! mkdRule" .s:reverse
+exe "hi! mkdURL" .s:fg_col12
+exe "hi! mkdID" .s:fg_col12
+exe "hi! mkdIDDelimiter" .s:fg_col15
+
+" なぞ
+exe "hi! markdownCodeDelimiter" .s:bg_col14
+exe "hi! markdownUrl" .s:bg_col14
+exe "hi! mkdIndentCode0" .s:bg_col14
+exe "hi! mkdIndentCode1" .s:bg_col14
+exe "hi! mkdIndentCode2" .s:bg_col14
+exe "hi! mkdFrontmatterDelimiter" .s:bg_col14
+exe "hi! mkdString" .s:bg_col14
+exe "hi! mkdMath" .s:bg_col14
+exe "hi! mkdURLDelimiter" .s:bg_col14
+" ++}}}
 " +}}}

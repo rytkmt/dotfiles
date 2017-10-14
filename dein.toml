@@ -215,10 +215,11 @@ au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/neosnippet.rc.vim
 repo = 'tyru/open-browser.vim'
 
 [[plugins]]
-repo = 'rcmdnk/vim-markdown'
-hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-markdown.rc.vim
-'''
+repo = 'godlygeek/tabular'
+
+[[plugins]]
+repo = 'joker1007/vim-markdown-quote-syntax'
+
 
 [[plugins]]
 repo = 'kannokanno/previm'
@@ -228,7 +229,7 @@ au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/previm.rc.vim
 
 [[plugins]]
 repo = 'Shougo/denite.nvim'
-if = "has('nvim')"
+if = "has('python3')"
 hook_add = '''
 au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/denite.rc.vim
 '''

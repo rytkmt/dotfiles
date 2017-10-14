@@ -212,6 +212,10 @@ set wildmenu wildmode=list:longest,full
 " 画面分割時の位置
 set splitbelow
 set splitright
+
+"" texのconcealを無効化（#^ω^）
+let g:tex_conceal=''
+set conceallevel=0
 " ++ }}}
 " + }}}
 " + dein {{{
@@ -429,15 +433,16 @@ vmap <Leader>g [ctag]
 nmap <Leader>p [ctrlp]
 nmap [ctrlp] <Nop>
 
-nnoremap [previm] <Nop>
-nmap <Leader>; [previm]
+nnoremap [ft] <Nop>
+nmap <Leader>; [ft]
+
 nmap [denite] <Nop>
 nmap <Leader>d [denite]
 "=================================
-"     _  _  _  _     _        _  _
-"  q  W  E  R  T  y  U  i  o  P  @
-"      _  _  _  _
-"   a  S  D  F  G  h  j  k  l
+"     _  _  _  _     _        _
+"  q  W  E  R  T  y  U  i  o  P
+"      _  _  _  _             _
+"   a  S  D  F  G  h  j  k  l ;
 "    _     _  _
 "    Z  x  C  V  b  n  m
 "
@@ -462,7 +467,6 @@ endif
 "  autocmd MyAutoCmd BufWinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
 "  autocmd MyAutoCmd WinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
 "endif
-" autocmd MyAutoCmd FileType help nnoremap q :q<CR>
 " ++ }}}
 " ++ ファイルタイプ別{{{
 autocmd MyAutoCmd FileType help nnoremap <buffer> q :q<CR>

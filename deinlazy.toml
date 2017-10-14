@@ -13,8 +13,15 @@ source $XDG_CONFIG_HOME/plugins/neocomplete.vim.rc.vim
 
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
-if = "has('nvim')"
+if = "has('python3')"
 on_i = 1
 hook_post_source = '''
 source $XDG_CONFIG_HOME/plugins/deoplete.rc.vim
+'''
+
+[[plugins]]
+repo = 'rcmdnk/vim-markdown'
+on_ft = ['markdown','mkd']
+hook_add = '''
+au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-markdown.rc.vim
 '''

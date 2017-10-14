@@ -6,9 +6,11 @@ augroup END
 if has('win32')
   let g:previm_open_cmd = 'C:\\Users\\r_tsukamoto.ILL\\AppData\\Local\\Vivaldi\\Application\\vivaldi.exe'
 elseif has('mac')
-  let g:previm_open_cmd = ''
+  let g:previm_open_cmd = '/Applications/Vivaldi.app/Contents/MacOS/Vivaldi'
 elseif has('unix')
   let g:previm_open_cmd = ''
 end
-nnoremap <silent> [previm]o :<C-u>PrevimOpen<CR>
-nnoremap <silent> [previm]r :call previm#refresh()<CR>
+autocmd MyAutoCmd FileType markdown nnoremap <buffer> <silent> [ft]o :<C-u>PrevimOpen<CR>
+nnoremap <buffer> <silent> [ft]o :<C-u>PrevimOpen<CR>
+autocmd MyAutoCmd FileType markdown nnoremap <buffer> <silent> [ft]r :call previm#refresh()<CR>
+nnoremap <buffer> <silent> [ft]r :call previm#refresh()<CR>
