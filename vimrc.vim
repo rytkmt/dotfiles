@@ -337,22 +337,18 @@ nnoremap ZZ <Nop>
 nnoremap <C-z> <Nop>
 
 vnoremap d "_d
-nnoremap dd "_dd
-nnoremap de "_de
-nnoremap dL "_d$
-nnoremap dw "_dw
-inoremap <C-d> <C-o>"_dd
-nnoremap s "_s
-vnoremap s "_s
+nnoremap d "_d
+vnoremap D "_D
 nnoremap D "_D
-noremap x "_x
-nnoremap tt dd
-nnoremap te de
-nnoremap tL d$
-nnoremap tw dw
-nnoremap <C-c> viws
-nnoremap T D
+vnoremap x "_x
+nnoremap x "_x
+vnoremap s "_s
+nnoremap s "_s
+inoremap <C-d> <C-o>"_dd
+nnoremap t d
 vnoremap t x
+nnoremap T D
+nnoremap <C-c> viws
 nnoremap y%f :<C-u>redi! @"> \| echo expand("%:t") \| redi END<CR>
 nnoremap y%p :<C-u>redi! @"> \| echo expand("%:p") \| redi END<CR>
 nnoremap y%d :<C-u>redi! @"> \| echo expand("%:p:h") \| redi END<CR>
@@ -364,22 +360,32 @@ cmap <C-k> <RIGHT>
 nnoremap gj j
 nnoremap gk k
 
+" 行を移動
+nnoremap <C-Up> "zdd<Up>"zP
+nnoremap <C-Down> "zdd"zp
+" 複数行を移動
+vnoremap <C-Up> "zx<Up>"zP`[V`]
+vnoremap <C-Down> "zx"zp`[V`]
+
 " カーソル移動
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-h> <Left>
-inoremap <C-l> <Right>
 noremap <S-h>   ^
 noremap <S-j>  4gj
 noremap <C-j>   }
 noremap <S-k>  4gk
 noremap <C-k>   {
 noremap <S-l>   $
+
+" 画面移動
 noremap zl zL
 noremap zh zH
 noremap zj 4<C-e>
 noremap zk 4<C-y>
 
+" 削除
+inoremap <C-d> <Del>
+imap <C-h> <BS>
+
+" カーソル位置の単語を置換
 nnoremap <expr> <C-s> ':%s/\<' . expand('<cword>') . '\>/'
 vnoremap <expr> <C-s> ':s/\<' . expand('<cword>') . '\>/'
 
@@ -403,6 +409,8 @@ nnoremap ? ?\v
 " キーマップ用
 let mapleader = "\<Space>"
 map <Space> <Nop>
+"単語ハイライト
+nnoremap <silent> <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
 
 " コピペ
 vmap <Leader>c "*y
@@ -438,6 +446,7 @@ nmap <Leader>; [ft]
 
 nmap [denite] <Nop>
 nmap <Leader>d [denite]
+
 "=================================
 "     _  _  _  _     _        _
 "  q  W  E  R  T  y  U  i  o  P
