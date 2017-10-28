@@ -1,7 +1,7 @@
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 10-Oct-2017.
+" Last Change: 25-Oct-2017.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 " + kaoriya default settings {{{
@@ -328,6 +328,7 @@ cmap <C-Space> <C-r>*
 "挿入モード終了
 imap <C-Space> <ESC>
 vmap <nowait> <C-Space> <ESC>
+nmap <C-Space> <ESC>
 " ++ }}}
 " ++ その他 {{{
 "ヤンクした値がdやxで消えないように（復活させる）
@@ -347,12 +348,14 @@ nnoremap s "_s
 inoremap <C-d> <C-o>"_dd
 nnoremap t d
 vnoremap t x
+nnoremap tt dd
+nnoremap tL d$
 nnoremap T D
 nnoremap <C-c> viws
 nnoremap y%f :<C-u>redi! @"> \| echo expand("%:t") \| redi END<CR>
 nnoremap y%p :<C-u>redi! @"> \| echo expand("%:p") \| redi END<CR>
 nnoremap y%d :<C-u>redi! @"> \| echo expand("%:p:h") \| redi END<CR>
-noremap <ESC><ESC> :<C-u>noh<CR>
+nnoremap <ESC><ESC> :<C-u>noh<CR>
 cmap <C-j> <LEFT>
 cmap <C-k> <RIGHT>
 
