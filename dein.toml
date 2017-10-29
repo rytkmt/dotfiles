@@ -119,6 +119,9 @@ au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/grep.vim.rc.vim
 
 [[plugins]]
 repo = 'tomtom/tcomment_vim'
+hook_add = '''
+au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/tcomment_vim.rc.vim
+'''
 
 [[plugins]]
 repo = 'vim-scripts/AnsiEsc.vim'

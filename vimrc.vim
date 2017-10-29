@@ -101,6 +101,9 @@ endif
 augroup MyAutoCmd
   autocmd!
 augroup END
+augroup MyAutoLazyCmd
+  autocmd!
+augroup END
 syntax enable
 if has('nvim')
   if has('patch-7.4.1778')
@@ -419,6 +422,8 @@ endfunction
 command! -nargs=? ToSnakeCase call s:to_snake_case(<f-args>)
 nnoremap <expr> [map]s ':ToSnakeCase ' . expand('<cword>') .'<CR>'
 " nnoremap [map]s viwo<ESC>vuviw:s/\v(.)/_\l\1/g<CR>
+
+autocmd MyAutoLazyCmd VimEnter * nnoremap <nowait> <expr> gc '`[' . getregtype()[0] . '`]'
 
 " ruby if endの%移動
 source $VIMRUNTIME/macros/matchit.vim
