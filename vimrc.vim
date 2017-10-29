@@ -395,7 +395,6 @@ imap <C-h> <BS>
 nnoremap <expr> <C-s> ':%s/\<' . expand('<cword>') . '\>/'
 vnoremap <expr> <C-s> ':s/\<' . expand('<cword>') . '\>/'
 
-" nnoremap [map]c viwo<ESC>vUviw:s/\v_(.)/\u\1/g<CR>
 function! s:to_camel_case(before_str)
   let l:after_str = ""
   for l:before_char in split(a:before_str, '_')
@@ -408,7 +407,6 @@ nnoremap <expr> [map]c ':ToCamelCase ' . expand('<cword>') .'<CR>'
 
 function! s:to_snake_case(before_str)
   let l:before_str = substitute(a:before_str, "^.", "\\l\\0", "")
-  " let l:after_str = substitute(l:after_str, "[A-Z]", "_\\l\\1", "g")
   let l:after_str = ""
   for i in range(0,strlen(l:before_str)-1)
     if l:before_str[i] ==# toupper(l:before_str[i])
@@ -421,7 +419,6 @@ function! s:to_snake_case(before_str)
 endfunction
 command! -nargs=? ToSnakeCase call s:to_snake_case(<f-args>)
 nnoremap <expr> [map]s ':ToSnakeCase ' . expand('<cword>') .'<CR>'
-" nnoremap [map]s viwo<ESC>vuviw:s/\v(.)/_\l\1/g<CR>
 
 autocmd MyAutoLazyCmd VimEnter * nnoremap <nowait> <expr> gc '`[' . getregtype()[0] . '`]'
 
@@ -446,6 +443,16 @@ nnoremap ? ?\v
 let mapleader = "\<Space>"
 nmap , [map]
 nmap [map] <Nop>
+
+"=================================
+"
+"  q  w  e  r  t  y  u  i  o  p
+"   _  _
+"   A  S  d  f  g  h  j  k  l ;
+"       _  _
+"    z  X  C  v  b  n  m  ,  .
+"
+"=================================
 map <Space> <Nop>
 "単語ハイライト
 nnoremap <silent> <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
@@ -491,7 +498,7 @@ nmap <Leader>d [denite]
 "      _  _  _  _             _
 "   a  S  D  F  G  h  j  k  l ;
 "    _     _  _
-"    Z  x  C  V  b  n  m
+"    Z  x  C  V  b  n  m  ,  .
 "
 "=================================
 
