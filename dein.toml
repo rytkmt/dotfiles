@@ -236,3 +236,9 @@ if = "has('python3')"
 hook_add = '''
 au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/denite.rc.vim
 '''
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+hook_add = '''
+au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-quickrun.rc.vim
+'''

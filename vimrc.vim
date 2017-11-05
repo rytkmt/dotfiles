@@ -465,7 +465,9 @@ vmap <Leader>v "*p
 nmap <Leader>z [other]
 nmap <Leader>t [tab]
 nmap <Leader>w [window]
-nmap <Leader>q [ref]
+nmap <Leader>1 [ref]
+nmap <Leader>q [quick]
+nmap [quick] <Nop>
 nmap <Leader>e [edit]
 nmap [unite] <Nop>
 
@@ -493,8 +495,10 @@ nmap [denite] <Nop>
 nmap <Leader>d [denite]
 
 "=================================
-"     _  _  _  _     _        _
-"  q  W  E  R  T  y  U  i  o  P
+" _
+" 1  2  3  4  5  6  7  8  9  0
+"  _  _  _  _  _     _        _
+"  Q  W  E  R  T  y  U  i  o  P
 "      _  _  _  _             _
 "   a  S  D  F  G  h  j  k  l ;
 "    _     _  _
