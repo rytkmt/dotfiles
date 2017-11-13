@@ -442,6 +442,7 @@ nnoremap ? ?\v
 " キーマップ用
 let mapleader = "\<Space>"
 nmap , [map]
+vmap , [map]
 nmap [map] <Nop>
 
 "=================================
@@ -527,7 +528,12 @@ endif
 "endif
 " ++ }}}
 " ++ ファイルタイプ別{{{
+" +++ help{{{
 autocmd MyAutoCmd FileType help nnoremap <buffer> q :q<CR>
+" +++ }}}
+" +++ vimshell{{{
+autocmd MyAutoCmd FileType vimshell nmap <buffer> o Ga
+" +++ }}}
 " ++ }}}
 " +}}}
 " + ctags系 {{{
