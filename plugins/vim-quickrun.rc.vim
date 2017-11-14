@@ -7,7 +7,7 @@ let g:quickrun_config= {
   \     'outputter/buffer/split': ':botright 8sp',
   \     'hook/time/enable': '1'
   \    },
-  \   'ruby/syntax_check': {
+  \   'ruby_syntax_check': {
   \     "command" : "ruby",
   \     "exec"    : "%c %o %s:p ",
   \     "cmdopt"  : "-c",
@@ -15,8 +15,11 @@ let g:quickrun_config= {
   \     "outputter/buffer/into" : 1
   \   }
   \ }
+if has('win32')
+  let g:quickrun_config.ruby_syntax_check.command = 'C:\Ruby187\bin\ruby.EXE'
+endif
 nnoremap [quick]r :<C-u>QuickRun
 vnoremap [map]r :QuickRun<CR>
-nnoremap [quick]c :<C-u>QuickRun ruby/syntax_check<CR>
+nnoremap [quick]c :<C-u>QuickRun ruby_syntax_check<CR>
 nnoremap [quick]a :<C-u>QuickRun -args
 nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
