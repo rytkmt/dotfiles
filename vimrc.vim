@@ -1,7 +1,7 @@
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 25-Oct-2017.
+" Last Change: 16-Nov-2017.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 " + kaoriya default settings {{{
@@ -348,7 +348,6 @@ vnoremap x "_x
 nnoremap x "_x
 vnoremap s "_s
 nnoremap s "_s
-inoremap <C-d> <C-o>"_dd
 nnoremap t d
 vnoremap t x
 nnoremap tt dd
@@ -388,37 +387,15 @@ noremap zj 4<C-e>
 noremap zk 4<C-y>
 
 " 削除
-inoremap <C-d> <Del>
+inoremap <C-l> <Del>
 imap <C-h> <BS>
+inoremap <C-d> <C-o>"_dd
+inoremap <C-b> <C-o>"_db<C-o>x
+inoremap <C-e> <C-o>"_de
 
 " カーソル位置の単語を置換
 nnoremap <expr> <C-s> ':%s/\<' . expand('<cword>') . '\>/'
 vnoremap <expr> <C-s> ':s/\<' . expand('<cword>') . '\>/'
-
-function! s:to_camel_case(before_str)
-  let l:after_str = ""
-  for l:before_char in split(a:before_str, '_')
-    let l:after_str = l:after_str . substitute(l:before_char, "^.", "\\u\\0", "")
-  endfor
-  execute "normal viws" . l:after_str
-endfunction
-command! -nargs=? ToCamelCase call s:to_camel_case(<f-args>)
-nnoremap <expr> [map]c ':ToCamelCase ' . expand('<cword>') .'<CR>'
-
-function! s:to_snake_case(before_str)
-  let l:before_str = substitute(a:before_str, "^.", "\\l\\0", "")
-  let l:after_str = ""
-  for i in range(0,strlen(l:before_str)-1)
-    if l:before_str[i] ==# toupper(l:before_str[i])
-      let l:after_str = l:after_str . substitute(l:before_str[i], "[A-Z]", "_\\l\\0", "")
-    else
-      let l:after_str = l:after_str . l:before_str[i]
-    endif
-  endfor
-  execute "normal viws" . l:after_str
-endfunction
-command! -nargs=? ToSnakeCase call s:to_snake_case(<f-args>)
-nnoremap <expr> [map]s ':ToSnakeCase ' . expand('<cword>') .'<CR>'
 
 autocmd MyAutoLazyCmd VimEnter * nnoremap <nowait> <expr> gc '`[' . getregtype()[0] . '`]'
 
@@ -448,9 +425,9 @@ nmap [map] <Nop>
 "=================================
 "
 "  q  w  e  r  t  y  u  i  o  p
-"   _  _
+"
 "   A  S  d  f  g  h  j  k  l ;
-"       _  _
+"
 "    z  X  C  v  b  n  m  ,  .
 "
 "=================================
@@ -533,6 +510,32 @@ autocmd MyAutoCmd FileType help nnoremap <buffer> q :q<CR>
 " +++ }}}
 " +++ vimshell{{{
 autocmd MyAutoCmd FileType vimshell nmap <buffer> o Ga
+" +++ }}}
+" +++ ruby{{{
+function! s:to_camel_case(before_str)
+  let l:after_str = ""
+  for l:before_char in split(a:before_str, '_')
+    let l:after_str = l:after_str . substitute(l:before_char, "^.", "\\u\\0", "")
+  endfor
+  execute "normal viws" . l:after_str
+endfunction
+command! -nargs=? ToCamelCase call s:to_camel_case(<f-args>)
+autocmd MyAutoCmd FileType ruby nnoremap <expr> [ft]c ':ToCamelCase ' . expand('<cword>') .'<CR>'
+
+function! s:to_snake_case(before_str)
+  let l:before_str = substitute(a:before_str, "^.", "\\l\\0", "")
+  let l:after_str = ""
+  for i in range(0,strlen(l:before_str)-1)
+    if l:before_str[i] ==# toupper(l:before_str[i])
+      let l:after_str = l:after_str . substitute(l:before_str[i], "[A-Z]", "_\\l\\0", "")
+    else
+      let l:after_str = l:after_str . l:before_str[i]
+    endif
+  endfor
+  execute "normal viws" . l:after_str
+endfunction
+command! -nargs=? ToSnakeCase call s:to_snake_case(<f-args>)
+autocmd MyAutoCmd FileType ruby nnoremap <expr> [ft]s ':ToSnakeCase ' . expand('<cword>') .'<CR>'
 " +++ }}}
 " ++ }}}
 " +}}}
