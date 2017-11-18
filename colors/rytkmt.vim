@@ -9,25 +9,24 @@ if exists("syntax_on")
   syntax reset
 endif
 " + 色の設定 {{{
-if (has("gui_running")) || has('gui') || has('nvim')
+if has("gui_running") || has('gui') || has('nvim')
     let s:vmode       = "gui"
-    let s:col1       = "#222529" "黒
-    let s:col2       = "#323842"
+    let s:col1       = "#20222b" "黒
+    let s:col2       = "#32384d"
     let s:col3       = "#515960"
     let s:col4       = "#d7dbe2"
     let s:col5       = "#fdf4ed" "白
-    let s:col6        = "#88c0d0" "緑みの水色
+    let s:col6         = "#91acd1" "紫みの青
     let s:col7      = "#645f87" "濃い紫
     let s:col8      = "#bf6971" "オレンジ赤
     let s:col9        = "#817870" "グレー
-    let s:col10       = "#81a1c5" "水色
+    let s:col10       = "#a093c7" "水色
     let s:col11       = "#709d6c" "緑
     let s:col12  = "#d5b875" "黃
-    let s:col13   = "#c18675" "オレンジ
-    let s:col14   = "#b48ead" "薄ピンク
-    let s:col15         = "#7e8bb8" "紫みの青
-    let s:col16       = "#a3be8c" "黄緑
-    let s:col17       = "#b15e7c" "赤ピンク
+    let s:col13   = "#e2a478" "オレンジ
+    let s:col14   = "#d7afd7" "薄ピンク
+    let s:col15       = "#b4be82" "黄緑
+    let s:col16       = "#b15e7c" "赤ピンク
 else
     let s:vmode       = "cterm"
     let s:col1       = "235" "#262626
@@ -35,18 +34,17 @@ else
     let s:col3       = "240" "#585858
     let s:col4       = "253" "#dadada
     let s:col5       = "230" "#ffffd7
-    let s:col6        = "116" "#87d7d7
+    let s:col6        = "110" "#87afd7
     let s:col7      = "60" "#5f5f87
     let s:col8      = "131" "#af5f5f
     let s:col9        = "102" "#878787
-    let s:col10       = "110" "#87afd7
+    let s:col10       = "141" "#af87ff
     let s:col11       = "71" "#5faf5f
     let s:col12  = "223" "#ffd7af
     let s:col13   = "137" "#af875f
     let s:col14   = "182" "#d7afd7
-    let s:col15         = "68" "#5f87d7
-    let s:col16       = "151" "#afd7af
-    let s:col17       = "211" "#ff87af
+    let s:col15       = "151" "#afd7af
+    let s:col16       = "211" "#ff87af
 endif
 " }}}
 "
@@ -67,7 +65,6 @@ exe "let s:bg_col13   = ' ".s:vmode."bg=".s:col13  ."'"
 exe "let s:bg_col14   = ' ".s:vmode."bg=".s:col14  ."'"
 exe "let s:bg_col15         = ' ".s:vmode."bg=".s:col15        ."'"
 exe "let s:bg_col16       = ' ".s:vmode."bg=".s:col16      ."'"
-exe "let s:bg_col17       = ' ".s:vmode."bg=".s:col17      ."'"
 
 exe "let s:fg_col1       = ' ".s:vmode."fg=".s:col1      ."'"
 exe "let s:fg_col2       = ' ".s:vmode."fg=".s:col2      ."'"
@@ -85,7 +82,6 @@ exe "let s:fg_col13   = ' ".s:vmode."fg=".s:col13  ."'"
 exe "let s:fg_col14   = ' ".s:vmode."fg=".s:col14  ."'"
 exe "let s:fg_col15         = ' ".s:vmode."fg=".s:col15        ."'"
 exe "let s:fg_col16       = ' ".s:vmode."fg=".s:col16      ."'"
-exe "let s:fg_col17       = ' ".s:vmode."fg=".s:col17      ."'"
 
 exe "let s:sp_col1       = ' ".s:vmode."sp=".s:col1      ."'"
 exe "let s:sp_col2       = ' ".s:vmode."sp=".s:col2      ."'"
@@ -103,7 +99,6 @@ exe "let s:sp_col13   = ' ".s:vmode."sp=".s:col13  ."'"
 exe "let s:sp_col14   = ' ".s:vmode."sp=".s:col14  ."'"
 exe "let s:sp_col15         = ' ".s:vmode."sp=".s:col15        ."'"
 exe "let s:sp_col16       = ' ".s:vmode."sp=".s:col16      ."'"
-exe "let s:sp_col17       = ' ".s:vmode."sp=".s:col17      ."'"
 
 exe "let s:underline      = ' ".s:vmode."=underline'"
 exe "let s:bold      = ' ".s:vmode."=bold'"
@@ -118,19 +113,19 @@ exe "hi! Normal"                 .s:fg_col5       .s:bg_col1
 exe "hi! Comment"                .s:fg_col9
 
 exe "hi! Constant"               .s:fg_col7
-exe "hi! String"                 .s:fg_col16
+exe "hi! String"                 .s:fg_col15
 exe "hi! Character"              .s:fg_col10
 
 exe "hi! Identifier"             .s:fg_col13 "gui=NONE, cterm=NONE"
 exe "hi! Function"               .s:fg_col10
 
-exe "hi! Statement"              .s:fg_col15 "gui=NONE, cterm=NONE"
+exe "hi! Statement"              .s:fg_col6 "gui=NONE, cterm=NONE"
 hi! link Label String
 hi! link Exception PreProc
 
 exe "hi! PreProc"                .s:fg_col14
 hi! link Define Type
-exe "hi! Macro"                  .s:fg_col16
+exe "hi! Macro"                  .s:fg_col15
 
 exe "hi! Type"                   .s:fg_col8 "gui=NONE, cterm=NONE"
 hi! link StorageClass Identifier
@@ -142,7 +137,7 @@ exe "hi! Delimiter"              .s:fg_col4
 exe "hi! SpecialComment"         .s:fg_col4
 hi! link Debug Macro
 
-exe "hi! Error"                  .s:fg_col5       .s:bg_col15
+exe "hi! Error"                  .s:fg_col5       .s:bg_col6
 exe "hi! Todo"                   .s:fg_col7      .s:bg_col1
 
 exe "hi! Cursor"                                   .s:bg_col4
@@ -159,12 +154,12 @@ exe "hi! PMenuSel"               .s:fg_col10       .s:bg_col3
 exe "hi! PMenuSBar"                                .s:bg_col3
 exe "hi! PMenuThumb"                               .s:bg_col4
 
-exe "hi! Visual"                 .s:fg_col2       .s:bg_col15 .s:bold
+exe "hi! Visual"                 .s:fg_col2       .s:bg_col6 .s:bold
 exe "hi! Search"                 .s:fg_col1       .s:bg_col6
 hi! link IncSearch Search
 
 exe "hi! VertSplit"              .s:fg_col1       .s:bg_col4
-exe "hi! MatchParen"             .s:fg_col17      .s:bg_col1 "gui=underline,bold, cterm=underline,bold"
+exe "hi! MatchParen"             .s:fg_col16      .s:bg_col1 "gui=underline,bold, cterm=underline,bold"
 exe "hi! Title"                  .s:fg_col7
 exe "hi! Directory"              .s:fg_col9
 exe "hi! SpecialKey"             .s:fg_col3
@@ -182,11 +177,11 @@ exe "hi! ErrorMsg"               .s:fg_col1       .s:bg_col14
 " }}}
 " + その他highlight {{{
 "【_String】"
-exe "hi! _String" .s:fg_col16
+exe "hi! _String" .s:fg_col15
 "【_Comment】"
 exe "hi! _Comment" .s:fg_col9
 "【_Regexp】"
-exe "hi! _Regexp" .s:fg_col16
+exe "hi! _Regexp" .s:fg_col15
 "【_Unknown】"
 exe "hi! _Unknown" .s:bg_col7
 "【_Value】
@@ -250,27 +245,27 @@ exe "hi! rubyArrayDelimiter" .s:fg_col5
 exe "hi! rubyCurlyBlockDelimiter" .s:fg_col5
 " Class.method <-- . "
 exe "hi! rubyMethodDeclaration" .s:fg_col5
-" -------- col16 ----------"
+" -------- col15 ----------"
 " :some "
-exe "hi! rubySymbol" .s:fg_col16
-" ---------- col15 --------------"
+exe "hi! rubySymbol" .s:fg_col15
+" ---------- col6 --------------"
 " =========== fg =============="
 " if end case when rescue
-exe "hi! rubyConditional" .s:fg_col15 .s:bold
+exe "hi! rubyConditional" .s:fg_col6 .s:bold
 " do end begin rescue return"
-exe "hi! rubyControl" .s:fg_col15 .s:bold
+exe "hi! rubyControl" .s:fg_col6 .s:bold
 " exception_rescue"
-exe "hi! rubyExceptional" .s:fg_col15 .s:bold
+exe "hi! rubyExceptional" .s:fg_col6 .s:bold
 " yield "
-exe "hi! rubyKeyword" .s:fg_col15 .s:bold
+exe "hi! rubyKeyword" .s:fg_col6 .s:bold
 " while end for end "
-exe "hi! rubyRepeat" .s:fg_col15 .s:bold
+exe "hi! rubyRepeat" .s:fg_col6 .s:bold
 " for nm,val in some do <-- do "
-exe "hi! rubyOptionalDo" .s:fg_col15 .s:bold
+exe "hi! rubyOptionalDo" .s:fg_col6 .s:bold
 " some = 0 if true <-- if "
-exe "hi! rubyConditionalModifier" .s:fg_col15 .s:bold
+exe "hi! rubyConditionalModifier" .s:fg_col6 .s:bold
 " begin some end until true <-- until "
-exe "hi! rubyRepeatModifier" .s:fg_col15 .s:bold
+exe "hi! rubyRepeatModifier" .s:fg_col6 .s:bold
 " -------- col13 -----------"
 
 " Person  Exception "
@@ -319,7 +314,7 @@ exe "hi! rubyAccess" .s:fg_col7 .s:bold
 exe "hi! rubyAttribute" .s:fg_col7 .s:bold
 
 
-" ---------- col16 ------------"
+" ---------- col15 ------------"
 
 "【_String】"
 " " " "
@@ -473,9 +468,9 @@ hi! link cssValueTime _CSS_Value
 " 14Hz 3kHz <-- 14 3 "
 hi! link cssValueFrequency _CSS_Value
 
-"------------- col15 ---------------"
+"------------- col6 ---------------"
 " !important "
-exe "hi! cssImportant" .s:fg_col15 .s:bold
+exe "hi! cssImportant" .s:fg_col6 .s:bold
 "----------- col14 -----------"
 "------------ col8 -------------"
 " div ul "
@@ -483,7 +478,7 @@ exe "hi! cssTagName" .s:fg_col8
 " @keyframes some { 0% {} 30%{} } <-- 0% 30% "
 exe "hi! cssKeyFrameSelector" .s:fg_col8
 "------------ col7 -------------"
-"------------ col16 --------------"
+"------------ col15 --------------"
 "【_String】"
 " content: "\2193"; <-- \2193
 hi! link cssUnicodeEscape _String
@@ -649,22 +644,22 @@ exe "hi! javaScriptStatement" s:fg_col14
 exe "hi! javaScriptBranch" .s:fg_col14
 " var "
 exe "hi! javaScriptIdentifier" .s:fg_col14
-" --------------- col15 --------------------- "
+" --------------- col6 --------------------- "
 " function(){} <-- function "
-exe "hi! javaScriptFunction" .s:fg_col15 .s:bold
+exe "hi! javaScriptFunction" .s:fg_col6 .s:bold
 " if else end "
-exe "hi! javaScriptConditional" .s:fg_col15 .s:bold
+exe "hi! javaScriptConditional" .s:fg_col6 .s:bold
 " for "
-exe "hi! javaScriptRepeat" .s:fg_col15 .s:bold
+exe "hi! javaScriptRepeat" .s:fg_col6 .s:bold
 " case "
-exe "hi! javaScriptLabel" .s:fg_col15 .s:bold
+exe "hi! javaScriptLabel" .s:fg_col6 .s:bold
 " --------------- col9 -------------------- "
 "【_Comment】"
 " //some "
 hi! link javaScriptLineComment _Comment
 " /* some */ "
 hi! link javaScriptComment _Comment
-" -------------- col16 -------------------- "
+" -------------- col15 -------------------- "
 "【_String】"
 " /,/g "
 hi! link javaScriptRegexpString _String
@@ -712,11 +707,11 @@ exe "hi! htmlEvent" .s:fg_col5
 exe "hi! htmlLink" .s:fg_col5
 
 exe "hi! javaScript" .s:fg_col5
-" ------------- col15 -----------------
+" ------------- col6 -----------------
 " <tag> </tag> <-- tag
-exe "hi! htmlTagName" .s:fg_col15
+exe "hi! htmlTagName" .s:fg_col6
 " <script> </script> <-- script
-exe "hi! htmlSpecialTagName" .s:fg_col15
+exe "hi! htmlSpecialTagName" .s:fg_col6
 " ------------- col9 ----------------
 " 【_Comment】
 " <!-- comment --> <-- -- comment --
@@ -733,7 +728,7 @@ exe "hi! htmlTag" .s:fg_col13
 exe "hi! htmlEndTag" .s:fg_col13
 " <script> <-- < >
 exe "hi! htmlScriptTag" .s:fg_col13
-" -------------- col16 --------------
+" -------------- col15 --------------
 " "aa" 'aa'
 hi! link htmlString _String
 " -------------- col11 --------------
@@ -826,9 +821,9 @@ exe "hi! vimfilerNonMark"  .s:fg_col4
 " exe "hi! vimfilerStatus"  .s:fg_col11
 " exe "hi! vimfilerDirectory"  .s:fg_col11
 exe "hi! vimfilerNormalFile"  .s:fg_col5
-exe "hi! vimfilerMarkedFile"  .s:fg_col16
+exe "hi! vimfilerMarkedFile"  .s:fg_col15
 exe "hi! vimfilerOpenedFile"  .s:fg_col11
-exe "hi! vimfilerClosedFile"  .s:fg_col15
+exe "hi! vimfilerClosedFile"  .s:fg_col6
 exe "hi! vimfilerROFile"  .s:fg_col9
 " }}}
 " ++ markdown {{{
@@ -855,11 +850,11 @@ exe "hi! mkdLinkTitle" .s:fg_col5
 exe "hi! mkdListBlock0" .s:fg_col5
 exe "hi! mkdListBlock1" .s:fg_col5
 exe "hi! mkdListBlock2" .s:fg_col5
-exe "hi! mkdListItem" .s:fg_col15
+exe "hi! mkdListItem" .s:fg_col6
 exe "hi! mkdRule" .s:reverse
 exe "hi! mkdURL" .s:fg_col12
 exe "hi! mkdID" .s:fg_col12
-exe "hi! mkdIDDelimiter" .s:fg_col15
+exe "hi! mkdIDDelimiter" .s:fg_col6
 exe "hi! markdownCodeDelimiter" .s:fg_col11
 
 " なぞ

@@ -228,13 +228,12 @@ else
   let s:dein_cache_path = expand('~/.vim/cache/vim/dein')
 endif
 
-let s:dein_dir = s:dein_cache_path
-                 \ .'/repos/github.com/Shougo/dein.vim'
+let s:dein_dir = s:dein_cache_path .'/repos/github.com/Shougo/dein.vim'
 if &runtimepath !~ '/dein.vim'
   if !isdirectory(s:dein_dir)
     execute '!git clone https://github.com/Shougo/dein.vim ' . s:dein_dir
   endif
-  execute 'set runtimepath+=' . fnamemodify(s:dein_dir, ':p')
+  execute 'set runtimepath+=' . s:dein_dir
 endif
 
 if dein#load_state(s:dein_cache_path)
@@ -458,7 +457,8 @@ nmap <Leader>f [filer]
 nmap [search] <Nop>
 nmap <Leader>s [search]
 
-nmap <Leader>r [replace]
+nmap  [rails] <Nop>
+nmap <Leader>r [rails]
 
 nmap [ctag] <Nop>
 vmap [ctag] <Nop>

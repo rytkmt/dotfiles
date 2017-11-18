@@ -8,6 +8,9 @@
 #
 # ------------------
 [[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
 repo = 'Shougo/vimproc.vim'
 hook_post_update = '''
   if dein#util#_is_windows()
@@ -33,6 +36,9 @@ au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vimfiler.rc.vim
 
 [[plugins]]
 repo = 'rytkmt/dotfiles'
+
+[[plugins]]
+repo = 'cocopon/iceberg.vim'
 
 [[plugins]]
 repo = 'rakr/vim-one'
@@ -84,6 +90,9 @@ repo = 'cohama/lexima.vim'
 
 [[plugins]]
 repo = 'tpope/vim-rails'
+hook_add = '''
+au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-rails.rc.vim
+'''
 
 [[plugins]]
 repo = 'terryma/vim-expand-region'
