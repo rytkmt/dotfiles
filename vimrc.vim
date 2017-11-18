@@ -1,7 +1,7 @@
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 17-Nov-2017.
+" Last Change: 18-Nov-2017.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 " + kaoriya default settings {{{
@@ -125,6 +125,7 @@ set smartcase
 set incsearch
 "検索結果をハイライト
 set hlsearch
+autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow
 " ++ }}}
 " ++ 編集に関する設定: {{{
 "
