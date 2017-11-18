@@ -219,6 +219,9 @@ set splitright
 "" texのconcealを無効化（#^ω^）
 let g:tex_conceal=''
 set conceallevel=0
+
+" 一時ファイルを作成して開く、Tempfileコマンドを定義
+command! TempfileRuby :vs `=tempname()`|set ft=ruby
 " ++ }}}
 " + }}}
 " + dein {{{
