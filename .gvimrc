@@ -204,10 +204,9 @@ elseif has('mac') || has('unix')
 endif
 try
   if has('win32')
-    set guifont=VL_ゴシック:h11
-    set renderoptions=type:directx,renmode:5
-  else
-    set guifont=VL_ゴシック:h13
+    " set guifont=VL_ゴシック:h11
+    set guifont=Ricty_Diminished:h11:cSHIFTJIS:qDRAFT
+    set renderoptions=type:directx,renmode:4
   endif
 endtry
 "---------------------------------------------------------------------------
