@@ -27,16 +27,15 @@ if isdirectory(s:neco_dicts_dir)
   \   'ruby': s:neco_dicts_dir . '/ruby.dict'
   \ }
 endif
+
 unlet s:neco_dicts_dir
 let g:neocomplete#data_directory = $HOME . '/.vim/cache/neocomplete'
 "候補の選択
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
-inoremap <expr><C-j>  pumvisible() ? "\<C-n>" : "\<C-j>"
-inoremap <expr><C-k>  pumvisible() ? "\<C-p>" : "\<C-k>"
-imap <expr><C-l>
-		\ neocomplete#complete_common_string() != '' ?
-		\   neocomplete#complete_common_string() : "\<C-l>"
+imap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+imap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+imap <expr><C-j>  pumvisible() ? "\<C-n>" : "\<C-j>"
+imap <expr><C-k>  pumvisible() ? "\<C-p>" : "\<C-k>"
+imap <expr><C-l>  neocomplete#complete_common_string() != '' ? neocomplete#complete_common_string() : "\<Del>"
 autocmd MyAutoCmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd MyAutoCmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd MyAutoCmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
