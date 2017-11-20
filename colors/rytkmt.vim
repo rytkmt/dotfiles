@@ -1,5 +1,4 @@
 " mycolor color scheme
-
 let g:colors_name = expand('<sfile>:t:r')
 
 set background=dark
@@ -16,17 +15,16 @@ if has("gui_running") || has('gui') || has('nvim')
     let s:col3       = "#515960"
     let s:col4       = "#d7dbe2"
     let s:col5       = "#fdf4ed" "白
-    let s:col6         = "#91acd1" "紫みの青
-    let s:col7      = "#645f87" "濃い紫
-    let s:col8      = "#bf6971" "オレンジ赤
-    let s:col9        = "#817870" "グレー
-    let s:col10       = "#a093c7" "水色
-    let s:col11       = "#709d6c" "緑
-    let s:col12  = "#d5b875" "黃
-    let s:col13   = "#e2a478" "オレンジ
-    let s:col14   = "#d7afd7" "薄ピンク
-    let s:col15       = "#b4be82" "黄緑
-    let s:col16       = "#b15e7c" "赤ピンク
+    let s:col6         = "#91acd1" "水色
+    let s:col7      = "#716A97" "濃い紫
+    let s:col8        = "#817870" "グレー
+    let s:col9       = "#A096D7" "薄紫
+    let s:col10       = "#62846F" "緑
+    let s:col11  = "#D5CC87" "黃
+    let s:col12   = "#CFA686" "オレンジ
+    let s:col13   = "#D8C2E8" "薄ピンク
+    let s:col14       = "#B4BE96" "黄緑
+    let s:col15       = "#D48585" "赤ピンク
 else
     let s:vmode       = "cterm"
     let s:col1       = "235" "#262626
@@ -36,15 +34,14 @@ else
     let s:col5       = "230" "#ffffd7
     let s:col6        = "110" "#87afd7
     let s:col7      = "60" "#5f5f87
-    let s:col8      = "131" "#af5f5f
-    let s:col9        = "102" "#878787
-    let s:col10       = "141" "#af87ff
-    let s:col11       = "71" "#5faf5f
-    let s:col12  = "223" "#ffd7af
-    let s:col13   = "137" "#af875f
-    let s:col14   = "182" "#d7afd7
-    let s:col15       = "151" "#afd7af
-    let s:col16       = "211" "#ff87af
+    let s:col8        = "102" "#878787
+    let s:col9       = "141" "#af87ff
+    let s:col10       = "71" "#5faf5f
+    let s:col11  = "223" "#ffd7af
+    let s:col12   = "137" "#af875f
+    let s:col13   = "182" "#d7afd7
+    let s:col14       = "151" "#afd7af
+    let s:col15       = "211" "#ff87af
 endif
 " }}}
 "
@@ -64,7 +61,6 @@ exe "let s:bg_col12  = ' ".s:vmode."bg=".s:col12 ."'"
 exe "let s:bg_col13   = ' ".s:vmode."bg=".s:col13  ."'"
 exe "let s:bg_col14   = ' ".s:vmode."bg=".s:col14  ."'"
 exe "let s:bg_col15         = ' ".s:vmode."bg=".s:col15        ."'"
-exe "let s:bg_col16       = ' ".s:vmode."bg=".s:col16      ."'"
 
 exe "let s:fg_col1       = ' ".s:vmode."fg=".s:col1      ."'"
 exe "let s:fg_col2       = ' ".s:vmode."fg=".s:col2      ."'"
@@ -81,7 +77,6 @@ exe "let s:fg_col12  = ' ".s:vmode."fg=".s:col12 ."'"
 exe "let s:fg_col13   = ' ".s:vmode."fg=".s:col13  ."'"
 exe "let s:fg_col14   = ' ".s:vmode."fg=".s:col14  ."'"
 exe "let s:fg_col15         = ' ".s:vmode."fg=".s:col15        ."'"
-exe "let s:fg_col16       = ' ".s:vmode."fg=".s:col16      ."'"
 
 exe "let s:sp_col1       = ' ".s:vmode."sp=".s:col1      ."'"
 exe "let s:sp_col2       = ' ".s:vmode."sp=".s:col2      ."'"
@@ -98,7 +93,6 @@ exe "let s:sp_col12  = ' ".s:vmode."sp=".s:col12 ."'"
 exe "let s:sp_col13   = ' ".s:vmode."sp=".s:col13  ."'"
 exe "let s:sp_col14   = ' ".s:vmode."sp=".s:col14  ."'"
 exe "let s:sp_col15         = ' ".s:vmode."sp=".s:col15        ."'"
-exe "let s:sp_col16       = ' ".s:vmode."sp=".s:col16      ."'"
 
 exe "let s:underline      = ' ".s:vmode."=underline'"
 exe "let s:bold      = ' ".s:vmode."=bold'"
@@ -110,29 +104,29 @@ exe "let s:standout      = ' ".s:vmode."=standout'"
 "}}}
 " + 基本のhighlight {{{
 exe "hi! Normal"                 .s:fg_col5       .s:bg_col1
-exe "hi! Comment"                .s:fg_col9
+exe "hi! Comment"                .s:fg_col8
 
 exe "hi! Constant"               .s:fg_col7
-exe "hi! String"                 .s:fg_col15
-exe "hi! Character"              .s:fg_col10
+exe "hi! String"                 .s:fg_col14
+exe "hi! Character"              .s:fg_col9
 
-exe "hi! Identifier"             .s:fg_col13 "gui=NONE, cterm=NONE"
-exe "hi! Function"               .s:fg_col10
+exe "hi! Identifier"             .s:fg_col12 "gui=NONE, cterm=NONE"
+exe "hi! Function"               .s:fg_col9
 
 exe "hi! Statement"              .s:fg_col6 "gui=NONE, cterm=NONE"
 hi! link Label String
 hi! link Exception PreProc
 
-exe "hi! PreProc"                .s:fg_col14
+exe "hi! PreProc"                .s:fg_col13
 hi! link Define Type
-exe "hi! Macro"                  .s:fg_col15
+exe "hi! Macro"                  .s:fg_col14
 
-exe "hi! Type"                   .s:fg_col8 "gui=NONE, cterm=NONE"
+exe "hi! Type"                   .s:fg_col7 "gui=NONE, cterm=NONE"
 hi! link StorageClass Identifier
 
-exe "hi! Special"                .s:fg_col12
-exe "hi! SpecialChar"            .s:fg_col10
-exe "hi! Tag"                    .s:fg_col8
+exe "hi! Special"                .s:fg_col11
+exe "hi! SpecialChar"            .s:fg_col9
+exe "hi! Tag"                    .s:fg_col7
 exe "hi! Delimiter"              .s:fg_col4
 exe "hi! SpecialComment"         .s:fg_col4
 hi! link Debug Macro
@@ -149,8 +143,8 @@ exe "hi! NonText"                .s:fg_col3
 
 exe "hi! Folded"                 .s:fg_col4       .s:bg_col1
 
-exe "hi! PMenu"                  .s:fg_col11       .s:bg_col2
-exe "hi! PMenuSel"               .s:fg_col10       .s:bg_col3
+exe "hi! PMenu"                  .s:fg_col10       .s:bg_col2
+exe "hi! PMenuSel"               .s:fg_col9       .s:bg_col3
 exe "hi! PMenuSBar"                                .s:bg_col3
 exe "hi! PMenuThumb"                               .s:bg_col4
 
@@ -159,47 +153,47 @@ exe "hi! Search"                 .s:fg_col1       .s:bg_col6
 hi! link IncSearch Search
 
 exe "hi! VertSplit"              .s:fg_col1       .s:bg_col4
-exe "hi! MatchParen"             .s:fg_col16      .s:bg_col1 "gui=underline,bold, cterm=underline,bold"
+exe "hi! MatchParen"             .s:fg_col15      .s:bg_col1 "gui=underline,bold, cterm=underline,bold"
 exe "hi! Title"                  .s:fg_col7
-exe "hi! Directory"              .s:fg_col9
+exe "hi! Directory"              .s:fg_col8
 exe "hi! SpecialKey"             .s:fg_col3
 
-exe "hi! SpellBad"               .s:fg_col14   .s:bg_col1      "gui=underline, cterm=underline"
+exe "hi! SpellBad"               .s:fg_col13   .s:bg_col1      "gui=underline, cterm=underline"
 
 exe "hi! FoldColumn"             .s:fg_col5       .s:bg_col3
 exe "hi! SignColumn"             .s:fg_col5       .s:bg_col3
 
-exe "hi! Underlined"             .s:fg_col12
-exe "hi! Question"               .s:fg_col9
-exe "hi! WarningMsg"             .s:fg_col14
-exe "hi! ErrorMsg"               .s:fg_col1       .s:bg_col14
+exe "hi! Underlined"             .s:fg_col11
+exe "hi! Question"               .s:fg_col8
+exe "hi! WarningMsg"             .s:fg_col13
+exe "hi! ErrorMsg"               .s:fg_col1       .s:bg_col13
 
 " }}}
 " + その他highlight {{{
 "【_String】"
-exe "hi! _String" .s:fg_col15
+exe "hi! _String" .s:fg_col14
 "【_Comment】"
-exe "hi! _Comment" .s:fg_col9
+exe "hi! _Comment" .s:fg_col8
 "【_Regexp】"
-exe "hi! _Regexp" .s:fg_col15
+exe "hi! _Regexp" .s:fg_col14
 "【_Unknown】"
 exe "hi! _Unknown" .s:bg_col7
 "【_Value】
-exe "hi! _Value" .s:fg_col11
+exe "hi! _Value" .s:fg_col10
 
 "全角スペースをハイライト表示
 hi link ZenkakuSpace Error
 "}}}
 " + filetype毎のhighlight {{{
 " ++ Diff {{{
-exe "hi! DiffAdd"                .s:fg_col10       .s:bg_col1      "gui=underline, cterm=underline"
-exe "hi! DiffDelete"             .s:fg_col14   .s:bg_col1
-exe "hi! DiffChange"             .s:fg_col8      .s:bg_col1      "gui=underline, cterm=underline"
-exe "hi! DiffText"               .s:fg_col8      .s:bg_col1      "gui=underline, cterm=underline"
+exe "hi! DiffAdd"                .s:fg_col9       .s:bg_col1      "gui=underline, cterm=underline"
+exe "hi! DiffDelete"             .s:fg_col13   .s:bg_col1
+exe "hi! DiffChange"             .s:fg_col7      .s:bg_col1      "gui=underline, cterm=underline"
+exe "hi! DiffText"               .s:fg_col7      .s:bg_col1      "gui=underline, cterm=underline"
 " }}}
 " ++ Syntastic {{{
-exe "hi! SyntasticErrorSign"      .s:fg_col14  .s:bg_col1
-exe "hi! SyntasticStyleErrorSign" .s:fg_col14  .s:bg_col1
+exe "hi! SyntasticErrorSign"      .s:fg_col13  .s:bg_col1
+exe "hi! SyntasticStyleErrorSign" .s:fg_col13  .s:bg_col1
 " }}}
 " ++ ruby {{{
 
@@ -245,9 +239,9 @@ exe "hi! rubyArrayDelimiter" .s:fg_col5
 exe "hi! rubyCurlyBlockDelimiter" .s:fg_col5
 " Class.method <-- . "
 exe "hi! rubyMethodDeclaration" .s:fg_col5
-" -------- col15 ----------"
+" -------- col14 ----------"
 " :some "
-exe "hi! rubySymbol" .s:fg_col15
+exe "hi! rubySymbol" .s:fg_col14
 " ---------- col6 --------------"
 " =========== fg =============="
 " if end case when rescue
@@ -266,29 +260,29 @@ exe "hi! rubyOptionalDo" .s:fg_col6 .s:bold
 exe "hi! rubyConditionalModifier" .s:fg_col6 .s:bold
 " begin some end until true <-- until "
 exe "hi! rubyRepeatModifier" .s:fg_col6 .s:bold
-" -------- col13 -----------"
+" -------- col12 -----------"
 
 " Person  Exception "
-exe "hi! rubyConstant" .s:fg_col13
+exe "hi! rubyConstant" .s:fg_col12
 " self __FILE__ "
-exe "hi! rubyPseudoVariable" .s:fg_col13
+exe "hi! rubyPseudoVariable" .s:fg_col12
 " ARGV "
-exe "hi! rubyPredefinedConstant" .s:fg_col13
+exe "hi! rubyPredefinedConstant" .s:fg_col12
 " #{ }"
-exe "hi! rubyInterpolationDelimiter" .s:fg_col13
-" -------- col12 ----------"
+exe "hi! rubyInterpolationDelimiter" .s:fg_col12
+" -------- col11 ----------"
 " @test"
-exe "hi! rubyInstanceVariable" .s:fg_col12
+exe "hi! rubyInstanceVariable" .s:fg_col11
 " @@test"
-exe "hi! rubyClassVariable" .s:fg_col12
+exe "hi! rubyClassVariable" .s:fg_col11
 " $test"
-exe "hi! rubyGlobalVariable" .s:fg_col12
+exe "hi! rubyGlobalVariable" .s:fg_col11
 " $1
-exe "hi! rubyPredefinedVariable" .s:fg_col12
+exe "hi! rubyPredefinedVariable" .s:fg_col11
 " / some / "
-exe "hi! rubyRegexpDelimiter" .s:fg_col12
+exe "hi! rubyRegexpDelimiter" .s:fg_col11
 
-" ---------- col9 --------------"
+" ---------- col8 --------------"
 "【_Comment】"
 " comment_TODO
 hi! link rubyTodo _Comment
@@ -314,7 +308,7 @@ exe "hi! rubyAccess" .s:fg_col7 .s:bold
 exe "hi! rubyAttribute" .s:fg_col7 .s:bold
 
 
-" ---------- col15 ------------"
+" ---------- col14 ------------"
 
 "【_String】"
 " " " "
@@ -340,12 +334,12 @@ hi! link rubyRegexpDot _Regexp
 " / some_all /"
 hi! link rubyRegexp _Regexp
 
-" ----------- col8 -----------"
+" ----------- col7 -----------"
 
 " extend require "
-exe "hi! rubyInclude" .s:fg_col8
+exe "hi! rubyInclude" .s:fg_col7
 
-" ----------- col11 -----------"
+" ----------- col10 -----------"
 " 3 "
 hi! link rubyInteger _Value
 " 1.0 "
@@ -471,14 +465,14 @@ hi! link cssValueFrequency _CSS_Value
 "------------- col6 ---------------"
 " !important "
 exe "hi! cssImportant" .s:fg_col6 .s:bold
-"----------- col14 -----------"
-"------------ col8 -------------"
-" div ul "
-exe "hi! cssTagName" .s:fg_col8
-" @keyframes some { 0% {} 30%{} } <-- 0% 30% "
-exe "hi! cssKeyFrameSelector" .s:fg_col8
+"----------- col13 -----------"
 "------------ col7 -------------"
-"------------ col15 --------------"
+" div ul "
+exe "hi! cssTagName" .s:fg_col7
+" @keyframes some { 0% {} 30%{} } <-- 0% 30% "
+exe "hi! cssKeyFrameSelector" .s:fg_col7
+"------------ col7 -------------"
+"------------ col14 --------------"
 "【_String】"
 " content: "\2193"; <-- \2193
 hi! link cssUnicodeEscape _String
@@ -490,33 +484,33 @@ hi! link cssStringQQ _String
 hi! link cssSpecialCharQQ _String
 " '\\\\' "
 hi! link cssSpecialCharQ _String
-"------------- col9 --------------"
+"------------- col8 --------------"
 "【_Comment】】"
 hi! link cssComment _Comment
-"------------ col10 --------------"
+"------------ col9 --------------"
 " @charset "
-exe "hi! cssIncludeKeyword" .s:fg_col10
+exe "hi! cssIncludeKeyword" .s:fg_col9
 " @font-face "
-exe "hi! cssFontDescriptor" .s:fg_col10
+exe "hi! cssFontDescriptor" .s:fg_col9
 " .class <-- . "
-exe "hi! cssClassNameDot" .s:fg_col10
+exe "hi! cssClassNameDot" .s:fg_col9
 " .class <-- class "
-exe "hi! cssClassName" .s:fg_col10
+exe "hi! cssClassName" .s:fg_col9
 " #id "
-exe "hi! cssIdentifier" .s:fg_col10
+exe "hi! cssIdentifier" .s:fg_col9
 " .top_margin{} <-- _ "
-exe "hi! cssHacks" .s:fg_col10
-"---------- col12 -----------"
+exe "hi! cssHacks" .s:fg_col9
+"---------- col11 -----------"
 " selector:pseudo-class{} <-- pseudo-class "
-exe "hi! cssPseudoClass" .s:fg_col12
+exe "hi! cssPseudoClass" .s:fg_col11
 " @page:first <-- :first "
-exe "hi! cssPagePseudo" .s:fg_col12
+exe "hi! cssPagePseudo" .s:fg_col11
 " input:checked div:hover <-- :checked :hover "
-exe "hi! cssPseudoClassId" .s:fg_col12
-"---------- col13 ------------"
+exe "hi! cssPseudoClassId" .s:fg_col11
+"---------- col12 ------------"
 
 "【_CSS_Property】"
-exe "hi! _CSS_Property" .s:fg_col13
+exe "hi! _CSS_Property" .s:fg_col12
 " -moz- -webkit- "
 hi! link cssVendor _CSS_Property
 " animation-name animation-duration "
@@ -568,22 +562,22 @@ hi! link cssFlexibleBoxProp _CSS_Property
 " @media screen{ min-color: some} <-- min-color "
 hi! link cssMediaProp _CSS_Property
 
-"------------ col11 --------------"
+"------------ col10 --------------"
 " url(img/arw.png) <-- img/arw.png "
-exe "hi! cssURL" .s:fg_col11
+exe "hi! cssURL" .s:fg_col10
 " url(sansation_light.woff) <-- sansation_light.woff "
-exe "hi! cssFontDescriptorFunction" .s:fg_col11
+exe "hi! cssFontDescriptorFunction" .s:fg_col10
 " unicode-range: U+000-5FF, U+1e00-1fff, U+2000-2300;"
-exe "hi! cssFontDescriptorAttr" .s:fg_col11
+exe "hi! cssFontDescriptorAttr" .s:fg_col10
 " content: open-quote <-- open quote "
-exe "hi! cssGeneratedContentAttr" .s:fg_col11
+exe "hi! cssGeneratedContentAttr" .s:fg_col10
 
 " input[type=radio] <-- type radio "
-exe "hi! cssAttributeSelector" .s:fg_col11
+exe "hi! cssAttributeSelector" .s:fg_col10
 " :lang(en) :lang(no) <-- en no "
-exe "hi! cssPseudoClassFn" .s:fg_col11
+exe "hi! cssPseudoClassFn" .s:fg_col10
 " @media screen and print <-- screen print all "
-exe "hi! cssMediaType" .s:fg_col11
+exe "hi! cssMediaType" .s:fg_col10
 "------------ ??? ----------------"
 "【_Unknown】"
 hi! link cssMediaBlock _Unknown
@@ -635,15 +629,15 @@ exe "hi! javaScriptGlobal" .s:fg_col5
 exe "hi! javaScriptMember" .s:fg_col5
 " if() function() <-- ( ) "
 exe "hi! javaScriptParens" .s:fg_col5
-" ------------- col14 ----------------- "
+" ------------- col13 ----------------- "
 " new "
-exe "hi! javaScriptOperator" .s:fg_col14
+exe "hi! javaScriptOperator" .s:fg_col13
 " return "
-exe "hi! javaScriptStatement" s:fg_col14
+exe "hi! javaScriptStatement" s:fg_col13
 " break "
-exe "hi! javaScriptBranch" .s:fg_col14
+exe "hi! javaScriptBranch" .s:fg_col13
 " var "
-exe "hi! javaScriptIdentifier" .s:fg_col14
+exe "hi! javaScriptIdentifier" .s:fg_col13
 " --------------- col6 --------------------- "
 " function(){} <-- function "
 exe "hi! javaScriptFunction" .s:fg_col6 .s:bold
@@ -653,13 +647,13 @@ exe "hi! javaScriptConditional" .s:fg_col6 .s:bold
 exe "hi! javaScriptRepeat" .s:fg_col6 .s:bold
 " case "
 exe "hi! javaScriptLabel" .s:fg_col6 .s:bold
-" --------------- col9 -------------------- "
+" --------------- col8 -------------------- "
 "【_Comment】"
 " //some "
 hi! link javaScriptLineComment _Comment
 " /* some */ "
 hi! link javaScriptComment _Comment
-" -------------- col15 -------------------- "
+" -------------- col14 -------------------- "
 "【_String】"
 " /,/g "
 hi! link javaScriptRegexpString _String
@@ -667,10 +661,10 @@ hi! link javaScriptRegexpString _String
 hi! link javaScriptStringD _String
 " 'some' "
 hi! link javaScriptStringS _String
-" ------------- col13 ----------------- "
+" ------------- col12 ----------------- "
 " Date "
-exe "hi! javaScriptType" .s:fg_col13
-" -------------- col11 -------------------- "
+exe "hi! javaScriptType" .s:fg_col12
+" -------------- col10 -------------------- "
 " 1 3 "
 hi! link javaScriptValue _Value
 " 1 3 "
@@ -712,26 +706,26 @@ exe "hi! javaScript" .s:fg_col5
 exe "hi! htmlTagName" .s:fg_col6
 " <script> </script> <-- script
 exe "hi! htmlSpecialTagName" .s:fg_col6
-" ------------- col9 ----------------
+" ------------- col8 ----------------
 " 【_Comment】
 " <!-- comment --> <-- -- comment --
 hi! link htmlCommentPart _Comment
 " <!-- comment --> <-- <! >
 hi! link htmlComment _Comment
 hi! link htmlCssStyleComment _Comment
-" ------------- col13 -----------
-exe "hi! htmlSpecialChar" .s:fg_col13
+" ------------- col12 -----------
+exe "hi! htmlSpecialChar" .s:fg_col12
 
 " <tag> <div id=""> <-- < > \s =
-exe "hi! htmlTag" .s:fg_col13
+exe "hi! htmlTag" .s:fg_col12
 " </tag> <-- </ >
-exe "hi! htmlEndTag" .s:fg_col13
+exe "hi! htmlEndTag" .s:fg_col12
 " <script> <-- < >
-exe "hi! htmlScriptTag" .s:fg_col13
-" -------------- col15 --------------
+exe "hi! htmlScriptTag" .s:fg_col12
+" -------------- col14 --------------
 " "aa" 'aa'
 hi! link htmlString _String
-" -------------- col11 --------------
+" -------------- col10 --------------
 " colspan=2 <-- 2
 hi! link htmlValue _Value
 " -------------- Error --------------
@@ -769,12 +763,12 @@ hi! link htmlEventSQ _Unknown
 hi! link htmlEventDQ _Unknown
 " ------------- Normal ----------------
 hi! link htmlLeadingSpace Normal
-exe "hi! htmlH1" .s:bg_col8 .s:fg_col2
-exe "hi! htmlH2" .s:fg_col8 .s:underline
-exe "hi! htmlH3" .s:bg_col14 .s:fg_col2
-exe "hi! htmlH4" .s:fg_col14
-exe "hi! htmlH5" .s:bg_col13 .s:fg_col2
-exe "hi! htmlH6" .s:fg_col13
+exe "hi! htmlH1" .s:bg_col15 .s:fg_col2
+exe "hi! htmlH2" .s:fg_col15 .s:underline
+exe "hi! htmlH3" .s:bg_col13 .s:fg_col2
+exe "hi! htmlH4" .s:fg_col13
+exe "hi! htmlH5" .s:bg_col12 .s:fg_col2
+exe "hi! htmlH6" .s:fg_col12
 hi! link htmlTitle Normal
 hi! link cssStyle Normal
 
@@ -794,37 +788,37 @@ hi! link juliaVarargOperator Statement
 hi! link juliaRangeEnd Number
 hi! link juliaKeyword PreProc
 hi! link juliaParDelim Delimiter
-exe "hi! juliaStringVarsPla"     .s:fg_col9
-exe "hi! juliaStringVarDelim"    .s:fg_col9
-exe "hi! juliaStringVarsPar"     .s:fg_col9
+exe "hi! juliaStringVarsPla"     .s:fg_col8
+exe "hi! juliaStringVarDelim"    .s:fg_col8
+exe "hi! juliaStringVarsPar"     .s:fg_col8
 " }}}
 " ++ NERDTree {{{
-exe "hi! NERDTreeCWD"            .s:fg_col14
+exe "hi! NERDTreeCWD"            .s:fg_col13
 exe "hi! NERDTreeDirSlash"       .s:fg_col7
 exe "hi! NERDTreeHelp"           .s:fg_col6
 exe "hi! NERDTreeHelpTitle"      .s:fg_col7
-exe "hi! NERDTreeHelpKey"        .s:fg_col11
+exe "hi! NERDTreeHelpKey"        .s:fg_col10
 " }}}
 " ++ tex {{{
 hi! link TexMathDelim Macro
-exe "hi! TexMathOper"            .s:fg_col12
-exe "hi! TexCite"                .s:fg_col9
+exe "hi! TexMathOper"            .s:fg_col11
+exe "hi! TexCite"                .s:fg_col8
 " }}}
 " ++ sh {{{
 hi! link shQuote String
 " }}}
 " ++ vimfiler {{{
-exe "hi! vimfilerLeaf"  .s:fg_col13
+exe "hi! vimfilerLeaf"  .s:fg_col12
 exe "hi! vimfilerNonMark"  .s:fg_col4
-" exe "hi! vimfilerMark"  .s:fg_col11
-" exe "hi! vimfilerCurrentDirectory"  .s:fg_col11
-" exe "hi! vimfilerStatus"  .s:fg_col11
-" exe "hi! vimfilerDirectory"  .s:fg_col11
+" exe "hi! vimfilerMark"  .s:fg_col10
+" exe "hi! vimfilerCurrentDirectory"  .s:fg_col10
+" exe "hi! vimfilerStatus"  .s:fg_col10
+" exe "hi! vimfilerDirectory"  .s:fg_col10
 exe "hi! vimfilerNormalFile"  .s:fg_col5
-exe "hi! vimfilerMarkedFile"  .s:fg_col15
-exe "hi! vimfilerOpenedFile"  .s:fg_col11
+exe "hi! vimfilerMarkedFile"  .s:fg_col14
+exe "hi! vimfilerOpenedFile"  .s:fg_col10
 exe "hi! vimfilerClosedFile"  .s:fg_col6
-exe "hi! vimfilerROFile"  .s:fg_col9
+exe "hi! vimfilerROFile"  .s:fg_col8
 " }}}
 " ++ markdown {{{
 
@@ -834,37 +828,37 @@ exe "hi! mkdItalic" .s:fg_col7 .s:italic
 exe "hi! mkdBold" .s:fg_col7 .s:bold
 exe "hi! mkdBoldItalic" .s:fg_col7 .s:bold .s:italic
 hi! link mkdCode String
-exe "hi! mkdCodeDelimiter" .s:fg_col11 .s:bold
-exe "hi! mkdDelimiter" .s:fg_col11 .s:bold
-exe "hi! mkdFootnotes" .s:fg_col12
-exe "hi! mkdFootnotesDelimiter" .s:fg_col10
+exe "hi! mkdCodeDelimiter" .s:fg_col10 .s:bold
+exe "hi! mkdDelimiter" .s:fg_col10 .s:bold
+exe "hi! mkdFootnotes" .s:fg_col11
+exe "hi! mkdFootnotesDelimiter" .s:fg_col9
 hi! link mkdIndentCode String
-exe "hi! mkdInlineCodeDelimiter" .s:fg_col11 .s:bold
-exe "hi! mkdInlineURL" .s:fg_col12
-exe "hi! mkdLineBreak" .s:bg_col12
-exe "hi! mkdLink" .s:fg_col13
-exe "hi! mkdLinkDef" .s:fg_col13 .s:underline
-exe "hi! mkdLinkDefTarget" .s:fg_col12
-exe "hi! mkdLinkDelimiter" .s:fg_col11
+exe "hi! mkdInlineCodeDelimiter" .s:fg_col10 .s:bold
+exe "hi! mkdInlineURL" .s:fg_col11
+exe "hi! mkdLineBreak" .s:bg_col11
+exe "hi! mkdLink" .s:fg_col12
+exe "hi! mkdLinkDef" .s:fg_col12 .s:underline
+exe "hi! mkdLinkDefTarget" .s:fg_col11
+exe "hi! mkdLinkDelimiter" .s:fg_col10
 exe "hi! mkdLinkTitle" .s:fg_col5
 exe "hi! mkdListBlock0" .s:fg_col5
 exe "hi! mkdListBlock1" .s:fg_col5
 exe "hi! mkdListBlock2" .s:fg_col5
 exe "hi! mkdListItem" .s:fg_col6
 exe "hi! mkdRule" .s:reverse
-exe "hi! mkdURL" .s:fg_col12
-exe "hi! mkdID" .s:fg_col12
+exe "hi! mkdURL" .s:fg_col11
+exe "hi! mkdID" .s:fg_col11
 exe "hi! mkdIDDelimiter" .s:fg_col6
-exe "hi! markdownCodeDelimiter" .s:fg_col11
+exe "hi! markdownCodeDelimiter" .s:fg_col10
 
 " なぞ
-exe "hi! markdownUrl" .s:bg_col14
-exe "hi! mkdIndentCode0" .s:bg_col14
-exe "hi! mkdIndentCode1" .s:bg_col14
-exe "hi! mkdIndentCode2" .s:bg_col14
-exe "hi! mkdFrontmatterDelimiter" .s:bg_col14
-exe "hi! mkdString" .s:bg_col14
-exe "hi! mkdMath" .s:bg_col14
-exe "hi! mkdURLDelimiter" .s:bg_col14
+exe "hi! markdownUrl" .s:bg_col13
+exe "hi! mkdIndentCode0" .s:bg_col13
+exe "hi! mkdIndentCode1" .s:bg_col13
+exe "hi! mkdIndentCode2" .s:bg_col13
+exe "hi! mkdFrontmatterDelimiter" .s:bg_col13
+exe "hi! mkdString" .s:bg_col13
+exe "hi! mkdMath" .s:bg_col13
+exe "hi! mkdURLDelimiter" .s:bg_col13
 " ++}}}
 " +}}}
