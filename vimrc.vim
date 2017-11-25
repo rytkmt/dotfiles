@@ -398,8 +398,8 @@ inoremap <C-e> <C-o>"_de
 inoremap <C-p> <C-o>p
 
 " カーソル位置の単語を置換
-nnoremap <expr> <C-s> ':%s/\<' . expand('<cword>') . '\>/'
-vnoremap <expr> <C-s> ':s/\<' . expand('<cword>') . '\>/'
+nnoremap <expr> [map]s ':%s/\<' . expand('<cword>') . '\>/'
+vnoremap <expr> [map]s ':s/\<' . expand('<cword>') . '\>/'
 
 autocmd MyAutoLazyCmd VimEnter * nnoremap <nowait> <expr> gc '`[' . getregtype()[0] . '`]'
 
@@ -430,9 +430,9 @@ nmap [map] <Nop>
 "
 "  q  w  e  r  t  y  u  i  o  p
 "
-"   A  S  d  f  g  h  j  k  l ;
+"   a  s  d  f  g  h  j  k  l ;
 "
-"    z  X  C  v  b  n  m  ,  .
+"    z  x  c  v  b  n  m  ,  .
 "
 "=================================
 map <Space> <Nop>
