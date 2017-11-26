@@ -1,7 +1,7 @@
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 18-Nov-2017.
+" Last Change: 22-Nov-2017.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 " + kaoriya default settings {{{
@@ -222,6 +222,7 @@ let g:tex_conceal=''
 set conceallevel=0
 
 " 一時ファイルを作成して開く、Tempfileコマンドを定義
+command! Tempfile :vs `=tempname()`
 command! TempfileRuby :vs `=tempname()`|set ft=ruby
 " ++ }}}
 " + }}}
