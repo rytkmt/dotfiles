@@ -35,7 +35,7 @@ imap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 imap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 imap <expr><C-j>  pumvisible() ? "\<C-n>" : "\<C-j>"
 imap <expr><C-k>  pumvisible() ? "\<C-p>" : "\<C-k>"
-imap <expr><C-l>  neocomplete#complete_common_string() != '' ? neocomplete#complete_common_string() : "\<Del>"
+imap <expr><C-l>  neocomplete#complete_common_string() != '' ? neocomplete#complete_common_string() : "\<Right>"
 autocmd MyAutoCmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd MyAutoCmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd MyAutoCmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS

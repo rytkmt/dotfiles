@@ -1,7 +1,7 @@
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 22-Nov-2017.
+" Last Change: 14-Dec-2017.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 " + kaoriya default settings {{{
@@ -338,9 +338,6 @@ vmap <nowait> <C-Space> <ESC>
 nmap <C-Space><C-Space> :<C-u>noh<CR>
 " ++ }}}
 " ++ その他 {{{
-"ヤンクした値がdやxで消えないように（復活させる）
-nnoremap PP "0p
-vnoremap PP "0p
 nnoremap ZZ <Nop>
 nnoremap <C-z> <Nop>
 
@@ -391,12 +388,12 @@ noremap zj 4<C-e>
 noremap zk 4<C-y>
 
 " 削除
-imap <C-h> <BS>
+imap <C-H> <BS>
 inoremap <C-d> <C-o>"_dd
 inoremap <C-b> <C-o>"_db<C-o>x
 inoremap <C-e> <C-o>"_de
 
-inoremap <C-p> <C-o>p
+inoremap <C-p> <C-r>"
 
 " カーソル位置の単語を置換
 nnoremap <expr> [map]s ':%s/\<' . expand('<cword>') . '\>/'
