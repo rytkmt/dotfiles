@@ -11,6 +11,4 @@ elseif has('unix')
   let g:previm_open_cmd = ''
 end
 autocmd MyAutoCmd FileType markdown nnoremap <buffer> <silent> [ft]o :<C-u>PrevimOpen<CR>
-nnoremap <buffer> <silent> [ft]o :<C-u>PrevimOpen<CR>
 autocmd MyAutoCmd FileType markdown nnoremap <buffer> <silent> [ft]r :call previm#refresh()<CR>
-nnoremap <buffer> <silent> [ft]r :call previm#refresh()<CR>
