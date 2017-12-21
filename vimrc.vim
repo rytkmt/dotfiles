@@ -249,9 +249,9 @@ if dein#load_state(s:dein_cache_path)
   call dein#save_state()
 endif
 
-"if dein#check_install(['vimproc.vim'])
-"  call dein#install(['vimproc.vim'])
-"endif
+if dein#check_install(['vimproc.vim'])
+ call dein#install(['vimproc.vim'])
+endif
 if !has('vim_starting') && dein#check_install()
   call dein#install()
 endif
@@ -399,7 +399,7 @@ inoremap <C-p> <C-o>p
 
 " カーソル位置の単語を置換
 nnoremap <expr> [map]s ':%s/\<' . expand('<cword>') . '\>/'
-vnoremap <expr> [map]s ':s/\<' . expand('<cword>') . '\>/'
+vnoremap <expr> [map]s ':<C-u>%s/\<' . expand('<cword>') . '\>/'
 
 autocmd MyAutoLazyCmd VimEnter * nnoremap <nowait> <expr> gc '`[' . getregtype()[0] . '`]'
 
