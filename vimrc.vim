@@ -258,7 +258,7 @@ if !has('vim_starting') && dein#check_install()
 endif
 " deinの読み込み後に行う
 " filetype on
-colorscheme rytkmt
+colorscheme lighthouse
 filetype plugin indent on
 set noimdisable
 " }}}

@@ -38,6 +38,9 @@ au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vimfiler.rc.vim
 repo = 'rytkmt/dotfiles'
 
 [[plugins]]
+repo = 'rytkmt/lighthouse'
+
+[[plugins]]
 repo = 'cocopon/iceberg.vim'
 
 [[plugins]]
