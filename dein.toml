@@ -117,6 +117,9 @@ repo = "kana/vim-textobj-user"
 
 [[plugins]]
 repo = "h1mesuke/textobj-wiw"
+hook_add = '''
+let g:textobj_wiw_no_default_key_mappings = 0
+'''
 
 [[plugins]]
 repo = "kana/vim-textobj-function"
@@ -260,4 +263,11 @@ repo = 'rcmdnk/vim-markdown'
 on_ft = ['markdown','mkd']
 hook_add = '''
 au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-markdown.rc.vim
+'''
+
+[[plugins]]
+repo = 'easymotion/vim-easymotion'
+hook_add = '''
+let g:EasyMotion_do_mapping = 0
+au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-easymotion.rc.vim
 '''
