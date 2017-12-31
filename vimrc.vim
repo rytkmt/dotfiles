@@ -222,8 +222,15 @@ let g:tex_conceal=''
 set conceallevel=0
 
 " 一時ファイルを作成して開く、Tempfileコマンドを定義
-command! Tempfile :vs `=tempname()`
-command! TempfileRuby :vs `=tempname()`|set ft=ruby
+function! s:make_tempfile(...)
+  exe "vs " .tempname()
+  if exists("a:1")
+    exe "set ft=" .a:1
+  endif
+  autocmd MyAutoCmd BufLeave <buffer> write
+endfunction
+command! Tempfile call s:make_tempfile()
+command! TempfileRuby call s:make_tempfile("ruby")
 " ++ }}}
 " + }}}
 " + dein {{{
@@ -420,8 +427,8 @@ nnoremap / /\v
 nnoremap ? ?\v
 " キーマップ用
 let mapleader = "\<Space>"
-nmap , [map]
-vmap , [map]
+nmap <Tab> [map]
+vmap <Tab> [map]
 nmap [map] <Nop>
 
 "=================================
@@ -539,6 +546,9 @@ function! s:to_snake_case(before_str)
 endfunction
 command! -nargs=? ToSnakeCase call s:to_snake_case(<f-args>)
 autocmd MyAutoCmd FileType ruby nnoremap <expr> [ft]s ':ToSnakeCase ' . expand('<cword>') .'<CR>'
+" +++ }}}
+" +++ railslog {{{
+autocmd MyAutoCmd FileType railslog nmap <buffer> q bd!
 " +++ }}}
 " ++ }}}
 " +}}}
