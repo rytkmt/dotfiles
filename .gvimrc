@@ -21,13 +21,6 @@ if !exists("syntax_on")
   syntax on
 endif
 
-" Load the MacVim color scheme.  This can be disabled by loading another color
-" scheme with the :colorscheme command, or by adding the line
-"   let macvim_skip_colorscheme=1
-" to ~/.vimrc.
-"if !exists("macvim_skip_colorscheme") && !exists("colors_name")
-"    colorscheme macvim
-"endif
 
 " To make tabs more readable, the label only contains the tail of the file
 " name and the buffer modified flag.
@@ -171,8 +164,6 @@ unlet s:cpo_save
 "endif
 
 "---------------------------------------------------------------------------
-" カラー設定:
-"colorscheme morning
 
 "---------------------------------------------------------------------------
 " フォント設定:
@@ -219,7 +210,6 @@ endtry
 " コマンドラインの高さ(GUI使用時)
 "set cmdheight=2
 " 画面を黒地に白にする (次行の先頭の " を削除すれば有効になる)
-"colorscheme evening " (GUI使用時)
 
 "---------------------------------------------------------------------------
 " 日本語入力に関する設定:
@@ -308,7 +298,6 @@ endtry
 "let $SUDO_ASKPASS = $SSH_ASKPASS
 "set imdisableactivate
 
-colorscheme rytkmt
 
 set listchars=tab:»\ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 
