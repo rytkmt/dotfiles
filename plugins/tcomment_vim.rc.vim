@@ -1,22 +1,3 @@
-xunmap  gc
-nunmap  gc
-nunmap  gcb
-nunmap  gcc
-nunmap  gc9c
-nunmap  gc9
-nunmap  gc8c
-nunmap  gc8
-nunmap  gc7c
-nunmap  gc7
-nunmap  gc6c
-nunmap  gc6
-nunmap  gc5c
-nunmap  gc5
-nunmap  gc4c
-nunmap  gc4
-nunmap  gc3c
-nunmap  gc3
-nunmap  gc2c
-nunmap  gc2
-nunmap  gc1c
-nunmap  gc1
+let g:tcommentMaps = 0
+nmap <C-_><C-_> :TComment<CR>
+vmap <C-_><C-_> :TComment<CR>

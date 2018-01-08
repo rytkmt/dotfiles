@@ -1,7 +1,7 @@
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 0
-setlocal conceallevel=0
-setlocal nofoldenable
+autocmd MyAutoCmd FileType markdown setlocal conceallevel=0
+autocmd MyAutoCmd FileType markdown setlocal nofoldenable
 
 "キーマップ
 autocmd MyAutoCmd FileType markdown vmap <buffer> [ft]x :HeaderDecrease<CR>

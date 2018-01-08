@@ -25,13 +25,13 @@ hook_post_update = '''
   let g:dein#plugin.build = cmd
 '''
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vimproc.vim.rc.vim
+source $XDG_CONFIG_HOME/plugins/vimproc.vim.rc.vim
 '''
 
 [[plugins]]
 repo = 'Shougo/vimfiler'
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vimfiler.rc.vim
+source $XDG_CONFIG_HOME/plugins/vimfiler.rc.vim
 '''
 
 [[plugins]]
@@ -49,25 +49,25 @@ repo = 'rakr/vim-one'
 [[plugins]]
 repo = 'Shougo/unite.vim'
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/unite.vim.rc.vim
+source $XDG_CONFIG_HOME/plugins/unite.vim.rc.vim
 '''
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/lightline.vim.rc.vim
+source $XDG_CONFIG_HOME/plugins/lightline.vim.rc.vim
 '''
 
 [[plugins]]
 repo = 'Yggdroot/indentLine'
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/indentLine.rc.vim
+source $XDG_CONFIG_HOME/plugins/indentLine.rc.vim
 '''
 
 [[plugins]]
 repo = 'kana/vim-submode'
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-submode.rc.vim
+source $XDG_CONFIG_HOME/plugins/vim-submode.rc.vim
 '''
 
 [[plugins]]
@@ -94,13 +94,13 @@ repo = 'cohama/lexima.vim'
 [[plugins]]
 repo = 'tpope/vim-rails'
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-rails.rc.vim
+source $XDG_CONFIG_HOME/plugins/vim-rails.rc.vim
 '''
 
 [[plugins]]
 repo = 'terryma/vim-expand-region'
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-expand-region.rc.vim
+source $XDG_CONFIG_HOME/plugins/vim-expand-region.rc.vim
 '''
 
 [[plugins]]
@@ -109,7 +109,7 @@ repo = 'stevemadere/ruby-matchit'
 [[plugins]]
 repo = 'vimtaku/hl_matchit.vim'
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/hl_matchit.vim.rc.vim
+source $XDG_CONFIG_HOME/plugins/hl_matchit.vim.rc.vim
 '''
 
 [[plugins]]
@@ -118,7 +118,7 @@ repo = "kana/vim-textobj-user"
 [[plugins]]
 repo = "h1mesuke/textobj-wiw"
 hook_add = '''
-let g:textobj_wiw_no_default_key_mappings = 0
+source $XDG_CONFIG_HOME/plugins/textobj-wiw.rc.vim
 '''
 
 [[plugins]]
@@ -129,13 +129,13 @@ repo = "kana/vim-textobj-line"
 [[plugins]]
 repo = 'vim-scripts/grep.vim'
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/grep.vim.rc.vim
+source $XDG_CONFIG_HOME/plugins/grep.vim.rc.vim
 '''
 
 [[plugins]]
 repo = 'tomtom/tcomment_vim'
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/tcomment_vim.rc.vim
+source $XDG_CONFIG_HOME/plugins/tcomment_vim.rc.vim
 '''
 
 [[plugins]]
@@ -144,19 +144,13 @@ repo = 'vim-scripts/AnsiEsc.vim'
 [[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-trailing-whitespace.rc.vim
+source $XDG_CONFIG_HOME/plugins/vim-trailing-whitespace.rc.vim
 '''
-
-# [[plugins]]
-# repo = 'LeafCage/yankround.vim'
-# hook_add = '''
-# au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/yankround.vim.rc.vim
-# '''
 
 [[plugins]]
 repo = 'airblade/vim-rooter'
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-rooter.rc.vim
+source $XDG_CONFIG_HOME/plugins/vim-rooter.rc.vim
 '''
 
 [[plugins]]
@@ -171,13 +165,13 @@ repo = 'tyru/capture.vim'
 [[plugins]]
 repo = 'tpope/vim-surround'
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-surround.rc.vim
+source $XDG_CONFIG_HOME/plugins/vim-surround.rc.vim
 '''
 
 [[plugins]]
 repo = "kana/vim-smartinput"
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-smartinput-endwise.rc.vim
+source $XDG_CONFIG_HOME/plugins/vim-smartinput-endwise.rc.vim
 '''
 
 [[plugins]]
@@ -186,19 +180,19 @@ repo = "cohama/vim-smartinput-endwise"
 [[plugins]]
 repo = "alvan/vim-closetag"
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-closetag.rc.vim
+source $XDG_CONFIG_HOME/plugins/vim-closetag.rc.vim
 '''
 
 [[plugins]]
 repo = 'thinca/vim-ref'
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-ref.rc.vim
+source $XDG_CONFIG_HOME/plugins/vim-ref.rc.vim
 '''
 
 [[plugins]]
 repo = 'tyru/vim-altercmd'
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-altercmd.rc.vim
+source $XDG_CONFIG_HOME/plugins/vim-altercmd.rc.vim
 '''
 
 [[plugins]]
@@ -207,7 +201,7 @@ repo = 'cespare/vim-toml'
 [[plugins]]
 repo = 'maralla/vim-toml-enhance'
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-toml-enhance.rc.vim
+source $XDG_CONFIG_HOME/plugins/vim-toml-enhance.rc.vim
 '''
 
 #[[plugins]]
@@ -226,7 +220,7 @@ repo = 'lilydjwg/colorizer'
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/neosnippet.rc.vim
+source $XDG_CONFIG_HOME/plugins/neosnippet.rc.vim
 '''
 
 [[plugins]]
@@ -242,32 +236,32 @@ repo = 'joker1007/vim-markdown-quote-syntax'
 [[plugins]]
 repo = 'kannokanno/previm'
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/previm.rc.vim
+source $XDG_CONFIG_HOME/plugins/previm.rc.vim
 '''
 
 [[plugins]]
 repo = 'Shougo/denite.nvim'
 if = "has('python3')"
-hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/denite.rc.vim
+hook_post_source = '''
+source $XDG_CONFIG_HOME/plugins/denite.rc.vim
 '''
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-quickrun.rc.vim
+source $XDG_CONFIG_HOME/plugins/vim-quickrun.rc.vim
 '''
 
 [[plugins]]
 repo = 'rcmdnk/vim-markdown'
 on_ft = ['markdown','mkd']
 hook_add = '''
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-markdown.rc.vim
+source $XDG_CONFIG_HOME/plugins/vim-markdown.rc.vim
 '''
 
 [[plugins]]
 repo = 'easymotion/vim-easymotion'
 hook_add = '''
 let g:EasyMotion_do_mapping = 0
-au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/vim-easymotion.rc.vim
+source $XDG_CONFIG_HOME/plugins/vim-easymotion.rc.vim
 '''

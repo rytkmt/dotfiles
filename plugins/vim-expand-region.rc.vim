@@ -1,6 +1,6 @@
 let g:expand_region_text_objects = {
-      \ 'i,w'  :0,
-      \ 'a,w'  :0,
+      \ 'i_w'  :0,
+      \ 'a_w'  :0,
       \ 'iw'  :0,
       \ 'i['  :0,
       \ 'i"'  :0,
