@@ -1,7 +1,7 @@
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 07-Jan-2018.
+" Last Change: 12-Jan-2018.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 " + kaoriya default settings {{{
@@ -231,6 +231,11 @@ function! s:make_tempfile(...)
 endfunction
 command! Tempfile call s:make_tempfile()
 command! TempfileRuby call s:make_tempfile("ruby")
+
+function! s:open_current_explorer()
+  exe "silent ! start %:h"
+endfunction
+command! OpenCurrentExplorer call s:open_current_explorer()
 " ++ }}}
 " + }}}
 " + dein {{{
