@@ -1,7 +1,4 @@
-"submodeを抜け出すときのコマンドを有効に
-let g:submode_keep_leaving_key=1
-let g:submode_timeout=0
-
+echom "submode"
 " タブ操作サブモード
 call submode#enter_with('tab_close', 'n', '', '<Leader>tq', ':<C-u>tabc<CR>')
 call submode#map('tab_close', 'n', '', 'q', ':<C-u>tabc<CR>')
