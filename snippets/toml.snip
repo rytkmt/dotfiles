@@ -6,5 +6,5 @@ snippet plugin-hook
   [[plugins]]
   repo = '${1:REPO}'
   hook_add = '''
-  au MyAutoCmd VimEnter * nested source $XDG_CONFIG_HOME/plugins/${2:RC}.rc.vim
+  source $XDG_CONFIG_HOME/plugins/${2:RC}.rc.vim
   '''

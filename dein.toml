@@ -268,3 +268,9 @@ hook_add = '''
 let g:EasyMotion_do_mapping = 0
 source $XDG_CONFIG_HOME/plugins/vim-easymotion.rc.vim
 '''
+
+[[plugins]]
+repo = 'dhruvasagar/vim-table-mode'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-table-mode.rc.vim
+'''

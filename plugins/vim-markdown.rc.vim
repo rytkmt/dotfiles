@@ -1,6 +1,5 @@
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 0
-autocmd MyAutoCmd FileType markdown setlocal conceallevel=0
 autocmd MyAutoCmd FileType markdown setlocal nofoldenable
 
 "キーマップ
