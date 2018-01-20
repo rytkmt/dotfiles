@@ -1,4 +1,3 @@
-echom "submode"
 " タブ操作サブモード
 call submode#enter_with('tab_close', 'n', '', '<Leader>tq', ':<C-u>tabc<CR>')
 call submode#map('tab_close', 'n', '', 'q', ':<C-u>tabc<CR>')

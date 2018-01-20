@@ -226,6 +226,7 @@ nnoremap [other]h :so $VIMRUNTIME/syntax/hitest.vim
 nnoremap [other]s :sp<CR>:VimShellBufferDir<CR>
 nnoremap [other]r ::VimShellInteractive irb<CR>
 nnoremap [other]v :<C-u>tabedit $XDG_CONFIG_HOME/vimrc.vim<CR>
+nnoremap [other]d :<C-u>tabedit $XDG_CONFIG_HOME/dein.toml<CR>
 nnoremap [other]l :<C-u>so ~/.vimrc<CR>:<C-u>so ~/.gvimrc<CR>
 nnoremap [other]h :<C-u>tabedit $XDG_CONFIG_HOME/../lighthouse/colors/lighthouse.vim<CR>
 nnoremap [edit]s :e ++enc=shift_jis<CR>
@@ -281,123 +282,9 @@ autocmd MyAutoCmd FileType railslog nmap <buffer> q bd!
 " +++ }}}
 " ++ }}}
 " + ctags系 {{{
-  function! s:CheckProject()
-    if(!dein#tap('airblade/vim-rooter') || !dein#tap('Shougo/vimproc.vim'))
-      return
-    endif
 
-    let l:open_project = FindRootDirectory()
-
-    "Rakefileの存在でrailsプロジェクトか判断
-    if filereadable(l:open_project .'/Rakefile')
-      if !exists('g:gem_paths')
-        call s:SetGemPaths()
-      endif
-
-      if !exists('g:gem_paths') && len(g:gem_paths) > 0 && !exists('g:gem_tags')
-        call s:SetGemTags()
-      endif
-
-      if !exists('w:current_project') || w:current_project != l:open_project
-        let w:current_project = l:open_project
-        exe ':cd ' . w:current_project
-        call s:ChangeProject()
-      endif
-    else
-      if exists('w:project_tag')
-        unlet w:project_tag
-      endif
-    endif
-  endfunction
-
-  function! s:SetGemPaths()
-    let l:gem_paths = []
-    if has('win32')
-      let l:gem_paths = split(system('gem environment gempath'), ';')
-    else
-      " 配列で返るため明示的に0指定(要素は1つのため問題なし)
-      let l:gem_paths = split(split(system('! gem environment gempath'), '\r')[0], ':')
-    endif
-
-    let g:gem_paths = []
-    for gem_path in l:gem_paths
-      let l:gem_root = substitute(gem_path, '\n', '', 'g') . '/gems'
-      if isdirectory(l:gem_root)
-        call add(g:gem_paths, l:gem_root)
-      endif
-    endfor
-  endfunction
-
-  function! s:SetGemTags()
-    let g:gem_tags = []
-    for gem_path in g:gem_paths
-      if filereadable(gem_path . '/tags')
-        call add(g:gem_tags, gem_path . '/tags')
-      endif
-    endfor
-  endfunction
-
-  function! s:ChangeProject()
-    if !exists('w:current_project')
-      return
-    endif
-    if exists('w:project_tag')
-      unlet w:project_tag
-    endif
-
-    if filereadable(w:current_project . '/tags')
-      let w:project_tag = w:current_project . '/tags'
-    endif
-
-    let l:set_tags = []
-    if exists('w:project_tag')
-      call add(l:set_tags, w:project_tag)
-    endif
-
-    if exists('g:gem_tags') && len(g:gem_tags) > 0
-      for gem_tag in g:gem_tags
-        call add(l:set_tags, gem_tag)
-      endfor
-    endif
-
-    if len(l:set_tags) > 0
-      let &l:tags=join(l:set_tags, ',')
-    endif
-  endfunction
-
-  function! s:GenerateProjectTag()
-    let l:project = FindRootDirectory()
-    if filereadable(l:project .'/Rakefile')
-      " tagファイルを削除
-      try
-        if filereadable(l:project . '/tags')
-          if has('win32')
-            call system("DEL " . l:project . '/tags')
-          else
-            call system("rm " . l:project . '/tags')
-          endif
-        endif
-      catch
-        echom 'can not delete tags'
-        return
-      endtry
-
-      " tagファイルを作成
-      if has('win32')
-        echom 'up'
-        call s:system_async("CD " . l:project . " && ctags -R", 's:GeneratedProjectTag')
-      else
-        call s:system_async("cd " . l:project . " | ctags -R", 's:GeneratedProjectTag')
-      endif
-    else
-      echom 'nnot found rails project'
-    endif
-  endfunction
-
-  function! s:GeneratedProjectTag()
-    echom 'tag generate!!!'
-  endfunction
-  autocmd MyAutoCmd BufEnter,WinEnter * call s:CheckProject()
+  source $XDG_CONFIG_HOME/rc/extensions/_ctags.rc.vim
+  autocmd MyAutoCmd BufEnter,WinEnter * CtagsSet
 
   " nnoremap [ctag]u :<C-u>call UpdateTags()<CR>
   nnoremap [ctag]j <C-]>
