@@ -15,8 +15,8 @@ function! s:SetTagsOption() "{{{
   endif
 
   if exists('g:gem_tags') && len(g:gem_tags) > 0
-    for gem_tag in g:gem_tags
-      call add(l:set_tags, gem_tag)
+    for l:gem_tag in g:gem_tags
+      call add(l:set_tags, l:gem_tag)
     endfor
   endif
 
@@ -72,8 +72,8 @@ function! SetGemTags(gem_env) "{{{
   endif
 
   let g:gem_tags = []
-  for gem_path in l:gem_paths
-    let l:gem_root = substitute(gem_path, '\n', '', 'g') . '/gems'
+  for l:gem_path in l:gem_paths
+    let l:gem_root = substitute(l:gem_path, '\n', '', 'g') . '/gems'
 
     if isdirectory(l:gem_root)
       if filereadable(l:gem_root . '/tags')

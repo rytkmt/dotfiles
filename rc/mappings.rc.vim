@@ -123,7 +123,7 @@ noremap zj 4<C-e>
 noremap zk 4<C-y>
 
 " 削除
-imap <C-H> <BS>
+imap <C-h> <BS>
 inoremap <C-d> <C-o>"_dd
 inoremap <C-b> <C-o>"_db<C-o>x
 inoremap <C-e> <C-o>"_de
@@ -265,11 +265,11 @@ autocmd MyAutoCmd FileType ruby nnoremap <expr> [ft]c ':ToCamelCase ' . expand('
 function! s:to_snake_case(before_str)
   let l:before_str = substitute(a:before_str, "^.", "\\l\\0", "")
   let l:after_str = ""
-  for i in range(0,strlen(l:before_str)-1)
-    if l:before_str[i] ==# toupper(l:before_str[i])
-      let l:after_str = l:after_str . substitute(l:before_str[i], "[A-Z]", "_\\l\\0", "")
+  for l:i in range(0,strlen(l:before_str)-1)
+    if l:before_str[l:i] ==# toupper(l:before_str[l:i])
+      let l:after_str = l:after_str . substitute(l:before_str[l:i], "[A-Z]", "_\\l\\0", "")
     else
-      let l:after_str = l:after_str . l:before_str[i]
+      let l:after_str = l:after_str . l:before_str[l:i]
     endif
   endfor
   execute "normal viws" . l:after_str

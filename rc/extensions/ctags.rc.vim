@@ -45,8 +45,8 @@ function! s:SetGemPaths()
   endif
 
   let g:gem_paths = []
-  for gem_path in l:gem_paths
-    let l:gem_root = substitute(gem_path, '\n', '', 'g') . '/gems'
+  for l:gem_path in l:gem_paths
+    let l:gem_root = substitute(l:gem_path, '\n', '', 'g') . '/gems'
     if isdirectory(l:gem_root)
       call add(g:gem_paths, l:gem_root)
     endif
@@ -57,9 +57,9 @@ endfunction
 function! s:SetGemTags()
   echom "s:SetGemTags start"
   let g:gem_tags = []
-  for gem_path in g:gem_paths
-    if filereadable(gem_path . '/tags')
-      call add(g:gem_tags, gem_path . '/tags')
+  for l:gem_path in g:gem_paths
+    if filereadable(l:gem_path . '/tags')
+      call add(g:gem_tags, l:gem_path . '/tags')
     endif
   endfor
   echom "s:SetGemTags end"

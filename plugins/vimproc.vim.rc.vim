@@ -28,8 +28,8 @@ function! s:receive_vimproc_result(callback, ...)
   let a:args = []
   call add(a:args, 's:vimproc_result')
   if len(a:000) > 0
-    for var in a:000
-      call add(a:args, var)
+    for l:var in a:000
+      call add(a:args, l:var)
     endfor
   endif
   let a:arg_str = join(a:args, ', "')
@@ -62,8 +62,8 @@ function! SystemAsync(cmd, callback, ...)
   let a:args = []
   call add(a:args, a:callback)
   if len(a:000) > 0
-    for var in a:000
-      call add(a:args, var)
+    for l:var in a:000
+      call add(a:args, l:var)
     endfor
   endif
   let a:arg_str = join(a:args, '", "')

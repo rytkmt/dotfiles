@@ -1,3 +1,5 @@
+" vimスクリプトで\を指定した際のインデント量
+let g:vim_indent_cont = 1
 " + kaoriya default settings {{{
 " ++ plugins下のディレクトリをruntimepathへ追加 {{{
 for s:path in split(glob($VIM.'/plugins/*'), '\n')
