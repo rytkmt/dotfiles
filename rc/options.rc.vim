@@ -110,6 +110,8 @@ set backspace=indent,eol,start
 set wrapscan
 " 括弧入力時に対応する括弧を表示 (noshowmatch:表示しない)
 set showmatch
+" 括弧入力時に対応する括弧に一瞬移動する時間（0.1の倍数）
+set matchtime=2
 " コマンドライン補完するときに強化されたものを使う(参照 :help wildmenu)
 set wildmenu
 " テキスト挿入中の自動折り返しを日本語に対応させる
@@ -136,8 +138,6 @@ set cmdheight=2
 set showcmd
 " タイトルを表示
 set title
-"閉括弧が入力された時、対応する括弧を強調する
-set showmatch
 " 文脈によって解釈が異なる全角文字の幅を、2に固定する
 set ambiwidth=double
 " vimが自動で生成する（読み込み時など）tab幅をスペース2つ文にする

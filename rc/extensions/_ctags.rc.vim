@@ -34,7 +34,7 @@ function! s:GetRailsProjectRoot() "{{{
   endif
 
   " railsプロジェクトのファイルのみ対象
-  if index(['ruby', 'javascript', 'css', 'html', 'rhtml', 'railslog', 'eruby'], &filetype) < 0
+  if index(['ruby', 'javascript', 'css', 'html', 'rhtml', 'railslog', 'eruby', 'yaml'], &filetype) < 0
     return ""
   endif
 

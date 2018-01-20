@@ -89,6 +89,7 @@ vnoremap t x
 nnoremap tt dd
 nnoremap tL d$
 nnoremap T D
+nnoremap Y y$
 nnoremap <C-c> viws
 nnoremap y%f :<C-u>redi! @"> \| echo expand("%:t") \| redi END<CR>
 nnoremap y%p :<C-u>redi! @"> \| echo expand("%:p") \| redi END<CR>
@@ -133,8 +134,7 @@ inoremap <C-p> <C-r>"
 " カーソル位置の単語を置換
 nnoremap <expr> [map]s ':%s/\<' . expand('<cword>') . '\>/'
 vnoremap <expr> [map]s ':<C-u>%s/\<' . expand('<cword>') . '\>/'
-
-autocmd MyAutoLazyCmd VimEnter * nnoremap <nowait> <expr> gc '`[' . getregtype()[0] . '`]'
+nnoremap <nowait> <expr> gc '`[' . getregtype()[0] . '`]'
 
 " ruby if endの%移動
 source $VIMRUNTIME/macros/matchit.vim
@@ -151,8 +151,8 @@ nnoremap MM :<C-u>marks<CR>
 nnoremap <expr> <C-h> ':h ' . expand('<cword>')
 
 "メタ文字扱いのオプションをvery magicを初期値に
-nnoremap / /\v
-nnoremap ? ?\v
+" nnoremap / /\v
+" nnoremap ? ?\v
 " キーマップ用
 let mapleader = "\<Space>"
 nmap <Tab> [map]
