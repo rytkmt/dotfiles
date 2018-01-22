@@ -1,3 +1,4 @@
+set encoding=utf-8
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
@@ -11,7 +12,6 @@ augroup MyAutoLazyCmd
   autocmd!
 augroup END
 
-syntax enable
 
 source $XDG_CONFIG_HOME/rc/options.rc.vim
 
@@ -29,6 +29,8 @@ if &runtimepath !~ '/dein.vim'
   endif
   execute 'set runtimepath+=' . s:dein_dir
 endif
+
+syntax enable
 
 if dein#load_state(s:dein_cache_path)
   call dein#begin(s:dein_cache_path)

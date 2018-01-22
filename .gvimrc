@@ -322,8 +322,8 @@ function! GuiTabLabel()
   endif
 
   " このタブページに変更のあるバッファがるときには '[+]' を追加します(デフォルトで一応あるので)
-  for bufnr in l:bufnrlist
-    if getbufvar(bufnr, "&modified")
+  for l:bufnr in l:bufnrlist
+    if getbufvar(l:bufnr, "&modified")
       let l:label .= '[+]'
       break
     endif

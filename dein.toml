@@ -106,8 +106,8 @@ hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vim-expand-region.rc.vim
 '''
 
-[[plugins]]
-repo = 'stevemadere/ruby-matchit'
+# [[plugins]]
+# repo = 'stevemadere/ruby-matchit'
 
 [[plugins]]
 repo = 'vimtaku/hl_matchit.vim'
@@ -277,3 +277,10 @@ repo = 'dhruvasagar/vim-table-mode'
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vim-table-mode.rc.vim
 '''
+
+[[plugins]]
+repo = 'haya14busa/incsearch.vim'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/incsearch.vim.rc.vim
+'''
+
