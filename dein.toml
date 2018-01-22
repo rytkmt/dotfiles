@@ -218,6 +218,9 @@ source $XDG_CONFIG_HOME/plugins/ctrlp.vim.rc.vim
 
 [[plugins]]
 repo = 'lilydjwg/colorizer'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/colorizer.rc.vim
+'''
 
 
 [[plugins]]

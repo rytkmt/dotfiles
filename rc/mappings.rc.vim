@@ -179,6 +179,7 @@ vmap <Leader>v "*p
 
 nmap <Leader>z [other]
 nmap <Leader>t [tab]
+nmap <Leader>T [table]
 nmap <Leader>w [window]
 nmap <Leader>1 [ref]
 nmap <Leader>q [quick]
