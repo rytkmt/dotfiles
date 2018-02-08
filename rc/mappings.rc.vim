@@ -89,11 +89,10 @@ vnoremap t x
 nnoremap tt dd
 nnoremap tL d$
 nnoremap T D
-nnoremap Y y$
 nnoremap <C-c> viws
-nnoremap y%f :<C-u>redi! @"> \| echo expand("%:t") \| redi END<CR>
-nnoremap y%p :<C-u>redi! @"> \| echo expand("%:p") \| redi END<CR>
-nnoremap y%d :<C-u>redi! @"> \| echo expand("%:p:h") \| redi END<CR>
+nnoremap Yf :<C-u>redi! @"> \| echo expand("%:t") \| redi END<CR>
+nnoremap Yp :<C-u>redi! @"> \| echo expand("%:p") \| redi END<CR>
+nnoremap Yd :<C-u>redi! @"> \| echo expand("%:p:h") \| redi END<CR>
 nnoremap <ESC><ESC> :<C-u>noh<CR>
 cmap <C-j> <LEFT>
 cmap <C-k> <RIGHT>
@@ -176,6 +175,8 @@ nnoremap <silent> <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearc
 vmap <Leader>c "*y
 nmap <Leader>v "*p
 vmap <Leader>v "*p
+nmap <Leader>V "*P
+vmap <Leader>V "*P
 
 nmap <Leader>z [other]
 nmap <Leader>t [tab]
@@ -254,14 +255,25 @@ autocmd MyAutoCmd FileType vimshell nmap <buffer> o Ga
 " +++ }}}
 " +++ ruby{{{
 function! s:to_camel_case(before_str)
-  let l:after_str = ""
-  for l:before_char in split(a:before_str, '_')
+  let l:arr = split(a:before_str, '_')
+  let l:after_str = remove(l:arr, 0)
+  for l:before_char in l:arr
     let l:after_str = l:after_str . substitute(l:before_char, "^.", "\\u\\0", "")
   endfor
   execute "normal viws" . l:after_str
 endfunction
 command! -nargs=? ToCamelCase call s:to_camel_case(<f-args>)
 autocmd MyAutoCmd FileType ruby nnoremap <expr> [ft]c ':ToCamelCase ' . expand('<cword>') .'<CR>'
+
+function! s:to_pascal_case(before_str)
+  let l:after_str = ""
+  for l:before_char in split(a:before_str, '_')
+    let l:after_str = l:after_str . substitute(l:before_char, "^.", "\\u\\0", "")
+  endfor
+  execute "normal viws" . l:after_str
+endfunction
+command! -nargs=? ToPascalCase call s:to_pascal_case(<f-args>)
+autocmd MyAutoCmd FileType ruby nnoremap <expr> [ft]p ':ToPascalCase ' . expand('<cword>') .'<CR>'
 
 function! s:to_snake_case(before_str)
   let l:before_str = substitute(a:before_str, "^.", "\\l\\0", "")

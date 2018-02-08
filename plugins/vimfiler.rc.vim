@@ -50,7 +50,7 @@ autocmd MyAutoCmd FileType vimfiler call s:vimfiler_settings()
 function! s:vimfiler_settings()
   setlocal nonumber
   setlocal nocursorcolumn
-  echom vimfiler#helper#_get_file_directory()
+  " echom vimfiler#helper#_get_file_directory()
   " 移動
   nmap <buffer> j <Plug>(vimfiler_loop_cursor_down)
   nmap <buffer> k <Plug>(vimfiler_loop_cursor_up)
