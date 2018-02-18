@@ -190,19 +190,7 @@ set splitright
 let g:tex_conceal=''
 set conceallevel=0
 
-" 一時ファイルを作成して開く、Tempfileコマンドを定義
-function! s:make_tempfile(...)
-  exe "vs " .tempname()
-  if exists("a:1")
-    exe "set ft=" .a:1
-  endif
-  autocmd MyAutoCmd BufLeave <buffer> write
-endfunction
-command! Tempfile call s:make_tempfile()
-command! TempfileRuby call s:make_tempfile("ruby")
+" ヘルプの日本語化
+set helplang=ja,en
 
-function! s:open_current_explorer()
-  exe "silent ! start %:h"
-endfunction
-command! OpenCurrentExplorer call s:open_current_explorer()
 " ++ }}}

@@ -2,16 +2,12 @@ set encoding=utf-8
 scriptencoding utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 12-Jan-2018.
+" Last Change: 11-Feb-2018.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 augroup MyAutoCmd
   autocmd!
 augroup END
-augroup MyAutoLazyCmd
-  autocmd!
-augroup END
-
 
 source $XDG_CONFIG_HOME/rc/options.rc.vim
 

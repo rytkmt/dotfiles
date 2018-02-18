@@ -225,8 +225,6 @@ nmap <Leader>d [denite]
 "=================================
 
 nnoremap [other]h :so $VIMRUNTIME/syntax/hitest.vim
-nnoremap [other]s :sp<CR>:VimShellBufferDir<CR>
-nnoremap [other]r ::VimShellInteractive irb<CR>
 nnoremap [other]v :<C-u>tabedit $XDG_CONFIG_HOME/vimrc.vim<CR>
 nnoremap [other]d :<C-u>tabedit $XDG_CONFIG_HOME/dein.toml<CR>
 nnoremap [other]l :<C-u>so ~/.vimrc<CR>:<C-u>so ~/.gvimrc<CR>
@@ -250,10 +248,47 @@ endif
 " +++ help{{{
 autocmd MyAutoCmd FileType help nnoremap <buffer> q :q<CR>
 " +++ }}}
-" +++ vimshell{{{
-autocmd MyAutoCmd FileType vimshell nmap <buffer> o Ga
+" +++ railslog {{{
+autocmd MyAutoCmd FileType railslog nmap <buffer> q bd!
 " +++ }}}
-" +++ ruby{{{
+" ++ }}}
+" + ctags系 {{{
+
+  source $XDG_CONFIG_HOME/rc/extensions/_ctags.rc.vim
+  autocmd MyAutoCmd BufEnter,WinEnter * CtagsSet
+
+  " nnoremap [ctag]u :<C-u>call UpdateTags()<CR>
+  nnoremap [ctag]j <C-]>
+  nnoremap [ctag]k <C-t>
+  nnoremap [ctag]l :<C-u>tselect<CR>
+  nnoremap [ctag]; :<C-u>tags<CR>
+  nnoremap [ctag]v :vsp<CR>:exe("tjump " . expand("<cword>"))<CR>
+  nnoremap [ctag]s :exe("stj " . expand("<cword>"))<CR>
+  vnoremap [ctag]j g<C-]>
+" + }}}
+"+ 自作コマンド {{{
+
+" 一時ファイルを作成して開く、Tempfileコマンドを定義
+function! s:make_tempfile(...)
+  exe "vs " .tempname()
+  if exists("a:1")
+    exe "set ft=" .a:1
+  endif
+  autocmd MyAutoCmd BufLeave <buffer> write
+endfunction
+command! Tempfile call s:make_tempfile()
+command! TempfileRuby call s:make_tempfile("ruby")
+
+" カレントディレクトリをエクスプローラーで開く
+function! s:open_current_explorer()
+  if has('mac')
+    exe "silent ! open %:h"
+  else
+    exe "silent ! start %:h"
+  endif
+endfunction
+command! OpenCurrentExplorer call s:open_current_explorer()
+
 function! s:to_camel_case(before_str)
   let l:arr = split(a:before_str, '_')
   let l:after_str = remove(l:arr, 0)
@@ -289,22 +324,4 @@ function! s:to_snake_case(before_str)
 endfunction
 command! -nargs=? ToSnakeCase call s:to_snake_case(<f-args>)
 autocmd MyAutoCmd FileType ruby nnoremap <expr> [ft]s ':ToSnakeCase ' . expand('<cword>') .'<CR>'
-" +++ }}}
-" +++ railslog {{{
-autocmd MyAutoCmd FileType railslog nmap <buffer> q bd!
-" +++ }}}
-" ++ }}}
-" + ctags系 {{{
-
-  source $XDG_CONFIG_HOME/rc/extensions/_ctags.rc.vim
-  autocmd MyAutoCmd BufEnter,WinEnter * CtagsSet
-
-  " nnoremap [ctag]u :<C-u>call UpdateTags()<CR>
-  nnoremap [ctag]j <C-]>
-  nnoremap [ctag]k <C-t>
-  nnoremap [ctag]l :<C-u>tselect<CR>
-  nnoremap [ctag]; :<C-u>tags<CR>
-  nnoremap [ctag]v :vsp<CR>:exe("tjump " . expand("<cword>"))<CR>
-  nnoremap [ctag]s :exe("stj " . expand("<cword>"))<CR>
-  vnoremap [ctag]j g<C-]>
-" + }}}
+"}}}

@@ -75,6 +75,9 @@ autocmd MyAutoCmd VimEnter * source $XDG_CONFIG_HOME/plugins/vim-submode.rc.vim
 
 [[plugins]]
 repo = 'Shougo/vimshell'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vimshell.rc.vim
+'''
 
 
 [[plugins]]
@@ -278,3 +281,8 @@ hook_add = '''
 source $XDG_CONFIG_HOME/plugins/incsearch.vim.rc.vim
 '''
 
+[[plugins]]
+repo = 'w0ng/vim-hybrid'
+
+[[plugins]]
+repo = 'vim-jp/vimdoc-ja'
