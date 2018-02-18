@@ -289,6 +289,7 @@ function! s:open_current_explorer()
 endfunction
 command! OpenCurrentExplorer call s:open_current_explorer()
 
+" キャメルケースに変換
 function! s:to_camel_case(before_str)
   let l:arr = split(a:before_str, '_')
   let l:after_str = remove(l:arr, 0)
@@ -298,8 +299,9 @@ function! s:to_camel_case(before_str)
   execute "normal viws" . l:after_str
 endfunction
 command! -nargs=? ToCamelCase call s:to_camel_case(<f-args>)
-autocmd MyAutoCmd FileType ruby nnoremap <expr> [ft]c ':ToCamelCase ' . expand('<cword>') .'<CR>'
+nnoremap <expr> Cc ':ToCamelCase ' . expand('<cword>') .'<CR>'
 
+" パスカルケースに変換
 function! s:to_pascal_case(before_str)
   let l:after_str = ""
   for l:before_char in split(a:before_str, '_')
@@ -308,8 +310,9 @@ function! s:to_pascal_case(before_str)
   execute "normal viws" . l:after_str
 endfunction
 command! -nargs=? ToPascalCase call s:to_pascal_case(<f-args>)
-autocmd MyAutoCmd FileType ruby nnoremap <expr> [ft]p ':ToPascalCase ' . expand('<cword>') .'<CR>'
+nnoremap <expr> Cp ':ToPascalCase ' . expand('<cword>') .'<CR>'
 
+" スネークケースに変換
 function! s:to_snake_case(before_str)
   let l:before_str = substitute(a:before_str, "^.", "\\l\\0", "")
   let l:after_str = ""
@@ -323,5 +326,5 @@ function! s:to_snake_case(before_str)
   execute "normal viws" . l:after_str
 endfunction
 command! -nargs=? ToSnakeCase call s:to_snake_case(<f-args>)
-autocmd MyAutoCmd FileType ruby nnoremap <expr> [ft]s ':ToSnakeCase ' . expand('<cword>') .'<CR>'
+nnoremap <expr> Cs ':ToSnakeCase ' . expand('<cword>') .'<CR>'
 "}}}
