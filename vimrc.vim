@@ -1,8 +1,9 @@
 set encoding=utf-8
 scriptencoding utf-8
+set fileencodings=utf-8
 " 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
 "
-" Last Change: 12-Jan-2018.
+" Last Change: 08-Feb-2018.
 " Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 augroup MyAutoCmd

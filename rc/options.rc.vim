@@ -17,9 +17,6 @@ unlet! s:path
 "source $VIM/plugins/kaoriya/encode_japan.vim
 
 " メッセージを日本語にする (Windowsでは自動的に判断・設定されている)
-set encoding=utf-8
-set fileencodings=utf-8
-"set fileencodings=utf-8,iso-2022-jp,cp932,sjis,euc-jp
 if !(has('win32') || has('mac')) && has('multi_lang')
   if !exists('$LANG') || $LANG.'X' ==# 'X'
     if !exists('$LC_CTYPE') || $LC_CTYPE.'X' ==# 'X'
@@ -32,7 +29,7 @@ if !(has('win32') || has('mac')) && has('multi_lang')
 endif
 " MacOS Xメニューの日本語化 (メニュー表示前に行なう必要がある)
 if has('mac')
-  set encoding=utf-8
+  " set encoding=utf-8
   set ambiwidth=double
   if exists('$LANG') && $LANG ==# 'ja_JP.UTF-8'
     set langmenu=ja_ja.utf-8.macvim
