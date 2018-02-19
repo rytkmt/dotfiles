@@ -1,18 +1,10 @@
 set encoding=utf-8
 scriptencoding utf-8
 set fileencodings=utf-8
-" 日本語版のデフォルト設定ファイル(vimrc) - Vim7用試作
-"
-" Last Change: 08-Feb-2018.
-" Maintainer:  Ryo Tsukamoto <r12tkmt@gmail.com>
 "
 augroup MyAutoCmd
   autocmd!
 augroup END
-augroup MyAutoLazyCmd
-  autocmd!
-augroup END
-
 
 source $XDG_CONFIG_HOME/rc/options.rc.vim
 
@@ -23,12 +15,15 @@ else
   let s:dein_cache_path = expand('~/.vim/cache/vim/dein')
 endif
 
-let s:dein_dir = s:dein_cache_path .'/repos/github.com/Shougo/dein.vim'
+let s:clone_repositories = ['Shougo/dein.vim', 'vim-jp/vimdoc-ja']
 if &runtimepath !~ '/dein.vim'
-  if !isdirectory(s:dein_dir)
-    execute '!git clone https://github.com/Shougo/dein.vim ' . s:dein_dir
-  endif
-  execute 'set runtimepath+=' . s:dein_dir
+  for s:repos in s:clone_repositories
+    let s:repos_path = s:dein_cache_path . '/repos/github.com/' . s:repos
+    if !isdirectory(s:repos_path)
+      execute '!git clone https://github.com/' . s:repos . '.git ' . s:repos_path
+    endif
+    execute 'set runtimepath+=' . s:repos_path
+  endfor
 endif
 
 syntax enable
