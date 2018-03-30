@@ -127,7 +127,6 @@ set list
 "set listchars=tab:>-,extends:<,trail:-,eol:<
 set listchars=tab:>\ ,trail:-,nbsp:+
 " 長い行を折り返して表示 (nowrap:折り返さない)
-
 set nowrap
 " 常にステータス行を表示 (詳細は:he laststatus)
 set laststatus=2

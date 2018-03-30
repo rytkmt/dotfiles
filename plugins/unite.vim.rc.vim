@@ -9,10 +9,10 @@
 " nnoremap <silent> [unite]g :<C-u>Unite<Space>grep<CR>
 " nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
 " nnoremap <silent> [unite]b :<C-u>Unite<Space>bookmark<CR>
-call unite#custom_default_action('source/bookmark/directory' , 'lcd')
+" call unite#custom_default_action('source/bookmark/directory' , 'lcd')
 "nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
 " nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
-nnoremap <silent> [unite]y :<C-u>Unite<Space>history/yank<CR>
+" nnoremap <silent> [unite]y :<C-u>Unite<Space>history/yank<CR>
 "nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
 " function! CallUniteFileRec()
 "   if exists('w:current_project')
