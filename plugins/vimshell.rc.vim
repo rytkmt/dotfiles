@@ -3,7 +3,7 @@ let g:vimshell_prompt = "% "
 let g:vimshell_secondary_prompt = "> "
 "
 let g:vimshell_prompt_expr =
-\ 'escape(getcwd(). " %", "\\[]()?! ")." "'
+\ 'escape(fnamemodify(getcwd(), ":~"). " %", "\\[]()?! ")." "'
 let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+% '
 
 nnoremap [other]s :sp<CR>:VimShellBufferDir<CR>

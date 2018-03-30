@@ -172,11 +172,12 @@ map <Space> <Nop>
 nnoremap <silent> <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
 
 " コピペ
-vmap <Leader>c "*y
-nmap <Leader>v "*p
-vmap <Leader>v "*p
-nmap <Leader>V "*P
-vmap <Leader>V "*P
+vnoremap <Leader>c "*y
+vnoremap <Leader>x "*d
+nnoremap <Leader>v "*p
+vnoremap <Leader>v "*p
+nnoremap <Leader>V "*P
+vnoremap <Leader>V "*P
 
 nmap <Leader>z [other]
 nmap <Leader>t [tab]
@@ -227,6 +228,8 @@ nmap <Leader>d [denite]
 nnoremap [other]h :so $VIMRUNTIME/syntax/hitest.vim
 nnoremap [other]v :<C-u>tabedit $XDG_CONFIG_HOME/vimrc.vim<CR>
 nnoremap [other]d :<C-u>tabedit $XDG_CONFIG_HOME/dein.toml<CR>
+nnoremap [other]o :<C-u>tabedit $XDG_CONFIG_HOME/rc/options.rc.vim<CR>
+nnoremap [other]m :<C-u>tabedit $XDG_CONFIG_HOME/rc/mappings.rc.vim<CR>
 nnoremap [other]l :<C-u>so ~/.vimrc<CR>:<C-u>so ~/.gvimrc<CR>
 nnoremap [other]h :<C-u>tabedit $XDG_CONFIG_HOME/../lighthouse/colors/lighthouse.vim<CR>
 nnoremap [edit]s :e ++enc=shift_jis<CR>
