@@ -25,21 +25,16 @@ nnoremap [tab]6 :<C-u>tabn 6<CR>
 nnoremap [tab]7 :<C-u>tabn 7<CR>
 nnoremap [tab]8 :<C-u>tabn 8<CR>
 nnoremap [tab]9 :<C-u>tabn 9<CR>
-nnoremap [tab]10 :<C-u>tabn 10<CR>
-nnoremap [tab]m :<C-u>call <SID>move_buf_to_new_tab()<CR>
-
-" 作業ウィンドウを別タブで開く
-function! s:move_buf_to_new_tab()
-  let move_buf_to_new_tab_path = expand("%:p")
-  try
-    q
-  catch
-    return
-  endtry
-  execute "tabe " . move_buf_to_new_tab_path
-endfunction
+nnoremap [tab]m :<C-w>T
 " ++ }}}
 " ++ ウィンドウ操作 {{{
+
+" ウィンドウ分割
+nnoremap [window]s <C-w>s
+nnoremap [window]v <C-w>v
+
+" 新規タブに移動
+nnoremap [window]t <C-w>T
 
 " ウィンドウ遷移
 nnoremap [window]h <C-w>h
