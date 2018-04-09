@@ -93,6 +93,7 @@ nnoremap <C-c> viws
 nnoremap Yf :<C-u>redi! @"> \| echo expand("%:t") \| redi END<CR>
 nnoremap Yp :<C-u>redi! @"> \| echo expand("%:p") \| redi END<CR>
 nnoremap Yd :<C-u>redi! @"> \| echo expand("%:p:h") \| redi END<CR>
+nnoremap Yh :<C-u>redi! @"> \| echo expand("%:p:h") \| redi END<CR>
 nnoremap <ESC><ESC> :<C-u>noh<CR>
 cmap <C-j> <LEFT>
 cmap <C-k> <RIGHT>
