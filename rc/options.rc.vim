@@ -73,7 +73,10 @@ set formatexpr=autofmt#japanese#formatexpr()
 
 if has('nvim')
   if has('patch-7.4.1778')
-    set guicolors
+    try
+      set guicolors
+    catch
+    endtry
   endif
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   " 256色
@@ -127,7 +130,6 @@ set list
 "set listchars=tab:>-,extends:<,trail:-,eol:<
 set listchars=tab:>\ ,trail:-,nbsp:+
 " 長い行を折り返して表示 (nowrap:折り返さない)
-
 set nowrap
 " 常にステータス行を表示 (詳細は:he laststatus)
 set laststatus=2
