@@ -34,11 +34,13 @@ if dein#load_state(s:dein_cache_path)
   call dein#save_state()
 endif
 
+" vimprocだけ先にインストールしておく
 if dein#check_install(['vimproc.vim'])
  call dein#install(['vimproc.vim'])
 endif
 
-if !has('vim_starting') && dein#check_install()
+" 未インストールのものがあればインストール
+if dein#check_install()
   call dein#install()
 endif
 
