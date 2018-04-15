@@ -286,3 +286,6 @@ repo = 'w0ng/vim-hybrid'
 
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
+
+[[plugins]]
+repo = 'rytkmt/vim-textile'
