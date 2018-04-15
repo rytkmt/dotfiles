@@ -232,12 +232,6 @@ nnoremap [edit]s :e ++enc=shift_jis<CR>
 nnoremap [edit]u :e ++enc=utf-8<CR>
 nnoremap [edit]e :e ++enc=euc-jp<CR>
 
-if has('win32')
-  let $MEMO = $HOME . '/workspace/sql.sql'
-  let $TESTRB = $HOME . '/workspace/test.rb'
-  nnoremap [other]q :<C-u>tabedit $MEMO<CR>
-  nnoremap [other]t :<C-u>tabedit $TESTRB<CR>
-endif
 "if has('syntax')
 "  autocmd MyAutoCmd BufWinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
 "  autocmd MyAutoCmd WinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
@@ -251,20 +245,6 @@ autocmd MyAutoCmd FileType help nnoremap <buffer> q :q<CR>
 autocmd MyAutoCmd FileType railslog nmap <buffer> q bd!
 " +++ }}}
 " ++ }}}
-" + ctags系 {{{
-
-  source $XDG_CONFIG_HOME/rc/extensions/_ctags.rc.vim
-  autocmd MyAutoCmd BufEnter,WinEnter * CtagsSet
-
-  " nnoremap [ctag]u :<C-u>call UpdateTags()<CR>
-  nnoremap [ctag]j <C-]>
-  nnoremap [ctag]k <C-t>
-  nnoremap [ctag]l :<C-u>tselect<CR>
-  nnoremap [ctag]; :<C-u>tags<CR>
-  nnoremap [ctag]v :vsp<CR>:exe("tjump " . expand("<cword>"))<CR>
-  nnoremap [ctag]s :exe("stj " . expand("<cword>"))<CR>
-  vnoremap [ctag]j g<C-]>
-" + }}}
 "+ 自作コマンド {{{
 
 " 一時ファイルを作成して開く、Tempfileコマンドを定義
