@@ -73,7 +73,10 @@ set formatexpr=autofmt#japanese#formatexpr()
 
 if has('nvim')
   if has('patch-7.4.1778')
-    set guicolors
+    try
+      set guicolors
+    catch
+    endtry
   endif
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   " 256色

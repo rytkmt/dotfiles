@@ -1,6 +1,4 @@
-export DOT_FILES=$HOME/programs/vim/dotfiles
-export VIM_FILES=$HOME/programs/vim/vim
-export XDG_CONFIG_HOME=$DOT_FILES
+export DOT_FILES=$XDG_CONFIG_HOME
 export MYVIMRC=$DOT_FILES/vimrc.vim
 export TERM=xterm-color256
 
