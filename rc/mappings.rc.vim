@@ -88,6 +88,7 @@ nnoremap <C-c> viws
 nnoremap Yf :<C-u>redi! @"> \| echo expand("%:t") \| redi END<CR>
 nnoremap Yp :<C-u>redi! @"> \| echo expand("%:p") \| redi END<CR>
 nnoremap Yd :<C-u>redi! @"> \| echo expand("%:p:h") \| redi END<CR>
+nnoremap Yh :<C-u>redi! @"> \| echo expand("%:p:h") \| redi END<CR>
 nnoremap <ESC><ESC> :<C-u>noh<CR>
 cmap <C-j> <LEFT>
 cmap <C-k> <RIGHT>
@@ -240,20 +241,6 @@ autocmd MyAutoCmd FileType help nnoremap <buffer> q :q<CR>
 autocmd MyAutoCmd FileType railslog nmap <buffer> q bd!
 " +++ }}}
 " ++ }}}
-" + ctags系 {{{
-
-  source $XDG_CONFIG_HOME/rc/extensions/_ctags.rc.vim
-  autocmd MyAutoCmd BufEnter,WinEnter * CtagsSet
-
-  " nnoremap [ctag]u :<C-u>call UpdateTags()<CR>
-  nnoremap [ctag]j <C-]>
-  nnoremap [ctag]k <C-t>
-  nnoremap [ctag]l :<C-u>tselect<CR>
-  nnoremap [ctag]; :<C-u>tags<CR>
-  nnoremap [ctag]v :vsp<CR>:exe("tjump " . expand("<cword>"))<CR>
-  nnoremap [ctag]s :exe("stj " . expand("<cword>"))<CR>
-  vnoremap [ctag]j g<C-]>
-" + }}}
 "+ 自作コマンド {{{
 
 " 一時ファイルを作成して開く、Tempfileコマンドを定義

@@ -15,15 +15,12 @@ else
   let s:dein_cache_path = expand('~/.vim/cache/vim/dein')
 endif
 
-let s:clone_repositories = ['Shougo/dein.vim', 'vim-jp/vimdoc-ja']
 if &runtimepath !~ '/dein.vim'
-  for s:repos in s:clone_repositories
-    let s:repos_path = s:dein_cache_path . '/repos/github.com/' . s:repos
-    if !isdirectory(s:repos_path)
-      execute '!git clone https://github.com/' . s:repos . '.git ' . s:repos_path
-    endif
-    execute 'set runtimepath+=' . s:repos_path
-  endfor
+  let s:repos_path = s:dein_cache_path . '/repos/github.com/Shougo/dein.vim'
+  if !isdirectory(s:repos_path)
+    execute '!git clone https://github.com/Shougo/dein.vim.git ' . s:repos_path
+  endif
+  execute 'set runtimepath+=' . s:repos_path
 endif
 
 syntax enable
@@ -37,17 +34,24 @@ if dein#load_state(s:dein_cache_path)
   call dein#save_state()
 endif
 
+" vimprocだけ先にインストールしておく
 if dein#check_install(['vimproc.vim'])
  call dein#install(['vimproc.vim'])
 endif
-if !has('vim_starting') && dein#check_install()
+
+" 未インストールのものがあればインストール
+if dein#check_install()
   call dein#install()
 endif
+
 " deinの読み込み後に行う
-" filetype on
-colorscheme lighthouse
+try
+  colorscheme lighthouse
+catch
+endtry
+
 filetype plugin indent on
 set noimdisable
 " }}}
-"
+
 source $XDG_CONFIG_HOME/rc/mappings.rc.vim
