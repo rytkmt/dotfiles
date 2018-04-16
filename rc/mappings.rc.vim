@@ -231,16 +231,6 @@ nnoremap [edit]s :e ++enc=shift_jis<CR>
 nnoremap [edit]u :e ++enc=utf-8<CR>
 nnoremap [edit]e :e ++enc=euc-jp<CR>
 
-if has('win32')
-  let $MEMO = $HOME . '/workspace/sql.sql'
-  let $TESTRB = $HOME . '/workspace/test.rb'
-  nnoremap [other]q :<C-u>tabedit $MEMO<CR>
-  nnoremap [other]t :<C-u>tabedit $TESTRB<CR>
-endif
-"if has('syntax')
-"  autocmd MyAutoCmd BufWinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
-"  autocmd MyAutoCmd WinEnter * let w:m1 = matchadd("ZenkakuSpace", '　')
-"endif
 " ++ }}}
 " ++ ファイルタイプ別{{{
 " +++ help{{{
