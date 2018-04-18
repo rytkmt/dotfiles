@@ -19,3 +19,11 @@ hook_post_source = '''
 source $XDG_CONFIG_HOME/plugins/deoplete.rc.vim
 '''
 
+[[plugins]]
+repo = 'takkii/ruby-dictionary3'
+if = "has('python3')"
+depends = ['deoplete.nvim']
+on_i = 1
+hook_post_source = '''
+source $XDG_CONFIG_HOME/plugins/ruby-dictionary3.rc.vim
+'''

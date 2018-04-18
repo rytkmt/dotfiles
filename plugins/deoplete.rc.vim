@@ -10,6 +10,8 @@ let g:deoplete#auto_complete_start_length = 2
 " 補完する秒数
 let g:deoplete#auto_complete_delay = 0
 let g:deoplete#file#enable_buffer_path = 1
+
+
 "候補の選択
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
@@ -17,5 +19,5 @@ inoremap <expr><C-j>  pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <expr><C-k>  pumvisible() ? "\<C-p>" : "\<C-k>"
 imap <expr><C-l>
 		\ deoplete#complete_common_string() != '' ?
-		\   deoplete#complete_common_string() : "\<C-l>"
+		\   deoplete#complete_common_string() : "\<Right>"
 call deoplete#enable()
