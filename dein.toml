@@ -79,15 +79,6 @@ hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vimshell.rc.vim
 '''
 
-
-# [[plugins]]
-# repo = 'Shougo/neomru.vim'
-# if = "!has('nvim')"
-
-# [[plugins]]
-# repo = 'Shougo/neoyank.vim'
-# if = "!has('nvim')"
-
 [[plugins]]
 repo = 'ujihisa/unite-colorscheme'
 
@@ -250,7 +241,7 @@ source $XDG_CONFIG_HOME/plugins/previm.rc.vim
 
 [[plugins]]
 repo = 'Shougo/denite.nvim'
-if = "has('python3')"
+if = 'has("python3")'
 hook_post_source = '''
 source $XDG_CONFIG_HOME/plugins/denite.rc.vim
 '''

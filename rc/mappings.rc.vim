@@ -97,6 +97,8 @@ cmap <C-k> <RIGHT>
 nnoremap gj j
 nnoremap gk k
 
+vnoremap <C-p> "0p
+
 " 行を移動
 nnoremap <C-Up> "zdd<Up>"zP
 nnoremap <C-Down> "zdd"zp
@@ -206,7 +208,7 @@ nmap [ctrlp] <Nop>
 nnoremap [ft] <Nop>
 nmap <Leader>; [ft]
 
-nmap [denite] <Nop>
+nnoremap [denite] <Nop>
 nmap <Leader>d [denite]
 
 "=================================

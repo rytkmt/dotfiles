@@ -6,7 +6,7 @@ let g:deoplete#enable_camel_case = 1
 " ポップアップメニューで表示される候補の数
 let g:deoplete#max_list = 20
 " 補完を表示する最小文字数
-let g:deoplete#auto_complete_start_length = 2
+let g:deoplete#auto_complete_start_length = 1
 " 補完する秒数
 let g:deoplete#auto_complete_delay = 0
 let g:deoplete#file#enable_buffer_path = 1

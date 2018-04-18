@@ -12,9 +12,8 @@ function! _VimFilerOpen(init, type)
   let l:vimfiler_default_dir = ''
 
   if(a:type == 1 && (a:init || g:vimfiler_is_new))
-    if has('win32')
-      let l:vimfiler_default_dir = 'C:/Users/r_tsukamoto.ILL/workspace'
-    else
+    let l:vimfiler_default_dir = $FILER_DEFAULT
+    if empty(l:vimfiler_default_dir)
       let l:vimfiler_default_dir = $XDG_CONFIG_HOME
     endif
     if !isdirectory(l:vimfiler_default_dir)
