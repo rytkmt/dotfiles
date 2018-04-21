@@ -1,0 +1,1 @@
+xmap <Enter> <Plug>(EasyAlign)

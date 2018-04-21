@@ -286,3 +286,9 @@ repo = 'LeafCage/yankround.vim'
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/yankround.vim.rc.vim
 '''
+
+[[plugins]]
+repo = 'junegunn/vim-easy-align'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-easy-align.rc.vim
+'''
