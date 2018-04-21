@@ -301,3 +301,9 @@ source $XDG_CONFIG_HOME/plugins/scratch.rc.vim
 
 [[plugins]]
 repo = 'mattn/vim-maketable'
+
+[[plugins]]
+repo = 'thinca/vim-visualstar'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-visualstar.rc.vim
+'''
