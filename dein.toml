@@ -280,3 +280,9 @@ repo = 'vim-jp/vimdoc-ja'
 
 [[plugins]]
 repo = 'rytkmt/vim-textile'
+
+[[plugins]]
+repo = 'LeafCage/yankround.vim'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/yankround.vim.rc.vim
+'''

@@ -10,7 +10,13 @@ nmap <C-p> <Plug>(yankround-prev)
 vmap <C-p> <Plug>(yankround-prev)
 nmap <C-n> <Plug>(yankround-next)
 vmap <C-n> <Plug>(yankround-next)
-nnoremap <silent> [unite]y :<C-u>Unite<Space>yankround<CR>
 "yankのペーストにハイライトを使用するか
 let g:yankround_use_region_hl = 1
-autocmd MyAutoCmd ColorScheme * highlight YankRoundRegion gui=underline guifg=White guibg=Black
+let g:yankround_max_history = 10
+let g:yankround_dir = "~/.vim/cache/yankround"
+
+if has("gui_running") || has('gui') || has('nvim')
+  autocmd ColorScheme * hi! YankRoundRegion gui=underline guifg=#293239 guibg=#a4a4b2
+
+else
+endif

@@ -1,4 +1,5 @@
-nmap [ctrlp]f :<C-u>CtrlP<CR>
+let g:ctrlp_map = '[ctrlp]f'
+" nmap [ctrlp]f :<C-u>CtrlP<CR>
 nmap [ctrlp]b :<C-u>CtrlPBuffer<CR>
 nmap [ctrlp]m :<C-u>CtrlPMRU<CR>
 
