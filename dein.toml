@@ -298,3 +298,6 @@ repo = 'rytkmt/scratch.vim'
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/scratch.rc.vim
 '''
+
+[[plugins]]
+repo = 'mattn/vim-maketable'
