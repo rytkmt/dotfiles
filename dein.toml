@@ -96,6 +96,7 @@ source $XDG_CONFIG_HOME/plugins/vim-rails.rc.vim
 
 [[plugins]]
 repo = 'terryma/vim-expand-region'
+depends = ['vim-textobj-ruby']
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vim-expand-region.rc.vim
 '''
@@ -120,8 +121,15 @@ source $XDG_CONFIG_HOME/plugins/textobj-wiw.rc.vim
 
 [[plugins]]
 repo = "kana/vim-textobj-function"
+
 [[plugins]]
 repo = "kana/vim-textobj-line"
+
+[[plugins]]
+repo = 'rhysd/vim-textobj-ruby'
+hook_add = '''
+let g:textobj_ruby_more_mappings = 1
+'''
 
 [[plugins]]
 repo = 'vim-scripts/grep.vim'

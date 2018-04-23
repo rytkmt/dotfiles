@@ -17,6 +17,10 @@ let g:expand_region_text_objects = {
       \ 'iW'  :0,
       \ 'if'  :0,
       \ 'il'  :0,
+      \ 'irc' :0,
+      \ 'arc' :0,
+      \ 'iro' :0,
+      \ 'aro' :0,
       \ }
 vmap <silent> v <Plug>(expand_region_expand)
 vmap <silent> c <Plug>(expand_region_shrink)

@@ -195,3 +195,6 @@ set conceallevel=0
 set helplang=ja,en
 
 " ++ }}}
+" ++ ファイルタイプ別設定 {{{
+autocmd MyAutoCmd FileType ruby setl iskeyword+=?
+" }}}
