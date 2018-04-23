@@ -31,7 +31,7 @@ function! _VimFilerOpen(init, type)
   endif
 endfunction
 " VimFilerを起動
-autocmd MyAutoCmd VimEnter * call _VimFilerOpen(1,1)
+" autocmd MyAutoCmd VimEnter * call _VimFilerOpen(1,1)
 
 let g:vimfiler_no_default_key_mappings = 1
 " let g:vimfiler_tree_leaf_icon = ' '

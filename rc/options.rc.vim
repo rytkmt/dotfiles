@@ -94,7 +94,6 @@ set smartcase
 set incsearch
 "検索結果をハイライト
 set hlsearch
-autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow
 " ++ }}}
 " ++ 編集に関する設定: {{{
 "
@@ -195,6 +194,11 @@ set conceallevel=0
 set helplang=ja,en
 
 " ++ }}}
-" ++ ファイルタイプ別設定 {{{
-autocmd MyAutoCmd FileType ruby setl iskeyword+=?
-" }}}
+" ++ ファイルタイプ別 {{{
+" +++ quickfix {{{
+source $XDG_CONFIG_HOME/rc/extensions/quickfix.vim
+" +++ }}}
+" +++ ruby {{{
+autocmd MyAutoCmd FileType ruby setl iskeyword+=?,!
+" +++ }}}
+" ++ }}}
