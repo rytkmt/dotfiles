@@ -25,7 +25,7 @@ nnoremap [tab]6 :<C-u>tabn 6<CR>
 nnoremap [tab]7 :<C-u>tabn 7<CR>
 nnoremap [tab]8 :<C-u>tabn 8<CR>
 nnoremap [tab]9 :<C-u>tabn 9<CR>
-nnoremap [tab]m :<C-w>T
+nnoremap [tab]m <C-w>T
 " ++ }}}
 " ++ ウィンドウ操作 {{{
 
@@ -242,6 +242,9 @@ autocmd MyAutoCmd FileType help nnoremap <buffer> q :q<CR>
 " +++ railslog {{{
 autocmd MyAutoCmd FileType railslog nmap <buffer> q bd!
 " +++ }}}
+" +++ xml{{{
+autocmd MyAutoCmd FileType xml nnoremap <buffer> FF :%s/></>\r</g \| filetype indent on \| normal gg=G<CR>
+" +++}}}
 " ++ }}}
 "+ 自作コマンド {{{
 
@@ -276,7 +279,6 @@ function! s:to_camel_case(before_str)
   execute "normal viws" . l:after_str
 endfunction
 command! -nargs=? ToCamelCase call s:to_camel_case(<f-args>)
-nnoremap <expr> Cc ':ToCamelCase ' . expand('<cword>') .'<CR>'
 
 " パスカルケースに変換
 function! s:to_pascal_case(before_str)
@@ -287,7 +289,6 @@ function! s:to_pascal_case(before_str)
   execute "normal viws" . l:after_str
 endfunction
 command! -nargs=? ToPascalCase call s:to_pascal_case(<f-args>)
-nnoremap <expr> Cp ':ToPascalCase ' . expand('<cword>') .'<CR>'
 
 " スネークケースに変換
 function! s:to_snake_case(before_str)
@@ -303,5 +304,9 @@ function! s:to_snake_case(before_str)
   execute "normal viws" . l:after_str
 endfunction
 command! -nargs=? ToSnakeCase call s:to_snake_case(<f-args>)
+
+nnoremap <expr> Cc ':ToCamelCase ' . expand('<cword>') .'<CR>'
+nnoremap <expr> Cp ':ToPascalCase ' . expand('<cword>') .'<CR>'
 nnoremap <expr> Cs ':ToSnakeCase ' . expand('<cword>') .'<CR>'
+nnoremap W viw
 "}}}

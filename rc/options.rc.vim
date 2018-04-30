@@ -49,7 +49,8 @@ if !has('gui_running') && has('xterm_clipboard')
   set clipboard=exclude:cons\\\|linux\\\|cygwin\\\|rxvt\\\|screen
 endif
 if has('nvim')
-  set clipboard+=unnamed
+  " set clipboard+=unnamed
+  
 endif
 
 " プラットホーム依存の特別な設定
