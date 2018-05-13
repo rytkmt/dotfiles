@@ -128,6 +128,8 @@ inoremap <C-e> <C-o>"_de
 
 inoremap <C-p> <C-r>"
 
+nnoremap W viw
+
 " カーソル位置の単語を置換
 nnoremap <expr> [map]s ':%s/\<' . expand('<cword>') . '\>/'
 vnoremap <expr> [map]s ':<C-u>%s/\<' . expand('<cword>') . '\>/'
@@ -248,65 +250,9 @@ autocmd MyAutoCmd FileType xml nnoremap <buffer> FF :%s/></>\r</g \| filetype in
 " ++ }}}
 "+ 自作コマンド {{{
 
-" 一時ファイルを作成して開く、Tempfileコマンドを定義
-function! s:make_tempfile(...)
-  exe "vs " .tempname()
-  if exists("a:1")
-    exe "set ft=" .a:1
-  endif
-  autocmd MyAutoCmd BufLeave <buffer> write
-endfunction
-command! Tempfile call s:make_tempfile()
-command! TempfileRuby call s:make_tempfile("ruby")
-
-" カレントディレクトリをエクスプローラーで開く
-function! s:open_current_explorer()
-  if has('mac')
-    exe "silent ! open %:h"
-  else
-    exe "silent ! start %:h"
-  endif
-endfunction
-command! OpenCurrentExplorer call s:open_current_explorer()
-
-" キャメルケースに変換
-function! s:to_camel_case(before_str)
-  let l:arr = split(a:before_str, '_')
-  let l:after_str = remove(l:arr, 0)
-  for l:before_char in l:arr
-    let l:after_str = l:after_str . substitute(l:before_char, "^.", "\\u\\0", "")
-  endfor
-  execute "normal viws" . l:after_str
-endfunction
-command! -nargs=? ToCamelCase call s:to_camel_case(<f-args>)
-
-" パスカルケースに変換
-function! s:to_pascal_case(before_str)
-  let l:after_str = ""
-  for l:before_char in split(a:before_str, '_')
-    let l:after_str = l:after_str . substitute(l:before_char, "^.", "\\u\\0", "")
-  endfor
-  execute "normal viws" . l:after_str
-endfunction
-command! -nargs=? ToPascalCase call s:to_pascal_case(<f-args>)
-
-" スネークケースに変換
-function! s:to_snake_case(before_str)
-  let l:before_str = substitute(a:before_str, "^.", "\\l\\0", "")
-  let l:after_str = ""
-  for l:i in range(0,strlen(l:before_str)-1)
-    if l:before_str[l:i] ==# toupper(l:before_str[l:i])
-      let l:after_str = l:after_str . substitute(l:before_str[l:i], "[A-Z]", "_\\l\\0", "")
-    else
-      let l:after_str = l:after_str . l:before_str[l:i]
-    endif
-  endfor
-  execute "normal viws" . l:after_str
-endfunction
-command! -nargs=? ToSnakeCase call s:to_snake_case(<f-args>)
+source $XDG_CONFIG_HOME/rc/command.rc.vim
 
 nnoremap <expr> Cc ':ToCamelCase ' . expand('<cword>') .'<CR>'
 nnoremap <expr> Cp ':ToPascalCase ' . expand('<cword>') .'<CR>'
 nnoremap <expr> Cs ':ToSnakeCase ' . expand('<cword>') .'<CR>'
-nnoremap W viw
 "}}}
