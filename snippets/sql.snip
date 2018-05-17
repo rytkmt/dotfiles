@@ -1,0 +1,27 @@
+snippet     alter_add_column
+options head
+  ALTER TABLE ${1:TABLE} ADD COLUMN ${2:COLUMN} ${3:FORMAT};
+
+snippet     add_column
+options word
+  ADD COLUMN ${2:COLUMN} ${3:FORMAT};
+
+snippet     alter_set_default
+options head
+  ALTER TABLE ${1:TABLE} ALTER COLUMN ${2:COLUMN} SET DEFAULT ${4:DEFAULT};
+
+snippet     set_default
+options word
+  ALTER COLUMN ${2:COLUMN} SET DEFAULT ${4:DEFAULT}
+
+snippet     update_default
+options head
+  UPDATE ${1:TABLE} SET ${2:COLUMN} = ${4:DEFAULT};
+
+snippet     alter_set_not_null
+options head
+  ALTER TABLE ${1:TABLE} ALTER COLUMN ${2:COLUMN} SET NOT NULL;
+
+snippet     set_not_null
+options word
+  ALTER COLUMN ${2:COLUMN} SET NOT NULL;
