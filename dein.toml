@@ -84,6 +84,9 @@ repo = 'ujihisa/unite-colorscheme'
 
 [[plugins]]
 repo = 'mattn/emmet-vim'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/emmet-vim.rc.vim
+'''
 
 [[plugins]]
 repo = 'cohama/lexima.vim'
