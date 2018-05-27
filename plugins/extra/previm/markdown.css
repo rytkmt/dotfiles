@@ -31,3 +31,12 @@ blockquote {
   font-style:italic;
   margin: 15px 6px;
 }
+
+pre{
+  border: 1px solid #e6e6f1;
+  border-radius:4px;
+}
+
+code{
+  font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace;
+}
