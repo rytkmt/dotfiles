@@ -19,15 +19,15 @@ function! _VimFilerOpen(init, type)
     if !isdirectory(l:vimfiler_default_dir)
       let l:vimfiler_default_dir = $HOME
     endif
-    exe ":VimFilerExplorer -fnamewidth=200 -buffer-name=" . t:tab_name . " " . l:vimfiler_default_dir
+    exe ":VimFilerExplorer -fnamewidth=200 -buffer-name=" . t:tab_name . " " . fnamemodify(l:vimfiler_default_dir, ':p')
   elseif(a:type == 2)
     " カレントディレクトリ
     let l:vimfiler_default_dir = expand("%:p:h")
-    exe ":VimFilerExplorer -fnamewidth=200 -buffer-name=" . t:tab_name . " " . l:vimfiler_default_dir
+    exe ":VimFilerExplorer -fnamewidth=200 -buffer-name=" . t:tab_name . " " . fnamemodify(l:vimfiler_default_dir, ':p')
   elseif(a:type == 3)
     " カレントディレクトリ
     let l:vimfiler_default_dir = expand("%:p:h")
-    exe ":VimFiler -buffer-name=" . t:tab_name . " " . l:vimfiler_default_dir
+    exe ":VimFiler -buffer-name=" . t:tab_name . " " . fnamemodify(l:vimfiler_default_dir, ':p')
   endif
 endfunction
 " VimFilerを起動
