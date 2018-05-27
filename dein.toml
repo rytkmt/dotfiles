@@ -318,3 +318,12 @@ repo = 'thinca/vim-visualstar'
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vim-visualstar.rc.vim
 '''
+
+[[plugins]]
+repo = 'kana/vim-operator-user'
+
+[[plugins]]
+repo = 'kana/vim-operator-replace'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-operator-replace.rc.vim
+'''
