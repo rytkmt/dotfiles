@@ -1,4 +1,5 @@
 let g:previm_enable_realtime = 1
+let g:previm_custom_css_path = '$XDG_CONFIG_HOME/plugins/extra/previm/markdown.css'
 augroup PrevimSettings
     autocmd!
     autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown

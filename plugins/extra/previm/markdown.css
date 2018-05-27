@@ -1,0 +1,33 @@
+h1, h2, h3, h4, h5, h6{
+  margin-left: -5px;
+  padding-left: 3px;
+}
+h1 {
+  border-bottom: 3px solid #bbb;
+}
+
+h2 {
+  border-bottom: 2px solid #bbb;
+  font-size: 20px;
+}
+
+h3 {
+  border-bottom: 1px solid #ccc;
+}
+
+ul, ol{
+  margin-top: 8px;
+  padding-left: 28px;
+}
+
+ul ul, ol ol, ul ol, ol ul{
+  padding-left: 23px
+}
+
+blockquote {
+  border-left: 3px solid #ddd;
+  padding: 6px 14px;
+  color: #888;
+  font-style:italic;
+  margin: 15px 6px;
+}
