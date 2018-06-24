@@ -87,6 +87,10 @@ function! s:vimfiler_settings()
   nmap <buffer> l <Plug>(vimfiler_smart_l)
   nmap <buffer> <CR> l
 
+  nmap <buffer><expr> L vimfiler#smart_cursor_map(
+          \ "\<Plug>(vimfiler_cd_file)",
+          \ "\<Plug>(vimfiler_open_file_in_another_vimfiler)")
+
   " ウィンドウを分割して開く
   nmap <silent><buffer><expr> s ExpressionAndFilerClose("vimfiler#do_switch_action('split')")
   nmap <silent><buffer><expr> v ExpressionAndFilerClose("vimfiler#do_switch_action('vsplit')")
