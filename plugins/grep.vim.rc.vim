@@ -8,7 +8,7 @@ if has("win32")
   let Grep_Find_Path = 'C:\git_bin\find.exe'
   let Grep_Xargs_Path = 'C:\git_bin\xargs.exe'
   let Grep_Shell_Quote_Char = '"'
-  let Grep_Skip_Dirs = '.svn'
-  let Grep_Default_Options = '-I -G'
-  let Grep_Skip_Files = '*.bak *~ *.log'
 endif
+let Grep_Skip_Dirs = '.svn'
+let Grep_Default_Options = '-I -G'
+let Grep_Skip_Files = '*.bak *~ *.log'

@@ -13,3 +13,10 @@ autocmd MyAutoCmd FileType markdown nmap <buffer> [ft]t :TableFormat<CR>
 
 autocmd MyAutoCmd FileType markdown nmap <buffer> [ft]c :Toc<CR>
 
+function! s:auto_save()
+  if filewritable(expand('%'))
+    write
+  endif
+endfunction
+
+autocmd MyAutoCmd InsertLeave *.md call <SID>auto_save()

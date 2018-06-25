@@ -35,7 +35,7 @@ unlet s:cpo_save
 " An example for a Japanese version gvimrc file.
 " 日本語版のデフォルトGUI設定ファイル(gvimrc) - Vim 7.4
 "
-" Last Change: 16-Apr-2018.
+" Last Change: 01-Jun-2018.
 " Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
 "
 if has('win32')
@@ -47,7 +47,7 @@ endif
 try
   if has('win32')
     " set guifont=VL_ゴシック:h11
-    set guifont=Ricty_Diminished:h11:cSHIFTJIS:qDRAFT
+    set guifont=Ricty_Diminished:h9:cSHIFTJIS:qDRAFT
     set renderoptions=type:directx,renmode:4
   endif
 endtry
