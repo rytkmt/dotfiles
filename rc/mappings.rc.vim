@@ -231,6 +231,7 @@ nnoremap [other]v :<C-u>tabedit $XDG_CONFIG_HOME/vimrc.vim<CR>
 nnoremap [other]d :<C-u>tabedit $XDG_CONFIG_HOME/dein.toml<CR>
 nnoremap [other]o :<C-u>tabedit $XDG_CONFIG_HOME/rc/options.rc.vim<CR>
 nnoremap [other]m :<C-u>tabedit $XDG_CONFIG_HOME/rc/mappings.rc.vim<CR>
+nnoremap [other]c :<C-u>tabedit $XDG_CONFIG_HOME/rc/command.rc.vim<CR>
 nnoremap [other]l :<C-u>so ~/.vimrc<CR>:<C-u>so ~/.gvimrc<CR>
 nnoremap [other]h :<C-u>tabedit $XDG_CONFIG_HOME/../lighthouse/colors/lighthouse.vim<CR>
 nnoremap [edit]s :e ++enc=shift_jis<CR>
@@ -247,6 +248,9 @@ autocmd MyAutoCmd FileType railslog nmap <buffer> q bd!
 " +++ }}}
 " +++ xml{{{
 autocmd MyAutoCmd FileType xml nnoremap <buffer> FF :%s/></>\r</g \| filetype indent on \| normal gg=G<CR>
+" +++}}}
+" +++ json{{{
+autocmd MyAutoCmd FileType json nnoremap <buffer> FF :%s/\n//g \| %s/{/{\r/g \| %s/}/\r}/g \| %s/,/,\r/g \| filetype indent on \| normal gg=G<CR>:noh<CR>
 " +++}}}
 " ++ }}}
 "+ 自作コマンド {{{

@@ -84,7 +84,7 @@ function! s:FileToDictionary(file, name)
 endfunction
 
 function! s:InitQuickfix()
-  nnoremap <buffer> q :q!
+  nnoremap <buffer> q :q!<CR>
   nnoremap <buffer> [ft]s :SaveQuickfixResult 
   nnoremap <buffer> [ft]l :ShowSavedQuickfixResults<CR>
   nnoremap <buffer> [ft]r :ReadQuickfixResult<CR>
