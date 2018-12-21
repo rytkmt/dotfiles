@@ -140,6 +140,7 @@ function! s:vimfiler_settings()
   " マーク
   nmap <buffer> <S-Space> <Plug>(vimfiler_toggle_mark_current_line)
   vmap <buffer> <Space> <Plug>(vimfiler_toggle_mark_selected_lines)
+  nmap <buffer> + <Plug>(vimfiler_toggle_mark_current_line)
   nmap <buffer> * <Plug>(vimfiler_toggle_mark_all_lines)
   nmap <buffer> C <Plug>(vimfiler_clear_mark_all_lines)
 

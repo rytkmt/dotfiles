@@ -1,13 +1,20 @@
 " ++ 一時ファイル {{{
-function! s:make_tempfile(...)
-  exe "vs " .tempname()
+function! s:make_tempfile(win, ...)
+  let l:win = (a:win == 0 ? "e" : "vs")
+  exe l:win ." " .tempname()
   if exists("a:1")
     exe "set ft=" .a:1
   endif
   autocmd MyAutoCmd BufLeave <buffer> write
 endfunction
-command! Tempfile call s:make_tempfile()
-command! TempfileRuby call s:make_tempfile("ruby")
+command! Tempe call s:make_tempfile(0)
+command! Temperuby call s:make_tempfile(0, "ruby")
+command! Tempejson call s:make_tempfile(0, "xml")
+command! Tempexml call s:make_tempfile(0, "json")
+command! Temp call s:make_tempfile(1)
+command! Tempruby call s:make_tempfile(1, "ruby")
+command! Tempxml call s:make_tempfile(1, "xml")
+command! Tempjson call s:make_tempfile(1, "json")
 " ++ }}}
 
 " ++ カレントディレクトリをエクスプローラーで開く {{{
@@ -48,3 +55,21 @@ function! s:to_snake_case(before_str)
 endfunction
 command! -nargs=? ToSnakeCase call s:to_snake_case(<f-args>)
 " ++ }}}
+
+"++ ファイルやディレクトリのヤンク {{{
+
+function! s:yank_file_name()
+  call setreg('"', expand("%:t"))
+endfunction
+command! YankFileName call s:yank_file_name()
+
+function! s:yank_file_path()
+  call setreg('"', expand("%:p"))
+endfunction
+command! YankFilePath call s:yank_file_path()
+
+function! s:yank_file_dir()
+  call setreg('"', expand("%:p:h"))
+endfunction
+command! YankFileDir call s:yank_file_dir()
+"++ }}}

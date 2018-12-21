@@ -79,20 +79,18 @@ vnoremap x "_x
 nnoremap x "_x
 vnoremap s "_s
 nnoremap s "_s
-nnoremap S viw"_s
+nnoremap <C-s> viw"_s
 nnoremap t d
 vnoremap t x
 nnoremap tt dd
 nnoremap tL d$
 nnoremap T D
 nnoremap <C-c> viws
-nnoremap Yf :<C-u>redi! @"> \| echo expand("%:t") \| redi END<CR>
-nnoremap Yp :<C-u>redi! @"> \| echo expand("%:p") \| redi END<CR>
-nnoremap Yd :<C-u>redi! @"> \| echo expand("%:p:h") \| redi END<CR>
-nnoremap Yh :<C-u>redi! @"> \| echo expand("%:p:h") \| redi END<CR>
+
 nnoremap <ESC><ESC> :<C-u>noh<CR>
 cmap <C-j> <LEFT>
 cmap <C-k> <RIGHT>
+cmap <C-e> <C-u>e %:h/
 
 " 逆に普通の行単位で移動したい時のために逆の map も設定しておく
 nnoremap gj j
@@ -237,6 +235,8 @@ nnoremap [other]h :<C-u>tabedit $XDG_CONFIG_HOME/../lighthouse/colors/lighthouse
 nnoremap [edit]s :e ++enc=shift_jis<CR>
 nnoremap [edit]u :e ++enc=utf-8<CR>
 nnoremap [edit]e :e ++enc=euc-jp<CR>
+nnoremap <expr> [edit]c ':e ' . expand('%:p:h') . '/'
+nnoremap [edit]f :<C-u>set ft=
 
 " ++ }}}
 " ++ ファイルタイプ別{{{
@@ -260,4 +260,9 @@ source $XDG_CONFIG_HOME/rc/command.rc.vim
 nnoremap <expr> Cc ':ToCamelCase ' . expand('<cword>') .'<CR>'
 nnoremap <expr> Cp ':ToPascalCase ' . expand('<cword>') .'<CR>'
 nnoremap <expr> Cs ':ToSnakeCase ' . expand('<cword>') .'<CR>'
+
+nnoremap Yf :<C-u>YankFileName<CR>
+nnoremap Yp :<C-u>YankFilePath<CR>
+nnoremap Yd :<C-u>YankFileDir<CR>
+nnoremap Yh :<C-u>YankFileDir<CR>
 "}}}
