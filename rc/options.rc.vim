@@ -194,7 +194,7 @@ set conceallevel=0
 " ヘルプの日本語化
 set helplang=ja,en
 
-set wildignore+=*.gif,*.png,*.jpg,*.jpeg,*.bak,tags
+set wildignore+=*.gif,*.png,*.jpg,*.jpeg,*.bak,tags,*.zip,*.jar,*.class,*.pdf,*.swf
 
 " ++ }}}
 " ++ ファイルタイプ別 {{{

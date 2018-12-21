@@ -20,3 +20,51 @@ options     head
   require "#{MACAU_ROOT}/../test_my_method"
   include TestMyMethod
   init_log({"name" => "#{MACAU_ROOT}/log/test.log", "benchmark" => true})
+
+snippet strftime
+options word
+  strftime("%Y-%m-%d %H:%M:%S")
+
+snippet find_first
+options word
+  find(:first, :conditions => [])
+
+snippet find_all
+options word
+  find(:all, :conditions => [])
+
+snippet require_active_support
+options head
+  require 'rubygems'
+  require 'active_support'
+  require 'pp'
+
+snippet p_xx
+options word
+  p "${1:XX} : #{$1}"
+
+snippet tap_p
+options word
+  tap(&method(:p))
+
+snippet require_macau
+options head
+  require "#{MACAU_ROOT}/
+
+snippet require_pp
+options head
+  require 'pp'
+  pp 
+
+snippet pp_with_require
+options head
+  require 'pp'
+  pp 
+
+snippet macau_root
+options head
+  MACAU_ROOT = File.expand_path("#{File.dirname(__FILE__)}/../..") unless defined?(MACAU_ROOT)
+
+snippet require_macau
+options word
+  require "#{MACAU_ROOT}/

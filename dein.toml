@@ -7,8 +7,8 @@
 #
 #
 # ------------------
-# [[plugins]]
-# repo = 'Shougo/dein.vim'
+[[plugins]]
+repo = 'Shougo/dein.vim'
 
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
@@ -20,7 +20,7 @@ hook_post_update = '''
   elseif executable('gmake')
     let cmd = 'gmake'
   else
-    let cmd = 'make'
+    let cmd = 'make -f'
   endif
   let g:dein#plugin.build = cmd
 '''
