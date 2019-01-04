@@ -27,3 +27,18 @@ on_i = 1
 hook_post_source = '''
 source $XDG_CONFIG_HOME/plugins/ruby-dictionary3.rc.vim
 '''
+
+[[plugins]]
+repo = 'Shougo/neco-vim'
+if = "has('python3')"
+depends = ['deoplete.nvim']
+on_i = 1
+
+[[plugins]]
+repo = 'Shougo/neco-syntax'
+if = "has('python3')"
+depends = ['deoplete.nvim']
+on_i = 1
+hook_post_source = '''
+let g:necosyntax#min_keyword_length = 1
+'''
