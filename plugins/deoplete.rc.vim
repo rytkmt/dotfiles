@@ -4,13 +4,12 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_camel_case = 1
 " ポップアップメニューで表示される候補の数
-let g:deoplete#max_list = 20
+let g:deoplete#max_list = 30
 " 補完を表示する最小文字数
 let g:deoplete#auto_complete_start_length = 1
 " 補完する秒数
 let g:deoplete#auto_complete_delay = 0
 let g:deoplete#file#enable_buffer_path = 1
-
 
 "候補の選択
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"

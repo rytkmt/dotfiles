@@ -18,17 +18,18 @@ autocmd MyAutoCmd InsertLeave * silent! pclose!
 let g:neocomplete#max_keyword_width = 10000
 
 if !exists('g:neocomplete#delimiter_patterns')
-    let g:neocomplete#delimiter_patterns= {}
-  endif
-  let g:neocomplete#delimiter_patterns.ruby = ['::']
-let s:neco_dicts_dir = $VIM . '/bundle/dotfiles/dicts'
-if isdirectory(s:neco_dicts_dir)
+  let g:neocomplete#delimiter_patterns= {}
+endif
+let g:neocomplete#delimiter_patterns.ruby = ['::']
+
+let s:dicts_dir = $XDG_CONFIG_HOME . '/dicts'
+if isdirectory(s:dicts_dir)
   let g:neocomplete#sources#dictionary#dictionaries = {
-  \   'ruby': s:neco_dicts_dir . '/ruby.dict'
+  \   'ruby': s:dicts_dir . '/ruby.dict'
   \ }
+  unlet s:dicts_dir
 endif
 
-unlet s:neco_dicts_dir
 let g:neocomplete#data_directory = $HOME . '/.vim/cache/neocomplete'
 "候補の選択
 imap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"

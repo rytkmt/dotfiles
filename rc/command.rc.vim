@@ -60,16 +60,19 @@ command! -nargs=? ToSnakeCase call s:to_snake_case(<f-args>)
 
 function! s:yank_file_name()
   call setreg('"', expand("%:t"))
+  echo expand("%:t")
 endfunction
 command! YankFileName call s:yank_file_name()
 
 function! s:yank_file_path()
   call setreg('"', expand("%:p"))
+  echo expand("%:p")
 endfunction
 command! YankFilePath call s:yank_file_path()
 
 function! s:yank_file_dir()
   call setreg('"', expand("%:p:h"))
+  echo expand("%:p:h")
 endfunction
 command! YankFileDir call s:yank_file_dir()
 "++ }}}
