@@ -347,7 +347,9 @@ repo = 'rhysd/clever-f.vim'
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/clever-f.vim.rc.vim
 '''
-hook_post_source = '''
-" tなどが強制でマッピングされるので再読込
-source $XDG_CONFIG_HOME/rc/mappings.rc.vim
+
+[[plugins]]
+repo = 'haya14busa/vim-operator-flashy'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-operator-flashy.rc.vim
 '''
