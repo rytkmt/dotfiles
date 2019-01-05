@@ -253,6 +253,10 @@ autocmd MyAutoCmd FileType xml nnoremap <buffer> FF :%s/></>\r</g \| filetype in
 autocmd MyAutoCmd FileType json nnoremap <buffer> FF :%s/\n//g \| %s/{/{\r/g \| %s/}/\r}/g \| %s/,/,\r/g \| filetype indent on \| normal gg=G<CR>:noh<CR>
 " +++}}}
 " ++ }}}
+"+ 自作スクリプト {{{
+source $XDG_CONFIG_HOME/rc/scripts.rc.vim
+vmap <expr> <C-e> Select2ex()
+"+}}}
 "+ 自作コマンド {{{
 
 source $XDG_CONFIG_HOME/rc/command.rc.vim
@@ -265,4 +269,9 @@ nnoremap Yf :<C-u>YankFileName<CR>
 nnoremap Yp :<C-u>YankFilePath<CR>
 nnoremap Yd :<C-u>YankFileDir<CR>
 nnoremap Yh :<C-u>YankFileDir<CR>
+
+try
+  nnoremap [other]s :<C-u>SourceCurrentFile<CR>
+catch
+endtry
 "}}}

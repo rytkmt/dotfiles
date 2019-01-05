@@ -76,3 +76,15 @@ function! s:yank_file_dir()
 endfunction
 command! YankFileDir call s:yank_file_dir()
 "++ }}}
+
+"++ カレントファイルの再読込（vim） {{{
+try
+  function! s:source_current_file()
+    if &filetype == "vim"
+      exe "source %"
+    endif
+  endfunction
+  command! SourceCurrentFile call s:source_current_file()
+catch
+endtry
+"++ }}}

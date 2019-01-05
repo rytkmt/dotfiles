@@ -205,7 +205,7 @@ repo = 'tyru/open-browser.vim'
 [[plugins]]
 repo = 'Shougo/denite.nvim'
 if = 'has("python3")'
-hook_add = '''
+hook_post_source = '''
 source $XDG_CONFIG_HOME/plugins/denite.rc.vim
 '''
 
