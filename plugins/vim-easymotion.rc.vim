@@ -1,3 +1,4 @@
+let g:EasyMotion_do_mapping = 0
 nmap , <Plug>(easymotion-prefix)
 nmap <Plug>(easymotion-prefix)f <Plug>(easymotion-s)
 nmap <Plug>(easymotion-prefix)s <Plug>(easymotion-s2)

@@ -1,4 +1,11 @@
 [[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+on_i = 1
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/neosnippet.rc.vim
+'''
+
+[[plugins]]
 repo = 'Shougo/neosnippet'
 on_i = 1
 depends = ['neosnippet-snippets']
@@ -42,3 +49,65 @@ on_i = 1
 hook_post_source = '''
 let g:necosyntax#min_keyword_length = 1
 '''
+
+[[plugins]]
+repo = 'mattn/emmet-vim'
+on_i = 1
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/emmet-vim.rc.vim
+'''
+
+[[plugins]]
+repo = "alvan/vim-closetag"
+on_i = 1
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-closetag.rc.vim
+'''
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
+
+[[plugins]]
+repo = 'maralla/vim-toml-enhance'
+on_ft = 'toml'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-toml-enhance.rc.vim
+'''
+
+[[plugins]]
+repo = "kana/vim-smartinput"
+on_i = 1
+
+[[plugins]]
+repo = "cohama/vim-smartinput-endwise"
+on_i = 1
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-smartinput-endwise.rc.vim
+'''
+
+[[plugins]]
+repo = 'rcmdnk/vim-markdown'
+on_ft = ['markdown','mkd']
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-markdown.rc.vim
+'''
+
+[[plugins]]
+repo = 'joker1007/vim-markdown-quote-syntax'
+on_ft = ['markdown','mkd']
+
+[[plugins]]
+repo = 'kannokanno/previm'
+on_ft = ['markdown','mkd']
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/previm.rc.vim
+'''
+
+[[plugins]]
+repo = 'mattn/vim-maketable'
+on_ft = ['markdown','mkd']
+
+[[plugins]]
+repo = 'rytkmt/vim-textile'
+on_ft = 'textile'

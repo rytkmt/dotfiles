@@ -28,13 +28,13 @@ hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vimproc.vim.rc.vim
 '''
 
-[[plugins]]
-repo = 'Shougo/defx.nvim'
-if = 'has("nvim")'
-do = ':UpdateRemotePlugins'
-hook_add = '''
-" source $XDG_CONFIG_HOME/plugins/defx.nvim.rc.vim
-'''
+# [[plugins]]
+# repo = 'Shougo/defx.nvim'
+# if = 'has("nvim")'
+# do = ':UpdateRemotePlugins'
+# hook_add = '''
+# " source $XDG_CONFIG_HOME/plugins/defx.nvim.rc.vim
+# '''
 
 [[plugins]]
 repo = 'Shougo/vimfiler'
@@ -48,11 +48,11 @@ repo = 'rytkmt/dotfiles'
 [[plugins]]
 repo = 'rytkmt/lighthouse'
 
-[[plugins]]
-repo = 'cocopon/iceberg.vim'
+# [[plugins]]
+# repo = 'cocopon/iceberg.vim'
 
-[[plugins]]
-repo = 'rakr/vim-one'
+# [[plugins]]
+# repo = 'rakr/vim-one'
 
 [[plugins]]
 repo = 'Shougo/unite.vim'
@@ -89,12 +89,6 @@ source $XDG_CONFIG_HOME/plugins/vimshell.rc.vim
 
 [[plugins]]
 repo = 'ujihisa/unite-colorscheme'
-
-[[plugins]]
-repo = 'mattn/emmet-vim'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/emmet-vim.rc.vim
-'''
 
 [[plugins]]
 repo = 'cohama/lexima.vim'
@@ -185,43 +179,13 @@ source $XDG_CONFIG_HOME/plugins/vim-surround.rc.vim
 '''
 
 [[plugins]]
-repo = "kana/vim-smartinput"
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-smartinput-endwise.rc.vim
-'''
-
-[[plugins]]
-repo = "cohama/vim-smartinput-endwise"
-
-[[plugins]]
-repo = "alvan/vim-closetag"
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-closetag.rc.vim
-'''
-
-[[plugins]]
 repo = 'thinca/vim-ref'
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vim-ref.rc.vim
 '''
 
-[[plugins]]
-repo = 'tyru/vim-altercmd'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-altercmd.rc.vim
-'''
-
-[[plugins]]
-repo = 'cespare/vim-toml'
-
-[[plugins]]
-repo = 'maralla/vim-toml-enhance'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-toml-enhance.rc.vim
-'''
-
-#[[plugins]]
-#repo = 'gko/vim-coloresque'
+# [[plugins]]
+# repo = 'tyru/vim-altercmd'
 
 [[plugins]]
 repo = 'ctrlpvim/ctrlp.vim'
@@ -235,33 +199,13 @@ hook_add = '''
 source $XDG_CONFIG_HOME/plugins/colorizer.rc.vim
 '''
 
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/neosnippet.rc.vim
-'''
-
 [[plugins]]
 repo = 'tyru/open-browser.vim'
 
 [[plugins]]
-repo = 'godlygeek/tabular'
-
-[[plugins]]
-repo = 'joker1007/vim-markdown-quote-syntax'
-
-
-[[plugins]]
-repo = 'kannokanno/previm'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/previm.rc.vim
-'''
-
-[[plugins]]
 repo = 'Shougo/denite.nvim'
 if = 'has("python3")'
-hook_post_source = '''
+hook_add = '''
 source $XDG_CONFIG_HOME/plugins/denite.rc.vim
 '''
 
@@ -272,16 +216,8 @@ source $XDG_CONFIG_HOME/plugins/vim-quickrun.rc.vim
 '''
 
 [[plugins]]
-repo = 'rcmdnk/vim-markdown'
-on_ft = ['markdown','mkd']
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-markdown.rc.vim
-'''
-
-[[plugins]]
 repo = 'easymotion/vim-easymotion'
 hook_add = '''
-let g:EasyMotion_do_mapping = 0
 source $XDG_CONFIG_HOME/plugins/vim-easymotion.rc.vim
 '''
 
@@ -296,9 +232,6 @@ repo = 'w0ng/vim-hybrid'
 
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
-
-[[plugins]]
-repo = 'rytkmt/vim-textile'
 
 [[plugins]]
 repo = 'LeafCage/yankround.vim'
@@ -317,9 +250,6 @@ repo = 'rytkmt/scratch.vim'
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/scratch.rc.vim
 '''
-
-[[plugins]]
-repo = 'mattn/vim-maketable'
 
 [[plugins]]
 repo = 'thinca/vim-visualstar'
