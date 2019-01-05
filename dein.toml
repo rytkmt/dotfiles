@@ -335,3 +335,9 @@ repo = 'kana/vim-operator-replace'
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vim-operator-replace.rc.vim
 '''
+
+[[plugins]]
+repo = 'osyo-manga/vim-anzu'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-anzu.rc.vim
+'''
