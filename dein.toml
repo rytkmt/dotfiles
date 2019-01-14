@@ -283,3 +283,9 @@ repo = 'haya14busa/vim-operator-flashy'
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vim-operator-flashy.rc.vim
 '''
+
+[[plugins]]
+repo = 'vim-syntastic/syntastic'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/syntastic.rc.vim
+'''

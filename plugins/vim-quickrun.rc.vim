@@ -7,6 +7,11 @@ let g:quickrun_config= {
   \     'outputter/buffer/split': ':botright 8sp',
   \     'hook/time/enable': '1'
   \    },
+  \   'swift': {
+  \     'command': 'xcrun',
+  \     'cmdopt': 'swift',
+  \     'exec': '%c %o %s',
+  \   },
   \   'ruby_syntax_check': {
   \     "command" : "ruby",
   \     "exec"    : "%c %o %s:p ",
@@ -15,9 +20,6 @@ let g:quickrun_config= {
   \     "outputter/buffer/into" : 1
   \   }
   \ }
-if has('win32')
-  let g:quickrun_config.ruby_syntax_check.command = 'C:\Ruby187\bin\ruby.EXE'
-endif
 nnoremap [quick]r :<C-u>QuickRun
 vnoremap [map]r :QuickRun<CR>
 nnoremap [quick]c :<C-u>QuickRun ruby_syntax_check<CR>
