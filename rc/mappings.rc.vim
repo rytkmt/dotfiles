@@ -224,14 +224,13 @@ nmap <Leader>d [denite]
 "
 "=================================
 
-nnoremap [other]h :so $VIMRUNTIME/syntax/hitest.vim
+" nnoremap [other]h :so $VIMRUNTIME/syntax/hitest.vim
 nnoremap [other]v :<C-u>tabedit $XDG_CONFIG_HOME/vimrc.vim<CR>
 nnoremap [other]d :<C-u>tabedit $XDG_CONFIG_HOME/dein.toml<CR>
 nnoremap [other]o :<C-u>tabedit $XDG_CONFIG_HOME/rc/options.rc.vim<CR>
 nnoremap [other]m :<C-u>tabedit $XDG_CONFIG_HOME/rc/mappings.rc.vim<CR>
 nnoremap [other]c :<C-u>tabedit $XDG_CONFIG_HOME/rc/command.rc.vim<CR>
 nnoremap [other]l :<C-u>so ~/.vimrc<CR>:<C-u>so ~/.gvimrc<CR>
-nnoremap [other]h :<C-u>tabedit $XDG_CONFIG_HOME/../lighthouse/colors/lighthouse.vim<CR>
 nnoremap [edit]s :e ++enc=shift_jis<CR>
 nnoremap [edit]u :e ++enc=utf-8<CR>
 nnoremap [edit]e :e ++enc=euc-jp<CR>
@@ -271,7 +270,7 @@ nnoremap Yd :<C-u>YankFileDir<CR>
 nnoremap Yh :<C-u>YankFileDir<CR>
 
 try
-  nnoremap [other]s :<C-u>SourceCurrentFile<CR>
+  nnoremap [other]r :<C-u>SourceCurrentFile<CR>
 catch
 endtry
 "}}}

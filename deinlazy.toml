@@ -82,7 +82,7 @@ on_i = 1
 [[plugins]]
 repo = "cohama/vim-smartinput-endwise"
 on_i = 1
-hook_add = '''
+hook_post_source = '''
 source $XDG_CONFIG_HOME/plugins/vim-smartinput-endwise.rc.vim
 '''
 
@@ -99,7 +99,7 @@ on_ft = ['markdown','mkd']
 
 [[plugins]]
 repo = 'kannokanno/previm'
-on_ft = ['markdown','mkd']
+on_ft = ['markdown','mkd', 'textile']
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/previm.rc.vim
 '''
@@ -111,3 +111,20 @@ on_ft = ['markdown','mkd']
 [[plugins]]
 repo = 'rytkmt/vim-textile'
 on_ft = 'textile'
+
+[[plugins]]
+repo = 'landaire/deoplete-swift'
+on_ft = 'swift'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/deoplete-swift.rc.vim
+'''
+
+[[plugins]]
+repo = 'kballard/vim-swift'
+on_ft = 'swift'
+
+[[plugins]]
+repo = 'keith/swift.vim'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/swift.vim.rc.vim
+'''

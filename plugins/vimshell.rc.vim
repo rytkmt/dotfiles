@@ -7,7 +7,7 @@ let g:vimshell_prompt_expr =
 let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+% '
 
 nnoremap [other]s :sp<CR>:VimShellBufferDir<CR>
-nnoremap [other]r ::VimShellInteractive irb<CR>
+nnoremap [other]i ::VimShellInteractive irb<CR>
 autocmd MyAutoCmd FileType vimshell nmap <buffer> o <C-k>a
 autocmd MyAutoCmd FileType vimshell nmap <buffer> <S-o> <C-l><C-k>a
 autocmd MyAutoCmd FileType vimshell imap <buffer> <C-l> <C-u>clear<CR>
