@@ -11,5 +11,5 @@ let g:syntastic_loc_list_height = 5
 let g:syntastic_mode_map = {
 \ 'mode': 'active',
 \ 'active_filetypes': [
-\   'ruby', 'javascript', 'html', 'vim', 'eruby', 'sql', 'yaml'
+\   'ruby', 'javascript', 'html', 'vim', 'sql', 'yaml'
 \ ]}
