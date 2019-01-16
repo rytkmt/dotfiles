@@ -12,4 +12,7 @@ let g:syntastic_mode_map = {
 \ 'mode': 'active',
 \ 'active_filetypes': [
 \   'ruby', 'javascript', 'html', 'vim', 'sql', 'yaml'
+\ ],
+\ 'passive_filetypes': [
+\   'eruby'
 \ ]}
