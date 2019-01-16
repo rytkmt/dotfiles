@@ -38,6 +38,7 @@ source $XDG_CONFIG_HOME/plugins/vimproc.vim.rc.vim
 
 [[plugins]]
 repo = 'Shougo/vimfiler'
+depends = ['vimproc.vim']
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vimfiler.rc.vim
 '''
