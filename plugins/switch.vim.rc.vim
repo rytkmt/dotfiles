@@ -2,7 +2,8 @@ let g:switch_mapping = "-"
 let g:switch_custom_definitions =
   \ [
   \   switch#NormalizedCase(['left', 'right', 'center']),
-  \   switch#NormalizedCase(['==', '!='])
+  \   switch#NormalizedCase(['==', '!=']),
+  \   switch#NormalizedCase(['ON', 'OFF'])
   \ ]
 autocmd FileType javascript let b:switch_custom_definitions =
   \ [
