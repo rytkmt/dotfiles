@@ -64,3 +64,18 @@ options head
 snippet macau_root
 options head
   MACAU_ROOT = File.expand_path("#{File.dirname(__FILE__)}/../..") unless defined?(MACAU_ROOT)
+
+snippet here_document
+options word
+  <<-"${1:NAME}"
+  ${2:CONTENTS}
+  $1
+
+snippet benchmark
+options head
+  require 'benchmark'
+  result = Benchmark.measure do
+    ${1:CONTENTS}
+  end
+  puts Benchmark::CAPTION
+  puts result
