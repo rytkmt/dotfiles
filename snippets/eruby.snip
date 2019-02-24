@@ -5,3 +5,9 @@ options     word
 snippet     style_type
 options     word
   style type="text/css">
+
+snippet     for
+options     head
+  for(var ${1:ITERATOR}=0; $1<${2:SOMETHING}.length; $1++) {
+    ${3:CONTENTS}
+  }

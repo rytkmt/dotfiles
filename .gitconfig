@@ -1,0 +1,13 @@
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+[include]
+  path = ~/.gitconfig.local
+[alias]
+  st = status -s
+  cm = commit
+  co = checkout
+  aa = add -A
+  d = diff
+  graph = log --graph --pretty=format:'%C(white reverse) %h% Creset %C(green reverse) %an %Creset %C(cyan)%ar%Creset%C(red reverse)%d%Creset%n%C(white bold)%w(80)%s%Creset%n%n%w(80,2,2)%b'
