@@ -10,4 +10,5 @@
   co = checkout
   aa = add -A
   d = diff
+  als = !"git config --list | grep ^alias\\. | sort | sed s/^alias\\.// | sed -e 's/=/ /' | awk '{printf \"%-10s %s\",$1,c=\"\";for(i=2;i<=NF;i++) c=c $i\" \"; print c}'"
   graph = log --graph --pretty=format:'%C(white reverse) %h% Creset %C(green reverse) %an %Creset %C(cyan)%ar%Creset%C(red reverse)%d%Creset%n%C(white bold)%w(80)%s%Creset%n%n%w(80,2,2)%b'
