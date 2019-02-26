@@ -79,3 +79,7 @@ options head
   end
   puts Benchmark::CAPTION
   puts result
+
+snippet Time_now_ms
+options word
+  Time.now.instance_eval { '%s.%03d' % [strftime('%Y/%m/%d %H:%M:%S'), (usec / 1000.0).round] }
