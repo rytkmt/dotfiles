@@ -188,7 +188,6 @@ source $XDG_CONFIG_HOME/plugins/vim-ref.rc.vim
 [[plugins]]
 repo = 'rytkmt/vim-ref-ri'
 hook_add = '''
-echom 'test'
 source $XDG_CONFIG_HOME/plugins/vim-ref-ri.rc.vim
 '''
 
