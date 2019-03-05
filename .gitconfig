@@ -5,6 +5,7 @@
 [include]
   path = ~/.gitconfig.local
 [alias]
+  h = help
   st = status -s
   cm = commit
   co = checkout
@@ -12,7 +13,17 @@
   b = branch
   ba = branch -a
   d = diff
-  l = log
-  ll = log --oneline
+  l = log --oneline
+  ll = log --graph --date=format:'%y/%m/%d %H:%M:%S' --pretty=format:'\t\b\b\b%C(yellow)%h%Creset %C(cyan)%ad%Creset %C(green)%an%Creset%C(auto)%d%Creset%n\t%C(white bold)%w(80)%s%n%Creset%w(80,2,2)%b'
+  lll = log
+  ss = stash push -u
+  sss = stash show
+  ssl = stash list --pretty='%C(yellow)%gd%Creset %gs'
+  ssa = stash apply --index
+  ssd = stash drop
+  ssp = stash pop --index
+  ssb = stash branch
+  uncm = reset --soft
+  unst = reset --mixed
+  unch = reset --hard
   als = !"git config --list | grep ^alias\\. | sort | sed s/^alias\\.// | sed -e 's/=/ /' | awk '{printf \"%-10s %s\",$1,c=\"\";for(i=2;i<=NF;i++) c=c $i\" \"; print c}'"
-  graph = log --graph --pretty=format:'%C(white reverse) %h% Creset %C(green reverse) %an %Creset %C(cyan)%ar%Creset%C(red reverse)%d%Creset%n%C(white bold)%w(80)%s%Creset%n%n%w(80,2,2)%b'

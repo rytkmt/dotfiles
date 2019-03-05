@@ -14,4 +14,4 @@ prompt
 export XDG_CONFIG_HOME=$current_dir
 export DOT_FILES=$XDG_CONFIG_HOME
 export MYVIMRC=$DOT_FILES/vimrc.vim
-export TERM=xterm-color256
+export TERM=xterm-256color
