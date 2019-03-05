@@ -56,3 +56,8 @@ source ${gitからcloneしたdotfilesのディレクトリ}/.bashrc
 【8】.gitconfigの設定
 $HOMEの下に.gitconfigという名前でシンボリックリンクを貼る
 ローカルなものを作りたい場合は、~/.gitconfig.localで設定ファイルを別途用意
+
+【9】vim-ref用のテキストブラウザのインストール
+
+(linux)
+yum install lynx

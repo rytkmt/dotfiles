@@ -15,3 +15,5 @@ export XDG_CONFIG_HOME=$current_dir
 export DOT_FILES=$XDG_CONFIG_HOME
 export MYVIMRC=$DOT_FILES/vimrc.vim
 export TERM=xterm-256color
+export RI="-f markdown"
+export RI_PAGER="nvim -RM -c 'set ft=markdown cocu=nc cole=2' -c 'nn q :q<cr>' -"
