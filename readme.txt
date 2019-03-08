@@ -17,12 +17,15 @@ Cドライブの直下に「git_bin」という名前でGitのbinにディレク
 mklink git_bin c:¥Program Files¥Git¥usr¥bin
 
 【3】タグジャンプようにctagsを入れる
-(windows)
-https://github.com/universal-ctags/ctags
-上記からバイナリ版をダウンロードしパスを通す
+universal ctags を使用する
 
 (linux)
-yum install ctags
+git clone https://github.com/universal-ctags/ctags.git
+cd ctags
+./autogen.sh 
+./configure
+make
+sudo make install
 
 【4】ctagsを非同期でファイル読み込み時などに更新するためvimprocの設定
 
@@ -30,16 +33,11 @@ yum install ctags
 http://qiita.com/akase244/items/ce5e2e18ad5883e98a77
 上記の手順通りに設定を行う
 
-(centos)
-yum install ctags
-
 【5】ctagsの設定ファイル
-.ctagsファイルにシンボリックリンクを貼る
-(windows)
-HOMEの下にctags.confという名前でシンボリックリンクを貼る
+.ctags.dディレクトリにシンボリックリンクを貼る
 
-(mac)
-HOMEの下に.ctagsという名前でシンボリックリンクを貼る
+(linux)
+HOMEの下に.ctags.dという名前でシンボリックリンクを貼る
 
 【6】fontの設定(win)
 http://www.rs.tus.ac.jp/yyusa/ricty_diminished.html

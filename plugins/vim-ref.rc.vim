@@ -4,9 +4,15 @@ autocmd MyAutoCmd FileType ref-* nnoremap <buffer> <silent> q :<C-u>close<CR>
 " 辞書定義
 let g:ref_source_webdict_sites = {
 \   'je': {
+\     'url': 'https://translate.google.co.jp/?hl=en#view=home&op=translate&sl=ja&tl=en&text=%s',
+\   },
+\   'je2': {
 \     'url': 'http://dictionary.infoseek.ne.jp/jeword/%s',
 \   },
 \   'ej': {
+\     'url': 'https://translate.google.co.jp/?hl=en#view=home&op=translate&sl=en&tl=ja&text=%s',
+\   },
+\   'ej2': {
 \     'url': 'http://dictionary.infoseek.ne.jp/ejword/%s',
 \   },
 \ }
@@ -26,3 +32,5 @@ endfunction
 
 nmap <expr> [ref]j ':Ref webdict je<Space>'
 nmap <expr> [ref]e ':Ref webdict ej '.expand("<cword>")
+nmap <expr> [ref]J ':Ref webdict je2<Space>'
+nmap <expr> [ref]E ':Ref webdict ej2 '.expand("<cword>")

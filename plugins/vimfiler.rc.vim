@@ -35,7 +35,7 @@ function! _VimFilerOpen(init, type)
     exe l:open_cmd . " " . fnamemodify(l:vimfiler_default_dir, ':p')
   elseif a:type == 3
     " カレントディレクトリ
-    let l:vimfiler_default_dir = expand("%:p:h")
+    let l:vimfiler_default_dir = $XDG_CONFIG_HOME
     exe l:open_cmd . " " . fnamemodify(l:vimfiler_default_dir, ':p')
   endif
 endfunction
@@ -43,7 +43,7 @@ endfunction
 nmap [filer]f :<C-u>call _VimFilerOpen(0,1)<CR>
 nmap [filer]d :<C-u>call _VimFilerOpen(1,1)<CR>
 nmap [filer]b :<C-u>call _VimFilerOpen(1,2)<CR>
-nmap [filer]u :<C-u>call _VimFilerOpen(1,3)<CR>
+nmap [filer]v :<C-u>call _VimFilerOpen(1,3)<CR>
 
 let g:vimfiler_no_default_key_mappings = 1
 
