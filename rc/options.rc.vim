@@ -196,6 +196,8 @@ set helplang=ja,en
 
 set wildignore+=*.gif,*.png,*.jpg,*.jpeg,*.bak,tags,*.zip,*.jar,*.class,*.pdf,*.swf
 
+set updatetime=300
+
 " ++ }}}
 " ++ ファイルタイプ別 {{{
 " +++ quickfix {{{

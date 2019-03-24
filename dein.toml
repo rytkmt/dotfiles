@@ -297,4 +297,8 @@ hook_add = '''
 source $XDG_CONFIG_HOME/plugins/syntastic.rc.vim
 '''
 
-
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-gitgutter.rc.vim
+'''
