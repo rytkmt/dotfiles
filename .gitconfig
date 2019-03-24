@@ -7,16 +7,23 @@
 [alias]
   h = help
   st = status -s
-  cm = commit
+  cm = commit -m
   co = checkout
   aa = add -A
   b = branch
   ba = branch -a
+  fe = fetch -p
+  mf = merge FETCH_HEAD
+  mod = merge origin/develop
   d = diff
   ds = diff --name-status
   di = diff --cached
-  l = log --oneline -n 18
-  ls = log --oneline -n 18 --name-status
+  l = log --oneline --no-merges -n 18
+  la = log --oneline -n 18
+  ls = log --oneline --no-merges -n 18 --name-status
+  lsa = log --oneline -n 18 --name-status
+  lsr = log --oneline --no-merges -n 18 --name-status --author='r_tsukamoto' origin/develop..HEAD
+  lsra = log --oneline -n 18 --name-status --author='r_tsukamoto' origin/develop..HEAD
   ll = log --graph --date=format:'%y/%m/%d %H:%M:%S' --pretty=format:'\t\b\b\b%C(yellow)%h%Creset %C(cyan)%ad%Creset %C(green)%an%Creset%C(auto)%d%Creset%n\t%C(white bold)%w(80)%s%n%Creset%w(80,2,2)%b'
   lls = log --graph --date=format:'%y/%m/%d %H:%M:%S' --pretty=format:'\t\b\b\b%C(yellow)%h%Creset %C(cyan)%ad%Creset %C(green)%an%Creset%C(auto)%d%Creset%n\t%C(white bold)%w(80)%s%n%Creset%w(80,2,2)%b' --name-status
   lll = log

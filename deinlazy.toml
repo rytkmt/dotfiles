@@ -128,3 +128,11 @@ repo = 'keith/swift.vim'
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/swift.vim.rc.vim
 '''
+
+[[plugins]]
+repo = 'thinca/vim-prettyprint'
+on_ft = 'vim'
+
+# [[plugins]]
+# repo = 'itmammoth/run-rspec.vim'
+# on_ft = 'ruby'

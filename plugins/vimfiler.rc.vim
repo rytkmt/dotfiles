@@ -92,12 +92,12 @@ function! s:vimfiler_settings()
           \ "\<Plug>(vimfiler_open_file_in_another_vimfiler)")
 
   " ウィンドウを分割して開く
-  nmap <silent><buffer><expr> s ExpressionAndFilerClose("vimfiler#do_switch_action('split')")
-  nmap <silent><buffer><expr> v ExpressionAndFilerClose("vimfiler#do_switch_action('vsplit')")
-  nmap <silent><buffer><expr> t ExpressionAndFilerClose("vimfiler#do_switch_action('tabopen')")
-  nmap <buffer> <C-v> v
-  nmap <buffer> <C-s> s
-  nmap <buffer> <C-t> t
+  nmap <silent><buffer><expr> <C-s> ExpressionAndFilerClose("vimfiler#do_switch_action('split')")
+  nmap <silent><buffer><expr> <C-v> ExpressionAndFilerClose("vimfiler#do_switch_action('vsplit')")
+  nmap <silent><buffer><expr> <C-t> ExpressionAndFilerClose("vimfiler#do_switch_action('tabopen')")
+  nnoremap <silent><buffer><expr> s vimfiler#do_switch_action('split')
+  nnoremap <silent><buffer><expr> v vimfiler#do_switch_action('vsplit')
+  nnoremap <silent><buffer><expr> t vimfiler#do_switch_action('tabopen')
 
   nmap <buffer> h <Plug>(vimfiler_smart_h)
   nmap <buffer> u <Plug>(vimfiler_switch_to_parent_directory)

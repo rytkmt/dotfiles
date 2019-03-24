@@ -1,6 +1,6 @@
 current_dir=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
 function parse_git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1/'
 }
 # export PS1='\h \[\033[1;33m\]\W \[\033[0m\]$(parse_git_branch)$ '
 function prompt {
