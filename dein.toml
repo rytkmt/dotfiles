@@ -296,9 +296,26 @@ repo = 'vim-syntastic/syntastic'
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/syntastic.rc.vim
 '''
+hook_post_update = '''
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+'''
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vim-gitgutter.rc.vim
+'''
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-fugitive.rc.vim
+'''
+
+[[plugins]]
+repo = 'kamykn/spelunker.vim'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/spelunker.vim.rc.vim
 '''

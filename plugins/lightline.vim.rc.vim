@@ -32,11 +32,22 @@ function! LightlineReadonly()
   return &ft != 'vimfiler' && &ft !~? 'help' && &readonly ? 'RO' : ''
 endfunction
 function! LightlineFilename()
+  let l:fugitive = ' '
+  try
+    call function("FugitiveHead")
+    let l:fugitive_head = FugitiveHead()
+    if l:fugitive_head != ""
+      let l:fugitive = ' ('. FugitiveHead(). ')'
+    endif
+  catch
+  endtry
+
   return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
     \ (&ft == 'vimfiler' ? len(b:vimfiler.current_dir) > 1 ? split(b:vimfiler.current_dir, "/")[-1] : '' :
     \  &ft == 'unite' ? unite#get_status_string() :
     \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-    \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+    \ ('' != LightlineModified() ? ' ' . LightlineModified() : '') .
+    \ l:fugitive
 endfunction
 function! LightlineModified()
   return &modifiable && &modified ? '+' : ''
