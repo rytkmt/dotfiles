@@ -68,9 +68,9 @@ vmap <nowait> <C-Space> <ESC>
 nmap <C-Space><C-Space> :<C-u>noh<CR>
 " ++ }}}
 " ++ ターミナル操作 {{{
-nnoremap <A-s> :sp<CR>:terminal<CR>isource ~/.bash_profile<CR>
-nnoremap <A-v> :vs<CR>:terminal<CR>isource ~/.bash_profile<CR>
-nnoremap <A-e> :terminal<CR>isource ~/.bash_profile<CR>
+nnoremap <A-s> :sp<CR>:terminal<CR>isource ~/.bash_profile<CR>clear<CR>
+nnoremap <A-v> :vs<CR>:terminal<CR>isource ~/.bash_profile<CR>clear<CR>
+nnoremap <A-e> :terminal<CR>isource ~/.bash_profile<CR>clear<CR>
 tnoremap <A-j> <C-\><C-n>
 " ++ }}}
 " ++ その他 {{{

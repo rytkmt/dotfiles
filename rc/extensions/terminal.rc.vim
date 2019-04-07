@@ -1,4 +1,12 @@
-function! s:terminal_open()
+function! s:bufnew()
+ " 幸いにも 'buftype' は設定されているのでそれを基準とする
+  if &buftype == "terminal" && &filetype == ""
+    set filetype=terminal
+  endif
+endfunction
+
+function! s:color()
+  " ターミナルの色はあとから指定する
   let g:terminal_color_0  = "#1b2b34" "black
   let g:terminal_color_1  = "#cd6f77" "red
   let g:terminal_color_2  = "#5aaa65" "green
@@ -19,7 +27,16 @@ function! s:terminal_open()
   let g:terminal_color_foreground="#c1c6cf" "foreground
 endfunction
 
-augroup MyTerminalOpen
-  autocmd!
-  autocmd BufEnter * if &buftype == 'terminal' | call s:terminal_open() | endif
+function! s:filetype()
+  " ここに :terminal のバッファ固有の設定を記述する
+  nnoremap <buffer> q :q!<CR>
+endfunction
+
+
+augroup my-terminal
+    autocmd!
+   " BufNew の時点では 'buftype' が設定されていないので timer イベントでごまかすなど…
+    autocmd BufNew * call timer_start(0, { -> s:bufnew() })
+    autocmd FileType terminal call s:filetype()
+    autocmd ColorScheme * call s:color()
 augroup END
