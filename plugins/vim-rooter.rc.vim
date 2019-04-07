@@ -1,5 +1,5 @@
 let g:rooter_manual_only = 1 "FindRootDirectory()
-let g:rooter_patterns = ['Rakefile', '.svn/', '.git/']
+let g:rooter_patterns = ['Rakefile', 'Gemfile', '.svn/', '.git/']
 
 " + ctags系 {{{
 

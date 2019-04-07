@@ -199,7 +199,11 @@ set wildignore+=*.gif,*.png,*.jpg,*.jpeg,*.bak,tags,*.zip,*.jar,*.class,*.pdf,*.
 set updatetime=300
 
 " ++ }}}
+
 " ++ ファイルタイプ別 {{{
+" +++ terminal {{{
+source $XDG_CONFIG_HOME/rc/extensions/terminal.rc.vim
+" +++ }}}
 " +++ quickfix {{{
 source $XDG_CONFIG_HOME/rc/extensions/quickfix.vim
 " +++ }}}
