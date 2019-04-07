@@ -5,13 +5,22 @@
 [include]
   path = ~/.gitconfig.local
 [alias]
+  sn = "!f() { \
+    if [ $# -ne 1 ];\
+    then \
+      echo 'required comment message by first args';\
+    else \
+      git add -A; \
+      git commit -m \"$1\"; \
+    fi; \
+  }; f"
   h = help
-  st = status -s
+  st = status -sb
   cm = commit
   co = checkout
   aa = add -A
   b = branch
-  ba = branch -a
+  ba = branch -a -vv
   d = diff
   ds = diff --name-status
   di = diff --cached
