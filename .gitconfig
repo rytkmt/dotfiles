@@ -17,6 +17,8 @@
   h = help
   st = status -sb
   cm = commit -m
+  amm = commit --amend -m
+  am = commit --amend --no-edit
   co = checkout
   aa = add -A
   b = branch

@@ -35,9 +35,7 @@ options word
 
 snippet require_active_support
 options head
-  require 'rubygems'
-  require 'active_support'
-  require 'pp'
+  require 'active_support/all'
 
 snippet p_xx
 options word
@@ -91,3 +89,7 @@ options head
 snippet binding_pry
 options head
   binding.pry
+
+snippet tap_pry
+options word
+  tap{binding.pry}
