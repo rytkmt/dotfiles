@@ -18,14 +18,16 @@
   st = status -sb
   cm = commit -m
   amm = commit --amend -m
-  am = commit --amend --no-edit
+  amc = commit --amend --no-edit
   co = checkout
   aa = add -A
   b = branch
   ba = branch -a -vv
+  bd = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
   fe = fetch -p
   mf = merge FETCH_HEAD
   mod = merge origin/develop -m "behind解消"
+  mom = merge origin/master -m "behind解消"
   d = diff
   ds = diff --name-status
   di = diff --cached
@@ -51,4 +53,10 @@
   unst = reset --mixed
   unch = reset --hard
   po = push origin
+  pob = "!f() { \
+    git branch --no-color 2> /dev/null | \
+    sed -e '/^[^*]/d' | \
+    sed -e 's/* // ' | \
+    xargs -I@ git push origin @; \
+  }; f"
   als = !"git config --list | grep ^alias\\. | sort | sed s/^alias\\.// | sed -e 's/=/ /' | awk '{printf \"%-10s %s\",$1,c=\"\";for(i=2;i<=NF;i++) c=c $i\" \"; print c}'"

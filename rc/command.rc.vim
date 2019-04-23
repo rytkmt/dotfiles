@@ -2,19 +2,14 @@
 function! s:make_tempfile(win, ...)
   let l:win = (a:win == 0 ? "e" : "vs")
   exe l:win ." " .tempname()
-  if exists("a:1")
+  if exists("a:1") && a:1 != ""
     exe "set ft=" .a:1
   endif
   autocmd MyAutoCmd BufLeave <buffer> write
 endfunction
-command! Tempe call s:make_tempfile(0)
-command! Temperuby call s:make_tempfile(0, "ruby")
-command! Tempejson call s:make_tempfile(0, "xml")
-command! Tempexml call s:make_tempfile(0, "json")
-command! Temp call s:make_tempfile(1)
-command! Tempruby call s:make_tempfile(1, "ruby")
-command! Tempxml call s:make_tempfile(1, "xml")
-command! Tempjson call s:make_tempfile(1, "json")
+
+command! -nargs=? Tempe call s:make_tempfile(0, "<args>")
+command! -nargs=? Temp call s:make_tempfile(1, "<args>")
 " ++ }}}
 
 " ++ カレントディレクトリをエクスプローラーで開く {{{

@@ -135,6 +135,9 @@ inoremap <C-p> <C-r>"
 
 nnoremap W viw
 
+" 現在行を前の行の末尾に繋げる
+nnoremap <C-l> ^d0dhj
+
 " カーソル位置の単語を置換
 nnoremap <expr> [map]s ':%s/\<' . expand('<cword>') . '\>/'
 vnoremap <expr> [map]s ':<C-u>%s/\<' . expand('<cword>') . '\>/'
@@ -148,11 +151,15 @@ augroup matchit
 augroup END
 nmap m %
 vmap m %
+
 " マーク
 nnoremap M m
 nnoremap MM :<C-u>marks<CR>
+
 " 前回変更点をVモードで選択
 nnoremap <expr> <C-h> ':h ' . expand('<cword>')
+
+vnoremap <C-r> :s/\v\r$//g<CR>
 
 "メタ文字扱いのオプションをvery magicを初期値に
 " nnoremap / /\v
