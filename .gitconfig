@@ -21,7 +21,7 @@
   amc = commit --amend --no-edit
   co = checkout
   aa = add -A
-  b = branch
+  b = branch -vv
   ba = branch -a -vv
   bd = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
   fe = fetch -p
