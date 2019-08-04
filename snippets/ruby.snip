@@ -1,13 +1,28 @@
-snippet rescue-ex
+snippet rescue-e
 options head
-  rescue => ex
+  rescue => e
 
-snippet rescue-ex-p
+snippet rescue-e-binding
 options head
-  rescue => ex
-    p ex.class
-    p ex.message
-    p ex.backtrace
+  rescue => e
+    binding.pry
+
+snippet rescue-e-p
+options head
+  rescue => e
+    p e.class
+    p e.message
+    p e.backtrace
+
+snippet     logger_stdout
+options     head
+  p "[ log-start ]"
+  ActiveRecord::Base.logger = Logger.new(STDOUT)
+
+snippet     logger_nil
+options     head
+  p "[ log-end ]"
+  ActiveRecord::Base.logger = nil
 
 snippet pex
 options head
@@ -93,3 +108,153 @@ options head
 snippet tap_pry
 options word
   tap{binding.pry}
+
+snippet numericality_integer
+options word
+  numericality: { only_integer: true }
+
+snippet sequence_text
+options head
+  sequence(:${1:COLUMN}) { |i| "$1_#{i}" }
+  ${2}
+
+snippet sequence_count
+options head
+  sequence(:${1:COLUMN}) { |i| i }
+  ${2}
+
+snippet factory_define
+options head
+  FactoryBot.define do
+    factory :${1}, class: CmCore::${2} do
+      ${3}
+    end
+  end
+
+snippet model_cm_core_ar
+options head
+  module CmCore
+    class ${1} < CmCore::ApplicationRecord
+      ${2}
+    end
+  end
+
+snippet enum_cm_core
+options head
+  module CmCore
+    module Enums
+      module ${1:NAME}
+        extend ActiveSupport::Concern
+        included do
+          enum ${2:SMALLNAME}: {
+            ${3}
+          }, _prefix: true
+        end
+      end
+    end
+  end
+
+snippet enum_cm_core_with_directory
+options head
+  module CmCore
+    module Enums
+      module ${1:GROUP}
+        module ${2:NAME}
+          extend ActiveSupport::Concern
+          included do
+            enum ${3:SMALLNAME}: {
+              ${4}
+            }, _prefix: true
+          end
+        end
+      end
+    end
+  end
+
+snippet create_table
+options head
+  create_table "${1:TABLE}", force: :cascade, comment: "${2:T_NAME}" do |t|
+    ${3}
+  end
+
+snippet add_foreign_key
+options head
+  add_foreign_key "${1:FROM_TABLE}", "${2:TO_TABLE}", name: "fk_${3:TO_ID}_id"
+
+snippet trow
+options head
+  t.${1:TYPE} "${2:NAME}", ${4} comment: "${3:COMMENT}"
+
+snippet trow_enum
+options head
+  t.integer "${2:NAME}", null: false, default: ${4:DEFAULT}, comment: "${3:COMMENT}"
+
+snippet trow_text
+options head
+  t.text "${2:NAME}", null: false, default: "", comment: "${3:COMMENT}"
+
+snippet trow_integer
+options head
+  t.integer "${2:NAME}", null: false, default: 0, comment: "${3:COMMENT}"
+
+snippet trow_bool
+options head
+  t.boolean "${2:NAME}", null: false, default: false, comment: "${3:COMMENT}"
+
+snippet trow_bigint
+options head
+  t.bigint "${2:NAME}", null: false, comment: "${3:COMMENT}"
+
+snippet trow_datetime
+alias trow_time
+options head
+  t.datetime "${1:NAME}", ${3}comment: "${2:COMMENT}"
+
+snippet trow_jsonb
+options head
+  t.jsonb    "${1:NAME}", null: false, default: {}, comment: "${2: COMMENT}"
+
+snippet trow_operator
+options head
+  t.bigint   "created_by", null: false, default: 0, comment: "登録した担当者ID"
+  t.bigint   "updated_by", null: false, default: 0, comment: "更新した担当者ID"
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+
+snippet tindex
+options head
+  t.index ["${1:TARGET}"], name: "index_${2:TABLE_NAME}_on_$1"
+  ${3}
+
+snippet transaction
+options head
+  ActiveRecord::Base.transaction do
+    ${1}
+  end
+
+snippet rspec_init
+options head
+  require("rails_helper")
+
+  describe(${1: KLASS}) do
+    ${2: CONTENTS}
+  end
+
+snippet rspec_fuubar_autoreflesh_disable
+alias fuubar_autoreflesh_disable
+options head
+  RSpec.configure do |config|
+    config.fuubar_auto_refresh = false
+  end
+
+snippet vcr_cassette_name
+options word
+  vcr: { cassette_name: "${1}" }
+
+snippet p_vcr_yaml
+options head
+  require 'active_support/all'
+  require 'yaml'
+  path = "${1:PATH}"
+  res_body = YAML.load(File.read(path)).dig("http_interactions", 0, "response", "body", "string")
+  pp JSON.parse(res_body)

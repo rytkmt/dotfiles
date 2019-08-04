@@ -21,6 +21,7 @@ highlight SpelunkerSpellBad cterm=underline ctermfg=247 gui=underline guifg=#e0d
 
 " highlight SpelunkerComplexOrCompoundWord cterm=underline ctermfg=NONE gui=underline guifg=NONE
 
-" let g:spelunker_white_list_for_user = [
-"  \ 
-"  \ ]
+let g:spelunker_white_list_for_user = [
+ \ "klass", "kana",
+ \ "nekopos", "conveni", "regexp"
+ \ ]

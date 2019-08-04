@@ -67,11 +67,11 @@ hook_add = '''
 source $XDG_CONFIG_HOME/plugins/lightline.vim.rc.vim
 '''
 
-[[plugins]]
-repo = 'Yggdroot/indentLine'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/indentLine.rc.vim
-'''
+# [[plugins]]
+# repo = 'Yggdroot/indentLine'
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/indentLine.rc.vim
+# '''
 
 [[plugins]]
 repo = 'kana/vim-submode'
@@ -83,22 +83,16 @@ autocmd MyAutoCmd VimEnter * source $XDG_CONFIG_HOME/plugins/vim-submode.rc.vim
 '''
 
 [[plugins]]
-repo = 'Shougo/vimshell'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vimshell.rc.vim
-'''
-
-[[plugins]]
 repo = 'ujihisa/unite-colorscheme'
 
 [[plugins]]
 repo = 'cohama/lexima.vim'
 
-[[plugins]]
-repo = 'tpope/vim-rails'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-rails.rc.vim
-'''
+# [[plugins]]
+# repo = 'tpope/vim-rails'
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/vim-rails.rc.vim
+# '''
 
 [[plugins]]
 repo = 'terryma/vim-expand-region'
@@ -308,14 +302,17 @@ hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vim-gitgutter.rc.vim
 '''
 
-[[plugins]]
-repo = 'tpope/vim-fugitive'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-fugitive.rc.vim
-'''
+# [[plugins]]
+# repo = 'tpope/vim-fugitive'
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/vim-fugitive.rc.vim
+# '''
+
+# [[plugins]]
+# repo = 'kamykn/spelunker.vim'
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/spelunker.vim.rc.vim
+# '''
 
 [[plugins]]
-repo = 'kamykn/spelunker.vim'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/spelunker.vim.rc.vim
-'''
+repo = 'tyru/stoptypofile.vim'

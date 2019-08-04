@@ -12,7 +12,7 @@ nmap <C-n> <Plug>(yankround-next)
 vmap <C-n> <Plug>(yankround-next)
 "yankのペーストにハイライトを使用するか
 let g:yankround_use_region_hl = 1
-let g:yankround_max_history = 10
+let g:yankround_max_history = 20
 let g:yankround_dir = "~/.vim/cache/yankround"
 
 if has("gui_running") || has('gui') || has('nvim')

@@ -14,6 +14,16 @@
       git commit -m \"$1\"; \
     fi; \
   }; f"
+  snp = "!f() { \
+    if [ $# -ne 1 ];\
+    then \
+      echo 'required comment message by first args';\
+    else \
+      git add -A; \
+      git commit -m \"$1\"; \
+      git pob; \
+    fi; \
+  }; f"
   h = help
   st = status -sb
   cm = commit -m
@@ -23,6 +33,7 @@
   aa = add -A
   b = branch -vv
   ba = branch -a -vv
+  bm = branch -m
   bd = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
   fe = fetch -p
   mf = merge FETCH_HEAD
@@ -42,7 +53,8 @@
   lll = log
   lf = log -p
   ss = stash push -u
-  sss = stash show -p
+  sss = stash show
+  ssss = stash show -p
   ssl = stash list --pretty='%C(yellow)%gd%Creset %gs'
   ssa = stash apply --index
   ssd = stash drop

@@ -1,6 +1,6 @@
 " ++ 一時ファイル {{{
 function! s:make_tempfile(win, ...)
-  let l:win = (a:win == 0 ? "e" : "vs")
+  let l:win = (a:win == 0 ? "e" : (a:win == 1 ? "vs" : "sp"))
   exe l:win ." " .tempname()
   if exists("a:1") && a:1 != ""
     exe "set ft=" .a:1
@@ -10,6 +10,7 @@ endfunction
 
 command! -nargs=? Tempe call s:make_tempfile(0, "<args>")
 command! -nargs=? Temp call s:make_tempfile(1, "<args>")
+command! -nargs=? Temps call s:make_tempfile(2, "<args>")
 " ++ }}}
 
 " ++ カレントディレクトリをエクスプローラーで開く {{{
@@ -82,4 +83,15 @@ try
   command! SourceCurrentFile call s:source_current_file()
 catch
 endtry
+"++ }}}
+
+"++ 隠しバッファの削除 {{{
+function! s:delete_hidden_buffers()
+    let tpbl=[]
+    call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+    for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+        silent execute 'bwipeout' buf
+    endfor
+endfunction
+command! DeleteHiddenBuffers call s:delete_hidden_buffers()
 "++ }}}

@@ -41,6 +41,8 @@ nnoremap [window]h <C-w>h
 nnoremap [window]j <C-w>j
 nnoremap [window]k <C-w>k
 nnoremap [window]l <C-w>l
+nnoremap [window]r <C-w>r
+nnoremap [window]<S-r> <C-w><S-r>
 " ウィンドウ移動
 nnoremap [window]H <C-w>H
 nnoremap [window]J <C-w>J
@@ -70,6 +72,7 @@ nmap <C-Space><C-Space> :<C-u>noh<CR>
 " ++ ターミナル操作 {{{
 nnoremap <A-s> :sp<CR>:terminal<CR>isource ~/.bash_profile<CR>clear<CR>
 nnoremap <A-v> :vs<CR>:terminal<CR>isource ~/.bash_profile<CR>clear<CR>
+nnoremap <A-t> :<C-u>tabnew<CR>:terminal<CR>isource ~/.bash_profile<CR>clear<CR>
 nnoremap <A-e> :terminal<CR>isource ~/.bash_profile<CR>clear<CR>
 tnoremap <A-j> <C-\><C-n>
 " ++ }}}
@@ -244,8 +247,10 @@ nnoremap [other]o :<C-u>tabedit $XDG_CONFIG_HOME/rc/options.rc.vim<CR>
 nnoremap [other]m :<C-u>tabedit $XDG_CONFIG_HOME/rc/mappings.rc.vim<CR>
 nnoremap [other]c :<C-u>tabedit $XDG_CONFIG_HOME/rc/command.rc.vim<CR>
 nnoremap [other]l :<C-u>so ~/.vimrc<CR>:<C-u>so ~/.gvimrc<CR>
-nnoremap [edit]s :e ++enc=shift_jis<CR>
-nnoremap [edit]u :e ++enc=utf-8<CR>
+nnoremap [other]u :<C-u>tabedit $XDG_CONFIG_HOME/plugins/spelunker.vim.rc.vim<CR>
+nnoremap [other]s :<C-u>tabedit $XDG_CONFIG_HOME/plugins/switch.vim.rc.vim<CR>
+nnoremap [edit]s :e ++enc=shift_jis ++ff=dos<CR>
+nnoremap [edit]u :e ++enc=utf-8 ++ff=unix<CR>
 nnoremap [edit]e :e ++enc=euc-jp<CR>
 nnoremap <expr> [edit]c ':e ' . expand('%:p:h') . '/'
 nnoremap [edit]f :<C-u>set ft=

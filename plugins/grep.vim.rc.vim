@@ -9,6 +9,6 @@ if has("win32")
   let Grep_Xargs_Path = 'C:\git_bin\xargs.exe'
   let Grep_Shell_Quote_Char = '"'
 endif
-let Grep_Skip_Dirs = '.svn'
+let Grep_Skip_Dirs = '.svn .git'
 let Grep_Default_Options = '-I -G'
-let Grep_Skip_Files = '*.bak *~ *.log'
+let Grep_Skip_Files = '*.bak *~ *.log  tags HEAD'
