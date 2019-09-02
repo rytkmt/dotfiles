@@ -169,7 +169,7 @@ set smarttab
 " カーソルを行頭、行末で止まらないようにする
 set whichwrap=b,s,h,l,<,>,[,]
 " 行を強調表示
-set cursorline
+" set cursorline
 " 列を強調表示
 " set cursorcolumn
 " power_line に必須
@@ -190,6 +190,10 @@ set splitright
 "" texのconcealを無効化（#^ω^）
 let g:tex_conceal=''
 set conceallevel=0
+
+" 320列以上のものはシンタックス評価しない
+set synmaxcol=320
+" set colorcolumn=4,8,12
 
 " ヘルプの日本語化
 set helplang=ja,en

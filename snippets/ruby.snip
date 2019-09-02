@@ -1,27 +1,25 @@
 snippet rescue-e
 options head
-  rescue => e
+  rescue => _e
 
 snippet rescue-e-binding
 options head
-  rescue => e
+  rescue => _e
     binding.pry
 
 snippet rescue-e-p
 options head
-  rescue => e
-    p e.class
-    p e.message
-    p e.backtrace
+  rescue => _e
+    p _e.class
+    p _e.message
+    p _e.backtrace
 
 snippet     logger_stdout
 options     head
-  p "[ log-start ]"
   ActiveRecord::Base.logger = Logger.new(STDOUT)
 
 snippet     logger_nil
 options     head
-  p "[ log-end ]"
   ActiveRecord::Base.logger = nil
 
 snippet pex
@@ -258,3 +256,15 @@ options head
   path = "${1:PATH}"
   res_body = YAML.load(File.read(path)).dig("http_interactions", 0, "response", "body", "string")
   pp JSON.parse(res_body)
+
+snippet example_error
+options head
+  example "エラーになる" do
+    ${1}
+  end
+
+snippet example_success_regist
+options head
+  example "正常に登録される" do
+    ${1}
+  end

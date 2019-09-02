@@ -2,6 +2,8 @@
   diff = auto
   status = auto
   branch = auto
+[core]
+  excludesfile = ~/.gitignore
 [include]
   path = ~/.gitconfig.local
 [alias]

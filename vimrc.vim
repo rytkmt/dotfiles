@@ -6,6 +6,11 @@ augroup MyAutoCmd
   autocmd!
 augroup END
 
+augroup vimrc-highlight
+  autocmd!
+  autocmd Syntax * if 1000 < line('$') | syntax sync minlines=100 | endif
+augroup END
+
 source $XDG_CONFIG_HOME/rc/options.rc.vim
 
 " + dein {{{

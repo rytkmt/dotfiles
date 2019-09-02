@@ -9,7 +9,9 @@ let g:switch_custom_definitions =
   \   switch#NormalizedCase(['post', 'get', 'put', 'delete']),
   \   switch#NormalizedCase(['asc', 'desc']),
   \   switch#NormalizedCase(['する', 'しない']),
+  \   switch#NormalizedCase(['なる', 'ならない']),
   \   switch#NormalizedCase(['はい', 'いいえ']),
+  \   switch#NormalizedCase(['ある', 'ない']),
   \   switch#NormalizedCase(['正常', '異常']),
   \   switch#NormalizedCase(['成功', '失敗']),
   \   switch#NormalizedCase(['無い', '有る']),
@@ -22,7 +24,7 @@ autocmd FileType ruby let b:switch_custom_definitions =
   \   switch#NormalizedCase(['if', 'unless']),
   \   switch#NormalizedCase(['once', 'all']),
   \   switch#NormalizedCase(['all', 'first']),
-  \   switch#NormalizedCase(['describe', 'context'])
+  \   switch#NormalizedCase(['describe', 'context', 'example']),
   \ ]
 
 autocmd FileType neosnippet let b:switch_custom_definitions =

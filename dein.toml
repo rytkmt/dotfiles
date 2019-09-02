@@ -246,11 +246,11 @@ hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vim-easy-align.rc.vim
 '''
 
-[[plugins]]
-repo = 'rytkmt/scratch.vim'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/scratch.rc.vim
-'''
+# [[plugins]]
+# repo = 'rytkmt/scratch.vim'
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/scratch.rc.vim
+# '''
 
 [[plugins]]
 repo = 'thinca/vim-visualstar'
@@ -316,3 +316,6 @@ source $XDG_CONFIG_HOME/plugins/vim-gitgutter.rc.vim
 
 [[plugins]]
 repo = 'tyru/stoptypofile.vim'
+
+# [[plugins]]
+# repo = 'cocopon/inspecthi.vim'
