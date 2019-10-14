@@ -41,6 +41,12 @@
   mf = merge FETCH_HEAD
   mod = merge origin/develop -m "behind解消"
   mom = merge origin/master -m "behind解消"
+  moc = "!f() { \
+    git branch --no-color 2> /dev/null | \
+    sed -e '/^[^*]/d' | \
+    sed -e 's/* // ' | \
+    xargs -I@ git merge origin/@; \
+  }; f"
   d = diff
   ds = diff --name-status
   di = diff --cached
@@ -74,3 +80,12 @@
     xargs -I@ git push origin @; \
   }; f"
   als = !"git config --list | grep ^alias\\. | sort | sed s/^alias\\.// | sed -e 's/=/ /' | awk '{printf \"%-10s %s\",$1,c=\"\";for(i=2;i<=NF;i++) c=c $i\" \"; print c}'"
+  gs = "!f() { \
+    if [ $# -ne 2 ];\
+    then \
+      echo 'two arguments are required. the string before replacement and the string after replacement';\
+    else \
+      git ls-files -z | xargs -0 sed -i -e \"s/$1/$2/g\";\
+    fi; \
+  }; f"
+  g = grep -n

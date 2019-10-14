@@ -137,3 +137,12 @@ on_ft = 'vim'
 # [[plugins]]
 # repo = 'itmammoth/run-rspec.vim'
 # on_ft = 'ruby'
+
+[[plugins]]
+repo = 'autozimu/LanguageClient-neovim'
+rev = 'next'
+build = 'bash install.sh'
+on_ft = 'ruby'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/LanguageClient-neovim.rc.vim
+'''

@@ -319,3 +319,12 @@ repo = 'tyru/stoptypofile.vim'
 
 # [[plugins]]
 # repo = 'cocopon/inspecthi.vim'
+
+[[plugins]]
+repo = 'koron/codic-vim'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/codic-vim.rc.vim
+'''
+
+[[plugins]]
+repo = 'rhysd/unite-codic.vim'

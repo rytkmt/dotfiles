@@ -95,11 +95,8 @@ snippet Time_now_ms
 options word
   Time.now.instance_eval { '%s.%03d' % [strftime('%Y/%m/%d %H:%M:%S'), (usec / 1000.0).round] }
 
-snippet logger_stdout
-options head
-  ActiveRecord::Base.logger = Logger.new(STDOUT)
-
 snippet binding_pry
+alias   pry
 options head
   binding.pry
 
@@ -268,3 +265,43 @@ options head
   example "正常に登録される" do
     ${1}
   end
+
+snippet raise_not_implement
+options head
+  raise(NotImplementedError)
+
+snippet concern_included
+options head
+  extend ActiveSupport::Concern
+
+  included do
+    ${1}
+  end
+
+snippet concern_class_methods
+options head
+  extend ActiveSupport::Concern
+
+  class_methods do
+    ${1}
+  end
+
+snippet describe
+  describe "${1:DESCRIBE}" do${2}
+  end
+
+snippet context
+  context "${1:CONTEXT}" do${2}
+  end
+
+snippet example
+  example "${1:EXAMPLE}" do${2}
+  end
+
+snippet context_with_example
+options head
+  context "${1:CONTEXT}" do
+    example "${2:EXAMPLE}" do${3}
+    end
+  end
+  ${4}

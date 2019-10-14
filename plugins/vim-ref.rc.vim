@@ -30,7 +30,7 @@ function! g:ref_source_webdict_sites.ej.filter(output)
   return join(split(a:output, "\n")[15 :], "\n")
 endfunction
 
-nmap <expr> [ref]j ':Ref webdict je<Space>'
-nmap <expr> [ref]e ':Ref webdict ej '.expand("<cword>")
-nmap <expr> [ref]J ':Ref webdict je2<Space>'
-nmap <expr> [ref]E ':Ref webdict ej2 '.expand("<cword>")
+nmap <expr> [lib]j ':Ref webdict je<Space>'
+nmap <expr> [lib]e ':Ref webdict ej '.expand("<cword>")
+nmap <expr> [lib]J ':Ref webdict je2<Space>'
+nmap <expr> [lib]E ':Ref webdict ej2 '.expand("<cword>")

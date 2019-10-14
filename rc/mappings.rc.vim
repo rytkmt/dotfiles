@@ -61,6 +61,9 @@ nnoremap [window]m <C-w><Bar>
 " 幅揃える
 nnoremap [window]= <C-w>=
 
+" プレビューウインドウを閉じる
+nnoremap [window]z <C-w>z
+
 "ヤンク文字で検索
 cmap <S-Space> <C-r>"
 cmap <C-Space> <C-r>*
@@ -198,7 +201,7 @@ nmap <Leader>z [other]
 nmap <Leader>t [tab]
 nmap <Leader>T [table]
 nmap <Leader>w [window]
-nmap <Leader>1 [ref]
+nmap <Leader>l [lib]
 nmap <Leader>q [quick]
 nmap [quick] <Nop>
 nmap <Leader>e [edit]
