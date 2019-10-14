@@ -328,3 +328,9 @@ source $XDG_CONFIG_HOME/plugins/codic-vim.rc.vim
 
 [[plugins]]
 repo = 'rhysd/unite-codic.vim'
+
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-indent-guides.rc.vim
+'''
