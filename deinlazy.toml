@@ -140,6 +140,7 @@ on_ft = 'vim'
 
 [[plugins]]
 repo = 'autozimu/LanguageClient-neovim'
+if = 'has("nvim")'
 rev = 'next'
 build = 'bash install.sh'
 on_ft = 'ruby'
