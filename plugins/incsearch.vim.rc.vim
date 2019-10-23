@@ -1,3 +1,3 @@
-map /  <Plug>(incsearch-forward)\v
-map ?  <Plug>(incsearch-backward)\v
-map g/ <Plug>(incsearch-stay)\v
+nmap /  <Plug>(incsearch-forward)\v
+nmap ?  <Plug>(incsearch-backward)\v
+nmap g/ <Plug>(incsearch-stay)\v
