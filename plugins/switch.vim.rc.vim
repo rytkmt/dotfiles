@@ -16,6 +16,7 @@ let g:switch_custom_definitions =
   \   switch#NormalizedCase(['成功', '失敗']),
   \   switch#NormalizedCase(['無い', '有る']),
   \   switch#NormalizedCase(['以上', '以下']),
+  \   switch#NormalizedCase(['縦', '横']),
   \   switch#NormalizedCase(['-', '+'])
   \ ]
 

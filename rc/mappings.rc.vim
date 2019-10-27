@@ -91,13 +91,13 @@ inoremap <C-p> <C-r>"
 
 inoremap <silent><expr> <C-j>
  \ pumvisible() ? "\<C-n>" : "\<C-j>"
-inoremap <silent><expr> <TAB>
- \ pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <silent><expr> <Tab>
+ \ pumvisible() ? "\<C-n>" : "\<Tab>"
 
 inoremap <silent><expr> <C-k>
  \ pumvisible() ? "\<C-p>" : "\<C-k>"
-inoremap <silent><expr> <S-TAB>
- \ pumvisible() ? "\<C-p>" : "\<C-k>"
+inoremap <silent><expr> <S-Tab>
+ \ pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 inoremap <silent><expr> <C-s>
  \ pumvisible() ? "\<C-y>" : "\<C-s>"
