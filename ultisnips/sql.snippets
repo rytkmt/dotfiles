@@ -1,0 +1,53 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+
+snippet alter_add_column "" b
+  ALTER TABLE ${1:TABLE} ADD COLUMN ${2:COLUMN} ${3:FORMAT};
+endsnippet
+
+snippet add_column "" w
+  ADD COLUMN ${2:COLUMN} ${3:FORMAT};
+endsnippet
+
+snippet alter_set_default "" b
+  ALTER TABLE ${1:TABLE} ALTER COLUMN ${2:COLUMN} SET DEFAULT ${4:DEFAULT};
+endsnippet
+
+snippet set_default "" w
+  ALTER COLUMN ${2:COLUMN} SET DEFAULT ${4:DEFAULT}
+endsnippet
+
+snippet update_default "" b
+  UPDATE ${1:TABLE} SET ${2:COLUMN} = ${4:DEFAULT};
+endsnippet
+
+snippet alter_set_not_null "" b
+  ALTER TABLE ${1:TABLE} ALTER COLUMN ${2:COLUMN} SET NOT NULL;
+endsnippet
+
+snippet set_not_null "" w
+  ALTER COLUMN ${2:COLUMN} SET NOT NULL;
+endsnippet
