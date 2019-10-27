@@ -1,54 +1,54 @@
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-on_i = 1
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/neosnippet.rc.vim
-'''
+# [[plugins]]
+# repo = 'Shougo/neosnippet-snippets'
+# on_i = 1
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/neosnippet.rc.vim
+# '''
+#
+# [[plugins]]
+# repo = 'Shougo/neosnippet'
+# on_i = 1
+# depends = ['neosnippet-snippets']
+#
+# [[plugins]]
+# repo = 'Shougo/neocomplete.vim'
+# if = '!has("nvim")'
+# on_i = 1
+# hook_post_source = '''
+# source $XDG_CONFIG_HOME/plugins/neocomplete.vim.rc.vim
+# '''
 
-[[plugins]]
-repo = 'Shougo/neosnippet'
-on_i = 1
-depends = ['neosnippet-snippets']
+# [[plugins]]
+# repo = 'Shougo/deoplete.nvim'
+# if = 'has("python3")'
+# on_i = 1
+# hook_post_source = '''
+# source $XDG_CONFIG_HOME/plugins/deoplete.rc.vim
+# '''
 
-[[plugins]]
-repo = 'Shougo/neocomplete.vim'
-if = '!has("nvim")'
-on_i = 1
-hook_post_source = '''
-source $XDG_CONFIG_HOME/plugins/neocomplete.vim.rc.vim
-'''
+# [[plugins]]
+# repo = 'takkii/ruby-dictionary3'
+# if = "has('python3')"
+# depends = ['deoplete.nvim']
+# on_i = 1
+# hook_post_source = '''
+# source $XDG_CONFIG_HOME/plugins/ruby-dictionary3.rc.vim
+# '''
 
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-if = 'has("python3")'
-on_i = 1
-hook_post_source = '''
-source $XDG_CONFIG_HOME/plugins/deoplete.rc.vim
-'''
-
-[[plugins]]
-repo = 'takkii/ruby-dictionary3'
-if = "has('python3')"
-depends = ['deoplete.nvim']
-on_i = 1
-hook_post_source = '''
-source $XDG_CONFIG_HOME/plugins/ruby-dictionary3.rc.vim
-'''
-
-[[plugins]]
-repo = 'Shougo/neco-vim'
-if = "has('python3')"
-depends = ['deoplete.nvim']
-on_i = 1
-
-[[plugins]]
-repo = 'Shougo/neco-syntax'
-if = "has('python3')"
-depends = ['deoplete.nvim']
-on_i = 1
-hook_post_source = '''
-let g:necosyntax#min_keyword_length = 1
-'''
+# [[plugins]]
+# repo = 'Shougo/neco-vim'
+# if = "has('python3')"
+# depends = ['deoplete.nvim']
+# on_i = 1
+#
+# [[plugins]]
+# repo = 'Shougo/neco-syntax'
+# if = "has('python3')"
+# depends = ['deoplete.nvim']
+# on_i = 1
+# hook_post_source = '''
+# let g:necosyntax#min_keyword_length = 1
+# '''
 
 [[plugins]]
 repo = 'mattn/emmet-vim'
@@ -112,12 +112,12 @@ on_ft = ['markdown','mkd']
 repo = 'rytkmt/vim-textile'
 on_ft = 'textile'
 
-[[plugins]]
-repo = 'landaire/deoplete-swift'
-on_ft = 'swift'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/deoplete-swift.rc.vim
-'''
+# [[plugins]]
+# repo = 'landaire/deoplete-swift'
+# on_ft = 'swift'
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/deoplete-swift.rc.vim
+# '''
 
 [[plugins]]
 repo = 'kballard/vim-swift'
@@ -138,12 +138,12 @@ on_ft = 'vim'
 # repo = 'itmammoth/run-rspec.vim'
 # on_ft = 'ruby'
 
-[[plugins]]
-repo = 'autozimu/LanguageClient-neovim'
-if = 'has("nvim")'
-rev = 'next'
-build = 'bash install.sh'
-on_ft = 'ruby'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/LanguageClient-neovim.rc.vim
-'''
+# [[plugins]]
+# repo = 'autozimu/LanguageClient-neovim'
+# if = 'has("nvim")'
+# rev = 'next'
+# build = 'bash install.sh'
+# on_ft = 'ruby'
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/LanguageClient-neovim.rc.vim
+# '''

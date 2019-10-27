@@ -6,3 +6,5 @@ alias ebrl='vim $HOME/.bashrc'
 alias ebpl='vim $HOME/.bash_profile'
 alias egc='vim $HOME/.gitconfig'
 alias cdv='cd $XDG_CONFIG_HOME'
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

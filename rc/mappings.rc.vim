@@ -79,6 +79,32 @@ nnoremap <A-t> :<C-u>tabnew<CR>:terminal<CR>isource ~/.bash_profile<CR>clear<CR>
 nnoremap <A-e> :terminal<CR>isource ~/.bash_profile<CR>clear<CR>
 tnoremap <A-j> <C-\><C-n>
 " ++ }}}
+" ++ 記述周り {{{
+
+" 削除
+imap <C-h> <BS>
+inoremap <C-d> <C-o>"_dd
+inoremap <C-b> <C-o>"_db<C-o>x
+inoremap <C-e> <C-o>"_de
+
+inoremap <C-p> <C-r>"
+
+inoremap <silent><expr> <C-j>
+ \ pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <silent><expr> <TAB>
+ \ pumvisible() ? "\<C-n>" : "\<C-j>"
+
+inoremap <silent><expr> <C-k>
+ \ pumvisible() ? "\<C-p>" : "\<C-k>"
+inoremap <silent><expr> <S-TAB>
+ \ pumvisible() ? "\<C-p>" : "\<C-k>"
+
+inoremap <silent><expr> <C-s>
+ \ pumvisible() ? "\<C-y>" : "\<C-s>"
+inoremap <silent><expr> <C-l>
+ \ pumvisible() ? "\<C-y>" : "\<Right>"
+
+" ++ }}}
 " ++ その他 {{{
 nnoremap ZZ <Nop>
 nnoremap <C-z> <Nop>
@@ -130,14 +156,6 @@ noremap zl zL
 noremap zh zH
 noremap zj 4<C-e>
 noremap zk 4<C-y>
-
-" 削除
-imap <C-h> <BS>
-inoremap <C-d> <C-o>"_dd
-inoremap <C-b> <C-o>"_db<C-o>x
-inoremap <C-e> <C-o>"_de
-
-inoremap <C-p> <C-r>"
 
 nnoremap W viw
 

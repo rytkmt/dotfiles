@@ -1,7 +1,7 @@
 let g:lightline = {
 \  'colorscheme': 'one',
 \  'active': {
-\    'left': [['mode', 'paste'], ['filename']],
+\    'left': [['mode', 'paste'], ['filename'], ['gitstatus']],
 \    'right': [['row'], ['fileencoding'], ['filetype'], ['projecttag']]
 \  },
 \  'inactive': {
@@ -17,7 +17,8 @@ let g:lightline = {
 \    'row' : 'LightlineRow',
 \    'fileencoding': 'LightlineFileencoding',
 \    'filetype': 'LightlineFiletype',
-\    'projecttag': 'LightlineProjecttag'
+\    'projecttag': 'LightlineProjecttag',
+\    'gitstatus': 'LightlineGitStatus'
 \  }
 \}
 let s:default_palette = g:lightline#colorscheme#default#palette
@@ -63,6 +64,12 @@ function! LightlineFiletype()
 endfunction
 function! LightlineProjecttag()
   return exists('w:project_tag') ? 'T' : ''
+endfunction
+function! LightlineGitStatus()
+  let status = get(g:, 'coc_git_status', '')
+  let status = substitute(status, "[^a-zA-Z0-9]", "", "g")
+  return "(".status.")"
+  " return winwidth(0) > 120 ? status : ''
 endfunction
 let s:p.normal.left[1] = ['#b15e7c', '#222529', 1, 1]
 let s:p.inactive.left[0] = ['#b15e7c', '#222529', 1, 1]

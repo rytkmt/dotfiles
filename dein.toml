@@ -285,22 +285,22 @@ hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vim-operator-flashy.rc.vim
 '''
 
-[[plugins]]
-repo = 'vim-syntastic/syntastic'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/syntastic.rc.vim
-'''
-hook_post_update = '''
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-'''
+# [[plugins]]
+# repo = 'vim-syntastic/syntastic'
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/syntastic.rc.vim
+# '''
+# hook_post_update = '''
+# set statusline+=%#warningmsg#
+# set statusline+=%{SyntasticStatuslineFlag()}
+# set statusline+=%*
+# '''
 
-[[plugins]]
-repo = 'airblade/vim-gitgutter'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-gitgutter.rc.vim
-'''
+# [[plugins]]
+# repo = 'airblade/vim-gitgutter'
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/vim-gitgutter.rc.vim
+# '''
 
 # [[plugins]]
 # repo = 'tpope/vim-fugitive'
@@ -333,4 +333,13 @@ repo = 'rhysd/unite-codic.vim'
 repo = 'nathanaelkane/vim-indent-guides'
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vim-indent-guides.rc.vim
+'''
+
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+build = 'coc#util#install()'
+rev = 'release'
+merge = 0
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/coc.nvim.rc.vim
 '''
