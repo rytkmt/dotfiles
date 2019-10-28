@@ -102,12 +102,23 @@ curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
 
 ### extentions
 
-#### ruby
+#### 事前準備
+
+##### ruby
 
 ```shell
 gem install solargraph
 ```
 
+##### snippets
+
+```shell
+ln -s $XDG_CONFIG_HOME/ultisnips ~/.config/coc/my_snippets
+```
+
+#### install
+
 ```vim
 :CocInstall coc-git coc-json coc-solargraph coc-vimlsp coc-snippets coc-markdownlint
 ```
+
