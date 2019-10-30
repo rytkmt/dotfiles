@@ -343,3 +343,6 @@ merge = 0
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/coc.nvim.rc.vim
 '''
+
+[[plugins]]
+repo = 'cocopon/inspecthi.vim'
