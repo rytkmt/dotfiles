@@ -53,6 +53,8 @@ function! s:defx_my_settings() abort
   setl winblend=18
 
   " explorerの場合
+  " nnoremap <silent><buffer><expr> e     defx#do_action('open')
+  " nnoremap <silent><buffer><expr> <CR>  defx#do_action('open')
   " nnoremap <silent><buffer><expr> l     defx#do_action('drop')
   " nnoremap <silent><buffer><expr> L     defx#do_action('drop')
   " nnoremap <silent><buffer><expr> s     defx#do_action('open', 'split')
@@ -61,13 +63,13 @@ function! s:defx_my_settings() abort
   " floatingの場合
   nnoremap <silent><buffer><expr> l     defx#is_directory() ? defx#do_action('open') : defx#do_action('multi', ['quit', 'open'])
   nnoremap <silent><buffer><expr> L     defx#is_directory() ? defx#do_action('open') : defx#do_action('multi', ['quit', 'open'])
+  nnoremap <silent><buffer><expr> e     defx#is_directory() ? defx#do_action('open') : defx#do_action('multi', ['quit', 'open'])
+  nnoremap <silent><buffer><expr> <CR>  defx#is_directory() ? defx#do_action('open') : defx#do_action('multi', ['quit', 'open'])
   nnoremap <silent><buffer><expr> s     defx#is_directory() ? defx#do_action('open') : defx#do_action('multi', ['quit', [ 'open', 'split' ]])
   nnoremap <silent><buffer><expr> v     defx#is_directory() ? defx#do_action('open') : defx#do_action('multi', ['quit', [ 'open', 'vsplit' ]])
 
 
   " Define mappings
-  nnoremap <silent><buffer><expr> e     defx#do_action('open')
-  nnoremap <silent><buffer><expr> <CR>  defx#do_action('open')
   nnoremap <silent><buffer><expr> c     defx#do_action('copy')
   nnoremap <silent><buffer><expr> m     defx#do_action('move')
   nnoremap <silent><buffer><expr> p     defx#do_action('paste')

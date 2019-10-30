@@ -27,16 +27,6 @@ hook_post_update = '''
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vimproc.vim.rc.vim
 '''
-hook_post_update = '''
-call defx#custom#option('_', {
- \  'direction' : 'topleft',
- \  'ignored-files' : ".git",
- \  'listed' : 1,
- \  'toggle' : 1,
- \  'split' : 'vertical',
- \   'winwidth' : 30
- \ })
-'''
 
 [[plugins]]
 repo = 'Shougo/defx.nvim'
