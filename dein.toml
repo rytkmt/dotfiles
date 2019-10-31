@@ -36,6 +36,18 @@ hook_add = '''
 source $XDG_CONFIG_HOME/plugins/defx.nvim.rc.vim
 '''
 
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-devicons.rc.vim
+'''
+
+[[plugins]]
+repo = 'kristijanhusak/defx-icons'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/defx-icons.rc.vim
+'''
+
 # [[plugins]]
 # repo = 'Shougo/vimfiler'
 # depends = ['vimproc.vim']

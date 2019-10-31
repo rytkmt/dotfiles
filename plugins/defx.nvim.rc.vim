@@ -8,12 +8,18 @@ function! _DefxOpen(init, type)
   " endif
 
 " nnoremap <silent> [filer]d :<C-u>Defx -listed -resume -buffer-name=tab`tabpagenr()`
-
+  setl guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 12
+  let l:options = [
+  \ "-resume",
+  \ "-ignored-files='.git'",
+  \ "-buffer-name=tab`tabpagenr()`",
+  \ ]
+  " \ "-columns=icons:indent:filename:type"
   " explorerの場合
-  " let l:open_cmd = ":Defx -split=vertical -direction=topleft -toggle -resume -ignored-files='.git' -winwidth=30 -buffer-name=tab`tabpagenr()`"
+  " let l:open_cmd = ":Defx -split=vertical -direction=topleft -toggle  -winwidth=30 " .join(l:options, " ")
 
   " floatingの場合
-  let l:open_cmd = ":Defx -split=floating -resume -ignored-files='.git' -wincol=`&columns / 8` -winrow=`&lines / 10` -winheight=`&lines / 10 * 8` -buffer-name=tab`tabpagenr()`"
+  let l:open_cmd = ":Defx -split=floating -wincol=`&columns / 8` -winrow=`&lines / 10` -winheight=`&lines / 10 * 8` " .join(l:options, " ")
 
   let l:defx_default_dir = ''
 

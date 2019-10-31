@@ -301,6 +301,11 @@ context "${1:CONTEXT}" do${2}
 end
 endsnippet
 
+snippet context_vcr "" b
+context "${1:CONTEXT}", vcr: { cassette_name: "${2:CASSETTE_NAME}" } do${3}
+end
+endsnippet
+
 snippet example "" b
 example "${1:EXAMPLE}" do${2}
 end

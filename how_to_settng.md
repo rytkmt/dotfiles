@@ -122,3 +122,20 @@ ln -s $XDG_CONFIG_HOME/ultisnips ~/.config/coc/my_snippets
 :CocInstall coc-git coc-json coc-solargraph coc-vimlsp coc-snippets coc-markdownlint
 ```
 
+## defxのためのアイコン
+
+### linux
+
+```shell
+mkdir -p ~/.local/share/fonts
+cd ~/.local/share/fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
+```
+
+### mac
+
+```shell
+cd ~/Library/Fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
+```
+
+#### ターミナルにも適用
+https://qiita.com/park-jh/items/4358d2d33a78ec0a2b5c
