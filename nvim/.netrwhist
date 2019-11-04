@@ -1,0 +1,3 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/home/vagrant/workspace/rx_1/app/services/api/batches/rakuten_pay/get_result_update_order_shipping_async_service'

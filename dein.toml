@@ -28,20 +28,32 @@ hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vimproc.vim.rc.vim
 '''
 
-# [[plugins]]
-# repo = 'Shougo/defx.nvim'
-# if = 'has("nvim")'
-# do = ':UpdateRemotePlugins'
-# hook_add = '''
-# " source $XDG_CONFIG_HOME/plugins/defx.nvim.rc.vim
-# '''
+[[plugins]]
+repo = 'Shougo/defx.nvim'
+if = 'has("nvim")'
+do = ':UpdateRemotePlugins'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/defx.nvim.rc.vim
+'''
 
 [[plugins]]
-repo = 'Shougo/vimfiler'
-depends = ['vimproc.vim']
+repo = 'ryanoasis/vim-devicons'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vimfiler.rc.vim
+source $XDG_CONFIG_HOME/plugins/vim-devicons.rc.vim
 '''
+
+[[plugins]]
+repo = 'kristijanhusak/defx-icons'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/defx-icons.rc.vim
+'''
+
+# [[plugins]]
+# repo = 'Shougo/vimfiler'
+# depends = ['vimproc.vim']
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/vimfiler.rc.vim
+# '''
 
 [[plugins]]
 repo = 'rytkmt/dotfiles'
@@ -343,3 +355,6 @@ merge = 0
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/coc.nvim.rc.vim
 '''
+
+[[plugins]]
+repo = 'cocopon/inspecthi.vim'

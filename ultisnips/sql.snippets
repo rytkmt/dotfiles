@@ -25,29 +25,29 @@
 # Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
 
 snippet alter_add_column "" b
-  ALTER TABLE ${1:TABLE} ADD COLUMN ${2:COLUMN} ${3:FORMAT};
+ALTER TABLE ${1:TABLE} ADD COLUMN ${2:COLUMN} ${3:FORMAT};
 endsnippet
 
 snippet add_column "" w
-  ADD COLUMN ${2:COLUMN} ${3:FORMAT};
+ADD COLUMN ${2:COLUMN} ${3:FORMAT};
 endsnippet
 
 snippet alter_set_default "" b
-  ALTER TABLE ${1:TABLE} ALTER COLUMN ${2:COLUMN} SET DEFAULT ${4:DEFAULT};
+ALTER TABLE ${1:TABLE} ALTER COLUMN ${2:COLUMN} SET DEFAULT ${4:DEFAULT};
 endsnippet
 
 snippet set_default "" w
-  ALTER COLUMN ${2:COLUMN} SET DEFAULT ${4:DEFAULT}
+ALTER COLUMN ${2:COLUMN} SET DEFAULT ${4:DEFAULT}
 endsnippet
 
 snippet update_default "" b
-  UPDATE ${1:TABLE} SET ${2:COLUMN} = ${4:DEFAULT};
+UPDATE ${1:TABLE} SET ${2:COLUMN} = ${4:DEFAULT};
 endsnippet
 
 snippet alter_set_not_null "" b
-  ALTER TABLE ${1:TABLE} ALTER COLUMN ${2:COLUMN} SET NOT NULL;
+ALTER TABLE ${1:TABLE} ALTER COLUMN ${2:COLUMN} SET NOT NULL;
 endsnippet
 
 snippet set_not_null "" w
-  ALTER COLUMN ${2:COLUMN} SET NOT NULL;
+ALTER COLUMN ${2:COLUMN} SET NOT NULL;
 endsnippet

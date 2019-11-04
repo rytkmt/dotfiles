@@ -1,6 +1,10 @@
 nmap <silent> gd <Plug>(coc-definition)
 nnoremap <silent> gh :call <SID>show_documentation()<CR>
 nmap <silent> gr <Plug>(coc-references)
+
+" snippetsのplaceholderの移動
+let g:coc_snippet_next = '<c-s>'
+
 " 変更点へ移動
 nmap [g <Plug>(coc-git-prevchunk)
 nmap ]g <Plug>(coc-git-nextchunk)
