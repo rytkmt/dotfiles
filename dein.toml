@@ -30,7 +30,7 @@ source $XDG_CONFIG_HOME/plugins/vimproc.vim.rc.vim
 
 [[plugins]]
 repo = 'Shougo/defx.nvim'
-if = 'has("nvim")'
+if = 'has("nvim") && has("python3_compiled")'
 do = ':UpdateRemotePlugins'
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/defx.nvim.rc.vim
@@ -38,22 +38,25 @@ source $XDG_CONFIG_HOME/plugins/defx.nvim.rc.vim
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
+depends = ['defx.nvim']
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vim-devicons.rc.vim
 '''
 
 [[plugins]]
 repo = 'kristijanhusak/defx-icons'
+depends = ['defx.nvim']
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/defx-icons.rc.vim
 '''
 
-# [[plugins]]
-# repo = 'Shougo/vimfiler'
-# depends = ['vimproc.vim']
-# hook_add = '''
-# source $XDG_CONFIG_HOME/plugins/vimfiler.rc.vim
-# '''
+[[plugins]]
+repo = 'Shougo/vimfiler'
+if = '!has("nvim") || !has("python3_compiled")'
+depends = ['vimproc.vim']
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vimfiler.rc.vim
+'''
 
 [[plugins]]
 repo = 'rytkmt/dotfiles'
@@ -349,6 +352,7 @@ source $XDG_CONFIG_HOME/plugins/vim-indent-guides.rc.vim
 
 [[plugins]]
 repo = 'neoclide/coc.nvim'
+if = 'has("node")'
 build = 'coc#util#install()'
 rev = 'release'
 merge = 0
