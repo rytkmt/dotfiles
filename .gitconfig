@@ -1,3 +1,5 @@
+[http]
+  postBuffer = 2M
 [color]
   ui = true
   diff = auto
