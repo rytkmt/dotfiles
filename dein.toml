@@ -36,19 +36,19 @@ hook_add = '''
 source $XDG_CONFIG_HOME/plugins/defx.nvim.rc.vim
 '''
 
-[[plugins]]
-repo = 'ryanoasis/vim-devicons'
-depends = ['defx.nvim']
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-devicons.rc.vim
-'''
-
-[[plugins]]
-repo = 'kristijanhusak/defx-icons'
-depends = ['defx.nvim']
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/defx-icons.rc.vim
-'''
+# [[plugins]]
+# repo = 'ryanoasis/vim-devicons'
+# depends = ['defx.nvim']
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/vim-devicons.rc.vim
+# '''
+#
+# [[plugins]]
+# repo = 'kristijanhusak/defx-icons'
+# depends = ['defx.nvim']
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/defx-icons.rc.vim
+# '''
 
 [[plugins]]
 repo = 'Shougo/vimfiler'
@@ -219,13 +219,6 @@ source $XDG_CONFIG_HOME/plugins/colorizer.rc.vim
 repo = 'tyru/open-browser.vim'
 
 [[plugins]]
-repo = 'Shougo/denite.nvim'
-if = 'has("nvim") && has("python3_compiled")'
-hook_source = '''
-source $XDG_CONFIG_HOME/plugins/denite.rc.vim
-'''
-
-[[plugins]]
 repo = 'thinca/vim-quickrun'
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vim-quickrun.rc.vim
@@ -362,3 +355,6 @@ source $XDG_CONFIG_HOME/plugins/coc.nvim.rc.vim
 
 [[plugins]]
 repo = 'cocopon/inspecthi.vim'
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'

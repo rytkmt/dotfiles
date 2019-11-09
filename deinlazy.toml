@@ -147,3 +147,14 @@ on_ft = 'vim'
 # hook_add = '''
 # source $XDG_CONFIG_HOME/plugins/LanguageClient-neovim.rc.vim
 # '''
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+if = 'has("nvim") && has("python3_compiled")'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/denite.nvim.rc.vim
+'''
+on_cmd = 'Denite'
+hook_source = '''
+source $XDG_CONFIG_HOME/plugins/denite.nvim.source.rc.vim
+'''
