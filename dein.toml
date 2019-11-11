@@ -188,18 +188,18 @@ hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vim-surround.rc.vim
 '''
 
-[[plugins]]
-repo = 'thinca/vim-ref'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-ref.rc.vim
-'''
-
-[[plugins]]
-repo = 'rytkmt/vim-ref-ri'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-ref-ri.rc.vim
-'''
-
+# [[plugins]]
+# repo = 'thinca/vim-ref'
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/vim-ref.rc.vim
+# '''
+#
+# [[plugins]]
+# repo = 'rytkmt/vim-ref-ri'
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/vim-ref-ri.rc.vim
+# '''
+#
 # [[plugins]]
 # repo = 'tyru/vim-altercmd'
 
@@ -215,8 +215,8 @@ hook_add = '''
 source $XDG_CONFIG_HOME/plugins/colorizer.rc.vim
 '''
 
-[[plugins]]
-repo = 'tyru/open-browser.vim'
+# [[plugins]]
+# repo = 'tyru/open-browser.vim'
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
@@ -236,8 +236,8 @@ hook_add = '''
 source $XDG_CONFIG_HOME/plugins/incsearch.vim.rc.vim
 '''
 
-[[plugins]]
-repo = 'w0ng/vim-hybrid'
+# [[plugins]]
+# repo = 'w0ng/vim-hybrid'
 
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
@@ -326,16 +326,13 @@ source $XDG_CONFIG_HOME/plugins/vim-operator-flashy.rc.vim
 repo = 'tyru/stoptypofile.vim'
 
 # [[plugins]]
-# repo = 'cocopon/inspecthi.vim'
+# repo = 'koron/codic-vim'
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/codic-vim.rc.vim
+# '''
 
-[[plugins]]
-repo = 'koron/codic-vim'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/codic-vim.rc.vim
-'''
-
-[[plugins]]
-repo = 'rhysd/unite-codic.vim'
+# [[plugins]]
+# repo = 'rhysd/unite-codic.vim'
 
 [[plugins]]
 repo = 'nathanaelkane/vim-indent-guides'
