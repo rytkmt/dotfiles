@@ -97,12 +97,12 @@ source $XDG_CONFIG_HOME/plugins/vim-markdown.rc.vim
 repo = 'joker1007/vim-markdown-quote-syntax'
 on_ft = ['markdown','mkd']
 
-[[plugins]]
-repo = 'kannokanno/previm'
-on_ft = ['markdown','mkd', 'textile']
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/previm.rc.vim
-'''
+# [[plugins]]
+# repo = 'kannokanno/previm'
+# on_ft = ['markdown','mkd', 'textile']
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/previm.rc.vim
+# '''
 
 [[plugins]]
 repo = 'mattn/vim-maketable'
