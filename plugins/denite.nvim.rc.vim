@@ -38,10 +38,12 @@ augroup denite_filter
     nnoremap <silent><buffer> <C-n> j
     nnoremap <silent><buffer> <C-k> k
     nnoremap <silent><buffer> <C-p> k
+    nnoremap <silent><buffer> <C-q> :call denite#call_map('quit')<CR>
   endfunction
 
   autocmd FileType denite-filter call s:denite_filter_settings()
   function! s:denite_filter_settings() abort
+    nnoremap <silent><buffer> <C-q> <C-o>:call denite#call_map('quit')<CR>
     inoremap <silent><buffer> <C-q> <C-o>:call denite#call_map('quit')<CR>
     imap <silent><buffer> <C-e> <CR><CR>
     imap <silent><buffer> <C-s> <CR>s

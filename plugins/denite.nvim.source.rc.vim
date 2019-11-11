@@ -12,6 +12,7 @@ call denite#custom#option('default', {
  \ 'start_filter': v:false,
  \ 'filter-updatetime': 10,
  \ 'highlight_matched_char': 'Todo',
+ \ 'highlight_prompt': 'DiffText',
  \ 'highlight_matched_range': 'Normal',
  \ })
 "  \ 'max_dynamic_update_candidates': 80000
