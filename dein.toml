@@ -119,11 +119,11 @@ source $XDG_CONFIG_HOME/plugins/vim-expand-region.rc.vim
 # [[plugins]]
 # repo = 'stevemadere/ruby-matchit'
 
-[[plugins]]
-repo = 'vimtaku/hl_matchit.vim'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/hl_matchit.vim.rc.vim
-'''
+# [[plugins]]
+# repo = 'vimtaku/hl_matchit.vim'
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/hl_matchit.vim.rc.vim
+# '''
 
 [[plugins]]
 repo = "kana/vim-textobj-user"
