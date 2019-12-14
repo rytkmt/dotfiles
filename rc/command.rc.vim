@@ -110,3 +110,17 @@ function! s:get_highlight_info()
 endfunction
 command! HighlightInfo call s:get_highlight_info()
 "++ }}}
+
+"++ floatwindowの移動 {{{
+function! s:move_float_window(col, row)
+  let l:config = nvim_win_get_config(0)
+  let l:config['col'] = l:config['col'] + a:col
+  let l:config['row'] = l:config['row'] + a:row
+  call nvim_win_set_config(0, l:config)
+  redraw
+endfunction
+command! MoveFloatWindowRight call s:move_float_window(8, 0)
+command! MoveFloatWindowLeft call s:move_float_window(-8, 0)
+command! MoveFloatWindowTop call s:move_float_window(0, -3)
+command! MoveFloatWindowBottom call s:move_float_window(0, 3)
+"++ }}}

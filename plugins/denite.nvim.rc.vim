@@ -21,6 +21,8 @@ augroup denite_filter
   autocmd!
   autocmd FileType denite call s:denite_settings()
   function! s:denite_settings() abort
+    nnoremap <buffer><expr> B ":set winblend=0<CR>"
+    nnoremap <buffer><expr> b ":set winblend=18<CR>"
     nnoremap <silent><buffer><expr> i       denite#do_map('open_filter_buffer')
     nnoremap <silent><buffer><expr> <CR>    denite#do_map('do_action', 'open')
     nnoremap <silent><buffer><expr> e       denite#do_map('do_action', 'open')

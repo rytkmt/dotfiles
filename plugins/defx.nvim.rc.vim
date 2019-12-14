@@ -55,8 +55,10 @@ nmap [filer]v :<C-u>call _DefxOpen(1,3)<CR>
 
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
+  nnoremap <buffer><expr> B ":setl winblend=0<CR>"
+  nnoremap <buffer><expr> b ":setl winblend=30<CR>"
   " 半透明化
-  setl winblend=18
+  " setl winblend=18
 
   " explorerの場合
   " nnoremap <silent><buffer><expr> e     defx#do_action('open')
