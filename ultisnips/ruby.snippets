@@ -318,3 +318,39 @@ context "${1:CONTEXT}" do
 end
 ${4}
 endsnippet
+
+snippet allow_mock_return "rspec allow mock to return" b
+allow(${1:NAME}).to(receive(:${2:METHOD}).and_return(${3:RETURN}))
+endsnippet
+
+snippet allow_any_instance_mock_return "rspec allow mock to return" b
+allow_any_instance_of(${1:NAME}).to(receive(:${2:METHOD}).and_return(${3:RETURN}))
+endsnippet
+
+snippet allow_mock_raise "rspec allow mock to raise" b
+allow(${1:NAME}).to(receive(:${2:METHOD}).and_raise(${3:ERROR}))
+endsnippet
+
+snippet extend_concern "extend active_support concern" b
+extend ActiveSupport::Concern
+
+included do${1}
+end
+
+class_methods do
+end
+endsnippet
+
+snippet freeze_hash "freeze nested object" i
+map(&:freeze).to_h.freeze
+endsnippet
+
+snippet freeze_single_array "freeze nested object" i
+map(&:freeze).freeze
+endsnippet
+
+snippet around_travel_to "timetravel freeze" b
+around do |e|
+	travel_to(${1:TIME}){ e.run }
+end
+endsnippet

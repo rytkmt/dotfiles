@@ -24,4 +24,4 @@ let g:expand_region_text_objects = {
       \ }
 vmap <silent> v <Plug>(expand_region_expand)
 vmap <silent> c <Plug>(expand_region_shrink)
-nmap <silent> c <Plug>(expand_region_shrink)
+" nmap <silent> c <Plug>(expand_region_shrink)

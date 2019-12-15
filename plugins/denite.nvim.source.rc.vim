@@ -16,9 +16,7 @@ call denite#custom#option('default', {
  \ 'highlight_matched_range': 'Normal',
  \ })
 "  \ 'max_dynamic_update_candidates': 80000
-call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>', 'noremap')
 call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
-call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>', 'noremap')
 call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
 
 call denite#custom#filter('matcher/ignore_globs', 'ignore_globs',

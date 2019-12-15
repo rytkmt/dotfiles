@@ -33,6 +33,15 @@
   h = help
   st = status -sb
   cm = commit -m
+  cmp = "!f() { \
+    if [ $# -ne 1 ];\
+    then \
+      echo 'required comment message by first args';\
+    else \
+      git commit -m \"$1\"; \
+      git pob; \
+    fi; \
+  }; f"
   amm = commit --amend -m
   amc = commit --amend --no-edit
   co = checkout

@@ -155,6 +155,6 @@ hook_add = '''
 source $XDG_CONFIG_HOME/plugins/denite.nvim.rc.vim
 '''
 on_cmd = 'Denite'
-hook_source = '''
+hook_post_source = '''
 source $XDG_CONFIG_HOME/plugins/denite.nvim.source.rc.vim
 '''

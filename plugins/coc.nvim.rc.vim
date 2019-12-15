@@ -10,6 +10,7 @@ nmap [g <Plug>(coc-git-prevchunk)
 nmap ]g <Plug>(coc-git-nextchunk)
 " git変更内容を確認
 nmap gs <Plug>(coc-git-chunkinfo)
+nmap gb :CocCommand git.chunkUndo<CR>
 
 nmap [other]n :CocCommand snippets.editSnippets<CR>
 

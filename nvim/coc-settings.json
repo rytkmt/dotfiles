@@ -1,3 +1,4 @@
 {
-  "snippets.userSnippetsDirectory": "~/.config/coc/my_snippets"
+  "snippets.userSnippetsDirectory": "~/.config/coc/my_snippets",
+  "coc.preferences.jumpCommand": "vsplit"
 }

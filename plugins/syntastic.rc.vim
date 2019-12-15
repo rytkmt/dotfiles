@@ -1,3 +1,7 @@
+let g:syntastic_error_symbol = "-\u0078"
+let g:syntastic_warning_symbol = "-\u0021"
+let g:syntastic_style_error_symbol = "S\u0078"
+let g:syntastic_style_warning_symbol = "S\u0021"
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1

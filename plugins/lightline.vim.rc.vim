@@ -2,11 +2,11 @@ let g:lightline = {
 \  'colorscheme': 'one',
 \  'active': {
 \    'left': [['mode', 'paste'], ['filename'], ['gitstatus']],
-\    'right': [['row'], ['fileencoding'], ['filetype'], ['projecttag']]
+\    'right': [['row'], ['fileencoding'], ['filetype'], ['projecttag'], ['fileformat']]
 \  },
 \  'inactive': {
 \    'left': [['filename']],
-\    'right': [['row'], ['fileencoding'], ['filetype'], ['projecttag']]
+\    'right': [['row'], ['fileencoding'], ['filetype'], ['projecttag'], ['fileformat']]
 \  },
 \  'component_function': {
 \    'mode': 'LightlineMode',
@@ -18,7 +18,8 @@ let g:lightline = {
 \    'fileencoding': 'LightlineFileencoding',
 \    'filetype': 'LightlineFiletype',
 \    'projecttag': 'LightlineProjecttag',
-\    'gitstatus': 'LightlineGitStatus'
+\    'gitstatus': 'LightlineGitStatus',
+\    'fileformat': 'LightlineFileFormat'
 \  }
 \}
 let s:default_palette = g:lightline#colorscheme#default#palette
@@ -71,6 +72,10 @@ function! LightlineGitStatus()
   return "(".status.")"
   " return winwidth(0) > 120 ? status : ''
 endfunction
+function! LightlineFileFormat()
+  return &ft == 'vimfiler' ? '' : &ff
+endfunction
+
 let s:p.normal.left[1] = ['#b15e7c', '#222529', 1, 1]
 let s:p.inactive.left[0] = ['#b15e7c', '#222529', 1, 1]
 let s:p.normal.right[2] = ['#323232', '#d75f00', 1, 1]

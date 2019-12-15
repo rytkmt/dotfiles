@@ -51,7 +51,7 @@ augroup denite_filter
     imap <silent><buffer> <C-t> <CR>t
     imap <silent><buffer> <C-j> <CR>j
     imap <silent><buffer> <C-k> <CR>k
-    imap <silent><buffer> <C-n> <CR>j
-    imap <silent><buffer> <C-p> <CR>k
+    imap <silent><buffer> <C-n> <Down>
+    imap <silent><buffer> <C-p> <Up>
   endfunction
 augroup END
