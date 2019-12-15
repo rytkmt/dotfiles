@@ -27,3 +27,21 @@ call submode#map('window', 'n', '', 'm', '<C-w><Bar>')
 call submode#map('window', 'n', '', '.', '12<C-w>>')
 call submode#map('window', 'n', '', ',', '12<C-w><')
 call submode#map('window', 'n', '', '=', '<C-w>=')
+
+
+augroup floatwindow_submode
+  autocmd!
+  autocmd FileType defx call s:floatwindow_submode_settings()
+  autocmd FileType denite call s:floatwindow_submode_settings()
+
+  function! s:floatwindow_submode_settings() abort
+    call submode#enter_with('floatwin_move', 'n', 'b', 'U', ':MoveFloatWindowTop<CR>')
+    call submode#enter_with('floatwin_move', 'n', 'b', 'D', ':MoveFloatWindowBottom<CR>')
+    call submode#enter_with('floatwin_move', 'n', 'b', 'H', ':MoveFloatWindowLeft<CR>')
+    call submode#enter_with('floatwin_move', 'n', 'b', 'L', ':MoveFloatWindowRight<CR>')
+    call submode#map('floatwin_move', 'n', 'b', 'u', ':MoveFloatWindowTop<CR>')
+    call submode#map('floatwin_move', 'n', 'b', 'd', ':MoveFloatWindowBottom<CR>')
+    call submode#map('floatwin_move', 'n', 'b', 'h', ':MoveFloatWindowLeft<CR>')
+    call submode#map('floatwin_move', 'n', 'b', 'l', ':MoveFloatWindowRight<CR>')
+  endfunction
+augroup END
