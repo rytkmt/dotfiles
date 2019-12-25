@@ -162,7 +162,7 @@ source $XDG_CONFIG_HOME/plugins/tcomment_vim.rc.vim
 repo = 'vim-scripts/AnsiEsc.vim'
 
 [[plugins]]
-repo = 'bronson/vim-trailing-whitespace'
+repo = 'rytkmt/vim-trailing-whitespace'
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vim-trailing-whitespace.rc.vim
 '''

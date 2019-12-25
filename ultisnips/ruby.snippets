@@ -168,6 +168,9 @@ end
 endsnippet
 
 snippet create_table "" b
+# encoding: utf-8
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
 create_table "${1:TABLE}", force: :cascade, comment: "${2:T_NAME}" do |t|
 	${3}
 end
@@ -353,4 +356,8 @@ snippet around_travel_to "timetravel freeze" b
 around do |e|
 	travel_to(${1:TIME}){ e.run }
 end
+endsnippet
+
+snippet rubocop_disable "rubocop_disable" i
+rubocop:disable ${1:NAME}
 endsnippet
