@@ -185,19 +185,19 @@ t.${1:TYPE} "${2:NAME}", ${4} comment: "${3:COMMENT}"
 endsnippet
 
 snippet trow_enum "" b
-t.integer "${2:NAME}", null: false, default: ${4:DEFAULT}, comment: "${3:COMMENT}"
+t.integer "${2:NAME}", default: ${4:DEFAULT}, null: false, comment: "${3:COMMENT}"
 endsnippet
 
 snippet trow_text "" b
-t.text "${2:NAME}", null: false, default: "", comment: "${3:COMMENT}"
+t.text "${2:NAME}", default: "", null: false, comment: "${3:COMMENT}"
 endsnippet
 
 snippet trow_integer "" b
-t.integer "${2:NAME}", null: false, default: 0, comment: "${3:COMMENT}"
+t.integer "${2:NAME}", default: 0, null: false, comment: "${3:COMMENT}"
 endsnippet
 
 snippet trow_bool "" b
-t.boolean "${2:NAME}", null: false, default: false, comment: "${3:COMMENT}"
+t.boolean "${2:NAME}", default: false, null: false, comment: "${3:COMMENT}"
 endsnippet
 
 snippet trow_bigint "" b
@@ -209,14 +209,14 @@ t.datetime "${1:NAME}", ${3}comment: "${2:COMMENT}"
 endsnippet
 
 snippet trow_jsonb "" b
-t.jsonb    "${1:NAME}", null: false, default: {}, comment: "${2: COMMENT}"
+t.jsonb    "${1:NAME}", default: {}, null: false, comment: "${2: COMMENT}"
 endsnippet
 
 snippet trow_operator "" b
-t.bigint   "created_by", null: false, default: 0, comment: "登録した担当者ID"
-t.bigint   "updated_by", null: false, default: 0, comment: "更新した担当者ID"
-t.datetime "created_at", null: false
-t.datetime "updated_at", null: false
+t.bigint   "created_by", default: 0, null: false, comment: "登録した担当者ID"
+t.bigint   "updated_by", default: 0, null: false, comment: "更新した担当者ID"
+t.datetime "created_at",             null: false
+t.datetime "updated_at",             null: false
 endsnippet
 
 snippet tindex "" b

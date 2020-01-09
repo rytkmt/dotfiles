@@ -273,7 +273,9 @@ nnoremap [other]s :<C-u>tabedit $XDG_CONFIG_HOME/plugins/switch.vim.rc.vim<CR>
 nnoremap [edit]s :e ++enc=shift_jis ++ff=dos<CR>
 nnoremap [edit]u :e ++enc=utf-8 ++ff=unix<CR>
 nnoremap [edit]e :e ++enc=euc-jp<CR>
-nnoremap <expr> [edit]c ':e ' . expand('%:p:h') . '/'
+nnoremap <expr> [edit]cc ':e ' . expand('%:p:h') . '/'
+nnoremap <expr> [edit]cv ':vs ' . expand('%:p:h') . '/'
+nnoremap <expr> [edit]cs ':sp ' . expand('%:p:h') . '/'
 nnoremap [edit]f :<C-u>set ft=
 
 " ++ }}}
