@@ -82,11 +82,11 @@ endsnippet
 
 snippet benchmark "" b
 require 'benchmark'
-result = Benchmark.measure do
-	${1:CONTENTS}
+Benchmark.bm ${1:COUNT} do |r|
+  r.report "${2:NAME}" do
+    ${3:CONTEXT}
+  end
 end
-puts Benchmark::CAPTION
-puts result
 endsnippet
 
 snippet Time_now_ms "" w
@@ -188,6 +188,14 @@ snippet trow_enum "" b
 t.integer "${2:NAME}", default: ${4:DEFAULT}, null: false, comment: "${3:COMMENT}"
 endsnippet
 
+snippet trow_enum_force_select "" b
+t.integer "${2:NAME}",                        null: false, comment: "${3:COMMENT}"
+endsnippet
+
+snippet trow_enum_allow_nil "" b
+t.integer "${2:NAME}",                                     comment: "${3:COMMENT}"
+endsnippet
+
 snippet trow_text "" b
 t.text "${2:NAME}", default: "", null: false, comment: "${3:COMMENT}"
 endsnippet
@@ -208,13 +216,26 @@ snippet trow_datetime "" b
 t.datetime "${1:NAME}", ${3}comment: "${2:COMMENT}"
 endsnippet
 
-snippet trow_jsonb "" b
+snippet trow_jsonb_hash "" b
 t.jsonb    "${1:NAME}", default: {}, null: false, comment: "${2: COMMENT}"
+endsnippet
+
+snippet trow_jsonb_array "" b
+t.jsonb    "${1:NAME}", default: [], null: false, comment: "${2: COMMENT}"
+endsnippet
+
+snippet trow_jsonb_nil "" b
+t.jsonb    "${1:NAME}",                           comment: "${2: COMMENT}"
 endsnippet
 
 snippet trow_operator "" b
 t.bigint   "created_by", default: 0, null: false, comment: "登録した担当者ID"
 t.bigint   "updated_by", default: 0, null: false, comment: "更新した担当者ID"
+t.datetime "created_at",             null: false
+t.datetime "updated_at",             null: false
+endsnippet
+
+snippet trow_operate_at "" b
 t.datetime "created_at",             null: false
 t.datetime "updated_at",             null: false
 endsnippet
@@ -251,7 +272,7 @@ end
 endsnippet
 
 snippet vcr_cassette_name "" w
-vcr: { cassette_name: "${1}" }
+vcr: { cassette_name: "${1:CASSETTE_NAME}" }
 endsnippet
 
 snippet p_vcr_yaml "" b
@@ -330,6 +351,10 @@ snippet allow_any_instance_mock_return "rspec allow mock to return" b
 allow_any_instance_of(${1:NAME}).to(receive(:${2:METHOD}).and_return(${3:RETURN}))
 endsnippet
 
+snippet expect_any_instance_mock_once "rspec expect mock called once" b
+expect_any_instance_of(${1:NAME}).to(receive(:${2:METHOD}).once)
+endsnippet
+
 snippet allow_mock_raise "rspec allow mock to raise" b
 allow(${1:NAME}).to(receive(:${2:METHOD}).and_raise(${3:ERROR}))
 endsnippet
@@ -360,4 +385,12 @@ endsnippet
 
 snippet rubocop_disable "rubocop_disable" i
 rubocop:disable ${1:NAME}
+endsnippet
+
+snippet proc "" i
+-> { ${1} }
+endsnippet
+
+snippet proc_r "" i
+->(r) { r.${1} }
 endsnippet

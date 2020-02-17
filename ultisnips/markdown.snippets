@@ -33,6 +33,12 @@ snippet image b
 !{margin-left:30px;width:140px;border:solid 1px #aaa;}.${1:IMAGE_NAME}!
 endsnippet
 
+snippet fold
+<details><summary>${1:TITLE}</summary><pre>
+${2:CONTENTS}
+</pre></details>
+endsnippet
+
 snippet fold_ruby b
 <details><summary>${1:TITLE}</summary><pre><code lang="ruby">
 ${2:RUBY_CODE}

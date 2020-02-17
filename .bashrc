@@ -7,4 +7,12 @@ alias ebpl='vim $HOME/.bash_profile'
 alias egc='vim $HOME/.gitconfig'
 alias cdv='cd $XDG_CONFIG_HOME'
 
+function flon() {
+  sed -e 's/:.*$//' |  uniq
+}
+alias flon=flon
+function vimtemp() {
+  vim -c "Tempe $1"
+}
+
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

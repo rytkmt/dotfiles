@@ -1,4 +1,18 @@
 {
   "snippets.userSnippetsDirectory": "~/.config/coc/my_snippets",
-  "coc.preferences.jumpCommand": "vsplit"
+  "coc.preferences.jumpCommand": "vsplit",
+  "list.normalMappings": {
+    "<C-v>": "action:vsplit",
+    "<C-s>": "action:split",
+    "<C-e>": "action:edit",
+    "<C-t>": "action:tabe",
+    "<C-j>": "normal:j",
+    "<C-n>": "normal:j",
+    "<C-k>": "normal:k",
+    "<C-p>": "normal:k",
+    "v": "action:vsplit",
+    "s": "action:split",
+    "e": "action:edit",
+    "t": "action:tabe"
+  }
 }
