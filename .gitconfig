@@ -32,6 +32,18 @@
   }; f"
   h = help
   st = status -sb
+  stv = "!f() { \
+    if [ $# -ne 1 ];\
+    then \
+      echo 'required file number by first args';\
+    else \
+      git status -s | \
+      sed -e 's/^\\s\\?[A-Z?]*\\s//' | \
+      head -n \"$1\" | \
+      tail -n 1 | \
+      xargs sh -c \"nvim \\$1 < /dev/tty\" -;\
+    fi; \
+  }; f"
   stc = !git status -sb| grep -v "^[DAM]\\ " | grep --color "^[A-Z]*\\ "
   cm = commit -m
   cmp = "!f() { \

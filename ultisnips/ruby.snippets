@@ -33,13 +33,6 @@ rescue => _e
 	binding.pry
 endsnippet
 
-snippet rescue-e-p "" b
-rescue => _e
-  p _e.class
-  p _e.message
-  p _e.backtrace
-endsnippet
-
 snippet logger_stdout "" b
 ActiveRecord::Base.logger = Logger.new(STDOUT)
 endsnippet
@@ -76,8 +69,8 @@ snippet require_active_support "" b
 require 'active_support/all'
 endsnippet
 
-snippet tap_p "" w
-tap(&method(:p))
+snippet tap_pp "" w
+tap(&method(:pp))
 endsnippet
 
 snippet benchmark "" b
