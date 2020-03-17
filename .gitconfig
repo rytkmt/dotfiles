@@ -44,7 +44,7 @@
       xargs sh -c \"nvim \\$1 < /dev/tty\" -;\
     fi; \
   }; f"
-  stc = !git status -sb| grep -v "^[DAM]\\ " | grep --color "^[A-Z]*\\ "
+  stc = !git status -sb| grep -v "^[DAMR]\\ " | grep --color "^[A-Z]*\\ "
   cm = commit -m
   cmp = "!f() { \
     if [ $# -ne 1 ];\
@@ -63,17 +63,19 @@
   ba = branch -a -vv
   bm = branch -m
   bd = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
+  bdd = branch -D
   fe = fetch -p
   mf = merge FETCH_HEAD
-  mod = merge origin/develop -m "behind解消"
-  mom = merge origin/master -m "behind解消"
+  mod = merge origin/develop -m \"Resolve behind\"
+  mom = merge origin/master -m \"Resolve behind\"
+  moh = merge origin/hotfix_release_prod_20200225_095000 -m \"Resolve behind\"
   moc = "!f() { \
     git branch --no-color 2> /dev/null | \
     sed -e '/^[^*]/d' | \
     sed -e 's/* // ' | \
     xargs -I@ git merge origin/@; \
   }; f"
-  mos = merge origin/swagger-crossx_api -m "behind解消"
+  mos = merge origin/swagger-crossx_api -m \"Resolve behind\"
   d = diff
   ds = diff --name-status
   di = diff --cached
