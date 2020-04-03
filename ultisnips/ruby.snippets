@@ -31,6 +31,7 @@ endsnippet
 snippet rescue-e-binding "" b
 rescue => _e
 	binding.pry
+	raise _e
 endsnippet
 
 snippet logger_stdout "" b
@@ -222,8 +223,8 @@ t.jsonb    "${1:NAME}",                           comment: "${2: COMMENT}"
 endsnippet
 
 snippet trow_operator "" b
-t.bigint   "created_by", default: 0, null: false, comment: "登録した担当者ID"
-t.bigint   "updated_by", default: 0, null: false, comment: "更新した担当者ID"
+t.bigint   "created_by",             null: false, comment: "登録した担当者ID"
+t.bigint   "updated_by",             null: false, comment: "更新した担当者ID"
 t.datetime "created_at",             null: false
 t.datetime "updated_at",             null: false
 endsnippet

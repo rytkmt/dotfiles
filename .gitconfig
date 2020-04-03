@@ -67,7 +67,6 @@
   fe = fetch -p
   mf = merge FETCH_HEAD
   mod = merge origin/develop -m \"Resolve behind\"
-  mom = merge origin/master -m \"Resolve behind\"
   moh = merge origin/hotfix_release_prod_20200225_095000 -m \"Resolve behind\"
   moc = "!f() { \
     git branch --no-color 2> /dev/null | \
