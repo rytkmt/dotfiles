@@ -11,6 +11,11 @@ function prompt {
     export PS1="${LIGHT_BLUE}\w [\u]${PURPLE}\$(parse_git_branch)${WHITE} \$ "
 }
 prompt
+
+if [ -f ~/.bash_profile_local ]; then
+  source ~/.bash_profile_local
+fi
+
 export XDG_CONFIG_HOME=$current_dir
 export DOT_FILES=$XDG_CONFIG_HOME
 export MYVIMRC=$DOT_FILES/vimrc.vim
