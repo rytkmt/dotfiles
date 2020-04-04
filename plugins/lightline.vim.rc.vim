@@ -2,11 +2,14 @@ let g:lightline = {
 \  'colorscheme': 'one',
 \  'active': {
 \    'left': [['mode', 'paste'], ['filename'], ['gitstatus']],
-\    'right': [['row'], ['fileencoding'], ['filetype'], ['projecttag'], ['fileformat']]
+\    'right': [['row'], ['fileencoding'], ['filetype'], ['projecttag'], ['fileformat'], ['codepoint']]
 \  },
 \  'inactive': {
 \    'left': [['filename']],
 \    'right': [['row'], ['fileencoding'], ['filetype'], ['projecttag'], ['fileformat']]
+\  },
+\  'component': {
+\    'codepoint': '%B'
 \  },
 \  'component_function': {
 \    'mode': 'LightlineMode',
@@ -19,7 +22,7 @@ let g:lightline = {
 \    'filetype': 'LightlineFiletype',
 \    'projecttag': 'LightlineProjecttag',
 \    'gitstatus': 'LightlineGitStatus',
-\    'fileformat': 'LightlineFileFormat'
+\    'fileformat': 'LightlineFileFormat',
 \  }
 \}
 let s:default_palette = g:lightline#colorscheme#default#palette

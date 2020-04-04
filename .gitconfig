@@ -32,6 +32,19 @@
   }; f"
   h = help
   st = status -sb
+  stv = "!f() { \
+    if [ $# -ne 1 ];\
+    then \
+      echo 'required file number by first args';\
+    else \
+      git status -s | \
+      sed -e 's/^\\s\\?[A-Z?]*\\s//' | \
+      head -n \"$1\" | \
+      tail -n 1 | \
+      xargs sh -c \"nvim \\$1 < /dev/tty\" -;\
+    fi; \
+  }; f"
+  stc = !git status -sb| grep -v "^[DAMR]\\ " | grep --color "^[A-Z]*\\ "
   cm = commit -m
   cmp = "!f() { \
     if [ $# -ne 1 ];\
@@ -50,16 +63,18 @@
   ba = branch -a -vv
   bm = branch -m
   bd = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
+  bdd = branch -D
   fe = fetch -p
   mf = merge FETCH_HEAD
-  mod = merge origin/develop -m "behind解消"
-  mom = merge origin/master -m "behind解消"
+  mod = merge origin/develop -m \"Resolve behind\"
+  moh = merge origin/hotfix_release_prod_20200225_095000 -m \"Resolve behind\"
   moc = "!f() { \
     git branch --no-color 2> /dev/null | \
     sed -e '/^[^*]/d' | \
     sed -e 's/* // ' | \
     xargs -I@ git merge origin/@; \
   }; f"
+  mos = merge origin/swagger-crossx_api -m \"Resolve behind\"
   d = diff
   ds = diff --name-status
   di = diff --cached
@@ -101,4 +116,31 @@
       git ls-files -z | xargs -0 sed -i -e \"s/$1/$2/g\";\
     fi; \
   }; f"
-  g = grep -n
+  fd = "!f() { \
+    if [ $# -ne 1 ];\
+    then \
+      echo 'required find string by first args';\
+    else \
+      git ls-files | grep --color \"$1\";\
+    fi; \
+  }; f"
+  g = "!f() { \
+    if [ $# -eq 0 ]; then \
+      echo 'arguments are required.'; \
+    else \
+      str='git grep -n \"'$1'\"'; \
+      is_v='';\
+      if [ $# -gt 1 ]; then \
+        for x in ${@:2:$#-1}; do \
+          if [ $x = '-v' ]; then \
+            is_v='-v ';\
+          else \
+            str=$str' | grep '$is_v' \"'$x'\"'; \
+            is_v='';\
+          fi; \
+        done; \
+        str=$str' | grep --color \"'$1'\"'; \
+      fi; \
+      eval "$str"; \
+    fi; \
+  }; f"
