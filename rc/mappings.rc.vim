@@ -84,9 +84,6 @@ tnoremap <A-j> <C-\><C-n>
 " 削除
 imap <C-h> <BS>
 inoremap <C-d> <C-o>"_dd
-inoremap <C-b> <C-o>"_db<C-o>x
-inoremap <C-e> <C-o>"_de
-
 inoremap <C-p> <C-r>"
 
 inoremap <silent><expr> <C-j>

@@ -19,4 +19,3 @@ imap <expr><C-l>
 \ deoplete#complete_common_string() != '' ?
 \   deoplete#complete_common_string() : "\<Right>"
 call deoplete#enable()
-

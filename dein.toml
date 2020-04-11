@@ -340,14 +340,40 @@ hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vim-indent-guides.rc.vim
 '''
 
+# [[plugins]]
+# repo = 'neoclide/coc.nvim'
+# if = 'has("node")'
+# build = 'coc#util#install()'
+# rev = 'release'
+# merge = 0
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/coc.nvim.rc.vim
+# '''
+
 [[plugins]]
-repo = 'neoclide/coc.nvim'
-if = 'has("node")'
-build = 'coc#util#install()'
-rev = 'release'
-merge = 0
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/coc.nvim.rc.vim
+let g:lsp_log_file = ''
+" hook_source だとうまく動かなかった
+if executable('solargraph')
+  " gem install solargraph
+  au User lsp_setup call lsp#register_server({
+    \ 'name': 'solargraph',
+    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+    \ 'initialization_options': {"diagnostics": "true"},
+    \ 'whitelist': ['ruby'],
+    \ })
+endif
+'''
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+merged = 0
+hook_add = '''
+let g:lsp_settings_servers_dir=$HOME.'/.local/share/vim-lsp-settings/servers'
 '''
 
 [[plugins]]
@@ -360,4 +386,14 @@ repo = 'Shougo/neomru.vim'
 repo = 'haya14busa/vim-asterisk'
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vim-asterisk.rc.vim
+'''
+
+[[plugins]]
+repo = 'SirVer/ultisnips'
+hook_add = '''
+let g:UltiSnipsRemoveSelectModeMappings = 0
+let g:UltiSnipsExpandTrigger="<c-s>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
+let g:UltiSnipsJumpBackwardTrigger="<c-p>"
+let g:UltiSnipsSnippetDirectories=[$XDG_CONFIG_HOME.'/ultisnips']
 '''
