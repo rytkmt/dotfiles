@@ -1,28 +1,3 @@
-# [[plugins]]
-# repo = 'Shougo/neocomplete.vim'
-# if = '!has("nvim")'
-# on_i = 1
-# hook_post_source = '''
-# source $XDG_CONFIG_HOME/plugins/neocomplete.vim.rc.vim
-# '''
-
-# [[plugins]]
-# repo = 'Shougo/deoplete.nvim'
-# if = 'has("python3")'
-# on_i = 1
-# hook_post_source = '''
-# source $XDG_CONFIG_HOME/plugins/deoplete.rc.vim
-# '''
-
-# [[plugins]]
-# repo = 'takkii/ruby-dictionary3'
-# if = "has('python3')"
-# depends = ['deoplete.nvim']
-# on_i = 1
-# hook_post_source = '''
-# source $XDG_CONFIG_HOME/plugins/ruby-dictionary3.rc.vim
-# '''
-
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete.vim'
 on_ft = ['git', 'snippet', 'toml', 'vim', 'ruby']

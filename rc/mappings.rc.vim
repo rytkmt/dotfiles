@@ -216,7 +216,7 @@ nmap <Leader>z [other]
 nmap <Leader>t [tab]
 nmap <Leader>T [table]
 nmap <Leader>w [window]
-nmap <Leader>l [lib]
+nmap <Leader>l [lsp]
 nmap <Leader>q [quick]
 nmap [quick] <Nop>
 nmap <Leader>e [edit]

@@ -102,6 +102,9 @@ repo = 'ujihisa/unite-colorscheme'
 
 [[plugins]]
 repo = 'cohama/lexima.vim'
+hook_add = '''
+let g:lexima_nvim_accept_pum_with_enter = 0
+'''
 
 # [[plugins]]
 # repo = 'tpope/vim-rails'
@@ -356,24 +359,14 @@ repo = 'prabirshrestha/async.vim'
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
 hook_add = '''
-let g:lsp_log_file = ''
-" hook_source だとうまく動かなかった
-if executable('solargraph')
-  " gem install solargraph
-  au User lsp_setup call lsp#register_server({
-    \ 'name': 'solargraph',
-    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
-    \ 'initialization_options': {"diagnostics": "true"},
-    \ 'whitelist': ['ruby'],
-    \ })
-endif
+source $XDG_CONFIG_HOME/plugins/vim-lsp.rc.vim
 '''
 
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
 merged = 0
 hook_add = '''
-let g:lsp_settings_servers_dir=$HOME.'/.local/share/vim-lsp-settings/servers'
+source $XDG_CONFIG_HOME/plugins/vim-lsp-settings.rc.vim
 '''
 
 [[plugins]]
