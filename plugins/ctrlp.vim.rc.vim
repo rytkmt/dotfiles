@@ -23,3 +23,6 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll|class|jar|gif|png|jpeg|jpg)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
+
+
+autocmd FileType ctrlp call s:ctrlp_my_settings()

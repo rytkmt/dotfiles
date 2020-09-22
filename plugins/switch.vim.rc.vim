@@ -4,6 +4,9 @@ let g:switch_custom_definitions =
   \   switch#NormalizedCase(['left', 'right', 'center']),
   \   switch#NormalizedCase(['before', 'after']),
   \   switch#NormalizedCase(['start', 'end']),
+  \   switch#NormalizedCase(['horizontal', 'vertical']),
+  \   switch#NormalizedCase(['disable', 'enable']),
+  \   switch#NormalizedCase(['from', 'to']),
   \   switch#NormalizedCase(['==', '!=']),
   \   switch#NormalizedCase(['ON', 'OFF']),
   \   switch#NormalizedCase(['post', 'get', 'put', 'delete']),
@@ -12,11 +15,15 @@ let g:switch_custom_definitions =
   \   switch#NormalizedCase(['なる', 'ならない']),
   \   switch#NormalizedCase(['はい', 'いいえ']),
   \   switch#NormalizedCase(['ある', 'ない']),
+  \   switch#NormalizedCase(['いる', 'いない']),
   \   switch#NormalizedCase(['正常', '異常']),
   \   switch#NormalizedCase(['成功', '失敗']),
+  \   switch#NormalizedCase(['最初', '最後']),
   \   switch#NormalizedCase(['無い', '有る']),
   \   switch#NormalizedCase(['以上', '以下']),
   \   switch#NormalizedCase(['縦', '横']),
+  \   switch#NormalizedCase(['税込', '税別']),
+  \   switch#NormalizedCase(['include', 'exclude']),
   \   switch#NormalizedCase(['-', '+'])
   \ ]
 

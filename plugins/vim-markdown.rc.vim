@@ -15,7 +15,7 @@ autocmd MyAutoCmd FileType markdown nmap <buffer> [ft]c :Toc<CR>
 
 function! s:auto_save()
   if filewritable(expand('%'))
-    write
+    write!
   endif
 endfunction
 

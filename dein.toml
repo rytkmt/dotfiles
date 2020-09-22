@@ -307,11 +307,11 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 '''
 
-# [[plugins]]
-# repo = 'airblade/vim-gitgutter'
-# hook_add = '''
-# source $XDG_CONFIG_HOME/plugins/vim-gitgutter.rc.vim
-# '''
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-gitgutter.rc.vim
+'''
 
 # [[plugins]]
 # repo = 'tpope/vim-fugitive'
@@ -384,9 +384,5 @@ source $XDG_CONFIG_HOME/plugins/vim-asterisk.rc.vim
 [[plugins]]
 repo = 'SirVer/ultisnips'
 hook_add = '''
-let g:UltiSnipsRemoveSelectModeMappings = 0
-let g:UltiSnipsExpandTrigger="<c-s>"
-let g:UltiSnipsJumpForwardTrigger="<c-n>"
-let g:UltiSnipsJumpBackwardTrigger="<c-p>"
-let g:UltiSnipsSnippetDirectories=[$XDG_CONFIG_HOME.'/ultisnips']
+source $XDG_CONFIG_HOME/plugins/ultisnips.rc.vim
 '''

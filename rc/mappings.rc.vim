@@ -84,23 +84,16 @@ tnoremap <A-j> <C-\><C-n>
 " 削除
 imap <C-h> <BS>
 inoremap <C-d> <C-o>"_dd
-inoremap <C-p> <C-r>"
+inoremap <C-v> <C-r>"
 
-inoremap <silent><expr> <C-j>
- \ pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <silent><expr> <Tab>
  \ pumvisible() ? "\<C-n>" : "\<Tab>"
-
-inoremap <silent><expr> <C-k>
- \ pumvisible() ? "\<C-p>" : "\<C-k>"
 inoremap <silent><expr> <S-Tab>
  \ pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-inoremap <silent><expr> <C-s>
- \ pumvisible() ? "\<C-y>" : "\<C-s>"
-inoremap <silent><expr> <C-l>
- \ pumvisible() ? "\<C-y>" : "\<Right>"
-
+inoremap <silent><expr> <C-j>
+ \ pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <silent><expr> <C-k>
+ \ pumvisible() ? "\<C-p>" : "\<C-k>"
 " ++ }}}
 " ++ その他 {{{
 nnoremap ZZ <Nop>
@@ -131,7 +124,7 @@ cmap <C-e> <C-u>e %:h/
 nnoremap gj j
 nnoremap gk k
 
-vnoremap <C-p> "0p
+xnoremap <C-p> "0p
 
 " 行を移動
 nnoremap <C-Up> "zdd<Up>"zP

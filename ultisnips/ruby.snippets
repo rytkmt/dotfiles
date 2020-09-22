@@ -388,3 +388,10 @@ endsnippet
 snippet proc_r "" i
 ->(r) { r.${1} }
 endsnippet
+
+snippet dir_require "" b
+Dir[__dir__ + "/`!v expand("%:t:r")`/*.rb"].each { |p| require p }
+endsnippet
+snippet require_dir "" b
+Dir[__dir__ + "/`!v expand("%:t:r")`/*.rb"].each { |p| require p }
+endsnippet

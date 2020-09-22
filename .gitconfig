@@ -31,7 +31,7 @@
     fi; \
   }; f"
   h = help
-  st = status -sb
+  st = status -s
   stv = "!f() { \
     if [ $# -ne 1 ];\
     then \
@@ -44,7 +44,7 @@
       xargs sh -c \"nvim \\$1 < /dev/tty\" -;\
     fi; \
   }; f"
-  stc = !git status -sb| grep -v "^[DAMR]\\ " | grep --color "^[A-Z]*\\ "
+  stc = !git status -s| grep -v "^[DAMR]\\ " | grep --color "^[A-Z]*\\ "
   cm = commit -m
   cmp = "!f() { \
     if [ $# -ne 1 ];\
@@ -117,11 +117,23 @@
     fi; \
   }; f"
   fd = "!f() { \
-    if [ $# -ne 1 ];\
-    then \
-      echo 'required find string by first args';\
+    if [ $# -eq 0 ]; then \
+      echo 'arguments are required.'; \
     else \
-      git ls-files | grep --color \"$1\";\
+      str='git ls-files | grep --color \"'$1'\"';\
+      is_v='';\
+      if [ $# -gt 1 ]; then \
+        for x in ${@:2:$#-1}; do \
+          if [ $x = '-v' ]; then \
+            is_v='-v ';\
+          else \
+            str=$str' | grep '$is_v' \"'$x'\"'; \
+            is_v='';\
+          fi; \
+        done; \
+        str=$str' | grep --color \"'$1'\"'; \
+      fi; \
+      eval "$str"; \
     fi; \
   }; f"
   g = "!f() { \

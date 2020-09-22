@@ -1,14 +1,27 @@
 command! DeniteCurrentFileProjectDir call s:DeniteCurrentFileProjectDir()
-function! s:DeniteCurrentFileProjectDir()
+command! DeniteCurrentFileProjectDirX call s:DeniteCurrentFileProjectDirX()
+
+function! s:DeniteCurrentFileProjectDir(...)
+  let l:option = exists("a:1") ? " ".a:1 : ""
   let l:path = expand("%")
   if l:path == ""
     echom "invalid  current path"
   else
     let l:type = finddir('.git', expand('%:p').";") != '' ? 'file/rec/git' : 'file/rec'
-    execute ":DeniteProjectDir " .l:type ." -path=".l:path
+    execute ":DeniteProjectDir " .l:type ." -path=".l:path.l:option
   endif
 endfunction
+function! s:DeniteCurrentFileProjectDirX(...)
+  let l:tmp = @@
+  silent normal gvy
+  let l:selected = @@
+  let @@ = l:tmp
 
+  call s:DeniteCurrentFileProjectDir()
+  execute "normal i".l:selected
+endfunction
+
+xnoremap ;d :<C-u>DeniteCurrentFileProjectDirX<CR>
 "ファイル一覧
 nnoremap [denite]f :<C-u>DeniteCurrentFileProjectDir<CR>
 "ファイル履歴
@@ -48,12 +61,21 @@ augroup denite_filter
     nnoremap <silent><buffer> <C-q> <C-o>:call denite#call_map('quit')<CR>
     inoremap <silent><buffer> <C-q> <C-o>:call denite#call_map('quit')<CR>
     imap <silent><buffer> <C-e> <CR><CR>
+    nmap <silent><buffer> <C-e> <CR><CR>
     imap <silent><buffer> <C-s> <CR>s
+    nmap <silent><buffer> <C-s> <CR>s
     imap <silent><buffer> <C-v> <CR>v
+    nmap <silent><buffer> <C-v> <CR>v
     imap <silent><buffer> <C-t> <CR>t
+    nmap <silent><buffer> <C-t> <CR>t
     imap <silent><buffer> <C-j> <CR>j
+    nmap <silent><buffer> <C-j> <CR>j
     imap <silent><buffer> <C-k> <CR>k
+    nmap <silent><buffer> <C-k> <CR>k
     imap <silent><buffer> <C-n> <Down>
+    nmap <silent><buffer> <C-n> <Down>
     imap <silent><buffer> <C-p> <Up>
+    nmap <silent><buffer> <C-p> <Up>
+
   endfunction
 augroup END
