@@ -8,13 +8,13 @@ function! _DefxOpen(init, type)
   " endif
 
 " nnoremap <silent> [filer]d :<C-u>Defx -listed -resume -buffer-name=tab`tabpagenr()`
-  setl guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 12
+  " setl guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 12
   let l:options = [
   \ "-resume",
   \ "-ignored-files='.git'",
   \ "-buffer-name=tab`tabpagenr()`",
+  \ "-columns=indent:icons:filename:type"
   \ ]
-  " \ "-columns=icons:indent:filename:type"
   " explorerの場合
   " let l:open_cmd = ":Defx -split=vertical -direction=topleft -toggle  -winwidth=30 " .join(l:options, " ")
 
