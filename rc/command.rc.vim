@@ -55,8 +55,9 @@ command! -nargs=? ToSnakeCase call s:to_snake_case(<f-args>)
 "++ ファイルやディレクトリのヤンク {{{
 
 function! s:yank_file_name()
-  call setreg('*', expand("%:t"))
-  echo expand("%:t")
+  let l:name = substitute(expand("%:t"), "\.[a-zA-Z]*$", "", "")
+  call setreg('*', l:name)
+  echo l:name
 endfunction
 command! YankFileName call s:yank_file_name()
 
@@ -65,6 +66,13 @@ function! s:yank_file_path()
   echo expand("%:p")
 endfunction
 command! YankFilePath call s:yank_file_path()
+
+function! s:yank_file_path_under_root()
+  let l:path = substitute(expand("%:p"), FindRootDirectory()."/", "", "")
+  call setreg('*', l:path)
+  echo l:path
+endfunction
+command! YankFilePathUnderRoot call s:yank_file_path_under_root()
 
 function! s:yank_file_dir()
   call setreg('*', expand("%:p:h"))

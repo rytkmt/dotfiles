@@ -8,8 +8,18 @@
 [core]
   excludesfile = ~/.gitignore
   quotepath = false
+  # pager = delta
+[interactive]
+  diffFilter = delta --color-only
 [include]
   path = ~/.gitconfig.local
+[delta]
+  diff-so-fancy=true
+  keep-plus-minus-markers=true
+  minus-emph-style="bold 94 89"
+  plus-emph-style="bold 29 29"
+  hunk-header-style="omit"
+  line-numbers=true
 [alias]
   sn = "!f() { \
     if [ $# -ne 1 ];\
@@ -67,7 +77,7 @@
   fe = fetch -p
   mf = merge FETCH_HEAD
   mod = merge origin/develop -m \"Resolve behind\"
-  moh = merge origin/hotfix_release_prod_20200225_095000 -m \"Resolve behind\"
+  moh = merge origin/hotfix_release_prod_20210128 -m \"Resolve behind\"
   moc = "!f() { \
     git branch --no-color 2> /dev/null | \
     sed -e '/^[^*]/d' | \
@@ -121,15 +131,10 @@
       echo 'arguments are required.'; \
     else \
       str='git ls-files | grep --color \"'$1'\"';\
-      is_v='';\
       if [ $# -gt 1 ]; then \
+        str=$str' | pipgre'; \
         for x in ${@:2:$#-1}; do \
-          if [ $x = '-v' ]; then \
-            is_v='-v ';\
-          else \
-            str=$str' | grep '$is_v' \"'$x'\"'; \
-            is_v='';\
-          fi; \
+          str=$str' '$x; \
         done; \
         str=$str' | grep --color \"'$1'\"'; \
       fi; \
@@ -140,19 +145,16 @@
     if [ $# -eq 0 ]; then \
       echo 'arguments are required.'; \
     else \
-      str='git grep -n \"'$1'\"'; \
-      is_v='';\
+      pathspec=' -- :^*.csv :^*.tsv :^*.zip :^*.json :^*.ttf'; \
+      str='git grep -n \"'$1'\"'$pathspec; \
       if [ $# -gt 1 ]; then \
+        str=$str' | pipgre'; \
         for x in ${@:2:$#-1}; do \
-          if [ $x = '-v' ]; then \
-            is_v='-v ';\
-          else \
-            str=$str' | grep '$is_v' \"'$x'\"'; \
-            is_v='';\
-          fi; \
+          str=$str' '$x; \
         done; \
         str=$str' | grep --color \"'$1'\"'; \
       fi; \
       eval "$str"; \
     fi; \
   }; f"
+  cln = clean -fd

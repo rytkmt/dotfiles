@@ -257,7 +257,6 @@ nnoremap [other]d :<C-u>tabedit $XDG_CONFIG_HOME/dein.toml<CR>
 nnoremap [other]o :<C-u>tabedit $XDG_CONFIG_HOME/rc/options.rc.vim<CR>
 nnoremap [other]m :<C-u>tabedit $XDG_CONFIG_HOME/rc/mappings.rc.vim<CR>
 nnoremap [other]c :<C-u>tabedit $XDG_CONFIG_HOME/rc/command.rc.vim<CR>
-nnoremap [other]l :<C-u>so ~/.vimrc<CR>:<C-u>so ~/.gvimrc<CR>
 nnoremap [other]u :<C-u>tabedit $XDG_CONFIG_HOME/plugins/spelunker.vim.rc.vim<CR>
 nnoremap [other]s :<C-u>tabedit $XDG_CONFIG_HOME/plugins/switch.vim.rc.vim<CR>
 nnoremap [edit]s :e ++enc=shift_jis ++ff=dos<CR>
@@ -297,6 +296,7 @@ nnoremap <expr> Cs ':ToSnakeCase ' . expand('<cword>') .'<CR>'
 
 nnoremap Yf :<C-u>YankFileName<CR>
 nnoremap Yp :<C-u>YankFilePath<CR>
+nnoremap YP :<C-u>YankFilePathUnderRoot<CR>
 nnoremap Yd :<C-u>YankFileDir<CR>
 nnoremap Yh :<C-u>YankFileDir<CR>
 

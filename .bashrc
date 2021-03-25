@@ -6,6 +6,7 @@ alias ebpl='vim $HOME/.bash_profile'
 alias egc='vim $HOME/.gitconfig'
 alias cdv='cd $XDG_CONFIG_HOME'
 alias sbr='source $HOME/.bashrc'
+export EDITOR="nvim"
 
 function flon() {
   sed -e 's/:.*$//' | sed -e 's/^\s\?[ADMU\?]\{1,2\}\s\+//' | uniq
@@ -24,6 +25,7 @@ function lvim() {
 }
 alias xvim='xargs nvim'
 alias fxvim='flon|xvim'
+alias flvim='flon|lvim'
 
 function csviews() {
   command iconv -f shift-jis -t UTF8//TRANSLIT $1 | csview --style grid
@@ -41,4 +43,17 @@ else
   alias ltl='lt | less -r'
 fi
 
-alias bat='bat --style="numbers,grid"'
+if [[ $(command -v bat) ]]; then
+  alias bat='bat --style="numbers,grid"'
+  alias cat='bat --style="grid"'
+  alias batf='bat --style="full"'
+  alias xbat='xargs bat'
+fi
+alias xcat='xargs cat'
+
+if [[ $(command -v vivid) ]]; then
+  export LS_COLORS="$(vivid generate ayu)"
+fi
+
+# fullpathを表示する
+alias fp='readlink -f'

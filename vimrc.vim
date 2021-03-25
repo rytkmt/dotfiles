@@ -21,6 +21,8 @@ else
   let s:dein_cache_path = expand('~/.vim/cache/vim/dein')
 endif
 
+let g:dein#install_github_api_token = $GITHUB_API_TOKEN
+
 if &runtimepath !~ '/dein.vim'
   let s:repos_path = s:dein_cache_path . '/repos/github.com/Shougo/dein.vim'
   if !isdirectory(s:repos_path)

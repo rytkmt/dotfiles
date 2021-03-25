@@ -207,3 +207,18 @@ on_cmd = 'Denite'
 hook_post_source = '''
 source $XDG_CONFIG_HOME/plugins/denite.nvim.source.rc.vim
 '''
+
+[[plugins]]
+repo = 'ujihisa/quicklearn'
+on_ft = 'ruby'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/quicklearn.rc.vim
+'''
+
+[[plugins]]
+repo = 'iamcco/markdown-preview.nvim'
+on_ft = 'markdown'
+build = 'sh -c "cd app && yarn install"'
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/markdown-preview.nvim.rc.vim
+'''
