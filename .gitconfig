@@ -157,4 +157,4 @@
       eval "$str"; \
     fi; \
   }; f"
-  cln = clean -fd
+  cle = clean -fd

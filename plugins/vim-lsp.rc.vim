@@ -2,10 +2,16 @@
 let g:lsp_log_file = ''
 let g:lsp_diagnostics_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
-let g:asyncomplete_popup_delay = 200
-let g:lsp_text_edit_enabled = 0
+let g:lsp_diagnostics_signs_insert_mode_enabled = 0
+let g:lsp_diagnostics_signs_delay = 800
+let g:asyncomplete_popup_delay = 300
+" let g:lsp_diagnostics_virtual_text_enabled = 0
+let g:lsp_insert_text_enabled = 1
+" let g:lsp_text_edit_enabled = 0
+" let g:lsp_completion_documentation_enabled = 0
+let g:lsp_diagnostics_float_delay = 800
 let g:lsp_textprop_enabled = 1
-let g:lsp_virtual_text_enabled = 0
+" let g:lsp_virtual_text_enabled = 0
 
 nmap [lsp]s <plug>(lsp-status)
 nmap [lsp]t <plug>(lsp-type-definition)

@@ -98,7 +98,7 @@ autocmd MyAutoCmd User asyncomplete_setup call asyncomplete#register_source(asyn
 repo = 'prabirshrestha/asyncomplete-ultisnips.vim'
 if = 'has("python3")'
 on_i = 1
-depends = ['ultisnips']
+depends = ['ultisnips', 'asyncomplete.vim']
 hook_source = '''
 call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
       \ 'name': 'ultisnips',

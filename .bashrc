@@ -1,3 +1,5 @@
+# xargsをパイプで実行するときに引数にエイリアスを使えるようにする
+alias xargs='xargs '
 alias vim='nvim'
 alias sudo="sudo env PATH=$PATH"
 alias als="alias | sort | sed s/^alias\.// | sed -e 's/=/ /' | awk '{printf \"%-10s %s\",\$1,c=\"\";for(i=2;i<=NF;i++) c=c \$i\" \"; print c}' | sed s/\'// | sed s/\'//"
@@ -24,7 +26,9 @@ function lvim() {
   eval "$str"; \
 }
 alias xvim='xargs nvim'
+alias xvimo='xvim -O'
 alias fxvim='flon|xvim'
+alias fxvimo='flon|xvimo'
 alias flvim='flon|lvim'
 
 function csviews() {
@@ -48,8 +52,10 @@ if [[ $(command -v bat) ]]; then
   alias cat='bat --style="grid"'
   alias batf='bat --style="full"'
   alias xbat='xargs bat'
+  alias fxbat='flon|xbat'
 fi
 alias xcat='xargs cat'
+alias fxcat='flon|xcat'
 
 if [[ $(command -v vivid) ]]; then
   export LS_COLORS="$(vivid generate ayu)"
