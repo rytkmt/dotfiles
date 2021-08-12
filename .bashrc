@@ -32,9 +32,11 @@ alias fxvim='flon|xvim'
 alias fxvimo='flon|xvimo'
 alias flvim='flon|lvim'
 
-function csviews() {
-  command iconv -f shift-jis -t UTF8//TRANSLIT $1 | csview --style grid
-}
+if [[ $(command -v csview) ]]; then
+  function csviews() {
+    command iconv -f shift-jis -t UTF8//TRANSLIT $1 | csview --style grid
+  }
+fi
 
 if [[ $(command -v exa) ]]; then
   alias ll='exa --icons -la'
