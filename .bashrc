@@ -1,5 +1,6 @@
 # xargsをパイプで実行するときに引数にエイリアスを使えるようにする
 alias xargs='xargs '
+alias vi='/usr/bin/vim'
 alias vim='nvim'
 alias vimo='vim -O'
 alias sudo="sudo env PATH=$PATH"

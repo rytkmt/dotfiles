@@ -383,6 +383,7 @@ source $XDG_CONFIG_HOME/plugins/vim-asterisk.rc.vim
 
 [[plugins]]
 repo = 'SirVer/ultisnips'
+if = 'has("python3")'
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/ultisnips.rc.vim
 '''
