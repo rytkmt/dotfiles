@@ -1,6 +1,7 @@
 # xargsをパイプで実行するときに引数にエイリアスを使えるようにする
 alias xargs='xargs '
 alias vim='nvim'
+alias vimo='vim -O'
 alias sudo="sudo env PATH=$PATH"
 alias als="alias | sort | sed s/^alias\.// | sed -e 's/=/ /' | awk '{printf \"%-10s %s\",\$1,c=\"\";for(i=2;i<=NF;i++) c=c \$i\" \"; print c}' | sed s/\'// | sed s/\'//"
 alias ebrl='vim $HOME/.bashrc'
@@ -11,7 +12,7 @@ alias sbr='source $HOME/.bashrc'
 export EDITOR="nvim"
 
 function flon() {
-  sed -e 's/:.*$//' | sed -e 's/^\s\?[ADMU\?]\{1,2\}\s\+//' | uniq
+  sed -e 's/:.*$//' | sed -e 's/^\s\?[ADMUR\?]\{1,2\}\s\+//' | sed -e 's/^.*\ ->\ //' | uniq
 }
 function vimtemp() {
   vim -c "Tempe $1"

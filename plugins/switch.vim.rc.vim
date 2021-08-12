@@ -8,9 +8,10 @@ let g:switch_custom_definitions =
   \   switch#NormalizedCase(['horizontal', 'vertical']),
   \   switch#NormalizedCase(['disable', 'enable']),
   \   switch#NormalizedCase(['from', 'to']),
+  \   switch#NormalizedCase(['first', 'last']),
+  \   switch#NormalizedCase(['present', 'absent']),
   \   switch#NormalizedCase(['==', '!=']),
   \   switch#NormalizedCase(['ON', 'OFF']),
-  \   switch#NormalizedCase(['post', 'get', 'put', 'delete']),
   \   switch#NormalizedCase(['asc', 'desc']),
   \   switch#NormalizedCase(['する', 'しない']),
   \   switch#NormalizedCase(['なる', 'ならない']),
@@ -23,6 +24,7 @@ let g:switch_custom_definitions =
   \   switch#NormalizedCase(['無い', '有る']),
   \   switch#NormalizedCase(['以上', '以下']),
   \   switch#NormalizedCase(['縦', '横']),
+  \   switch#NormalizedCase(['負', '正']),
   \   switch#NormalizedCase(['前', '後']),
   \   switch#NormalizedCase(['先頭', '末尾']),
   \   switch#NormalizedCase(['税込', '税別']),
@@ -34,8 +36,6 @@ let g:switch_custom_definitions =
 autocmd FileType ruby let b:switch_custom_definitions =
   \ [
   \   switch#NormalizedCase(['if', 'unless']),
-  \   switch#NormalizedCase(['once', 'all']),
-  \   switch#NormalizedCase(['all', 'first']),
   \   switch#NormalizedCase(['describe', 'context', 'example']),
   \   switch#NormalizedCase(['class', 'module']),
   \   switch#NormalizedCase(['require', 'require_relative']),

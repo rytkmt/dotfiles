@@ -55,6 +55,7 @@
     fi; \
   }; f"
   stc = !git status -s| grep -v "^[DAMR]\\ " | grep --color "^[A-Z]*\\ "
+  stcc = !git status -s| grep -v "^\\?\\?\\ " | grep -v "^D\\ " | awk '{print $2}'
   cm = commit -m
   cmp = "!f() { \
     if [ $# -ne 1 ];\
@@ -74,6 +75,12 @@
   bm = branch -m
   bd = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
   bdd = branch -D
+  by = "!f() { \
+    git branch --no-color 2> /dev/null | \
+    sed -e '/^[^*]/d' | \
+    sed -e 's/* // ' | \
+    xargs -I@ lemonade copy @; \
+  }; f"
   fe = fetch -p
   mf = merge FETCH_HEAD
   mod = merge origin/develop -m \"Resolve behind\"
@@ -85,7 +92,7 @@
     xargs -I@ git merge origin/@; \
   }; f"
   mos = merge origin/swagger-crossx_api -m \"Resolve behind\"
-  d = diff
+  d = diff --color-words
   ds = diff --name-status
   di = diff --cached
   l = log --oneline --no-merges -n 18
@@ -145,7 +152,7 @@
     if [ $# -eq 0 ]; then \
       echo 'arguments are required.'; \
     else \
-      pathspec=' -- :^*.csv :^*.tsv :^*.zip :^*.json :^*.ttf'; \
+      pathspec=' -- :^*.csv :^*.tsv :^*.pdf :^*.zip :^*.json :^*.ttf'; \
       str='git grep -n \"'$1'\"'$pathspec; \
       if [ $# -gt 1 ]; then \
         str=$str' | pipgre'; \

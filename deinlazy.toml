@@ -12,7 +12,7 @@ hook_source = '''
 autocmd MyAutoCmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
       \ 'name': 'buffer',
       \ 'priority': 5,
-      \ 'whitelist': ['*'],
+      \ 'allowlist': ['*'],
       \ 'completor': function('asyncomplete#sources#buffer#completor'),
       \ }))
 '''
@@ -24,7 +24,7 @@ hook_source = '''
 autocmd MyAutoCmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
       \ 'name': 'file',
       \ 'priority': 3,
-      \ 'whitelist': ['*'],
+      \ 'allowlist': ['*'],
       \ 'completor': function('asyncomplete#sources#file#completor'),
       \ }))
 '''
@@ -46,7 +46,7 @@ hook_source = '''
 autocmd MyAutoCmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#necosyntax#get_source_options({
       \ 'name': 'necosyntax',
       \ 'priority': 7,
-      \ 'whitelist': ['*'],
+      \ 'allowlist': ['*'],
       \ 'completor': function('asyncomplete#sources#necosyntax#completor'),
       \ }))
 '''
@@ -63,7 +63,7 @@ depends = ['neco-vim']
 hook_source = '''
 autocmd MyAutoCmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#necovim#get_source_options({
       \ 'name': 'necovim',
-      \ 'whitelist': ['vim'],
+      \ 'allowlist': ['vim'],
       \ 'priority': 10,
       \ 'completor': function('asyncomplete#sources#necovim#completor'),
       \ }))
@@ -88,7 +88,7 @@ autocmd MyAutoCmd User asyncomplete_setup call asyncomplete#register_source(asyn
 # hook_source = '''
 # autocmd MyAutoCmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
 #       \ 'name': 'neosnippet',
-#       \ 'whitelist': ['*'],
+#       \ 'allowlist': ['*'],
 #       \ 'priority': 9,
 #       \ 'completor': function('asyncomplete#sources#neosnippet#completor'),
 #       \ }))
@@ -101,10 +101,10 @@ on_i = 1
 depends = ['ultisnips', 'asyncomplete.vim']
 hook_source = '''
 call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-      \ 'name': 'ultisnips',
-      \ 'whitelist': ['*'],
-      \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-      \ }))
+    \ 'name': 'ultisnips',
+    \ 'allowlist': ['*'],
+    \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+    \ }))
 '''
 
 [[plugins]]

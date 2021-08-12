@@ -25,4 +25,4 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 
-autocmd FileType ctrlp call s:ctrlp_my_settings()
+" autocmd FileType ctrlp call s:ctrlp_my_settings()

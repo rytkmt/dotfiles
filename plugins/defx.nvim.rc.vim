@@ -13,7 +13,7 @@ function! _DefxOpen(init, type)
   \ "-resume",
   \ "-ignored-files='.git'",
   \ "-buffer-name=tab`tabpagenr()`",
-  \ "-columns=indent:icons:filename:type"
+  \ "-columns=indent:icons:indent:filename:type"
   \ ]
   " explorerの場合
   " let l:open_cmd = ":Defx -split=vertical -direction=topleft -toggle  -winwidth=30 " .join(l:options, " ")

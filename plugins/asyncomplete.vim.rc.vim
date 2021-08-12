@@ -1,4 +1,4 @@
-let g:asyncomplete_enable_for_all = 0
+let g:asyncomplete_enable_for_all = 1
 autocmd MyAutoCmd FileType git,snippet,toml,vim,ruby call asyncomplete#enable_for_buffer()
 
 imap <c-5> <Plug>(asyncomplete_force_refresh)
