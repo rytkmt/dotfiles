@@ -42,6 +42,7 @@
   }; f"
   h = help
   st = status -s
+  sti = status -s --ignored
   stv = "!f() { \
     if [ $# -ne 1 ];\
     then \
