@@ -54,8 +54,8 @@ else
 fi
 
 if [[ $(command -v bat) ]]; then
-  alias bat='bat --style="numbers,grid"'
-  alias cat='bat --style="grid"'
+  alias bat='bat --style="numbers,grid,header"'
+  alias cat='bat --style="grid,header"'
   alias batf='bat --style="full"'
   alias xbat='xargs bat'
   alias fxbat='flon|xbat'
