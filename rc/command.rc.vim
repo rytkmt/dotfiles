@@ -132,3 +132,18 @@ command! MoveFloatWindowLeft call s:move_float_window(-8, 0)
 command! MoveFloatWindowTop call s:move_float_window(0, -3)
 command! MoveFloatWindowBottom call s:move_float_window(0, 3)
 "++ }}}
+
+"++ profile {{{
+function! s:profile_start() abort
+  profile start ~/profile.txt
+  profile func *
+  profile file *
+endfunction
+
+function! s:profile_end() abort
+  profile pause
+endfunction
+
+command! ProfileStart call s:profile_start()
+command! ProfileEnd call s:profile_end()
+"++ }}}

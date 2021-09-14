@@ -106,12 +106,6 @@ hook_add = '''
 let g:lexima_accept_pum_with_enter = 0
 '''
 
-# [[plugins]]
-# repo = 'tpope/vim-rails'
-# hook_add = '''
-# source $XDG_CONFIG_HOME/plugins/vim-rails.rc.vim
-# '''
-
 [[plugins]]
 repo = 'terryma/vim-expand-region'
 depends = ['vim-textobj-ruby']
@@ -212,11 +206,12 @@ hook_add = '''
 source $XDG_CONFIG_HOME/plugins/ctrlp.vim.rc.vim
 '''
 
-[[plugins]]
-repo = 'lilydjwg/colorizer'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/colorizer.rc.vim
-'''
+# 遅いので一時的にコメントアウトしておく
+# [[plugins]]
+# repo = 'lilydjwg/colorizer'
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/colorizer.rc.vim
+# '''
 
 # [[plugins]]
 # repo = 'tyru/open-browser.vim'

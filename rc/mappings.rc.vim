@@ -223,9 +223,6 @@ nmap <Leader>f [filer]
 nmap [search] <Nop>
 nmap <Leader>s [search]
 
-nmap  [rails] <Nop>
-nmap <Leader>r [rails]
-
 nmap [ctag] <Nop>
 vmap [ctag] <Nop>
 nmap <Leader>g [ctag]
@@ -242,7 +239,7 @@ nmap <Leader>d [denite]
 "=================================
 " _
 " 1  2  3  4  5  6  7  8  9  0
-"  _  _  _  _  _     _        _
+"  _  _  _     _     _        _
 "  Q  W  E  R  T  y  U  i  o  P
 "      _  _  _  _             _
 "   a  S  D  F  G  h  j  k  l ;
