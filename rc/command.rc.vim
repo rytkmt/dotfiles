@@ -142,6 +142,7 @@ endfunction
 
 function! s:profile_end() abort
   profile pause
+  echo "profiled => ~/profile.txt"
 endfunction
 
 command! ProfileStart call s:profile_start()

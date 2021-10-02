@@ -373,13 +373,13 @@ endsnippet
 
 snippet timetravel_freeze "timetravel freeze" b
 around do |e|
-	travel_to(${1:TIME}){ e.run }
+	travel_to(${1:TIME}) { e.run }
 end
 endsnippet
 
 snippet around_travel_to "timetravel freeze" b
 around do |e|
-	travel_to(${1:TIME}){ e.run }
+	travel_to(${1:TIME}) { e.run }
 end
 endsnippet
 
