@@ -90,11 +90,8 @@ source $XDG_CONFIG_HOME/plugins/lightline.vim.rc.vim
 
 [[plugins]]
 repo = 'kana/vim-submode'
-hook_post_source = '''
-"submodeを抜け出すときのコマンドを有効に
-let g:submode_keep_leaving_key=1
-let g:submode_timeout=0
-autocmd MyAutoCmd VimEnter * source $XDG_CONFIG_HOME/plugins/vim-submode.rc.vim
+hook_add = '''
+source $XDG_CONFIG_HOME/plugins/vim-submode.rc.vim
 '''
 
 # [[plugins]]

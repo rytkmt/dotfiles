@@ -40,7 +40,7 @@ augroup denite_filter
     nnoremap <silent><buffer><expr> <CR>    denite#do_map('do_action', 'open')
     nnoremap <silent><buffer><expr> e       denite#do_map('do_action', 'open')
     nnoremap <silent><buffer><expr> l       denite#do_map('do_action', 'open')
-    nnoremap <silent><buffer><expr> L       denite#do_map('do_action', 'open')
+    " nnoremap <silent><buffer><expr> L       denite#do_map('do_action', 'open')
     nnoremap <silent><buffer><expr> <C-s>   denite#do_map('do_action', 'split')
     nnoremap <silent><buffer><expr> s       denite#do_map('do_action', 'split')
     nnoremap <silent><buffer><expr> <C-v>   denite#do_map('do_action', 'vsplit')
