@@ -117,19 +117,19 @@ repo = 'prabirshrestha/asyncomplete-lsp.vim'
 on_ft = ['ruby']
 depends = ['asyncomplete.vim', 'vim-lsp']
 
-[[plugins]]
-repo = 'mattn/emmet-vim'
-on_i = 1
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/emmet-vim.rc.vim
-'''
+# [[plugins]]
+# repo = 'mattn/emmet-vim'
+# on_i = 1
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/emmet-vim.rc.vim
+# '''
 
-[[plugins]]
-repo = "alvan/vim-closetag"
-on_i = 1
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-closetag.rc.vim
-'''
+# [[plugins]]
+# repo = "alvan/vim-closetag"
+# on_i = 1
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/vim-closetag.rc.vim
+# '''
 
 [[plugins]]
 repo = 'cespare/vim-toml'

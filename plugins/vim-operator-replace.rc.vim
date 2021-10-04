@@ -1,1 +1,1 @@
-map <nowait> R  <Plug>(operator-replace)
+xnoremap <nowait> R  <Plug>(operator-replace)

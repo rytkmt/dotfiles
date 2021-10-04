@@ -2,14 +2,13 @@ let g:lightline = {
 \  'colorscheme': 'one',
 \  'active': {
 \    'left': [['mode', 'paste'], ['filename'], ['gitstatus']],
-\    'right': [['row'], ['fileencoding'], ['filetype'], ['projecttag'], ['fileformat'], ['codepoint']]
+\    'right': [['row'], ['fileencoding'], ['filetype'], ['projecttag'], ['fileformat']]
 \  },
 \  'inactive': {
 \    'left': [['filename']],
 \    'right': [['row'], ['fileencoding'], ['filetype'], ['projecttag'], ['fileformat']]
 \  },
 \  'component': {
-\    'codepoint': '%B'
 \  },
 \  'component_function': {
 \    'mode': 'LightlineMode',
