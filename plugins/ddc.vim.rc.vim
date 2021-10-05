@@ -7,21 +7,26 @@ call ddc#custom#patch_global('sources', [
 call ddc#custom#patch_global('backspaceCompletion', v:true)
 call ddc#custom#patch_global('sourceOptions', {
     \ '_': {
-    \   'matchers': ['matcher_head'],
-    \   'sorters': ['sorter_rank'],
+    \   'matchers': ['matcher_fuzzy'],
+    \   'sorters': ['sorter_fuzzy'],
     \ },
-    \ 'vim-lsp': {
+    \ 'nvim-lsp': {
     \   'mark': 'lsp',
-    \   'minAutoCompleteLength': 1
+    \   'forceCompletionPattern': '\.\w*|:\w*|->\w*'
     \ },
     \ 'around': {'mark': 'A'},
     \ 'ultisnips': {'mark': 'ulti'},
     \ 'buffer': {'mark': 'B'},
     \ })
-call ddc#custom#patch_filetype(['ruby'], 'sources', ['around', 'ultisnips', 'vim-lsp'])
+call ddc#custom#patch_filetype(['ruby'], 'sources', ['around', 'ultisnips', 'nvim-lsp'])
+    " \ 'vim-lsp': {
+    " \   'mark': 'lsp',
+    " \   'minAutoCompleteLength': 1
+    " \ },
 
 call ddc#custom#patch_global('sourceParams', {
     \ 'around': {'maxSize': 500},
+    \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
     \ })
 
 imap <expr><C-s>
@@ -43,4 +48,22 @@ imap <silent><expr> <C-l> pumvisible() ? "\<C-s>" : "\<Right>"
 " " <S-TAB>: completion back.
 " inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
 
+
+lua << EOF
+    local on_attach = function (client, bufnr)
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true, silent = true})
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>vs | lua vim.lsp.buf.definition()<CR>', {noremap = true, silent = true})
+    end
+    require('lspconfig').solargraph.setup({on_attach = on_attach})
+EOF
+
+
+" nnoremap <silent> [lsp]s <plug>(lsp-status)
+" nnoremap <silent> [lsp]t <plug>(lsp-type-definition)
+" nnoremap <silent> [lsp]d :vsplit \| :LspDefinition<CR>
+" nmap <silent> gd :vsplit \| [lsp]d
+" nnoremap <silent> [lsp]u <plug>(lsp-peek-declaration)
+" nnoremap <silent> [lsp]i <plug>(lsp-type-hierarchy)
+" nnoremap <silent> [lsp]h <plug>(lsp-hover)
+call ddc_nvim_lsp_doc#enable()
 call ddc#enable()

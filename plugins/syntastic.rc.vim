@@ -20,7 +20,7 @@ let g:syntastic_enable_balloons = 0
 let g:syntastic_mode_map = {
 \ 'mode': 'active',
 \ 'active_filetypes': [
-\   'ruby', 'javascript', 'html', 'vim', 'sql', 'yaml'
+\   'ruby', 'vim', 'sql', 'yaml'
 \ ],
 \ 'passive_filetypes': [
 \   'eruby'

@@ -288,6 +288,7 @@ hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vim-operator-flashy.rc.vim
 '''
 
+# solargraphにはmriのチェックがないため仕方なく
 [[plugins]]
 repo = 'vim-syntastic/syntastic'
 hook_add = '''
@@ -345,21 +346,28 @@ source $XDG_CONFIG_HOME/plugins/vim-indent-guides.rc.vim
 # source $XDG_CONFIG_HOME/plugins/coc.nvim.rc.vim
 # '''
 
-[[plugins]]
-repo = 'prabirshrestha/async.vim'
+# [[plugins]]
+# repo = 'prabirshrestha/async.vim'
+
+# [[plugins]]
+# repo = 'prabirshrestha/vim-lsp'
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/vim-lsp.rc.vim
+# '''
+#
+# [[plugins]]
+# repo = 'mattn/vim-lsp-settings'
+# merged = 0
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/vim-lsp-settings.rc.vim
+# '''
 
 [[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-lsp.rc.vim
-'''
+repo = 'neovim/nvim-lspconfig'
 
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
-merged = 0
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-lsp-settings.rc.vim
-'''
+# なぜかうまく表示されない
+# [[plugins]]
+# repo = 'matsui54/ddc-nvim-lsp-doc'
 
 [[plugins]]
 repo = 'cocopon/inspecthi.vim'

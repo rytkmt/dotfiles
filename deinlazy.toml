@@ -5,19 +5,32 @@ hook_source = 'call denops#server#start()'
 
 [[plugins]]
 repo = 'Shougo/ddc.vim'
-on_event = 'InsertEnter'
+on_ft = ['git', 'snippet', 'toml', 'vim', 'ruby']
 depends = 'denops.vim'
 hook_source = '''
 source $XDG_CONFIG_HOME/plugins/ddc.vim.rc.vim
 '''
 
-[[plugins]]
-repo = 'shun/ddc-vim-lsp'
-on_source = 'ddc.vim'
-depends = 'vim-lsp'
+# [[plugins]]
+# repo = 'shun/ddc-vim-lsp'
+# on_source = 'ddc.vim'
+# depends = 'vim-lsp'
 
 [[plugins]]
-repo = 'Shougo/ddc-matcher_head'
+repo = 'Shougo/ddc-nvim-lsp'
+on_source = 'ddc.vim'
+depends = ['nvim-lspconfig', 'lspsaga.nvim']
+
+# [[plugins]]
+# repo = 'Shougo/ddc-matcher_head'
+# on_source = 'ddc.vim'
+#
+# [[plugins]]
+# repo = 'Shougo/ddc-sorter_rank'
+# on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'tani/ddc-fuzzy'
 on_source = 'ddc.vim'
 
 [[plugins]]
@@ -27,10 +40,6 @@ on_source = 'ddc.vim'
 [[plugins]]
 repo = 'matsui54/ddc-ultisnips'
 depends = 'ultisnips'
-on_source = 'ddc.vim'
-
-[[plugins]]
-repo = 'Shougo/ddc-sorter_rank'
 on_source = 'ddc.vim'
 
 [[plugins]]
