@@ -8,7 +8,7 @@ call ddc#custom#patch_global('backspaceCompletion', v:true)
 call ddc#custom#patch_global('sourceOptions', {
     \ '_': {
     \   'matchers': ['matcher_fuzzy'],
-    \   'sorters': ['sorter_fuzzy'],
+    \   'sorters': ['sorter_rank'],
     \ },
     \ 'nvim-lsp': {
     \   'mark': 'lsp',
@@ -18,7 +18,7 @@ call ddc#custom#patch_global('sourceOptions', {
     \ 'ultisnips': {'mark': 'ulti'},
     \ 'buffer': {'mark': 'B'},
     \ })
-call ddc#custom#patch_filetype(['ruby'], 'sources', ['around', 'ultisnips', 'nvim-lsp'])
+call ddc#custom#patch_filetype(['ruby'], 'sources', ['nvim-lsp', 'around', 'ultisnips', ])
     " \ 'vim-lsp': {
     " \   'mark': 'lsp',
     " \   'minAutoCompleteLength': 1
@@ -29,9 +29,7 @@ call ddc#custom#patch_global('sourceParams', {
     \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
     \ })
 
-imap <expr><C-s>
-\ ddc#map#complete_common_string() != '' ?
-\   "\<C-R>=UltiSnips#ExpandSnippet()\<CR>" : "\<Right>"
+" imap <expr><C-s> "\<Right>\<C-R>=UltiSnips#ExpandSnippet()\<CR>"
 
 " inoremap <silent> <C-l> <Right>
 " inoremap <expr> <CR> pumvisible() ? asyncomplete#close_popup() . "\<CR>" : "\<CR>"
@@ -51,10 +49,26 @@ imap <silent><expr> <C-l> pumvisible() ? "\<C-s>" : "\<Right>"
 
 lua << EOF
     local on_attach = function (client, bufnr)
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true, silent = true})
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>vs | lua vim.lsp.buf.definition()<CR>', {noremap = true, silent = true})
+      -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true, silent = true})
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>vs | lua vim.lsp.buf.definition()<CR>', {noremap = true, silent = true})
     end
-    require('lspconfig').solargraph.setup({on_attach = on_attach})
+    require('lspconfig').solargraph.setup({
+      on_attach = on_attach,
+
+      settings = {
+        solargraph = {
+          auto_format = true,
+          diagnostics = true,
+          folding = false,
+          formatting = false,
+          hover = false,
+          reference = false,
+          rename = false,
+          symbols = false,
+          useBundler = false
+        }
+      }
+    })
 EOF
 
 
@@ -65,5 +79,4 @@ EOF
 " nnoremap <silent> [lsp]u <plug>(lsp-peek-declaration)
 " nnoremap <silent> [lsp]i <plug>(lsp-type-hierarchy)
 " nnoremap <silent> [lsp]h <plug>(lsp-hover)
-call ddc_nvim_lsp_doc#enable()
 call ddc#enable()

@@ -1,6 +1,6 @@
 let g:UltiSnipsEditSplit = "tabdo"
 let g:UltiSnipsRemoveSelectModeMappings = 0
-let g:UltiSnipsExpandTrigger="<c-s>"
+let g:UltiSnipsExpandTrigger="<C-s>"
 let g:UltiSnipsJumpForwardTrigger="<nop>"
 let g:UltiSnipsJumpBackwardTrigger="<nop>"
 let g:UltiSnipsSnippetDirectories=[$XDG_CONFIG_HOME.'/ultisnips']

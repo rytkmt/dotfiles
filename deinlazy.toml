@@ -19,15 +19,15 @@ source $XDG_CONFIG_HOME/plugins/ddc.vim.rc.vim
 [[plugins]]
 repo = 'Shougo/ddc-nvim-lsp'
 on_source = 'ddc.vim'
-depends = ['nvim-lspconfig', 'lspsaga.nvim']
+depends = ['nvim-lspconfig']
 
 # [[plugins]]
 # repo = 'Shougo/ddc-matcher_head'
 # on_source = 'ddc.vim'
-#
-# [[plugins]]
-# repo = 'Shougo/ddc-sorter_rank'
-# on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-sorter_rank'
+on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'tani/ddc-fuzzy'
