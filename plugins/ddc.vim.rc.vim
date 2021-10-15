@@ -49,8 +49,14 @@ imap <silent><expr> <C-l> pumvisible() ? "\<C-s>" : "\<Right>"
 
 lua << EOF
     local on_attach = function (client, bufnr)
-      -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true, silent = true})
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>vs | lua vim.lsp.buf.definition()<CR>', {noremap = true, silent = true})
+      local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+      local opts = { noremap=true, silent=true }
+      -- buf_set_keymap('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+      buf_set_keymap('n', 'gd', '<cmd>vs | lua vim.lsp.buf.definition()<CR>', opts)
+      buf_set_keymap('n', 'gf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+      buf_set_keymap('n', 'g[', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+      buf_set_keymap('n', 'g]', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+      -- require('folding').on_attach()
     end
     require('lspconfig').solargraph.setup({
       on_attach = on_attach,
@@ -59,8 +65,8 @@ lua << EOF
         solargraph = {
           auto_format = true,
           diagnostics = true,
+          formatting = true,
           folding = false,
-          formatting = false,
           hover = false,
           reference = false,
           rename = false,

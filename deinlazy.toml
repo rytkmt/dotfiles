@@ -46,6 +46,12 @@ on_source = 'ddc.vim'
 repo = 'matsui54/ddc-buffer'
 on_source = 'ddc.vim'
 
+
+# [[plugins]]
+# repo = 'pierreglaser/folding-nvim'
+# depends = ['nvim-lspconfig']
+# on_source = 'ddc.vim'
+
 # [[plugins]]
 # repo = 'prabirshrestha/asyncomplete.vim'
 # on_ft = ['git', 'snippet', 'toml', 'vim', 'ruby']
@@ -254,6 +260,17 @@ source $XDG_CONFIG_HOME/plugins/denite.nvim.rc.vim
 on_cmd = 'Denite'
 hook_post_source = '''
 source $XDG_CONFIG_HOME/plugins/denite.nvim.source.rc.vim
+'''
+
+[[plugins]]
+repo = 'rytkmt/vim-textobj-ruby'
+rev = 'feature_textobj_ruby_method'
+on_ft = 'ruby'
+hook_add = '''
+let g:textobj_ruby_mappings = 0
+'''
+hook_source = '''
+source $XDG_CONFIG_HOME/plugins/vim-textobj-ruby.rc.vim
 '''
 
 [[plugins]]

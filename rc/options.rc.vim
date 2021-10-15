@@ -205,6 +205,10 @@ set updatetime=0
 " 再描画に掛ける時間
 set redrawtime=5000
 
+" 折りたたみのレベル
+set foldlevel=99
+" 折りたたみの仕方
+set foldmethod=manual
 " ++ }}}
 
 " ++ ファイルタイプ別 {{{

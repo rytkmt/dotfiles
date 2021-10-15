@@ -94,6 +94,7 @@
     xargs -I@ git merge origin/@; \
   }; f"
   mos = merge origin/swagger-crossx_api -m \"Resolve behind\"
+  mom = merge origin/master -m \"Resolve behind\"
   d = diff --color-words
   ds = diff --name-status
   di = diff --cached

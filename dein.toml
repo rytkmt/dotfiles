@@ -373,9 +373,6 @@ repo = 'neovim/nvim-lspconfig'
 repo = 'cocopon/inspecthi.vim'
 
 [[plugins]]
-repo = 'Shougo/neomru.vim'
-
-[[plugins]]
 repo = 'haya14busa/vim-asterisk'
 hook_add = '''
 source $XDG_CONFIG_HOME/plugins/vim-asterisk.rc.vim

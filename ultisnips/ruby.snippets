@@ -170,10 +170,6 @@ create_table "${1:TABLE}", force: :cascade, comment: "${2:T_NAME}" do |t|
 end
 endsnippet
 
-snippet add_foreign_key "" b
-add_foreign_key "${1:FROM_TABLE}", "${2:TO_TABLE}", name: "fk_${3:TO_ID}_id"
-endsnippet
-
 snippet trow "" b
 t.${1:TYPE} "${2:NAME}", ${4} comment: "${3:COMMENT}"
 endsnippet
@@ -237,6 +233,10 @@ endsnippet
 snippet tindex "" b
 t.index ["${1:TARGET}"], name: "index_${2:TABLE_NAME}_on_$1"
 ${3}
+endsnippet
+
+snippet tforeign_key "" b
+t.foreign_key "${1:TO_TABLE}", name: "fk_${2:TO_ID}_id"
 endsnippet
 
 snippet transaction "" b
