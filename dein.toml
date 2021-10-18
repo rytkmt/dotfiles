@@ -25,7 +25,7 @@ hook_post_update = '''
   let g:dein#plugin.build = cmd
 '''
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vimproc.vim.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/vimproc.vim.rc.vim
 '''
 
 [[plugins]]
@@ -33,21 +33,21 @@ repo = 'Shougo/defx.nvim'
 if = 'has("nvim") && has("python3_compiled")'
 do = ':UpdateRemotePlugins'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/defx.nvim.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/defx.nvim.rc.vim
 '''
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
 depends = ['defx.nvim']
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-devicons.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/vim-devicons.rc.vim
 '''
 
 [[plugins]]
 repo = 'kristijanhusak/defx-icons'
 depends = ['defx.nvim']
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/defx-icons.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/defx-icons.rc.vim
 '''
 
 [[plugins]]
@@ -55,7 +55,7 @@ repo = 'Shougo/vimfiler'
 if = '!has("nvim") || !has("python3_compiled")'
 depends = ['vimproc.vim']
 hook_post_source = '''
-source $XDG_CONFIG_HOME/plugins/vimfiler.rc.vim
+source $XDG_CONFIG_HOME/plugins/source/vimfiler.rc.vim
 '''
 
 [[plugins]]
@@ -73,25 +73,29 @@ repo = 'rytkmt/lighthouse'
 [[plugins]]
 repo = 'Shougo/unite.vim'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/unite.vim.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/unite.vim.rc.vim
 '''
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/lightline.vim.rc.vim
+hook_source = '''
+source $XDG_CONFIG_HOME/plugins/source/lightline.vim.rc.vim
 '''
 
 # [[plugins]]
 # repo = 'Yggdroot/indentLine'
 # hook_add = '''
-# source $XDG_CONFIG_HOME/plugins/indentLine.rc.vim
+# source $XDG_CONFIG_HOME/plugins/add/indentLine.rc.vim
 # '''
 
 [[plugins]]
 repo = 'kana/vim-submode'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-submode.rc.vim
+let g:submode_keep_leaving_key=1
+let g:submode_timeout=0
+'''
+hook_source = '''
+source $XDG_CONFIG_HOME/plugins/source/vim-submode.rc.vim
 '''
 
 # [[plugins]]
@@ -107,7 +111,7 @@ let g:lexima_accept_pum_with_enter = 0
 # repo = 'terryma/vim-expand-region'
 # depends = ['vim-textobj-ruby']
 # hook_add = '''
-# source $XDG_CONFIG_HOME/plugins/vim-expand-region.rc.vim
+# source $XDG_CONFIG_HOME/plugins/add/vim-expand-region.rc.vim
 # '''
 
 # [[plugins]]
@@ -116,7 +120,7 @@ let g:lexima_accept_pum_with_enter = 0
 # [[plugins]]
 # repo = 'vimtaku/hl_matchit.vim'
 # hook_add = '''
-# source $XDG_CONFIG_HOME/plugins/hl_matchit.vim.rc.vim
+# source $XDG_CONFIG_HOME/plugins/add/hl_matchit.vim.rc.vim
 # '''
 
 [[plugins]]
@@ -125,7 +129,7 @@ repo = "kana/vim-textobj-user"
 # [[plugins]]
 # repo = "h1mesuke/textobj-wiw"
 # hook_add = '''
-# source $XDG_CONFIG_HOME/plugins/textobj-wiw.rc.vim
+# source $XDG_CONFIG_HOME/plugins/add/textobj-wiw.rc.vim
 # '''
 
 # [[plugins]]
@@ -143,13 +147,13 @@ repo = "kana/vim-textobj-user"
 [[plugins]]
 repo = 'vim-scripts/grep.vim'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/grep.vim.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/grep.vim.rc.vim
 '''
 
 [[plugins]]
 repo = 'tomtom/tcomment_vim'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/tcomment_vim.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/tcomment_vim.rc.vim
 '''
 
 [[plugins]]
@@ -158,19 +162,22 @@ repo = 'vim-scripts/AnsiEsc.vim'
 [[plugins]]
 repo = 'rytkmt/vim-trailing-whitespace'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-trailing-whitespace.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/vim-trailing-whitespace.rc.vim
 '''
 
 [[plugins]]
 repo = 'airblade/vim-rooter'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-rooter.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/vim-rooter.rc.vim
 '''
 
 [[plugins]]
 repo = 'AndrewRadev/switch.vim'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/switch.vim.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/switch.vim.rc.vim
+'''
+hook_source = '''
+source $XDG_CONFIG_HOME/plugins/source/switch.vim.rc.vim
 '''
 
 [[plugins]]
@@ -179,19 +186,19 @@ repo = 'tyru/capture.vim'
 [[plugins]]
 repo = 'tpope/vim-surround'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-surround.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/vim-surround.rc.vim
 '''
 
 # [[plugins]]
 # repo = 'thinca/vim-ref'
 # hook_add = '''
-# source $XDG_CONFIG_HOME/plugins/vim-ref.rc.vim
+# source $XDG_CONFIG_HOME/plugins/add/vim-ref.rc.vim
 # '''
 #
 # [[plugins]]
 # repo = 'rytkmt/vim-ref-ri'
 # hook_add = '''
-# source $XDG_CONFIG_HOME/plugins/vim-ref-ri.rc.vim
+# source $XDG_CONFIG_HOME/plugins/add/vim-ref-ri.rc.vim
 # '''
 #
 # [[plugins]]
@@ -200,14 +207,14 @@ source $XDG_CONFIG_HOME/plugins/vim-surround.rc.vim
 [[plugins]]
 repo = 'ctrlpvim/ctrlp.vim'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/ctrlp.vim.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/ctrlp.vim.rc.vim
 '''
 
 # 遅いので一時的にコメントアウトしておく
 # [[plugins]]
 # repo = 'lilydjwg/colorizer'
 # hook_add = '''
-# source $XDG_CONFIG_HOME/plugins/colorizer.rc.vim
+# source $XDG_CONFIG_HOME/plugins/add/colorizer.rc.vim
 # '''
 
 # [[plugins]]
@@ -216,19 +223,19 @@ source $XDG_CONFIG_HOME/plugins/ctrlp.vim.rc.vim
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-quickrun.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/vim-quickrun.rc.vim
 '''
 
 # [[plugins]]
 # repo = 'easymotion/vim-easymotion'
 # hook_add = '''
-# source $XDG_CONFIG_HOME/plugins/vim-easymotion.rc.vim
+# source $XDG_CONFIG_HOME/plugins/add/vim-easymotion.rc.vim
 # '''
 
 # [[plugins]]
 # repo = 'haya14busa/incsearch.vim'
 # hook_add = '''
-# source $XDG_CONFIG_HOME/plugins/incsearch.vim.rc.vim
+# source $XDG_CONFIG_HOME/plugins/add/incsearch.vim.rc.vim
 # '''
 
 # [[plugins]]
@@ -240,25 +247,25 @@ repo = 'vim-jp/vimdoc-ja'
 [[plugins]]
 repo = 'LeafCage/yankround.vim'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/yankround.vim.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/yankround.vim.rc.vim
 '''
 
 [[plugins]]
 repo = 'junegunn/vim-easy-align'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-easy-align.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/vim-easy-align.rc.vim
 '''
 
 # [[plugins]]
 # repo = 'rytkmt/scratch.vim'
 # hook_add = '''
-# source $XDG_CONFIG_HOME/plugins/scratch.rc.vim
+# source $XDG_CONFIG_HOME/plugins/add/scratch.rc.vim
 # '''
 
 # [[plugins]]
 # repo = 'thinca/vim-visualstar'
 # hook_add = '''
-# source $XDG_CONFIG_HOME/plugins/vim-visualstar.rc.vim
+# source $XDG_CONFIG_HOME/plugins/add/vim-visualstar.rc.vim
 # '''
 
 [[plugins]]
@@ -267,32 +274,32 @@ repo = 'kana/vim-operator-user'
 [[plugins]]
 repo = 'kana/vim-operator-replace'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-operator-replace.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/vim-operator-replace.rc.vim
 '''
 
 [[plugins]]
 repo = 'osyo-manga/vim-anzu'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-anzu.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/vim-anzu.rc.vim
 '''
 
 [[plugins]]
 repo = 'rhysd/clever-f.vim'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/clever-f.vim.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/clever-f.vim.rc.vim
 '''
 
 [[plugins]]
 repo = 'haya14busa/vim-operator-flashy'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-operator-flashy.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/vim-operator-flashy.rc.vim
 '''
 
 # solargraphにはmriのチェックがないため仕方なく
 # [[plugins]]
 # repo = 'vim-syntastic/syntastic'
 # hook_add = '''
-# source $XDG_CONFIG_HOME/plugins/syntastic.rc.vim
+# source $XDG_CONFIG_HOME/plugins/add/syntastic.rc.vim
 # '''
 # hook_post_update = '''
 # set statusline+=%#warningmsg#
@@ -303,19 +310,19 @@ source $XDG_CONFIG_HOME/plugins/vim-operator-flashy.rc.vim
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-gitgutter.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/vim-gitgutter.rc.vim
 '''
 
 # [[plugins]]
 # repo = 'tpope/vim-fugitive'
 # hook_add = '''
-# source $XDG_CONFIG_HOME/plugins/vim-fugitive.rc.vim
+# source $XDG_CONFIG_HOME/plugins/add/vim-fugitive.rc.vim
 # '''
 
 # [[plugins]]
 # repo = 'kamykn/spelunker.vim'
 # hook_add = '''
-# source $XDG_CONFIG_HOME/plugins/spelunker.vim.rc.vim
+# source $XDG_CONFIG_HOME/plugins/add/spelunker.vim.rc.vim
 # '''
 
 [[plugins]]
@@ -324,7 +331,7 @@ repo = 'tyru/stoptypofile.vim'
 # [[plugins]]
 # repo = 'koron/codic-vim'
 # hook_add = '''
-# source $XDG_CONFIG_HOME/plugins/codic-vim.rc.vim
+# source $XDG_CONFIG_HOME/plugins/add/codic-vim.rc.vim
 # '''
 
 # [[plugins]]
@@ -333,7 +340,7 @@ repo = 'tyru/stoptypofile.vim'
 [[plugins]]
 repo = 'nathanaelkane/vim-indent-guides'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-indent-guides.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/vim-indent-guides.rc.vim
 '''
 
 # [[plugins]]
@@ -343,7 +350,7 @@ source $XDG_CONFIG_HOME/plugins/vim-indent-guides.rc.vim
 # rev = 'release'
 # merge = 0
 # hook_add = '''
-# source $XDG_CONFIG_HOME/plugins/coc.nvim.rc.vim
+# source $XDG_CONFIG_HOME/plugins/add/coc.nvim.rc.vim
 # '''
 
 # [[plugins]]
@@ -352,14 +359,14 @@ source $XDG_CONFIG_HOME/plugins/vim-indent-guides.rc.vim
 # [[plugins]]
 # repo = 'prabirshrestha/vim-lsp'
 # hook_add = '''
-# source $XDG_CONFIG_HOME/plugins/vim-lsp.rc.vim
+# source $XDG_CONFIG_HOME/plugins/add/vim-lsp.rc.vim
 # '''
 #
 # [[plugins]]
 # repo = 'mattn/vim-lsp-settings'
 # merged = 0
 # hook_add = '''
-# source $XDG_CONFIG_HOME/plugins/vim-lsp-settings.rc.vim
+# source $XDG_CONFIG_HOME/plugins/add/vim-lsp-settings.rc.vim
 # '''
 
 [[plugins]]
@@ -375,12 +382,12 @@ repo = 'cocopon/inspecthi.vim'
 [[plugins]]
 repo = 'haya14busa/vim-asterisk'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/vim-asterisk.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/vim-asterisk.rc.vim
 '''
 
 [[plugins]]
 repo = 'SirVer/ultisnips'
 if = 'has("python3")'
 hook_add = '''
-source $XDG_CONFIG_HOME/plugins/ultisnips.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/ultisnips.rc.vim
 '''

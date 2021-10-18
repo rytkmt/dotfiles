@@ -1,4 +1,3 @@
-let g:switch_mapping = "-"
 let g:switch_custom_definitions =
   \ [
   \   switch#NormalizedCase(['left', 'right', 'center']),
@@ -31,17 +30,4 @@ let g:switch_custom_definitions =
   \   switch#NormalizedCase(['include', 'exclude']),
   \   switch#NormalizedCase(['プラス', 'マイナス']),
   \   switch#NormalizedCase(['-', '+'])
-  \ ]
-
-autocmd FileType ruby let b:switch_custom_definitions =
-  \ [
-  \   switch#NormalizedCase(['if', 'unless']),
-  \   switch#NormalizedCase(['describe', 'context', 'example']),
-  \   switch#NormalizedCase(['class', 'module']),
-  \   switch#NormalizedCase(['require', 'require_relative']),
-  \ ]
-
-autocmd FileType neosnippet let b:switch_custom_definitions =
-  \ [
-  \   switch#NormalizedCase(['head', 'word'])
   \ ]
