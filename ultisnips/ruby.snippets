@@ -187,11 +187,15 @@ t.integer "${2:NAME}",                                     comment: "${3:COMMENT
 endsnippet
 
 snippet trow_text "" b
-t.text "${2:NAME}", default: "", null: false, comment: "${3:COMMENT}"
+t.text    "${2:NAME}", default: "",    null: false, comment: "${3:COMMENT}"
 endsnippet
 
 snippet trow_integer "" b
-t.integer "${2:NAME}", default: 0, null: false, comment: "${3:COMMENT}"
+t.integer "${2:NAME}",                 null: false, comment: "${3:COMMENT}"
+endsnippet
+
+snippet trow_integer_default0 "" b
+t.integer "${2:NAME}", default: 0,     null: false, comment: "${3:COMMENT}"
 endsnippet
 
 snippet trow_bool "" b
