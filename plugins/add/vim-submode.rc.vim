@@ -1,7 +1,6 @@
 "submodeを抜け出すときのコマンドを有効に
 let g:submode_keep_leaving_key=1
 let g:submode_timeout=0
-
 augroup submode
   autocmd!
   autocmd VimEnter * call s:submode_settings()

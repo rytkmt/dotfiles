@@ -91,11 +91,7 @@ source $XDG_CONFIG_HOME/plugins/source/lightline.vim.rc.vim
 [[plugins]]
 repo = 'kana/vim-submode'
 hook_add = '''
-let g:submode_keep_leaving_key=1
-let g:submode_timeout=0
-'''
-hook_source = '''
-source $XDG_CONFIG_HOME/plugins/source/vim-submode.rc.vim
+source $XDG_CONFIG_HOME/plugins/add/vim-submode.rc.vim
 '''
 
 # [[plugins]]
