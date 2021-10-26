@@ -13,26 +13,35 @@ vim.cmd('augroup END')
 vim.cmd('so $XDG_CONFIG_HOME/rc/filetypes.rc.vim')
 vim.cmd('so $XDG_CONFIG_HOME/rc/options.rc.vim')
 
+-- packer {{{
+local packer_dir = vim.env.HOME..'/.local/share/nvim/site/pack/packer/opt/packer.nvim'
+if not string.match(vim.o.runtimepath, '/packer.nvim') then
+  if vim.fn.isdirectory(packer_dir) ~= 1 then
+    os.execute('git clone https://github.com/wbthomason/packer.nvim '..packer_dir)
+  end
+  vim.o.runtimepath = packer_dir..','..vim.o.runtimepath
+end
+
+require'plugins'
+vim.cmd[[autocmd BufWritePost plugins.lua PackerCompile]]
+-- }}}
+
 -- dein {{{
 
-local dein_cache_path = nil
-if vim.fn.has('nvim') == 1 then
- dein_cache_path = vim.fn.expand('~/.vim/cache/nvim/dein')
-else
- dein_cache_path = vim.fn.expand('~/.vim/cache/vim/dein')
-end
+local dein_cache_path = vim.fn.expand(vim.env.HOME..'/.vim/cache/nvim/dein')
 
 vim.g['dein#install_github_api_token'] = vim.env.GITHUB_API_TOKEN
 
 local dein_repo_dir = dein_cache_path..'/repos/github.com/Shougo/dein.vim'
 
 if not string.match(vim.o.runtimepath, '/dein.vim') then
- if not (vim.fn.isdirectory(dein_repo_dir) ~= 1) then
+ if (vim.fn.isdirectory(dein_repo_dir) ~= 1) then
    os.execute('git clone https://github.com/Shougo/dein.vim '..dein_repo_dir)
  end
  vim.o.runtimepath = dein_repo_dir..','..vim.o.runtimepath
 end
 
+vim.cmd('filetype plugin indent on')
 vim.cmd('syntax enable')
 
 if (vim.fn['dein#load_state'](dein_cache_path) == 1) then
@@ -57,7 +66,6 @@ function set_colorscheme ()
 end
 pcall(set_colorscheme)
 
-vim.cmd('filetype plugin indent on')
 
 vim.cmd('set noimdisable')
 vim.cmd('so $XDG_CONFIG_HOME/rc/mappings.rc.vim')
