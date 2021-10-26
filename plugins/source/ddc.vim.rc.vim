@@ -9,6 +9,7 @@ call ddc#custom#patch_global('sourceOptions', {
     \ '_': {
     \   'matchers': ['matcher_fuzzy'],
     \   'sorters': ['sorter_rank'],
+    \   'maxCandidates': 30,
     \ },
     \ 'nvim-lsp': {
     \   'mark': 'lsp',
@@ -19,13 +20,9 @@ call ddc#custom#patch_global('sourceOptions', {
     \ 'buffer': {'mark': 'B'},
     \ })
 call ddc#custom#patch_filetype(['ruby'], 'sources', ['nvim-lsp', 'around', 'ultisnips', ])
-    " \ 'vim-lsp': {
-    " \   'mark': 'lsp',
-    " \   'minAutoCompleteLength': 1
-    " \ },
 
 call ddc#custom#patch_global('sourceParams', {
-    \ 'around': {'maxSize': 500},
+    \ 'around': {'maxSize': 400},
     \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
     \ })
 
@@ -64,9 +61,9 @@ require('lspconfig').solargraph.setup({
 
   settings = {
     solargraph = {
-      auto_format = true,
-      diagnostics = true,
-      formatting = true,
+      auto_format = false,
+      diagnostics = false,
+      formatting = false,
       folding = false,
       hover = false,
       reference = false,

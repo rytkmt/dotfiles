@@ -33,7 +33,6 @@ on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'matsui54/ddc-ultisnips'
-depends = 'ultisnips'
 on_source = 'ddc.vim'
 
 [[plugins]]
