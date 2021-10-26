@@ -1,45 +1,4 @@
 [[plugins]]
-repo = 'vim-denops/denops.vim'
-on_func = 'denops#server#start'
-hook_source = 'call denops#server#start()'
-
-[[plugins]]
-repo = 'Shougo/ddc.vim'
-on_ft = ['git', 'snippet', 'toml', 'vim', 'ruby']
-depends = 'denops.vim'
-hook_source = '''
-source $XDG_CONFIG_HOME/plugins/source/ddc.vim.rc.vim
-'''
-
-[[plugins]]
-repo = 'Shougo/ddc-nvim-lsp'
-on_source = 'ddc.vim'
-
-[[plugins]]
-repo = 'Shougo/ddc-matcher_head'
-on_source = 'ddc.vim'
-
-[[plugins]]
-repo = 'Shougo/ddc-sorter_rank'
-on_source = 'ddc.vim'
-
-[[plugins]]
-repo = 'tani/ddc-fuzzy'
-on_source = 'ddc.vim'
-
-[[plugins]]
-repo = 'Shougo/ddc-around'
-on_source = 'ddc.vim'
-
-[[plugins]]
-repo = 'matsui54/ddc-ultisnips'
-on_source = 'ddc.vim'
-
-[[plugins]]
-repo = 'matsui54/ddc-buffer'
-on_source = 'ddc.vim'
-
-[[plugins]]
 repo = 'Shougo/denite.nvim'
 if = 'has("nvim") && has("python3_compiled")'
 hook_add = '''

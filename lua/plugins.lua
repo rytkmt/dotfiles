@@ -46,8 +46,7 @@ require'packer'.startup(function()
     { 'vim-scripts/AnsiEsc.vim' },
     { 'vim-jp/vimdoc-ja' },
     { 'kana/vim-operator-user' },
-    { 'tyru/stoptypofile.vim' },
-    { 'neovim/nvim-lspconfig' }
+    { 'tyru/stoptypofile.vim' }
   }
 
   use_with_file("kana/vim-submode", "add")
@@ -107,5 +106,32 @@ require'packer'.startup(function()
   -- vim
   use { "thinca/vim-prettyprint", opt = true, ft = "vim" }
 
-  -- use { "vim-denops/denops.vim", opt = true, fn = 'denops#server#start', config = function() vim.call("denops#server#start()") end }
+
+  -- ddc周り
+  use {
+    'vim-denops/denops.vim',
+    opt = true,
+    ft = { 'git', 'snippet', 'toml', 'vim', 'ruby' },
+    config = function() vim.call("denops#server#start") end,
+  }
+
+  use {
+    'Shougo/ddc.vim',
+    requires = {
+      {
+        'Shougo/ddc-nvim-lsp',
+        requires = 'neovim/nvim-lspconfig'
+      },
+      { 'Shougo/ddc-matcher_head' },
+      { 'Shougo/ddc-sorter_rank' },
+      { 'tani/ddc-fuzzy' },
+      { 'Shougo/ddc-around' },
+      { 'matsui54/ddc-ultisnips' },
+      { 'matsui54/ddc-buffer' }
+    },
+    after = 'denops.vim',
+    config = function()
+      vim.cmd('so $XDG_CONFIG_HOME/plugins/source/ddc.vim.rc.vim')
+    end
+  }
 end)
