@@ -67,14 +67,13 @@ require'packer'.startup(function()
   use_with_file("SirVer/ultisnips", "add", "source")
   -- use_with_file("rytkmt/vim-trailing-whitespace", "add")
   -- 遅いので一時的にコメントアウトしておく
-  -- use_with_file("lilydjwg/colorizer", "add")
   -- use_with_file("vim-syntastic/syntastic", "add")
 
-  use_with_file("itchyny/lightline.vim", "source")
   use_with_file("haya14busa/vim-asterisk", "source")
   use_with_file("nathom/filetype.nvim", "source_lua")
   use_with_file("AndrewRadev/switch.vim", "add", "source")
   -- use_with_file("Shougo/vimproc.vim", "add", "source")
+  use_with_file('nvim-lualine/lualine.nvim', "source_lua", { requires = 'kyazdani42/nvim-web-devicons' })
 
   use { 'cohama/lexima.vim', setup = function() vim.g.lexima_accept_pum_with_enter = 0 end }
 
@@ -85,6 +84,7 @@ require'packer'.startup(function()
     opt = true,
     cmd = { 'Capture' }
   }
+
 
   use {
     'cocopon/inspecthi.vim',
@@ -106,6 +106,8 @@ require'packer'.startup(function()
   -- vim
   use { "thinca/vim-prettyprint", opt = true, ft = "vim" }
 
+  -- lua, vim
+  use { "norcalli/nvim-colorizer.lua", opt = true, ft = { "vim", "lua" } }--, config = function() require'colorizer'.setup() end }
 
   -- ddc周り
   use {
