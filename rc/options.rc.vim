@@ -93,6 +93,9 @@ set ignorecase
 set smartcase
 "インクリメンタルサーチを行う
 set incsearch
+" substitute中に変換後の文字に置き換えがプレビューされるのを無効化
+set inccommand=
+
 "検索結果をハイライト
 set hlsearch
 " ++ }}}

@@ -39,7 +39,6 @@ require'packer'.startup(function()
     use(args)
   end
 
-    -- { 'rytkmt/dotfiles' },
   use {
     { 'rytkmt/lighthouse' },
     { 'kana/vim-textobj-user' },

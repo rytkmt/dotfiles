@@ -9,7 +9,7 @@ call ddc#custom#patch_global('sourceOptions', {
     \ '_': {
     \   'matchers': ['matcher_fuzzy'],
     \   'sorters': ['sorter_rank'],
-    \   'maxCandidates': 30,
+    \   'maxCandidates': 500,
     \ },
     \ 'nvim-lsp': {
     \   'mark': 'lsp',
@@ -17,12 +17,12 @@ call ddc#custom#patch_global('sourceOptions', {
     \ },
     \ 'around': {'mark': 'A'},
     \ 'ultisnips': {'mark': 'ulti'},
-    \ 'buffer': {'mark': 'B'},
+    \ 'buffer': {'mark': 'B', 'limitBytes': 2000000},
     \ })
 call ddc#custom#patch_filetype(['ruby'], 'sources', ['nvim-lsp', 'around', 'ultisnips', ])
 
 call ddc#custom#patch_global('sourceParams', {
-    \ 'around': {'maxSize': 400},
+    \ 'around': {'maxSize': 800},
     \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
     \ })
 
