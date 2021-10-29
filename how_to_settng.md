@@ -16,43 +16,6 @@ mklink .vimrc {cloneしたvimrcのpath}
 ln -s {cloneしたvimrcのpath} .vimrc
 ```
 
-## grep用にリンクを貼る(winのみ)
-
-Cドライブの直下に「git_bin」という名前でGitのbinにディレクトリのシンボリックリンクを作成する
-
-```shell
-mklink git_bin c:¥Program Files¥Git¥usr¥bin
-```
-
-## タグジャンプようにctagsを入れる
-
-`universal ctags` を使用する
-
-#### linux
-
-```shell
-git clone https://github.com/universal-ctags/ctags.git
-cd ctags
-./autogen.sh
-./configure
-make
-sudo make install
-```
-
-## ctagsを非同期でファイル読み込み時などに更新するためvimprocの設定
-
-#### windows
-
-`http://qiita.com/akase244/items/ce5e2e18ad5883e98a77`
-上記の手順通りに設定を行う
-
-## ctagsの設定ファイル
-`.ctags.d`ディレクトリにシンボリックリンクを貼る
-
-#### linux
-
-HOMEの下に.ctags.dという名前でシンボリックリンクを貼る
-
 ## fontの設定(win)
 
 `http://www.rs.tus.ac.jp/yyusa/ricty_diminished.html`
@@ -79,18 +42,6 @@ $HOMEの下に.gitconfigという名前でシンボリックリンクを貼る
 
 #### (linux)
 yum install lynx
-
-## cocのための設定
-
-nodejsのインストール(`https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim`に記載)
-
-#### mac
-
-```shell
-brew install node
-curl -sL install-node.now.sh | sh
-curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
-```
 
 ### 設定に困った際は
 

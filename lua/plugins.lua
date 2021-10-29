@@ -47,10 +47,7 @@ require'packer'.startup(function()
     { 'kana/vim-operator-user' },
     { 'tyru/stoptypofile.vim' }
   }
-  use {
-    'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
+
   use_with_file("kana/vim-submode", "add")
   use_with_file("thinca/vim-quickrun", "add")
   use_with_file("airblade/vim-gitgutter", "add")
@@ -59,13 +56,11 @@ require'packer'.startup(function()
   use_with_file("vim-scripts/grep.vim", "add")
   use_with_file("tomtom/tcomment_vim", "add")
   use_with_file("tpope/vim-surround", "add")
-  use_with_file("ctrlpvim/ctrlp.vim", "add")
   use_with_file("LeafCage/yankround.vim", "add")
   use_with_file("osyo-manga/vim-anzu", "add")
   use_with_file("rhysd/clever-f.vim", "add")
   use_with_file("haya14busa/vim-operator-flashy", "add")
   use_with_file("kana/vim-operator-replace", "add")
-  -- use_with_file("airblade/vim-rooter", "add")
   use_with_file("SirVer/ultisnips", "add", "source")
   -- use_with_file("rytkmt/vim-trailing-whitespace", "add")
   -- 遅いので一時的にコメントアウトしておく
@@ -77,6 +72,11 @@ require'packer'.startup(function()
   -- use_with_file("Shougo/vimproc.vim", "add", "source")
   use_with_file('nvim-lualine/lualine.nvim', "source_lua", { requires = 'kyazdani42/nvim-web-devicons' })
   use { 'cohama/lexima.vim', setup = function() vim.g.lexima_accept_pum_with_enter = 0 end }
+  use_with_file(
+    'nvim-telescope/telescope.nvim',
+    "source_lua",
+    { requires = { {'nvim-lua/plenary.nvim'} } }
+  )
 
   -- 遅延系
 

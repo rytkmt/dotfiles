@@ -223,12 +223,8 @@ nmap <Leader>f [filer]
 nmap [search] <Nop>
 nmap <Leader>s [search]
 
-nmap [ctag] <Nop>
-vmap [ctag] <Nop>
-nmap <Leader>g [ctag]
-vmap <Leader>g [ctag]
-nmap <Leader>p [ctrlp]
-nmap [ctrlp] <Nop>
+nmap <Leader>p [finder]
+nmap [finder] <Nop>
 
 nnoremap [ft] <Nop>
 nmap <Leader>; [ft]
@@ -254,8 +250,7 @@ nnoremap [other]d :<C-u>tabedit $XDG_CONFIG_HOME/dein.toml<CR>
 nnoremap [other]o :<C-u>tabedit $XDG_CONFIG_HOME/rc/options.rc.vim<CR>
 nnoremap [other]m :<C-u>tabedit $XDG_CONFIG_HOME/rc/mappings.rc.vim<CR>
 nnoremap [other]c :<C-u>tabedit $XDG_CONFIG_HOME/rc/command.rc.vim<CR>
-nnoremap [other]u :<C-u>tabedit $XDG_CONFIG_HOME/plugins/spelunker.vim.rc.vim<CR>
-nnoremap [other]s :<C-u>tabedit $XDG_CONFIG_HOME/plugins/switch.vim.rc.vim<CR>
+nnoremap [other]s :<C-u>tabedit $XDG_CONFIG_HOME/plugins/source/switch.vim.rc.vim<CR>
 nnoremap [edit]s :e ++enc=shift_jis ++ff=dos<CR>
 nnoremap [edit]u :e ++enc=utf-8 ++ff=unix<CR>
 nnoremap [edit]e :e ++enc=euc-jp<CR>

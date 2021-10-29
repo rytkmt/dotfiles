@@ -1,5 +1,6 @@
 let g:switch_custom_definitions =
   \ [
+  \   switch#NormalizedCase(['next', 'prev']),
   \   switch#NormalizedCase(['left', 'right', 'center']),
   \   switch#NormalizedCase(['before', 'after']),
   \   switch#NormalizedCase(['start', 'end']),

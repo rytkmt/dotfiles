@@ -48,9 +48,7 @@ require'lualine'.setup{
   },
   sections = {
     lualine_a = {'mode'},
-    lualine_b = {
-      { 'filename', symbols = { modified = ' ', readonly = ' ' }, }
-    },
+    lualine_b = {'filename'},
     lualine_c = {'branch'},
     lualine_x = { function() return vim.call("FileDirUnderRootWithCache") end },
     lualine_y = {
@@ -59,9 +57,9 @@ require'lualine'.setup{
       {
         'fileformat',
         symbols = {
-          unix = 'LF', -- e712
-          dos = 'CRLF', -- e70f
-          mac = 'CR', -- e711
+          unix = 'LF', -- e712
+          dos = 'CRLF', -- e70f
+          mac = 'CR', -- e711
         }
       }
     },
@@ -69,9 +67,7 @@ require'lualine'.setup{
   },
   inactive_sections = {
     lualine_a = {},
-    lualine_b = {
-      { 'filename', symbols = { modified = ' ', readonly = ' ' }, }
-    },
+    lualine_b = {'filename'},
     lualine_c = {'branch'},
     lualine_x = {
       { 'filetype', colored = false }
