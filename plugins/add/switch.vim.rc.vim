@@ -1,4 +1,4 @@
-let g:switch_mapping = "-"
+nmap <nowait> - <Plug>(Switch)
 
 autocmd FileType ruby let b:switch_custom_definitions =
   \ [

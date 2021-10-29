@@ -65,7 +65,7 @@ require'packer'.startup(function()
   use_with_file("rhysd/clever-f.vim", "add")
   use_with_file("haya14busa/vim-operator-flashy", "add")
   use_with_file("kana/vim-operator-replace", "add")
-  use_with_file("airblade/vim-rooter", "add")
+  -- use_with_file("airblade/vim-rooter", "add")
   use_with_file("SirVer/ultisnips", "add", "source")
   -- use_with_file("rytkmt/vim-trailing-whitespace", "add")
   -- 遅いので一時的にコメントアウトしておく
