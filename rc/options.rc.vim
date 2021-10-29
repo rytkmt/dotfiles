@@ -142,12 +142,12 @@ set cmdheight=2
 set showcmd
 " タイトルを表示
 set title
-" 文脈によって解釈が異なる全角文字の幅を、2に固定する
-set ambiwidth=double
 " vimが自動で生成する（読み込み時など）tab幅をスペース2つ文にする
 set shiftwidth=2
 " 改行時などに、自動でインデントを設定してくれる
 set smartindent
+" UnicodeのAタイプ(Ambiguous)の文字幅（枠線のために => single、絵文字のため => double）
+set ambiwidth=single
 "vim設定をグループ化して閉じる
 autocmd MyAutoCmd FileType vim setlocal foldmethod=marker
 " ++ }}}

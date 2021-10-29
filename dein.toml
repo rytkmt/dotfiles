@@ -36,16 +36,16 @@ hook_add = '''
 source $XDG_CONFIG_HOME/plugins/add/defx.nvim.rc.vim
 '''
 
-[[plugins]]
-repo = 'ryanoasis/vim-devicons'
-depends = ['defx.nvim']
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/add/vim-devicons.rc.vim
-'''
+# [[plugins]]
+# repo = 'ryanoasis/vim-devicons'
+# depends = ['defx.nvim']
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/add/vim-devicons.rc.vim
+# '''
 
-[[plugins]]
-repo = 'kristijanhusak/defx-icons'
-depends = ['defx.nvim']
-hook_add = '''
-source $XDG_CONFIG_HOME/plugins/add/defx-icons.rc.vim
-'''
+# [[plugins]]
+# repo = 'kristijanhusak/defx-icons'
+# depends = ['defx.nvim']
+# hook_add = '''
+# source $XDG_CONFIG_HOME/plugins/add/defx-icons.rc.vim
+# '''

@@ -68,4 +68,5 @@ pcall(set_colorscheme)
 
 
 vim.cmd('set noimdisable')
+vim.cmd('so $XDG_CONFIG_HOME/rc/functions.rc.vim')
 vim.cmd('so $XDG_CONFIG_HOME/rc/mappings.rc.vim')

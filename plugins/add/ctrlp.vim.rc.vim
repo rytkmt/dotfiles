@@ -10,7 +10,7 @@ let g:ctrlp_clear_cache_on_exit = 0
 " scanする最大ファイル数
 let g:ctrlp_max_files = 10000
 " mruの最大保存数
-let g:ctrlp_mruf_max = 50
+let g:ctrlp_mruf_max = 100
 " 遅延再描画
 let g:ctrlp_lazy_update = 1
 " ルートパスと認識させるためのファイル
@@ -23,6 +23,5 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll|class|jar|gif|png|jpeg|jpg)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
-
 
 " autocmd FileType ctrlp call s:ctrlp_my_settings()

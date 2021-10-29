@@ -68,7 +68,7 @@ endfunction
 command! YankFilePath call s:yank_file_path()
 
 function! s:yank_file_path_under_root()
-  let l:path = substitute(expand("%:p"), FindRootDirectory()."/", "", "")
+  let l:path = FilePathUnderRoot()
   call setreg('*', l:path)
   echo l:path
 endfunction

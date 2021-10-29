@@ -8,14 +8,16 @@ local colors = {
     yellow    = '#c2c042',
     gray      = '#2f2f2f',
     darkgray  = '#202020',
-    lightgray = '#434343'
+    lightgray = '#838383',
+    offwhite  = '#d8d8c6'
 }
 
 local function mode_color(color)
   return {
     a = { bg = color, fg = colors.darkgray },
     b = { bg = colors.gray, fg = colors.white },
-    c = { bg = colors.gray, fg = colors.blue },
+    c = { bg = colors.gray, fg = color },
+    x = { bg = colors.gray, fg = colors.offwhite },
   }
 end
 
@@ -33,7 +35,7 @@ local custom_theme = {
 }
 
 local function location()
-  return 'L%-3lC%-2v'
+  return 'L%-3l| C%-3v'
 end
 
 require'lualine'.setup{
@@ -50,7 +52,7 @@ require'lualine'.setup{
       { 'filename', symbols = { modified = ' ', readonly = ' ' }, }
     },
     lualine_c = {'branch'},
-    lualine_x = {},
+    lualine_x = { function() return vim.call("FileDirUnderRootWithCache") end },
     lualine_y = {
       'filetype',
       'encoding',
@@ -63,12 +65,14 @@ require'lualine'.setup{
         }
       }
     },
-    lualine_z = {location}
+    lualine_z = { location }
   },
   inactive_sections = {
     lualine_a = {},
-    lualine_b = {'branch'},
-    lualine_c = {'filename'},
+    lualine_b = {
+      { 'filename', symbols = { modified = ' ', readonly = ' ' }, }
+    },
+    lualine_c = {'branch'},
     lualine_x = {
       { 'filetype', colored = false }
     },

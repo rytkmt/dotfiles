@@ -47,7 +47,10 @@ require'packer'.startup(function()
     { 'kana/vim-operator-user' },
     { 'tyru/stoptypofile.vim' }
   }
-
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
   use_with_file("kana/vim-submode", "add")
   use_with_file("thinca/vim-quickrun", "add")
   use_with_file("airblade/vim-gitgutter", "add")
@@ -73,7 +76,6 @@ require'packer'.startup(function()
   use_with_file("AndrewRadev/switch.vim", "add", "source")
   -- use_with_file("Shougo/vimproc.vim", "add", "source")
   use_with_file('nvim-lualine/lualine.nvim', "source_lua", { requires = 'kyazdani42/nvim-web-devicons' })
-
   use { 'cohama/lexima.vim', setup = function() vim.g.lexima_accept_pum_with_enter = 0 end }
 
   -- 遅延系
