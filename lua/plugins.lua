@@ -49,7 +49,7 @@ require'packer'.startup(function()
   }
 
   use_with_file("kana/vim-submode", "add")
-  use_with_file("thinca/vim-quickrun", "add")
+  use_with_file("thinca/vim-quickrun", "add", { requires = { "lambdalisue/vim-quickrun-neovim-job" } })
   use_with_file("airblade/vim-gitgutter", "add")
   use_with_file("junegunn/vim-easy-align", "add")
   use_with_file("nathanaelkane/vim-indent-guides", "add")
@@ -71,6 +71,7 @@ require'packer'.startup(function()
   use_with_file("AndrewRadev/switch.vim", "add", "source")
   -- use_with_file("Shougo/vimproc.vim", "add", "source")
   use_with_file('nvim-lualine/lualine.nvim', "source_lua", { requires = 'kyazdani42/nvim-web-devicons' })
+  use_with_file('kyazdani42/nvim-tree.lua', "add", "source_lua", { requires = 'kyazdani42/nvim-web-devicons' })
   use { 'cohama/lexima.vim', setup = function() vim.g.lexima_accept_pum_with_enter = 0 end }
   use_with_file(
     'nvim-telescope/telescope.nvim',
@@ -103,6 +104,9 @@ require'packer'.startup(function()
 
   -- textile
   use { "rytkmt/vim-textile", opt = true, ft = "textile" }
+
+  -- ruby
+  use_with_file("rytkmt/vim-textobj-ruby", "add", "source", { opt = true, ft = "ruby", branch = "feature_textobj_ruby_method" })
 
   -- vim
   use { "thinca/vim-prettyprint", opt = true, ft = "vim" }
