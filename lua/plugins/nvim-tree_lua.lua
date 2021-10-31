@@ -1,6 +1,6 @@
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 local list = {
-  { key = {"<CR>", "e"},                                           cb = tree_cb("edit") },
+  { key = {"<CR>", "e", "o"},                                           cb = tree_cb("edit") },
   { key = "l",     cb = tree_cb("cd") },
   { key = "h",     cb = tree_cb("parent_node")..tree_cb("edit") },
   { key = "v",     cb = tree_cb("vsplit") },
@@ -75,7 +75,7 @@ require'nvim-tree'.setup {
     side = 'left',
     auto_resize = false,
     mappings = {
-      custom_only = false,
+      custom_only = true,
       list = list
     }
   }

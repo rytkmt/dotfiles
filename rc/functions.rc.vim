@@ -7,7 +7,10 @@ function! FindGitProjectRoot()
       return expand(pathMaker)
     endif
   endwhile
-  return 0
+
+  " 無かったら現在のバッファで返す
+  echom "not found git root"
+  return "%:h"
 endfunction
 
 function! FilePathUnderRoot()
