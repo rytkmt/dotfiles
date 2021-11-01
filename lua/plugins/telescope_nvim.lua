@@ -16,6 +16,7 @@ require('telescope').setup{
     },
     mappings = {
       i = {
+        ["<C-u>"] = false,
         ["<C-q>"] = actions.close,
         ["<C-[>"] = actions.close,
         ["<esc>"] = actions.close,

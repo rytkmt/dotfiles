@@ -88,11 +88,11 @@ require'packer'.startup(function()
   }
 
 
-  use {
-    'cocopon/inspecthi.vim',
-    opt = true,
-    cmd = { 'Inspecthi', 'InspecthiShowInspector', 'InspecthiHideInspector' }
-  }
+  -- use {
+  --   'cocopon/inspecthi.vim',
+  --   opt = true,
+  --   cmd = { 'Inspecthi', 'InspecthiShowInspector', 'InspecthiHideInspector' }
+  -- }
 
   use { 'kana/vim-smartinput', opt = true, event = "InsertEnter *" }
   use_with_file("cohama/vim-smartinput-endwise", "source", { opt = true, event = "InsertEnter *" })
