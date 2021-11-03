@@ -1,5 +1,4 @@
-nmap <nowait> - <Plug>(Switch)
-
+nnoremap - :Switch<cr>
 autocmd FileType ruby let b:switch_custom_definitions =
   \ [
   \   switch#NormalizedCase(['if', 'unless']),
