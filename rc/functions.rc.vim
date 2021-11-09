@@ -2,15 +2,14 @@ function! FindGitProjectRoot()
   let pathMaker='%:p'
   while(len(expand(pathMaker))>1)
     let pathMaker=pathMaker.':h'
-    let fileToCheck=expand(pathMaker).'/.git'
-    if isdirectory(fileToCheck)||isdirectory(fileToCheck)
+    if isdirectory(expand(pathMaker).'/.git') || filereadable(expand(pathMaker).'/README.md')
       return expand(pathMaker)
     endif
   endwhile
 
   " 無かったら現在のバッファで返す
   echom "not found git root"
-  return "%:h"
+  return expand("%:h")
 endfunction
 
 function! FilePathUnderRoot()
