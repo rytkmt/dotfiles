@@ -28,9 +28,9 @@ local function open_with_path_command(dir)
   return ":lua require'nvim-tree.lib'.change_dir(" .. dir .."); require'nvim-tree'.open()<CR>"
 end
 
-vim.api.nvim_set_keymap("n", "[filer]f", open_with_path_command("vim.fn.FindGitProjectRoot()"), { noremap = false, silent = true, nowait = true })
+vim.api.nvim_set_keymap("n", "[filer]d", open_with_path_command("vim.fn.FindGitProjectRoot()"), { noremap = false, silent = true, nowait = true })
 vim.api.nvim_set_keymap("n", "[filer]b", open_with_path_command("vim.fn.expand('%:p:h')"), { noremap = false, silent = true, nowait = true })
-vim.api.nvim_set_keymap("n", "[filer]d", open_with_path_command("vim.env.HOME"), { noremap = false, silent = true, nowait = true })
+vim.api.nvim_set_keymap("n", "[filer]h", open_with_path_command("vim.env.HOME"), { noremap = false, silent = true, nowait = true })
 vim.api.nvim_set_keymap("n", "[filer]v", open_with_path_command("vim.env.XDG_CONFIG_HOME"), { noremap = false, silent = true, nowait = true })
 
 require'nvim-tree'.setup {

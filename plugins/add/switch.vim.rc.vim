@@ -1,3 +1,4 @@
+let g:switch_mapping = ""
 nnoremap - :Switch<cr>
 autocmd FileType ruby let b:switch_custom_definitions =
   \ [

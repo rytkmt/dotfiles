@@ -47,10 +47,9 @@ require'packer'.startup(function()
     { 'kana/vim-operator-user' },
     { 'tyru/stoptypofile.vim' }
   }
-
   use_with_file("kana/vim-submode", "add")
   use_with_file("thinca/vim-quickrun", "add", { requires = { "lambdalisue/vim-quickrun-neovim-job" } })
-  use_with_file("airblade/vim-gitgutter", "add")
+  -- use_with_file("airblade/vim-gitgutter", "add")
   use_with_file("junegunn/vim-easy-align", "add")
   use_with_file("glepnir/indent-guides.nvim", "source_lua")
   use_with_file("vim-scripts/grep.vim", "add")
@@ -73,7 +72,11 @@ require'packer'.startup(function()
   -- use_with_file("Shougo/vimproc.vim", "add", "source")
   use_with_file('nvim-lualine/lualine.nvim', "source_lua", { requires = 'kyazdani42/nvim-web-devicons' })
   use_with_file('kyazdani42/nvim-tree.lua', "add", "source_lua", { requires = 'kyazdani42/nvim-web-devicons' })
-  use { 'cohama/lexima.vim', setup = function() vim.g.lexima_accept_pum_with_enter = 0 end }
+  use_with_file('lewis6991/gitsigns.nvim', "source_lua")
+  use_with_file("windwp/nvim-autopairs", "source_lua", { requires = { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } })
+  -- 遅いため一旦・・
+  -- use_with_file('gelguy/wilder.nvim', "source")
+  -- use { 'cohama/lexima.vim', setup = function() vim.g.lexima_accept_pum_with_enter = 0 end }
   use_with_file(
     'nvim-telescope/telescope.nvim',
     "source_lua",
@@ -95,8 +98,8 @@ require'packer'.startup(function()
   --   cmd = { 'Inspecthi', 'InspecthiShowInspector', 'InspecthiHideInspector' }
   -- }
 
-  use { 'kana/vim-smartinput', opt = true, event = "InsertEnter *" }
-  use_with_file("cohama/vim-smartinput-endwise", "source", { opt = true, event = "InsertEnter *" })
+  -- use { 'kana/vim-smartinput', opt = true, event = "InsertEnter *" }
+  -- use_with_file("cohama/vim-smartinput-endwise", "source", { opt = true, event = "InsertEnter *" })
 
   -- markdown
   use_with_file("rcmdnk/vim-markdown", "add", { opt = true, ft = { "markdown", "mkd" } })

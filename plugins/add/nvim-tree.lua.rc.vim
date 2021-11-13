@@ -25,7 +25,7 @@ let g:nvim_tree_symlink_arrow = ' >> ' " defaults to ' ➛ '. used as a separato
 " Dictionary of buffer option names mapped to a list of option values that
 " indicates to the window picker that the buffer's window should not be
 " selectable.
-let g:nvim_tree_special_files = { 'README.md': 1, 'Rakefile': 1 } " List of filenames that gets highlighted with NvimTreeSpecialFile
+let g:nvim_tree_special_files = { 'README.md': 1, 'README.rdoc': 1, 'Rakefile': 1 } " List of filenames that gets highlighted with NvimTreeSpecialFile
 let g:nvim_tree_show_icons = {
     \ 'git': 0,
     \ 'folders': 1,

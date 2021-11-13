@@ -2,7 +2,7 @@ function! FindGitProjectRoot()
   let pathMaker='%:p'
   while(len(expand(pathMaker))>1)
     let pathMaker=pathMaker.':h'
-    if isdirectory(expand(pathMaker).'/.git') || filereadable(expand(pathMaker).'/README.md')
+    if isdirectory(expand(pathMaker).'/.git') || filereadable(expand(pathMaker).'/README.md') || filereadable(expand(pathMaker).'/README.rdoc')
       return expand(pathMaker)
     endif
   endwhile
