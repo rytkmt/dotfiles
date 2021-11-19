@@ -1,7 +1,9 @@
 local actions = require("telescope.actions")
+local action_layout = require("telescope.actions.layout")
 
 require('telescope').setup{
   defaults = {
+    preview = { hide_on_startup = true },
     sorting_strategy = "ascending",
     scroll_strategy = "limit",
     layout_strategy = "horizontal",
@@ -27,6 +29,7 @@ require('telescope').setup{
         ["<C-s>"] = actions.select_horizontal,
         ["<C-v>"] = actions.select_vertical,
         ["<C-t>"] = actions.select_tab,
+        ["<C-f>"] = action_layout.toggle_preview,
         ["<CR>"] = actions.select_default,
       },
       n = {
