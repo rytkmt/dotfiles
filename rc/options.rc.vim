@@ -161,6 +161,8 @@ set noswapfile
 set noundofile
 " ++ }}}
 " ++ その他：{{{
+" コマンド入力中にEscを押した際にキレイに中止するように
+set cpoptions+=x
 " "0"で始まる数値を、8進数として扱わないようにする
 set nrformats-=octal
 " ファイルの保存をしていなくても、べつのファイルを開けるようにする

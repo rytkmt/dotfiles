@@ -37,3 +37,8 @@ function! FileDirUnderRootWithCache()
 
   return b:file_dir_under_root
 endfunction
+
+function! InputPath()
+  let l:default = FindGitProjectRoot()
+  return input("Target path: ", l:default, "file")
+endfunction

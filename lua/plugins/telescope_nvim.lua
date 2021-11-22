@@ -42,7 +42,10 @@ require('telescope').setup{
   }
 }
 vim.api.nvim_set_keymap('n', '[finder]f', ':lua require("telescope.builtin").find_files({cwd = vim.call("FindGitProjectRoot")})<CR>', { noremap = true, silent = true, nowait = true })
+vim.api.nvim_set_keymap('n', '[finder]if', ':lua require("telescope.builtin").find_files({cwd = vim.call("InputPath")})<CR>', { noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]g', ':lua require("telescope.builtin").live_grep({cwd = vim.call("FindGitProjectRoot")})<CR>', { noremap = true, silent = true, nowait = true })
+vim.api.nvim_set_keymap('n', '[finder]ig', ':lua require("telescope.builtin").live_grep({cwd = vim.call("InputPath")})<CR>', { noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]G', ':lua require("telescope.builtin").grep_string({cwd = vim.call("FindGitProjectRoot")})<CR>', { noremap = true, silent = true, nowait = true })
+vim.api.nvim_set_keymap('n', '[finder]iG', ':lua require("telescope.builtin").grep_string({cwd = vim.call("InputPath")})<CR>', { noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]b', ':lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>', { noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]m', ':lua require("telescope.builtin").oldfiles()<CR>', { noremap = true, silent = true, nowait = true })
