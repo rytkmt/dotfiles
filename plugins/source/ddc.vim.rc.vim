@@ -17,12 +17,12 @@ call ddc#custom#patch_global('sourceOptions', {
     \ },
     \ 'around': {'mark': 'A'},
     \ 'ultisnips': {'mark': 'ulti'},
-    \ 'buffer': {'mark': 'B', 'limitBytes': 5000000},
+    \ 'buffer': {'mark': 'B', 'limitBytes': 8000000},
     \ })
 call ddc#custom#patch_filetype(['ruby'], 'sources', ['nvim-lsp', 'around', 'ultisnips', ])
 
 call ddc#custom#patch_global('sourceParams', {
-    \ 'around': {'maxSize': 800},
+    \ 'around': {'maxSize': 1500},
     \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
     \ })
 

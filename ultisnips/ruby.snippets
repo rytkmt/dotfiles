@@ -175,35 +175,39 @@ t.${1:TYPE} "${2:NAME}", ${4} comment: "${3:COMMENT}"
 endsnippet
 
 snippet trow_enum "" b
-t.integer "${2:NAME}", default: ${4:DEFAULT}, null: false, comment: "${3:COMMENT}"
+t.integer  "${2:NAME}", default: ${4:DEFAULT}, null: false, comment: "${3:COMMENT}"
 endsnippet
 
 snippet trow_enum_force_select "" b
-t.integer "${2:NAME}",                        null: false, comment: "${3:COMMENT}"
+t.integer  "${2:NAME}",                        null: false, comment: "${3:COMMENT}"
 endsnippet
 
 snippet trow_enum_allow_nil "" b
-t.integer "${2:NAME}",                                     comment: "${3:COMMENT}"
+t.integer  "${2:NAME}",                                     comment: "${3:COMMENT}"
 endsnippet
 
 snippet trow_text "" b
-t.text    "${2:NAME}", default: "",    null: false, comment: "${3:COMMENT}"
+t.text     "${2:NAME}", default: "",    null: false, comment: "${3:COMMENT}"
 endsnippet
 
 snippet trow_integer "" b
-t.integer "${2:NAME}",                 null: false, comment: "${3:COMMENT}"
+t.integer  "${2:NAME}",                 null: false, comment: "${3:COMMENT}"
 endsnippet
 
 snippet trow_integer_default0 "" b
-t.integer "${2:NAME}", default: 0,     null: false, comment: "${3:COMMENT}"
+t.integer  "${2:NAME}", default: 0,     null: false, comment: "${3:COMMENT}"
+endsnippet
+
+snippet trow_decimal "" b
+t.decimal  "${2:NAME}", precision: ${3:PRECISION}, scale: ${4:PRECISION}, default: "0.0", null: false, comment: "${5:COMMENT}"
 endsnippet
 
 snippet trow_bool "" b
-t.boolean "${2:NAME}", default: false, null: false, comment: "${3:COMMENT}"
+t.boolean  "${2:NAME}", default: false, null: false, comment: "${3:COMMENT}"
 endsnippet
 
 snippet trow_bigint "" b
-t.bigint  "${2:NAME}",                 null: false, comment: "${3:COMMENT}"
+t.bigint   "${2:NAME}",                 null: false, comment: "${3:COMMENT}"
 endsnippet
 
 snippet trow_datetime "" b

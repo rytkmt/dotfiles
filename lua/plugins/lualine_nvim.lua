@@ -44,7 +44,8 @@ require'lualine'.setup{
     theme  = custom_theme,
     component_separators = { left = '', right = '|'},
     section_separators = { left = '', right = ''},
-    disabled_filetypes = {}
+    disabled_filetypes = {},
+    -- file_status = false
   },
   sections = {
     lualine_a = {'mode'},
