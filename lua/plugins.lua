@@ -61,7 +61,6 @@ require'packer'.startup(function()
   -- 遅いため一回消す
   -- use_with_file("haya14busa/vim-operator-flashy", "add")
   use_with_file("kana/vim-operator-replace", "add")
-  -- use_with_file("SirVer/ultisnips", "add", "source")
   -- use_with_file("rytkmt/vim-trailing-whitespace", "add")
   -- 遅いので一時的にコメントアウトしておく
   -- use_with_file("vim-syntastic/syntastic", "add")
@@ -145,7 +144,6 @@ require'packer'.startup(function()
       { 'Shougo/ddc-sorter_rank' },
       { 'tani/ddc-fuzzy' },
       { 'Shougo/ddc-around' },
-      -- { 'matsui54/ddc-ultisnips' },
       { 'hrsh7th/vim-vsnip-integ', after = 'vim-vsnip' },
       { 'matsui54/ddc-buffer' }
     },
