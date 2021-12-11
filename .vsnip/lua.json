@@ -1,0 +1,27 @@
+{
+  "use_packer_plugin": {
+    "prefix": "use_packer_plugin",
+    "body": [
+      "use { '${1:REPO}' }"
+    ]
+  },
+  "use_packer_plugin_setup": {
+    "prefix": "use_packer_plugin_setup",
+    "body": [
+      "use {",
+      "  '${1:REPO}',",
+      "  setup = function() vim.cmd('so $XDG_CONFIG_HOME/plugins/add/${2:NAME}.rc.vim') end",
+      "}"
+    ]
+  },
+  "use_packer_plugin_on_cmd": {
+    "prefix": "use_packer_plugin_on_cmd",
+    "body": [
+      "use {",
+      "  '${1:REPO}',",
+      "  opt = true,",
+      "  cmd = { '${2:CMD}' }",
+      "}"
+    ]
+  }
+}

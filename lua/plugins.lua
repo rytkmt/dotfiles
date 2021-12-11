@@ -61,7 +61,7 @@ require'packer'.startup(function()
   -- 遅いため一回消す
   -- use_with_file("haya14busa/vim-operator-flashy", "add")
   use_with_file("kana/vim-operator-replace", "add")
-  use_with_file("SirVer/ultisnips", "add", "source")
+  -- use_with_file("SirVer/ultisnips", "add", "source")
   -- use_with_file("rytkmt/vim-trailing-whitespace", "add")
   -- 遅いので一時的にコメントアウトしておく
   -- use_with_file("vim-syntastic/syntastic", "add")
@@ -86,6 +86,7 @@ require'packer'.startup(function()
     "source_lua",
     { requires = { {'nvim-lua/plenary.nvim'} } }
   )
+  use_with_file('mattn/vim-sqlfmt', "add", { opt = true, ft = "sql" })
 
   -- 遅延系
 
@@ -108,6 +109,7 @@ require'packer'.startup(function()
   -- markdown
   use_with_file("rcmdnk/vim-markdown", "add", { opt = true, ft = { "markdown", "mkd" } })
   use { "joker1007/vim-markdown-quote-syntax", opt = true, ft = { "markdown", "mkd" } }
+  use("ellisonleao/glow.nvim", { opt = true, ft = { "markdown", "mkd" }})
   use { "mattn/vim-maketable", opt = true, ft = { "markdown", "mkd" } }
 
   -- textile
@@ -130,6 +132,8 @@ require'packer'.startup(function()
     config = function() vim.call("denops#server#start") end,
   }
 
+  use_with_file("hrsh7th/vim-vsnip", "add", { requires = { 'rafamadriz/friendly-snippets' } })
+
   use {
     'Shougo/ddc.vim',
     requires = {
@@ -141,7 +145,8 @@ require'packer'.startup(function()
       { 'Shougo/ddc-sorter_rank' },
       { 'tani/ddc-fuzzy' },
       { 'Shougo/ddc-around' },
-      { 'matsui54/ddc-ultisnips' },
+      -- { 'matsui54/ddc-ultisnips' },
+      { 'hrsh7th/vim-vsnip-integ', after = 'vim-vsnip' },
       { 'matsui54/ddc-buffer' }
     },
     after = 'denops.vim',

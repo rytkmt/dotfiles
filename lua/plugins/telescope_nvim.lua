@@ -38,6 +38,28 @@ require('telescope').setup{
     },
     file_ignore_patterns = {
       "%.pdf"
+    },
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      -- "--smart-case"
+      "--case-sensitive",
+    }
+  },
+  pickers = {
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      -- "--smart-case"
+      "--case-sensitive",
     }
   }
 }

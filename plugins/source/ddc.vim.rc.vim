@@ -1,6 +1,6 @@
 call ddc#custom#patch_global('sources', [
-  \ 'ultisnips',
   \ 'around',
+  \ 'vsnip',
   \ 'buffer',
   \ ])
 
@@ -16,10 +16,9 @@ call ddc#custom#patch_global('sourceOptions', {
     \   'forceCompletionPattern': '\.\w*|:\w*|->\w*'
     \ },
     \ 'around': {'mark': 'A'},
-    \ 'ultisnips': {'mark': 'ulti'},
     \ 'buffer': {'mark': 'B', 'limitBytes': 8000000},
     \ })
-call ddc#custom#patch_filetype(['ruby'], 'sources', ['nvim-lsp', 'around', 'ultisnips', ])
+call ddc#custom#patch_filetype(['ruby'], 'sources', ['nvim-lsp', 'vsnip', 'around', 'buffer' ])
 
 call ddc#custom#patch_global('sourceParams', {
     \ 'around': {'maxSize': 1500},
@@ -55,9 +54,12 @@ local on_attach = function (client, bufnr)
   buf_set_keymap('n', 'g]', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   -- require('folding').on_attach()
 end
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 require('lspconfig').solargraph.setup({
   on_attach = on_attach,
+  capabilities = capabilities,
 
   settings = {
     solargraph = {

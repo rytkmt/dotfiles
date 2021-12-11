@@ -1,0 +1,399 @@
+{
+  "rescue_e": {
+    "prefix": "rescue_e",
+    "body": [
+      "rescue => _e"
+    ]
+  },
+  "rescue_e_binding": {
+    "prefix": "rescue_e_binding",
+    "body": [
+      "rescue => _e",
+      "  binding.pry",
+      "  raise _e"
+    ]
+  },
+  "logger_stdout": {
+    "prefix": "logger_stdout",
+    "body": [
+      "ActiveRecord::Base.logger = Logger.new(STDOUT)"
+    ]
+  },
+  "logger_nil": {
+    "prefix": "logger_nil",
+    "body": [
+      "ActiveRecord::Base.logger = nil"
+    ]
+  },
+  "pex": {
+    "prefix": "pex",
+    "body": [
+      "p e.class",
+      "p e.message",
+      "p e.backtrace"
+    ]
+  },
+  "strftime": {
+    "prefix": "strftime",
+    "body": [
+      "strftime(\"%Y-%m-%d %H:%M:%S\")"
+    ]
+  },
+  "require_active_support": {
+    "prefix": "require_active_support",
+    "body": [
+      "require 'active_support/all'"
+    ]
+  },
+  "tap_pp": {
+    "prefix": "tap_pp",
+    "body": [
+      "tap(&method(:pp))"
+    ]
+  },
+  "benchmark": {
+    "prefix": "benchmark",
+    "body": [
+      "require 'benchmark'",
+      "Benchmark.bm ${1:COUNT} do |r|",
+      "  r.report \"${2:NAME}\" do",
+      "    ${3:CONTEXT}",
+      "  end",
+      "end"
+    ]
+  },
+  "Time_now_ms": {
+    "prefix": "Time_now_ms",
+    "body": [
+      "Time.now.instance_eval { '%s.%03d' % [strftime('%Y/%m/%d %H:%M:%S'), (usec / 1000.0).round] }"
+    ]
+  },
+  "binding_pry": {
+    "prefix": "pry",
+    "body": [
+      "binding.pry"
+    ]
+  },
+  "sequence_text": {
+    "prefix": "sequence_text",
+    "body": [
+      "sequence(:${1:COLUMN}) { |i| \"$1_#{i}\" }",
+      "$2"
+    ]
+  },
+  "sequence_count": {
+    "prefix": "sequence_count",
+    "body": [
+      "sequence(:${1:COLUMN}) { |i| i }",
+      "$2"
+    ]
+  },
+  "factory_define": {
+    "prefix": "factory_define",
+    "body": [
+      "factory :${1}, class: CmCore::${2} do",
+      "  ${3}",
+      "end"
+    ]
+  },
+  "model_cm_core_ar": {
+    "prefix": "model_cm_core_ar",
+    "body": [
+      "module CmCore",
+      "  class $1 < CmCore::ApplicationRecord",
+      "    $2",
+      "  end",
+      "end"
+    ]
+  },
+  "enum_cm_core": {
+    "prefix": "enum_cm_core",
+    "body": [
+      "module CmCore",
+      "  module Enums",
+      "    module ${1:NAME}",
+      "      extend ActiveSupport::Concern",
+      "      included do",
+      "        enum ${2:SMALLNAME}: {",
+      "          ${3}",
+      "        }, _prefix: true",
+      "      end",
+      "    end",
+      "  end",
+      "end"
+    ]
+  },
+  "enum_cm_core_with_directory": {
+    "prefix": "enum_cm_core_with_directory",
+    "body": [
+      "module CmCore",
+      "  module Enums",
+      "    module ${1:GROUP}",
+      "      module ${2:NAME}",
+      "        extend ActiveSupport::Concern",
+      "        included do",
+      "          enum ${3:SMALLNAME}: {",
+      "            ${4}",
+      "          }, _prefix: true",
+      "        end",
+      "      end",
+      "    end",
+      "  end",
+      "end"
+    ]
+  },
+  "create_table": {
+    "prefix": "create_table",
+    "body": [
+      "# encoding: utf-8",
+      "# -*- mode: ruby -*-",
+      "# vi: set ft=ruby :",
+      "create_table \"${1:TABLE}\", force: :cascade, comment: \"${2:T_NAME}\" do |t|",
+      "  ${3}",
+      "end"
+    ]
+  },
+  "trow": {
+    "prefix": "trow",
+    "body": [
+      "t.${1:TYPE} \"${2:NAME}\", ${4} comment: \"${3:COMMENT}\""
+    ]
+  },
+  "trow_enum": {
+    "prefix": "trow_enum",
+    "body": [
+      "t.integer  \"${2:NAME}\", default: ${4:DEFAULT}, null: false, comment: \"${3:COMMENT}\""
+    ]
+  },
+  "trow_enum_force_select": {
+    "prefix": "trow_enum_force_select",
+    "body": [
+      "t.integer  \"${2:NAME}\",                        null: false, comment: \"${3:COMMENT}\""
+    ]
+  },
+  "trow_enum_allow_nil": {
+    "prefix": "trow_enum_allow_nil",
+    "body": [
+      "t.integer  \"${2:NAME}\",                                     comment: \"${3:COMMENT}\""
+    ]
+  },
+  "trow_text": {
+    "prefix": "trow_text",
+    "body": [
+      "t.text     \"${2:NAME}\", default: \"\",    null: false, comment: \"${3:COMMENT}\""
+    ]
+  },
+  "trow_integer": {
+    "prefix": "trow_integer",
+    "body": [
+      "t.integer  \"${2:NAME}\",                 null: false, comment: \"${3:COMMENT}\""
+    ]
+  },
+  "trow_decimal": {
+    "prefix": "trow_decimal",
+    "body": [
+      "t.integer  \"${2:NAME}\",                 null: false, comment: \"${3:COMMENT}\""
+    ]
+  },
+  "trow_bool": {
+    "prefix": "trow_bool",
+    "body": [
+      "t.boolean  \"${2:NAME}\", default: false, null: false, comment: \"${3:COMMENT}\""
+    ]
+  },
+  "trow_bigint": {
+    "prefix": "trow_bigint",
+    "body": [
+      "t.bigint   \"${2:NAME}\",                 null: false, comment: \"${3:COMMENT}\""
+    ]
+  },
+  "trow_datetime": {
+    "prefix": "trow_datetime",
+    "body": [
+      "t.datetime \"${1:NAME}\", ${3}comment: \"${2:COMMENT}\""
+    ]
+  },
+  "trow_jsonb_hash": {
+    "prefix": "trow_jsonb_hash",
+    "body": [
+      "t.jsonb    \"${1:NAME}\", default: {}, null: false, comment: \"${2: COMMENT}\""
+    ]
+  },
+  "trow_jsonb_array": {
+    "prefix": "trow_jsonb_array",
+    "body": [
+      "t.jsonb    \"${1:NAME}\", default: [], null: false, comment: \"${2: COMMENT}\""
+    ]
+  },
+  "trow_jsonb_nil": {
+    "prefix": "trow_jsonb_nil",
+    "body": [
+      "t.jsonb    \"${1:NAME}\",                           comment: \"${2: COMMENT}\""
+    ]
+  },
+  "trow_operator": {
+    "prefix": "trow_operator",
+    "body": [
+      "t.bigint   \"created_by\",             null: false, comment: \"登録した担当者ID\"",
+      "t.bigint   \"updated_by\",             null: false, comment: \"更新した担当者ID\"",
+      "t.datetime \"created_at\",             null: false",
+      "t.datetime \"updated_at\",             null: false"
+    ]
+  },
+  "trow_operate_at": {
+    "prefix": "trow_operate_at",
+    "body": [
+      "t.datetime \"created_at\",             null: false",
+      "t.datetime \"updated_at\",             null: false"
+    ]
+  },
+  "tindex": {
+    "prefix": "tindex",
+    "body": [
+      "t.index [\"${1:TARGET}\"], name: \"index_${2:TABLE_NAME}_on_$1\"",
+      "${3}"
+    ]
+  },
+  "tforeign_key": {
+    "prefix": "tforeign_key",
+    "body": [
+      "t.foreign_key \"${1:TO_TABLE}\", name: \"fk_${2:TO_ID}_id\""
+    ]
+  },
+  "transaction": {
+    "prefix": "transaction",
+    "body": [
+      "ActiveRecord::Base.transaction do",
+      "  ${1}",
+      "end"
+    ]
+  },
+  "rspec_init": {
+    "prefix": "rspec_init",
+    "body": [
+      "require(\"rails_helper\")",
+      "",
+      "describe(${1: KLASS}) do",
+      "  ${2: CONTENTS}",
+      "end"
+    ]
+  },
+  "vcr_cassette_name": {
+    "prefix": "vcr_cassette_name",
+    "body": [
+      "vcr: { cassette_name: \"${1:CASSETTE_NAME}\" }"
+    ]
+  },
+  "raise_not_implement": {
+    "prefix": "raise_not_implement",
+    "body": [
+      "raise(NotImplementedError)"
+    ]
+  },
+  "concern_included": {
+    "prefix": "concern_included",
+    "body": [
+      "extend ActiveSupport::Concern",
+      "",
+      "included do",
+      "  ${1}",
+      "end"
+    ]
+  },
+  "concern_class_methods": {
+    "prefix": "concern_class_methods",
+    "body": [
+      "extend ActiveSupport::Concern",
+      "",
+      "class_methods do",
+      "  ${1}",
+      "end"
+    ]
+  },
+  "describe": {
+    "prefix": "describe",
+    "body": [
+      "describe \"${1:DESCRIBE}\" do${2}",
+      "end"
+    ]
+  },
+  "context": {
+    "prefix": "context",
+    "body": [
+      "context \"${1:CONTEXT}\" do${2}",
+      "end"
+    ]
+  },
+  "context_vcr": {
+    "prefix": "context_vcr",
+    "body": [
+      "context \"${1:CONTEXT}\", vcr: { cassette_name: \"${2:CASSETTE_NAME}\" } do${3}",
+      "end"
+    ]
+  },
+  "example": {
+    "prefix": "example",
+    "body": [
+      "example \"${1:EXAMPLE}\" do${2}",
+      "end"
+    ]
+  },
+  "allow_mock_return": {
+    "prefix": "allow_mock_return",
+    "body": [
+      "allow(${1:NAME}).to(receive(:${2:METHOD}).and_return(${3:RETURN}))"
+    ]
+  },
+  "allow_any_instance_mock_return": {
+    "prefix": "allow_any_instance_mock_return",
+    "body": [
+      "allow_any_instance_of(${1:NAME}).to(receive(:${2:METHOD}).and_return(${3:RETURN}))"
+    ]
+  },
+  "expect_any_instance_mock_once": {
+    "prefix": "expect_any_instance_mock_once",
+    "body": [
+      "expect_any_instance_of(${1:NAME}).to(receive(:${2:METHOD}).once)"
+    ]
+  },
+  "allow_mock_raise": {
+    "prefix": "allow_mock_raise",
+    "body": [
+      "allow(${1:NAME}).to(receive(:${2:METHOD}).and_raise(${3:ERROR}))"
+    ]
+  },
+  "timetravel_freeze": {
+    "prefix": "timetravel_freeze",
+    "body": [
+      "around do |e|",
+      "  travel_to(${1:TIME}) { e.run }",
+      "end"
+    ]
+  },
+  "around_travel_to": {
+    "prefix": "around_travel_to",
+    "body": [
+      "around do |e|",
+      "  travel_to(${1:TIME}) { e.run }",
+      "end"
+    ]
+  },
+  "rubocop_disable": {
+    "prefix": "rubocop_disable",
+    "body": [
+      "rubocop:disable ${1:NAME}"
+    ]
+  },
+  "dir_require": {
+    "prefix": "dir_require",
+    "body": [
+      "Dir[__dir__ + \"/`!v expand(\"%:t:r\")`/*.rb\"].each { |p| require p }"
+    ]
+  },
+  "require_dir": {
+    "prefix": "require_dir",
+    "body": [
+      "Dir[__dir__ + \"/`!v expand(\"%:t:r\")`/*.rb\"].each { |p| require p }"
+    ]
+  }
+}
