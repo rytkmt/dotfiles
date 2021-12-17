@@ -40,6 +40,16 @@
       git pob; \
     fi; \
   }; f"
+  snprb = "!f() { \
+    git add -A; \
+    git commit -m \"Resolve behind\"; \
+    git pob; \
+  }; f"
+  snpcbc = "!f() { \
+    git add -A; \
+    git commit -m \"Change back core\"; \
+    git pob; \
+  }; f"
   h = help
   st = status -s
   stg = status -s | pipgre
