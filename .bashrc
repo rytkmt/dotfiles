@@ -15,7 +15,7 @@ alias sbr='source $HOME/.bashrc'
 export EDITOR="nvim"
 
 function flon() {
-  sed -e 's/:.*$//' | sed -e 's/^\s\?[ADMUR\?]\{1,2\}\s\+//' | sed -e 's/^.*\ ->\ //' | uniq
+  sed -e 's/:.*$//' | grep -v '^D' | sed -e 's/^\s\?[AMUR\?]\{1,2\}\s\+//' | sed -e 's/^.*\ ->\ //' | uniq
 }
 function vimtemp() {
   vim -c "Tempe $1"
@@ -38,6 +38,9 @@ alias flvim='flon|lvim'
 if [[ $(command -v csview) ]]; then
   function csviews() {
     command iconv -f shift-jis -t UTF8//TRANSLIT $1 | csview --style grid
+  }
+  function csviewxs() {
+    xargs -l -iREPLACE command iconv -f shift-jis -t UTF8//TRANSLIT REPLACE | csview --style grid
   }
 fi
 

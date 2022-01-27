@@ -87,6 +87,7 @@ require'lir'.setup {
   devicons_enable = true,
   mappings = {
     ['e']     = actions.edit,
+    ['<CR>']  = actions.edit,
     ['o']     = actions.edit,
     ['l']     = actions.edit,
     ['s']     = actions.split,
