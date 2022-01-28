@@ -205,6 +205,8 @@ vnoremap <Leader>v "*p
 nnoremap <Leader>V "*P
 vnoremap <Leader>V "*P
 
+nmap <Leader>d [diff]
+nmap [diff] <Nop>
 nmap <Leader>z [other]
 nmap <Leader>t [tab]
 nmap <Leader>T [table]
@@ -228,9 +230,6 @@ nmap [finder] <Nop>
 
 nnoremap [ft] <Nop>
 nmap <Leader>; [ft]
-
-nnoremap [denite] <Nop>
-nmap <Leader>d [denite]
 
 "=================================
 " _

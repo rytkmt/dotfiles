@@ -76,6 +76,7 @@ require'packer'.startup(function()
   use_with_file('nvim-lualine/lualine.nvim', "source_lua", { requires = 'kyazdani42/nvim-web-devicons' })
   use_with_file('tamago324/lir.nvim', "source_lua", { requires = { { 'kyazdani42/nvim-web-devicons' }, { 'nvim-lua/plenary.nvim' } } })
   use_with_file('lewis6991/gitsigns.nvim', "source_lua")
+  use_with_file('sindrets/diffview.nvim', "source_lua", { requires = 'nvim-lua/plenary.nvim' })
   use_with_file("windwp/nvim-autopairs", "source_lua", { requires = { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } })
   -- 遅いため一旦・・
   -- use_with_file('gelguy/wilder.nvim', "source")

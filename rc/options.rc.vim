@@ -213,7 +213,7 @@ set foldlevel=99
 " 折りたたみの仕方
 set foldmethod=manual
 " バッファ終端以降の空行
-set fillchars=eob:\ 
+set fillchars=eob:\-,diff:\/
 " ++ }}}
 
 " ++ ファイルタイプ別 {{{

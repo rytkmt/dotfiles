@@ -41,7 +41,6 @@ augroup END
 augroup floatwindow_submode
   autocmd!
   " autocmd FileType defx call s:floatwindow_submode_settings()
-  " autocmd FileType denite call s:floatwindow_submode_settings()
 
   function! s:floatwindow_submode_settings() abort
     call submode#enter_with('floatwin_move', 'n', 'b', 'U', ':MoveFloatWindowTop<CR>')
