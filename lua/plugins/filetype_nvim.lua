@@ -13,6 +13,7 @@ require('filetype').setup({
             -- Set the filetype of any full filename matching the regex to gitconfig
             [".*git/config"] = "gitconfig",  -- Included in the plugin
             ["/.pryrc"] = "ruby",
+            ["/*.rake"] = "ruby",
         },
 
         -- The same as the ones above except the keys map to functions

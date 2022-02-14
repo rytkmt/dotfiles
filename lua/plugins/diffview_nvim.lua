@@ -45,8 +45,6 @@ require'diffview'.setup {
     -- The `view` bindings are active in the diff buffers, only when the current
     -- tabpage is a Diffview.
     view = {
-      ["<tab>"]      = cb("select_next_entry"),  -- Open the diff for the next file
-      ["<s-tab>"]    = cb("select_prev_entry"),  -- Open the diff for the previous file
       ["[diff]e"]    = cb("goto_file"),          -- Open the file in a new split in previous tabpage
       ["[diff]s"]    = cb("goto_file_split"),    -- Open the file in a new split
       ["[diff]t"]    = cb("goto_file_tab"),      -- Open the file in a new tabpage
@@ -65,14 +63,11 @@ require'diffview'.setup {
       ["U"]             = cb("unstage_all"),          -- Unstage all entries.
       ["X"]             = cb("restore_entry"),        -- Restore entry to the state on the left side.
       ["R"]             = cb("refresh_files"),        -- Update stats and entries in the file list.
-      ["<tab>"]         = cb("select_next_entry"),
-      ["<s-tab>"]       = cb("select_prev_entry"),
       ["e"]             = cb("goto_file"),
       ["s"]             = cb("goto_file_split"),
       ["t"]             = cb("goto_file_tab"),
       ["i"]             = cb("listing_style"),        -- Toggle between 'list' and 'tree' views
       ["f"]             = cb("toggle_flatten_dirs"),  -- Flatten empty subdirectories in tree listing style.
-      ["<leader>b"]     = cb("toggle_files"),
     },
     file_history_panel = {
       ["g!"]            = cb("options"),            -- Open the option panel
@@ -86,12 +81,9 @@ require'diffview'.setup {
       ["<up>"]          = cb("prev_entry"),
       ["<cr>"]          = cb("select_entry"),
       ["o"]             = cb("select_entry"),
-      ["<tab>"]         = cb("select_next_entry"),
-      ["<s-tab>"]       = cb("select_prev_entry"),
       ["e"]             = cb("goto_file"),
       ["s"]             = cb("goto_file_split"),
       ["t"]             = cb("goto_file_tab"),
-      ["<leader>b"]     = cb("toggle_files"),
     },
     option_panel = {
       ["<tab>"] = cb("select"),
@@ -99,3 +91,6 @@ require'diffview'.setup {
     },
   },
 }
+
+vim.api.nvim_set_keymap("n", "[diff]d", ":DiffviewOpen", { noremap = false, silent = false, nowait = true })
+vim.api.nvim_set_keymap("n", "[diff]h", ":DiffviewFileHistory", { noremap = false, silent = false, nowait = true })

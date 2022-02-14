@@ -3,7 +3,10 @@ alias xargs='xargs '
 alias vi='/usr/bin/vim'
 alias vim='nvim'
 alias vimo='vim -O'
-alias vimd='vim -c DiffviewOpen'
+# alias vimd='echo "DiffviewOpen $@"'
+function vimd() {
+  eval "vim -c \"DiffviewOpen $@\""; \
+}
 alias sudo="sudo env PATH=$PATH"
 alias als="alias | sort | sed s/^alias\.// | sed -e 's/=/ /' | awk '{printf \"%-10s %s\",\$1,c=\"\";for(i=2;i<=NF;i++) c=c \$i\" \"; print c}' | sed s/\'// | sed s/\'//"
 alias ebr='vim $XDG_CONFIG_HOME/.bashrc'
