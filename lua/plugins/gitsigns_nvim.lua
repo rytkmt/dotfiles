@@ -65,3 +65,7 @@ require('gitsigns').setup {
     enable = false
   },
 }
+
+vim.cmd("hi GitSignsAdd guifg=#728a7f gui=none guibg=none")
+vim.cmd("hi GitSignsDelete guifg=#d48585 gui=none guibg=none")
+vim.cmd("hi GitSignsChange guifg=#819cdf gui=none guibg=none")
