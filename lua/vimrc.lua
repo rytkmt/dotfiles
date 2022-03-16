@@ -26,10 +26,10 @@ require'plugins'
 vim.cmd[[autocmd BufWritePost plugins.lua PackerCompile]]
 -- }}}
 
-function set_colorscheme ()
-  vim.cmd('colorscheme lighthouse')
-end
-pcall(set_colorscheme)
+-- function set_colorscheme ()
+-- end
+-- pcall(set_colorscheme)
+vim.cmd('colorscheme lighthouse')
 
 
 vim.cmd('set noimdisable')

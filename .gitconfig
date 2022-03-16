@@ -20,6 +20,19 @@
   plus-emph-style="bold 29 29"
   hunk-header-style="omit"
   line-numbers=true
+[difftool]
+  prompt = true
+[diff]
+  tool = nvimdiff
+[difftool "nvimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[merge]
+  tool = nvimdiff
+[mergetool]
+  prompt = false
+  keepBackup = false
+[mergetool "nvimdiff"]
+  cmd = "nvim -d $BASE $LOCAL $MERGED $REMOTE -c 'wincmd -w'"
 [alias]
   sn = "!f() { \
     if [ $# -ne 1 ];\

@@ -38,6 +38,7 @@ alias xvimo='xvim -O'
 alias fxvim='flon|xvim'
 alias fxvimo='flon|xvimo'
 alias flvim='flon|lvim'
+alias fxvimd='flon|xargs git mergetool'
 
 if [[ $(command -v csview) ]]; then
   function csviews() {
@@ -61,11 +62,12 @@ else
 fi
 
 if [[ $(command -v bat) ]]; then
-  alias bat='bat --style="numbers,grid,header"'
   alias cat='bat --style="grid,header"'
   alias batf='bat --style="full"'
   alias xbat='xargs bat'
+  alias xbatf='xargs bat'
   alias fxbat='flon|xbat'
+  alias fxbatf='flon|xbatf'
 fi
 alias xcat='xargs cat'
 alias fxcat='flon|xcat'
@@ -76,3 +78,11 @@ fi
 
 # fullpathを表示する
 alias fp='readlink -f'
+
+function xrename_paths() {
+  if [ $# == 2 ]; then
+    xargs ruby -e "require\"fileutils\";ARGV.each{|v|new_n=v.gsub(\"$1\",\"$2\"); FileUtils.mkdir_p(File.dirname(new_n));puts \"#{v} => #{new_n}\"; FileUtils.mv(v, new_n)}"
+  else
+    echo "argument error. please set from_name, to_name"
+  fi
+}
