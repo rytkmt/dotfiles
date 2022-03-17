@@ -36,3 +36,6 @@ function! Select2ex()
 endfunction
 
 vnoremap <silent> <Plug>(rytkmt-select2ex) Select2ex()
+
+
+lua require("rc.scripts")
