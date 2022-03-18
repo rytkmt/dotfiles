@@ -55,7 +55,7 @@ require'packer'.startup(function()
   use_with_file("vim-scripts/grep.vim", "add")
   use_with_file("tomtom/tcomment_vim", "add")
   -- use_with_file("tpope/vim-surround", "add")
-  use_with_file("blackCauldron7/surround.nvim", "source_lua")
+  use_with_file("ur4ltz/surround.nvim", "source_lua")
   use_with_file("LeafCage/yankround.vim", "add")
   use_with_file("osyo-manga/vim-anzu", "add")
   -- use_with_file("rhysd/clever-f.vim", "add")
@@ -81,6 +81,7 @@ require'packer'.startup(function()
   -- 遅いため一旦・・
   -- use_with_file('gelguy/wilder.nvim', "source")
   -- use { 'cohama/lexima.vim', setup = function() vim.g.lexima_accept_pum_with_enter = 0 end }
+  use_with_file('rlane/pounce.nvim', "source_lua")
   use_with_file(
     'nvim-telescope/telescope.nvim',
     "source_lua",
