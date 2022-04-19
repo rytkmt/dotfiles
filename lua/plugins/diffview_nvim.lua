@@ -92,5 +92,10 @@ require'diffview'.setup {
   },
 }
 
-vim.api.nvim_set_keymap("n", "[diff]d", ":DiffviewOpen", { noremap = false, silent = false, nowait = true })
-vim.api.nvim_set_keymap("n", "[diff]h", ":DiffviewFileHistory", { noremap = false, silent = false, nowait = true })
+function _G.diffview_open_current_file()
+  vim.cmd(":DiffviewOpen -- " .. vim.fn.expand("%"))
+  return
+end
+
+vim.api.nvim_set_keymap("n", "[diff]d", ":lua diffview_open_current_file()<CR>", { noremap = false, silent = false, nowait = true })
+vim.api.nvim_set_keymap("n", "[diff]h", ":DiffviewFileHistory<CR>", { noremap = false, silent = false, nowait = true })

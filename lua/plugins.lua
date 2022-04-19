@@ -45,7 +45,8 @@ require'packer'.startup(function()
     { 'vim-scripts/AnsiEsc.vim' },
     { 'vim-jp/vimdoc-ja' },
     { 'kana/vim-operator-user' },
-    { 'tyru/stoptypofile.vim' }
+    { 'tyru/stoptypofile.vim' },
+    { 'tpope/vim-repeat' }
   }
   use_with_file("kana/vim-submode", "add")
   use_with_file("thinca/vim-quickrun", "add", { requires = { "lambdalisue/vim-quickrun-neovim-job" } })

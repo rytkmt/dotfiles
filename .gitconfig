@@ -183,7 +183,7 @@
     if [ $# -eq 0 ]; then \
       echo 'arguments are required.'; \
     else \
-      pathspec=' -- :^*.csv :^*.tsv :^*.pdf :^*.zip :^*.json :^*.java :^*.bat :^*.ttf'; \
+      pathspec=' -- :^*.csv :^*.tsv :^*.pdf :^*.zip :^*.json :^*.java :^*.bat :^*.ttf :^*.css :^*.js'; \
       str='git grep -n \"'$1'\"'$pathspec; \
       if [ $# -gt 1 ]; then \
         str=$str' | pipgre'; \
