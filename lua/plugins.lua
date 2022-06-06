@@ -46,7 +46,8 @@ require'packer'.startup(function()
     { 'vim-jp/vimdoc-ja' },
     { 'kana/vim-operator-user' },
     { 'tyru/stoptypofile.vim' },
-    { 'tpope/vim-repeat' }
+    { 'tpope/vim-repeat' },
+    { 'lewis6991/impatient.nvim' }
   }
   use_with_file("kana/vim-submode", "add")
   use_with_file("thinca/vim-quickrun", "add", { requires = { "lambdalisue/vim-quickrun-neovim-job" } })
@@ -67,6 +68,7 @@ require'packer'.startup(function()
   -- 遅いので一時的にコメントアウトしておく
   -- use_with_file("vim-syntastic/syntastic", "add")
 
+  use_with_file("nvim-treesitter/nvim-treesitter", "source_lua", { run = ':TSUpdate'})
   use_with_file("haya14busa/vim-asterisk", "source")
   use_with_file("nathom/filetype.nvim", "source_lua")
   use_with_file("monkoose/matchparen.nvim", "source_lua")
@@ -78,7 +80,8 @@ require'packer'.startup(function()
   use_with_file('tamago324/lir.nvim', "source_lua", { requires = { { 'kyazdani42/nvim-web-devicons' }, { 'nvim-lua/plenary.nvim' } } })
   use_with_file('lewis6991/gitsigns.nvim', "source_lua")
   use_with_file('sindrets/diffview.nvim', "source_lua", { requires = 'nvim-lua/plenary.nvim' })
-  use_with_file("windwp/nvim-autopairs", "source_lua", { requires = { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } })
+  -- use_with_file("windwp/nvim-autopairs", "source_lua", { requires = { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } })
+  use_with_file("windwp/nvim-autopairs", "source_lua", { requires = 'nvim-treesitter/nvim-treesitter' })
   -- 遅いため一旦・・
   -- use_with_file('gelguy/wilder.nvim', "source")
   -- use { 'cohama/lexima.vim', setup = function() vim.g.lexima_accept_pum_with_enter = 0 end }
@@ -99,11 +102,11 @@ require'packer'.startup(function()
   }
 
 
-  -- use {
-  --   'cocopon/inspecthi.vim',
-  --   opt = true,
-  --   cmd = { 'Inspecthi', 'InspecthiShowInspector', 'InspecthiHideInspector' }
-  -- }
+  use {
+    'cocopon/inspecthi.vim',
+    -- opt = true,
+    -- cmd = { 'Inspecthi', 'InspecthiShowInspector', 'InspecthiHideInspector' }
+  }
 
   -- use { 'kana/vim-smartinput', opt = true, event = "InsertEnter *" }
   -- use_with_file("cohama/vim-smartinput-endwise", "source", { opt = true, event = "InsertEnter *" })

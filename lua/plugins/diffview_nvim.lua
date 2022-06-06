@@ -48,8 +48,10 @@ require'diffview'.setup {
       ["[diff]e"]    = cb("goto_file"),          -- Open the file in a new split in previous tabpage
       ["[diff]s"]    = cb("goto_file_split"),    -- Open the file in a new split
       ["[diff]t"]    = cb("goto_file_tab"),      -- Open the file in a new tabpage
-      ["[diff]e"]    = cb("focus_files"),        -- Bring focus to the files panel
+      ["[diff]f"]    = cb("focus_files"),        -- Bring focus to the files panel
       ["[diff]b"]    = cb("toggle_files"),       -- Toggle the files panel.
+      ["[diff]j"]    = cb("select_next_entry"),           -- Bring the cursor to the next file entry
+      ["[diff]k"]    = cb("select_prev_entry"),
     },
     file_panel = {
       ["j"]             = cb("next_entry"),           -- Bring the cursor to the next file entry

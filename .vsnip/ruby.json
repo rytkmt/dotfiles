@@ -209,6 +209,12 @@
       "t.bigint   \"${2:NAME}\",                 null: false, comment: \"${3:COMMENT}\""
     ]
   },
+  "trow_date": {
+    "prefix": "trow_date",
+    "body": [
+      "t.date     \"${1:NAME}\", ${3}comment: \"${2:COMMENT}\""
+    ]
+  },
   "trow_datetime": {
     "prefix": "trow_datetime",
     "body": [
@@ -270,8 +276,8 @@
       "end"
     ]
   },
-  "rspec_init": {
-    "prefix": "rspec_init",
+  "rspec": {
+    "prefix": "rspec",
     "body": [
       "require(\"rails_helper\")",
       "",
@@ -368,7 +374,8 @@
     "prefix": "timetravel_freeze",
     "body": [
       "around do |e|",
-      "  travel_to(${1:TIME}) { e.run }",
+      "  @time = Time.zone.local(*Time.zone.now.to_a.take(6).reverse)",
+      "  travel_to(@time) { e.run }",
       "end"
     ]
   },
@@ -376,7 +383,8 @@
     "prefix": "around_travel_to",
     "body": [
       "around do |e|",
-      "  travel_to(${1:TIME}) { e.run }",
+      "  @time = Time.zone.local(*Time.zone.now.to_a.take(6).reverse)",
+      "  travel_to(@time) { e.run }",
       "end"
     ]
   },

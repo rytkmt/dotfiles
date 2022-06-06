@@ -113,7 +113,9 @@
   }; f"
   fe = fetch -p
   mf = merge FETCH_HEAD
+  fm = !git fe && git mf
   mod = merge origin/develop -m \"Resolve behind\"
+  fmod = !git fe && git merge origin/develop -m \"Resolve behind\"
   moh = merge origin/hotfix_release_prod_20210128 -m \"Resolve behind\"
   moc = "!f() { \
     git branch --no-color 2> /dev/null | \
@@ -122,6 +124,7 @@
     xargs -I@ git merge origin/@; \
   }; f"
   mos = merge origin/swagger-crossx_api -m \"Resolve behind\"
+  fmos = !git fe && git merge origin/swagger-crossx_api -m \"Resolve behind\"
   mom = merge origin/master -m \"Resolve behind\"
   d = diff --color-words
   ds = diff --name-status

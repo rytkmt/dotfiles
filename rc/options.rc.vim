@@ -213,7 +213,7 @@ set foldlevel=99
 " 折りたたみの仕方
 set foldmethod=manual
 " バッファ終端以降の空行
-set fillchars=eob:\-,diff:\/
+set fillchars=eob:\-,diff:\ 
 
 " matchparen.nvimを使用するため標準のものは止める
 let loaded_matchparen = 1

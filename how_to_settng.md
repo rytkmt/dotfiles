@@ -38,6 +38,10 @@ source ${gitからcloneしたdotfilesのディレクトリ}/.bashrc
 $HOMEの下に.gitconfigという名前でシンボリックリンクを貼る  
 ローカルなものを作りたい場合は、~/.gitconfig.localで設定ファイルを別途用意
 
+## .inputrcの設定
+
+$HOMEの下に.inputrcという名前でシンボリックリンクを貼る  
+
 ## ruby
 
 ```shell

@@ -3,7 +3,7 @@ local action_layout = require("telescope.actions.layout")
 
 require('telescope').setup{
   defaults = {
-    preview = { hide_on_startup = true },
+    preview = { hide_on_startup = true, treesitter = false  },
     sorting_strategy = "ascending",
     scroll_strategy = "limit",
     layout_strategy = "horizontal",
@@ -19,7 +19,12 @@ require('telescope').setup{
     mappings = {
       i = {
         ["<C-u>"] = false,
-        ["<C-q>"] = actions.close,
+        ["<C-q>"] = actions.send_to_qflist,
+        ["<C-o>"] = function(prompt_bufnr)
+          actions.send_to_qflist(prompt_bufnr)
+          vim.cmd [[copen]]
+        end,
+        ["<C-a>"] = actions.add_to_qflist,
         ["<C-[>"] = actions.close,
         ["<esc>"] = actions.close,
         ["<C-n>"] = actions.cycle_history_next,
@@ -71,3 +76,4 @@ vim.api.nvim_set_keymap('n', '[finder]G', ':lua require("telescope.builtin").gre
 vim.api.nvim_set_keymap('n', '[finder]iG', ':lua require("telescope.builtin").grep_string({cwd = vim.call("InputPath")})<CR>', { noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]b', ':lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>', { noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]m', ':lua require("telescope.builtin").oldfiles()<CR>', { noremap = true, silent = true, nowait = true })
+vim.api.nvim_set_keymap('n', '[finder]h', ':lua require("telescope.builtin").highlights()<CR>', { noremap = true, silent = true, nowait = true })

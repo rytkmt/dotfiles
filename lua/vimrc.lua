@@ -1,5 +1,6 @@
 vim.o.encoding='utf-8'
 vim.o.fileencodings='utf-8'
+vim.g.loaded_netrwPlugin = 1
 
 vim.cmd('augroup MyAutoCmd')
 vim.cmd('autocmd!')
