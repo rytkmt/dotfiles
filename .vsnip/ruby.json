@@ -281,7 +281,7 @@
     "body": [
       "require(\"rails_helper\")",
       "",
-      "describe(${1: KLASS}) do",
+      "describe ${1: KLASS} do",
       "  ${2: CONTENTS}",
       "end"
     ]

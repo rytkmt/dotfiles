@@ -112,10 +112,15 @@ require'packer'.startup(function()
   -- use_with_file("cohama/vim-smartinput-endwise", "source", { opt = true, event = "InsertEnter *" })
 
   -- markdown
-  use_with_file("rcmdnk/vim-markdown", "add", { opt = true, ft = { "markdown", "mkd" } })
-  use { "joker1007/vim-markdown-quote-syntax", opt = true, ft = { "markdown", "mkd" } }
-  use("ellisonleao/glow.nvim", { opt = true, ft = { "markdown", "mkd" }})
-  use { "mattn/vim-maketable", opt = true, ft = { "markdown", "mkd" } }
+  local markdown_option = { opt = true, ft = { "markdown", "mkd" } }
+  use_with_file("rcmdnk/vim-markdown", "add", markdown_option)
+  use("joker1007/vim-markdown-quote-syntax", markdown_option)
+  use("ellisonleao/glow.nvim", markdown_option)
+  use("mattn/vim-maketable", markdown_option)
+  local options = markdown_option
+  -- options.run = "cd app && npm install"
+  options.run = function() vim.fn["mkdp#util#install"]() end
+  use_with_file("iamcco/markdown-preview.nvim", "add", options)
 
   -- textile
   use { "rytkmt/vim-textile", opt = true, ft = "textile" }

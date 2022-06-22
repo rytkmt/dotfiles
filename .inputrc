@@ -1,6 +1,10 @@
 # 日本語説明ページ
 # https://linuxjm.osdn.jp/html/GNU_bash/man1/bash.1.html
 
+# もとの/etc/inputrcでonになっていたのでコピーしておく
+set input-meta on
+set output-meta on
+
 # ファイルタイプをカラフルに
 set colored-stats on
 
@@ -10,8 +14,6 @@ set colored-completion-prefix on
 # 実行ファイルに印を付ける
 # set visible-stats on
 
-# readline の起動時に emacs と vi のどちらに似たキー割り当てを使うのかを制御します。 editing-mode には emacs と vi のいずれかを指定できます。
-set editing-mode vi
 
 # これは補完機能のデフォルトの挙動を変えます。 On が設定されている場合、単語に対する補完候補が複数個あると、 ベルは鳴らされずに、マッチするものが即座にリスト表示されます。
 set show-all-if-ambiguous on
@@ -21,35 +23,42 @@ set completion-ignore-case on
 # On が設定されていると、 メニュー補完 (menu completion) で補完候補のリスト (空の場合も含む) を順番に表示する前に、共通先頭部分を表示します。
 set menu-complete-display-prefix on
 
-# for vi mode
-set show-mode-in-prompt on
-set vi-ins-mode-string \1\e[34;1m\2(ins) \1\e[0m\2
-set vi-cmd-mode-string \1\e[31;1m\2(cmd) \1\e[0m\2
+# readline の起動時に emacs と vi のどちらに似たキー割り当てを使うのかを制御します。 editing-mode には emacs と vi のいずれかを指定できます。
+# set editing-mode vi
 
-set keymap vi-command
-
-# Insert the arguments from the last command
-# "p": "i !!*\r"
-
-set keymap vi-insert
-
-# キーバインドのアンチパターン
-# - C-m への割当(Return の変更とも解釈される)
-#     C-j は改行なのでOK
-# - C-h への割当(Backspace の変更とも解釈される)
-# - C-i への割当(Tab の変更とも解釈される)
-
-# Pressing tab will list all completions & select the first one. Pressing it 
-# again will cycle through available completions.
-TAB: menu-complete
-# Shift-TAB cycles completions backward
-"\e[Z": menu-complete-backward
-
-"\C-p": history-search-backward
-"\C-n": history-search-forward
-"\C-k": history-search-backward
-"\C-j": history-search-forward
-"\C-l": "clear\C-m"
-
-# grep -r "" ./
-"\C-g": "grep -r "
+# $if mode=vi
+#
+# # for vi mode
+# set show-mode-in-prompt on
+# set vi-ins-mode-string \1\e[34;1m\2(ins) \1\e[0m\2
+# set vi-cmd-mode-string \1\e[31;1m\2(cmd) \1\e[0m\2
+#
+# set keymap vi-command
+#
+# # Insert the arguments from the last command
+# # "p": "i !!*\r"
+#
+# set keymap vi-insert
+#
+# # キーバインドのアンチパターン
+# # - C-m への割当(Return の変更とも解釈される)
+# #     C-j は改行なのでOK
+# # - C-h への割当(Backspace の変更とも解釈される)
+# # - C-i への割当(Tab の変更とも解釈される)
+#
+# # Pressing tab will list all completions & select the first one. Pressing it 
+# # again will cycle through available completions.
+# TAB: menu-complete
+# # Shift-TAB cycles completions backward
+# "\e[Z": menu-complete-backward
+#
+# "\C-p": history-search-backward
+# "\C-n": history-search-forward
+# "\C-k": history-search-backward
+# "\C-j": history-search-forward
+# "\C-l": "clear\C-m"
+#
+# # grep -r "" ./
+# "\C-g": "grep -r "
+#
+# $endif

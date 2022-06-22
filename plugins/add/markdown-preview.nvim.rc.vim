@@ -1,3 +1,13 @@
+" 起動などに失敗したら
+" https://github.com/iamcco/markdown-preview.nvim#install--usage
+" をもとにyarnなどのライブラリも含めてインストールを試してみる
+" nodeやnpm、yarnのライブラリのバージョンが怪しい
+
+" umlなどの書き方はこちら
+" https://plantuml.com/ja/
+
+
+
 " set to 1, nvim will open the preview window after entering the markdown buffer
 " default: 0
 let g:mkdp_auto_start = 0
@@ -11,7 +21,7 @@ let g:mkdp_auto_close = 1
 " leave from insert mode, default 0 is auto refresh markdown as you edit or
 " move the cursor
 " default: 0
-let g:mkdp_refresh_slow = 0
+let g:mkdp_refresh_slow = 1
 
 " set to 1, the MarkdownPreview command can be use for all files,
 " by default it can be use in markdown file
@@ -27,7 +37,7 @@ let g:mkdp_open_to_the_world = 1
 " useful when you work in remote vim and preview on local browser
 " more detail see: https://github.com/iamcco/markdown-preview.nvim/pull/9
 " default empty
-let g:mkdp_open_ip = '0.0.0.0'
+let g:mkdp_open_ip = '192.168.33.21'
 
 " specify browser to open preview page
 " default: ''
@@ -41,10 +51,10 @@ let g:mkdp_echo_preview_url = 1
 " this function will receive url as param
 " default is empty
 " let g:mkdp_browserfunc = ''
-function! g:Open_browser(url)
-  silent exe '!lemonade open 'a:url
+function! Open_browser(url)
+  exe 'silent ! lemonade open 'a:url
 endfunction
-let g:mkdp_browserfunc = 'g:Open_browser'
+let g:mkdp_browserfunc = 'Open_browser'
 " options for markdown render
 " mkit: markdown-it options for render
 " katex: katex options for math

@@ -1,0 +1,26 @@
+{
+  "ruby": {
+    "prefix": "ruby",
+    "body": [
+      "```ruby",
+      "${1}",
+      "```"
+    ]
+  },
+  "shell": {
+    "prefix": "shell",
+    "body": [
+      "```shell",
+      "${1}",
+      "```"
+    ]
+  },
+  "plantuml": {
+    "prefix": ["plantuml", "uml"],
+    "body": [
+      "```plantuml",
+      "${1}",
+      "```"
+    ]
+  }
+}
