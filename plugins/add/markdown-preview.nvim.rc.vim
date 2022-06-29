@@ -85,7 +85,8 @@ let g:mkdp_preview_options = {
 
 " use a custom markdown style must be absolute path
 " like '/Users/username/markdown.css' or expand('~/markdown.css')
-let g:mkdp_markdown_css = ''
+" let g:mkdp_markdown_css = $XDG_CONFIG_HOME.'/plugins/add/markdown-preview_nvim/markdown.css'
+" 指定した場合と、しなかった場合での挙動の違いを確認 1400だとうまく表示されない
 
 " use a custom highlight style must absolute path
 " like '/Users/username/highlight.css' or expand('~/highlight.css')

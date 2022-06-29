@@ -33,6 +33,7 @@ function lvim() {
   str='sed -n '$line'p | xargs nvim'; \
   eval "$str"; \
 }
+alias mdt='vimtemp markdown'
 alias xvim='xargs nvim'
 alias xvimo='xvim -O'
 alias fxvim='flon|xvim'

@@ -32,7 +32,7 @@ require'diffview'.setup {
     },
     log_options = {
       single_file = {
-        max_count = 256,      -- Limit the number of commits
+        -- max_count = 256,      -- Limit the number of commits
         follow = false,       -- Follow renames (only for single file)
         all = false,          -- Include all refs under 'refs/' including HEAD
         merges = false,       -- List only merge commits
@@ -40,7 +40,7 @@ require'diffview'.setup {
         reverse = false,      -- List commits in reverse order
       },
       multi_file = {
-        max_count = 256,
+        -- max_count = 256,
         all = false,          -- Include all refs under 'refs/' including HEAD
         merges = false,       -- List only merge commits
         no_merges = false,    -- List no merge commits
@@ -113,4 +113,4 @@ function _G.diffview_open_current_file()
 end
 
 vim.api.nvim_set_keymap("n", "[diff]d", ":lua diffview_open_current_file()<CR>", { noremap = false, silent = false, nowait = true })
-vim.api.nvim_set_keymap("n", "[diff]h", ":DiffviewFileHistory<CR>", { noremap = false, silent = false, nowait = true })
+vim.api.nvim_set_keymap("n", "[diff]h", ":DiffviewFileHistory %<CR>", { noremap = false, silent = false, nowait = true })
