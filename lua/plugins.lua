@@ -138,7 +138,7 @@ require'packer'.startup(function()
   use {
     'vim-denops/denops.vim',
     opt = true,
-    ft = { 'git', 'snippet', 'toml', 'vim', 'ruby' },
+    ft = { 'git', 'snippet', 'toml', 'vim', 'ruby', 'markdown' },
     config = function() vim.call("denops#server#start") end,
   }
 
@@ -156,7 +156,8 @@ require'packer'.startup(function()
       { 'tani/ddc-fuzzy' },
       { 'Shougo/ddc-around' },
       { 'hrsh7th/vim-vsnip-integ', after = 'vim-vsnip' },
-      { 'matsui54/ddc-buffer' }
+      { 'matsui54/ddc-buffer' },
+      { 'rytkmt/ddc-gemojione' }
     },
     after = 'denops.vim',
     config = function()

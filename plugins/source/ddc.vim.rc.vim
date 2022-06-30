@@ -19,8 +19,20 @@ call ddc#custom#patch_global('sourceOptions', {
     \ 'buffer': {'mark': 'B', 'limitBytes': 8000000},
     \ })
 call ddc#custom#patch_filetype(['ruby'], 'sources', ['nvim-lsp', 'vsnip', 'around', 'buffer' ])
+call ddc#custom#patch_filetype(['markdown'], 'sources', ['gemojione', 'vsnip', 'around', 'buffer' ])
+call ddc#custom#patch_filetype(['markdown'], 'keywordPattern', '[a-zA-Z_:]\w*')
 
 call ddc#custom#patch_global('sourceParams', {
+    \ 'around': {'maxSize': 1500},
+    \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
+    \ })
+
+call ddc#custom#patch_filetype(['markdown'], 'sourceParams', {
+    \ 'gemojione': {
+    \   'mark': 'gemojione',
+    \   'matchers': ['gemojione'],
+    \   'sorters': [],
+    \ },
     \ 'around': {'maxSize': 1500},
     \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
     \ })
