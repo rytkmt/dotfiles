@@ -73,10 +73,10 @@ vmap <nowait> <C-Space> <ESC>
 nmap <C-Space><C-Space> :<C-u>noh<CR>
 " ++ }}}
 " ++ ターミナル操作 {{{
-nnoremap <A-s> :sp<CR>:terminal<CR>isource ~/.bash_profile<CR>clear<CR>
-nnoremap <A-v> :vs<CR>:terminal<CR>isource ~/.bash_profile<CR>clear<CR>
-nnoremap <A-t> :<C-u>tabnew<CR>:terminal<CR>isource ~/.bash_profile<CR>clear<CR>
-nnoremap <A-e> :terminal<CR>isource ~/.bash_profile<CR>clear<CR>
+nnoremap <expr><A-s> ":sp<CR>:terminal<CR>isource ~/.bash_profile<CR>cd " . GitProjectRootWithCache() . "<CR>clear<CR>"
+nnoremap <expr><A-v> ":vs<CR>:terminal<CR>isource ~/.bash_profile<CR>cd " . GitProjectRootWithCache() . "<CR>clear<CR>"
+nnoremap <expr><A-t> ":tabnew<CR>:terminal<CR>isource ~/.bash_profile<CR>cd " . GitProjectRootWithCache() . "<CR>clear<CR>"
+nnoremap <expr><A-e> ":terminal<CR>isource ~/.bash_profile<CR>cd " . GitProjectRootWithCache() . "<CR>clear<CR>"
 tnoremap <A-j> <C-\><C-n>
 " ++ }}}
 " ++ 記述周り {{{

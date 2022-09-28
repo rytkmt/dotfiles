@@ -74,11 +74,19 @@ function! s:yank_file_path_under_root()
 endfunction
 command! YankFilePathUnderRoot call s:yank_file_path_under_root()
 
+function! s:yank_git_root()
+  let l:path = GitProjectRootWithCache()
+  call setreg('*', l:path)
+  echo l:path
+endfunction
+command! YankGitRoot call s:yank_git_root()
+
 function! s:yank_file_dir()
   call setreg('*', expand("%:p:h"))
   echo expand("%:p:h")
 endfunction
 command! YankFileDir call s:yank_file_dir()
+
 "++ }}}
 
 "++ カレントファイルの再読込（vim） {{{

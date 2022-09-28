@@ -19,8 +19,7 @@ require('telescope').setup{
     mappings = {
       i = {
         ["<C-u>"] = false,
-        ["<C-q>"] = actions.send_to_qflist,
-        ["<C-o>"] = function(prompt_bufnr)
+        ["<C-q>"] = function(prompt_bufnr)
           actions.send_to_qflist(prompt_bufnr)
           vim.cmd [[copen]]
         end,

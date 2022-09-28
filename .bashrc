@@ -8,7 +8,17 @@ function vimd() {
   eval "vim -c \"DiffviewOpen $@\""; \
 }
 alias sudo="sudo env PATH=$PATH"
-alias als="alias | sort | sed s/^alias\.// | sed -e 's/=/ /' | awk '{printf \"%-10s %s\",\$1,c=\"\";for(i=2;i<=NF;i++) c=c \$i\" \"; print c}' | sed s/\'// | sed s/\'//"
+if [[ $(command -v pipgre) ]]; then
+  function als() {
+    if [ $# == 0 ]; then
+      alias | sort | sed s/^alias\.// | sed -e 's/=/ /' | awk '{printf "%-10s %s",$1,c="";for(i=2;i<=NF;i++) c=c $i" "; print c}' | sed s/\'// | sed s/\'//
+    else
+      alias | sort | sed s/^alias\.// | sed -e 's/=/ /' | awk '{printf "%-10s %s",$1,c="";for(i=2;i<=NF;i++) c=c $i" "; print c}' | sed s/\'// | sed s/\'// | pipgre $*
+    fi
+  }
+else
+  alias als="alias | sort | sed s/^alias\.// | sed -e 's/=/ /' | awk '{printf \"%-10s %s\",\$1,c=\"\";for(i=2;i<=NF;i++) c=c \$i\" \"; print c}' | sed s/\'// | sed s/\'//"
+fi
 alias ebr='vim $XDG_CONFIG_HOME/.bashrc'
 alias ebp='vim $XDG_CONFIG_HOME/.bash_profile'
 alias ebrl='vim $HOME/.bashrc'
@@ -48,6 +58,9 @@ if [[ $(command -v csview) ]]; then
   function csviewxs() {
     xargs -l -iREPLACE command iconv -f shift-jis -t UTF8//TRANSLIT REPLACE | csview --style grid
   }
+  export -f csviews
+  alias xcsviews='xargs -I% bash -c "csviews %"'
+  alias xcsview='xargs -I% bash -c "csview %"'
 fi
 
 if [[ $(command -v exa) ]]; then

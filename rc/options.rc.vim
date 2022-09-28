@@ -218,15 +218,3 @@ set fillchars=eob:\-,diff:\
 " matchparen.nvimを使用するため標準のものは止める
 let loaded_matchparen = 1
 " ++ }}}
-
-" ++ ファイルタイプ別 {{{
-" +++ terminal {{{
-source $XDG_CONFIG_HOME/rc/extensions/terminal.rc.vim
-" +++ }}}
-" +++ quickfix {{{
-source $XDG_CONFIG_HOME/rc/extensions/quickfix.vim
-" +++ }}}
-" +++ ruby {{{
-autocmd MyAutoCmd FileType ruby setl iskeyword+=?,!
-" +++ }}}
-" ++ }}}

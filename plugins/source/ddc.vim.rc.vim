@@ -27,14 +27,19 @@ call ddc#custom#patch_global('sourceParams', {
     \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
     \ })
 
-call ddc#custom#patch_filetype(['markdown'], 'sourceParams', {
-    \ 'gemojione': {
-    \   'mark': 'gemojione',
-    \   'matchers': ['gemojione'],
-    \   'sorters': [],
+call ddc#custom#patch_filetype(['markdown'], 'sourceOptions', {
+    \ '_': {
+    \   'matchers': ['matcher_fuzzy'],
+    \   'sorters': ['sorter_rank'],
+    \   'maxCandidates': 500,
     \ },
-    \ 'around': {'maxSize': 1500},
-    \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
+    \ 'nvim-lsp': {
+    \   'mark': 'lsp',
+    \   'forceCompletionPattern': '\.\w*|:\w*|->\w*'
+    \ },
+    \ 'around': {'mark': 'A'},
+    \ 'buffer': {'mark': 'B', 'limitBytes': 8000000},
+    \ 'gemojione': { 'mark': 'G' },
     \ })
 
 " imap <expr><C-s> "\<Right>\<C-R>=UltiSnips#ExpandSnippet()\<CR>"

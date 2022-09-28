@@ -33,11 +33,13 @@ require'diffview'.setup {
     log_options = {
       single_file = {
         -- max_count = 256,      -- Limit the number of commits
-        follow = false,       -- Follow renames (only for single file)
+        follow = true,       -- Follow renames (only for single file)
+        first_parent = false,       -- Follow only the first parent upon seeing a merge commit.
         all = false,          -- Include all refs under 'refs/' including HEAD
         merges = false,       -- List only merge commits
-        no_merges = false,    -- List no merge commits
+        no_merges = true,    -- List no merge commits
         reverse = false,      -- List commits in reverse order
+        diff_merges = "first-parent"
       },
       multi_file = {
         -- max_count = 256,
@@ -45,6 +47,7 @@ require'diffview'.setup {
         merges = false,       -- List only merge commits
         no_merges = false,    -- List no merge commits
         reverse = false,      -- List commits in reverse order
+        diff_merges = "first-parent"
       },
     },
   },

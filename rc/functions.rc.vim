@@ -12,6 +12,16 @@ function! FindGitProjectRoot()
   return expand("%:h")
 endfunction
 
+function! GitProjectRootWithCache()
+  if exists("b:git_project_root")
+  else
+    let b:git_project_root = FindGitProjectRoot()
+  endif
+
+  return b:git_project_root
+endfunction
+
+
 function! FilePathUnderRoot()
   return substitute(expand("%:p"), FindGitProjectRoot()."/", "", "")
 endfunction
