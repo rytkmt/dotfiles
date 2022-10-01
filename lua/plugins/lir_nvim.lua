@@ -120,8 +120,8 @@ require'lir'.setup {
   float = {
     winblend = 0,
     curdir_window = {
-      enable = false,
-      highlight_dirname = false
+      enable = true,
+      highlight_dirname = true
     },
 
     -- -- You can define a function that returns a table to be passed as the third
