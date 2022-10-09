@@ -259,24 +259,12 @@ nnoremap <expr> [edit]cs ':sp ' . expand('%:p:h') . '/'
 nnoremap [edit]f :<C-u>set ft=
 
 " ++ }}}
-" ++ ファイルタイプ別{{{
-" +++ help{{{
-autocmd MyAutoCmd FileType help nnoremap <buffer> q :q<CR>
-" +++ }}}
-" +++ railslog {{{
-autocmd MyAutoCmd FileType railslog nmap <buffer> q bd!
-" +++ }}}
-" +++ xml{{{
-autocmd MyAutoCmd FileType xml nnoremap <buffer> FF :%s/></>\r</g \| filetype indent on \| normal gg=G<CR>
-" +++}}}
-" +++ json{{{
-autocmd MyAutoCmd FileType json nnoremap <buffer> FF :%s/\n//g \| %s/{/{\r/g \| %s/}/\r}/g \| %s/,/,\r/g \| filetype indent on \| normal gg=G<CR>:noh<CR>
-" +++}}}
-" ++ }}}
+
+" :ssを:%s/にするマッピング
+cnoremap <expr> s getcmdtype() == ':' && getcmdline() == 's' ? '<BS>%s/' : 's'
 "+ 自作スクリプト
 
 lua require("rc.scripts")
-
 
 "+ 自作コマンド {{{
 
