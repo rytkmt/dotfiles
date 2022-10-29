@@ -47,7 +47,7 @@ require'packer'.startup(function()
     { 'kana/vim-operator-user' },
     { 'tyru/stoptypofile.vim' },
     { 'tpope/vim-repeat' },
-    { 'lewis6991/impatient.nvim' }
+    { 'lewis6991/impatient.nvim' },
   }
   use_with_file("kana/vim-submode", "add")
   use_with_file("thinca/vim-quickrun", "add", { requires = { "lambdalisue/vim-quickrun-neovim-job" } })
@@ -68,9 +68,11 @@ require'packer'.startup(function()
   -- 遅いので一時的にコメントアウトしておく
   -- use_with_file("vim-syntastic/syntastic", "add")
 
+  use_with_file("skanehira/qfopen.vim", "source")
   use_with_file("nvim-treesitter/nvim-treesitter", "source_lua", { run = ':TSUpdate'})
   use_with_file("haya14busa/vim-asterisk", "source")
   use_with_file("nathom/filetype.nvim", "source_lua")
+  use_with_file("anuvyklack/pretty-fold.nvim", "source_lua")
   use_with_file("monkoose/matchparen.nvim", "source_lua")
   use_with_file("AndrewRadev/switch.vim", "add", "source")
   use_with_file("Pocco81/HighStr.nvim", "source_lua")
@@ -87,7 +89,8 @@ require'packer'.startup(function()
   -- 遅いため一旦・・
   -- use_with_file('gelguy/wilder.nvim', "source")
   -- use { 'cohama/lexima.vim', setup = function() vim.g.lexima_accept_pum_with_enter = 0 end }
-  use_with_file('rlane/pounce.nvim', "source_lua")
+  use_with_file("rlane/pounce.nvim", "source_lua")
+  use_with_file("chentoast/marks.nvim", "source_lua")
   use_with_file(
     'nvim-telescope/telescope.nvim',
     "source_lua",

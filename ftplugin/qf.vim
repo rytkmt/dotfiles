@@ -83,10 +83,8 @@ function! s:FileToDictionary(file, name)
   endtry
 endfunction
 
-function! s:InitQuickfix()
-  nnoremap <buffer> q :q!<CR>
-  nnoremap <buffer> [ft]s :SaveQuickfixResult 
-  nnoremap <buffer> [ft]l :ShowSavedQuickfixResults<CR>
-  nnoremap <buffer> [ft]r :ReadQuickfixResult<CR>
-endfunction
-autocmd MyAutoCmd FileType qf call s:InitQuickfix()
+nnoremap <buffer> q :q!<CR>
+nnoremap <buffer> <C-Enter> <C-w><Enter>
+nnoremap <buffer> [ft]s :SaveQuickfixResult
+nnoremap <buffer> [ft]l :ShowSavedQuickfixResults<CR>
+nnoremap <buffer> [ft]r :ReadQuickfixResult<CR>

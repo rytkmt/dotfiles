@@ -26,7 +26,7 @@ require('gitsigns').setup {
     -- ['v gb'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
     -- ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
     ['n gi'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-    ['n gs'] = '<cmd>Gitsigns toggle_signs<CR>',
+    ['n gS'] = '<cmd>Gitsigns toggle_signs<CR>',
     -- ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
     -- ['n <leader>hS'] = '<cmd>lua require"gitsigns".stage_buffer()<CR>',
     -- ['n <leader>hU'] = '<cmd>lua require"gitsigns".reset_buffer_index()<CR>',

@@ -35,7 +35,7 @@ local custom_theme = {
 }
 
 local function location()
-  return 'L%-3l| C%-3v'
+  return 'C%-3v'
 end
 
 require'lualine'.setup{
@@ -62,7 +62,10 @@ require'lualine'.setup{
           dos = 'CRLF', -- e70f
           mac = 'CR', -- e711
         }
-      }
+      },
+      function()
+        return '%LL'
+      end
     },
     lualine_z = { location }
   },

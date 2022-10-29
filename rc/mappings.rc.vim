@@ -170,6 +170,9 @@ vmap m %
 nnoremap M m
 nnoremap MM :<C-u>marks<CR>
 
+" 折りたたみ
+nmap zm Vmzf
+
 " 前回変更点をVモードで選択
 nnoremap <expr> <C-h> ':h ' . expand('<cword>')
 
