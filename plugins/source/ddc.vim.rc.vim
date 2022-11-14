@@ -3,6 +3,7 @@ call ddc#custom#patch_global('sources', [
   \ 'vsnip',
   \ 'buffer',
   \ ])
+call ddc#custom#patch_global('ui', 'native')
 
 call ddc#custom#patch_global('backspaceCompletion', v:true)
 call ddc#custom#patch_global('sourceOptions', {
@@ -18,15 +19,15 @@ call ddc#custom#patch_global('sourceOptions', {
     \ 'around': {'mark': 'A'},
     \ 'buffer': {'mark': 'B', 'limitBytes': 8000000},
     \ })
-call ddc#custom#patch_filetype(['ruby'], 'sources', ['nvim-lsp', 'vsnip', 'around', 'buffer' ])
-call ddc#custom#patch_filetype(['markdown'], 'sources', ['gemojione', 'vsnip', 'around', 'buffer' ])
-call ddc#custom#patch_filetype(['markdown'], 'keywordPattern', '[a-zA-Z_:]\w*')
 
 call ddc#custom#patch_global('sourceParams', {
     \ 'around': {'maxSize': 1500},
     \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
     \ })
 
+call ddc#custom#patch_filetype(['ruby'], 'sources', ['nvim-lsp', 'vsnip', 'around', 'buffer' ])
+call ddc#custom#patch_filetype(['markdown'], 'sources', ['gemojione', 'vsnip', 'around', 'buffer' ])
+call ddc#custom#patch_filetype(['markdown'], 'keywordPattern', '[a-zA-Z_:]\w*')
 call ddc#custom#patch_filetype(['markdown'], 'sourceOptions', {
     \ '_': {
     \   'matchers': ['matcher_fuzzy'],
@@ -58,7 +59,6 @@ imap <silent><expr> <C-l> pumvisible() ? "\<C-s>" : "\<Right>"
 "
 " " <S-TAB>: completion back.
 " inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
-
 
 lua << EOF
 local on_attach = function (client, bufnr)

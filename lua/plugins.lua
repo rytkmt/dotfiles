@@ -131,7 +131,9 @@ require'packer'.startup(function()
   use { "rytkmt/vim-textile", opt = true, ft = "textile" }
 
   -- ruby
-  use_with_file("rytkmt/vim-textobj-ruby", "add", "source", { opt = true, ft = "ruby", branch = "feature_textobj_ruby_method" })
+  -- use_with_file("rytkmt/vim-textobj-ruby", "add", "source", { opt = true, ft = "ruby", branch = "feature_textobj_ruby_method" })
+  -- use_with_file("rhysd/vim-textobj-ruby", { opt = true, ft = "ruby", after = "vim-textobj-user" })
+  -- use { "nvim-treesitter/nvim-treesitter-textobjects" }
 
   -- vim
   use { "thinca/vim-prettyprint", opt = true, ft = "vim" }
@@ -143,7 +145,7 @@ require'packer'.startup(function()
   use {
     'vim-denops/denops.vim',
     opt = true,
-    ft = { 'git', 'snippet', 'toml', 'vim', 'ruby', 'markdown', 'sql' },
+    ft = { 'git', 'snippet', 'ruby', 'toml', 'vim', 'markdown', 'sql' },
     config = function() vim.call("denops#server#start") end,
   }
 
@@ -153,13 +155,14 @@ require'packer'.startup(function()
     'Shougo/ddc.vim',
     requires = {
       {
-        'Shougo/ddc-nvim-lsp',
+        'Shougo/ddc-source-nvim-lsp',
         requires = 'neovim/nvim-lspconfig'
       },
       { 'Shougo/ddc-matcher_head' },
       { 'Shougo/ddc-sorter_rank' },
+      { 'Shougo/ddc-ui-native' },
       { 'tani/ddc-fuzzy' },
-      { 'Shougo/ddc-around' },
+      { 'Shougo/ddc-source-around' },
       { 'hrsh7th/vim-vsnip-integ', after = 'vim-vsnip' },
       { 'matsui54/ddc-buffer' },
       { 'rytkmt/ddc-gemojione' }

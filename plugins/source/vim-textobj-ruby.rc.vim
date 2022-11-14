@@ -1,6 +1,6 @@
 
-let s:save_cpo = &cpo
-set cpo&vim
+" let s:save_cpo = &cpo
+" set cpo&vim
 
 call textobj#user#plugin('ruby', {
     \ 'method' : {
@@ -22,5 +22,5 @@ call textobj#user#plugin('ruby', {
 nmap <nowait> zird virdzf
 nmap <nowait> zirc virczf
 
-let &cpo = s:save_cpo
-unlet s:save_cpo
+" let &cpo = s:save_cpo
+" unlet s:save_cpo

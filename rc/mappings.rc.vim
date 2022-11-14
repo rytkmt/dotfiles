@@ -120,6 +120,7 @@ cmap <C-j> <Tab>
 cmap <C-k> <S-Tab>
 cmap <C-e> <C-u>e %:h/
 
+
 " 逆に普通の行単位で移動したい時のために逆の map も設定しておく
 nnoremap gj j
 nnoremap gk k

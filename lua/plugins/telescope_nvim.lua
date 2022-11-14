@@ -3,7 +3,7 @@ local action_layout = require("telescope.actions.layout")
 
 require('telescope').setup{
   defaults = {
-    preview = { hide_on_startup = true, treesitter = false  },
+    preview = { hide_on_startup = true, treesitter = false, timeout = 1000 },
     sorting_strategy = "ascending",
     scroll_strategy = "limit",
     layout_strategy = "horizontal",
@@ -68,6 +68,14 @@ require('telescope').setup{
   }
 }
 vim.api.nvim_set_keymap('n', '[finder]f', ':lua require("telescope.builtin").find_files({cwd = vim.call("FindGitProjectRoot")})<CR>', { noremap = true, silent = true, nowait = true })
+-- vim.api.nvim_set_keymap('n', '[finder]F', ':lua require("telescope.builtin").find_files({cwd = vim.call("FindGitProjectRoot")})<CR>i', {})
+vim.keymap.set('n', '[finder]<C-f>', function()
+  local filename = vim.fn.substitute(vim.fn.expand("%:t"), "\\.[a-zA-Z]*$", "", "")
+  return ':lua require("telescope.builtin").find_files({cwd = vim.call("FindGitProjectRoot"), search_file = "'.. filename .. '"})<CR>'
+end, { expr = true, noremap = true, silent = true, nowait = true })
+vim.keymap.set('n', '[finder]F', function()
+  return ':lua require("telescope.builtin").find_files({cwd = vim.call("FindGitProjectRoot"), search_file = "'.. vim.fn.expand("<cword>") .. '"})<CR>'
+end, { expr = true, noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]if', ':lua require("telescope.builtin").find_files({cwd = vim.call("InputPath")})<CR>', { noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]g', ':lua require("telescope.builtin").live_grep({cwd = vim.call("FindGitProjectRoot")})<CR>', { noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]ig', ':lua require("telescope.builtin").live_grep({cwd = vim.call("InputPath")})<CR>', { noremap = true, silent = true, nowait = true })
