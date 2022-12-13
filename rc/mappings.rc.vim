@@ -159,11 +159,11 @@ vnoremap <expr> [map]s ':<C-u>%s/\<' . expand('<cword>') . '\>/'
 nnoremap <nowait> <expr> gc '`[' . getregtype()[0] . '`]'
 
 " ruby if endの%移動
-source $VIMRUNTIME/macros/matchit.vim
-augroup matchit
-  au!
-  au FileType ruby let b:match_words = '\<\(module\|class\|def\|begin\|do\|if\|unless\|case\)\>:\<\(elsif\|when\|rescue\)\>:\<\(else\|ensure\)\>:\<end\>'
-augroup END
+" source $VIMRUNTIME/macros/matchit.vim
+" augroup matchit
+"   au!
+"   au FileType ruby let b:match_words = '\<\(module\|class\|def\|begin\|do\|if\|unless\|case\)\>:\<\(elsif\|when\|rescue\)\>:\<\(else\|ensure\)\>:\<end\>'
+" augroup END
 nmap m %
 vmap m %
 

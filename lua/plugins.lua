@@ -28,11 +28,14 @@ require'packer'.startup(function()
     for i = 1 , #a do
       if a[i] == "add" then
         args["setup"] = loadstring("vim.cmd('so $XDG_CONFIG_HOME/plugins/add/" .. plugin_name .. ".rc.vim')")
+      elseif a[i] == "add_lua" then
+        plugin_name = string.gsub(plugin_name, "[.]", "_")
+        args["setup"] = loadstring("require('plugins.add." .. plugin_name .. "')")
       elseif a[i] == "source" then
         args["config"] = loadstring("vim.cmd('so $XDG_CONFIG_HOME/plugins/source/" .. plugin_name .. ".rc.vim')")
       elseif a[i] == "source_lua" then
         plugin_name = string.gsub(plugin_name, "[.]", "_")
-        args["config"] = loadstring("require('plugins." .. plugin_name .. "')")
+        args["config"] = loadstring("require('plugins.source." .. plugin_name .. "')")
       end
     end
 
@@ -48,6 +51,7 @@ require'packer'.startup(function()
     { 'tyru/stoptypofile.vim' },
     { 'tpope/vim-repeat' },
     { 'lewis6991/impatient.nvim' },
+    { 'itchyny/vim-qfedit' }
   }
   use_with_file("kana/vim-submode", "add")
   use_with_file("thinca/vim-quickrun", "add", { requires = { "lambdalisue/vim-quickrun-neovim-job" } })
@@ -69,11 +73,11 @@ require'packer'.startup(function()
   -- use_with_file("vim-syntastic/syntastic", "add")
 
   use_with_file("skanehira/qfopen.vim", "source")
-  use_with_file("nvim-treesitter/nvim-treesitter", "source_lua", { run = ':TSUpdate'})
+  use_with_file("nvim-treesitter/nvim-treesitter", "source_lua", { run = ':TSUpdate', requires = 'nvim-treesitter/playground' })
   use_with_file("haya14busa/vim-asterisk", "source")
   use_with_file("nathom/filetype.nvim", "source_lua")
   use_with_file("anuvyklack/pretty-fold.nvim", "source_lua")
-  use_with_file("monkoose/matchparen.nvim", "source_lua")
+  -- use_with_file("monkoose/matchparen.nvim", "source_lua")
   use_with_file("AndrewRadev/switch.vim", "add", "source")
   use_with_file("Pocco81/HighStr.nvim", "source_lua")
   use_with_file("tkmpypy/chowcho.nvim", "source_lua")
@@ -91,6 +95,7 @@ require'packer'.startup(function()
   -- use { 'cohama/lexima.vim', setup = function() vim.g.lexima_accept_pum_with_enter = 0 end }
   use_with_file("rlane/pounce.nvim", "source_lua")
   use_with_file("chentoast/marks.nvim", "source_lua")
+  use_with_file("andymass/vim-matchup", "add_lua")
   use_with_file(
     'nvim-telescope/telescope.nvim',
     "source_lua",
@@ -105,7 +110,6 @@ require'packer'.startup(function()
     opt = true,
     cmd = { 'Capture' }
   }
-
 
   use {
     'cocopon/inspecthi.vim',

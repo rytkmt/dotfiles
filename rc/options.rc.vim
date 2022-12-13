@@ -217,4 +217,5 @@ set fillchars=eob:\-,diff:\
 
 " matchparen.nvimを使用するため標準のものは止める
 let loaded_matchparen = 1
+let g:loaded_matchit = 1
 " ++ }}}

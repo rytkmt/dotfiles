@@ -1,4 +1,3 @@
-vim.g.did_load_filetypes = 1
 require('filetype').setup({
     overrides = {
         -- extensions = {
@@ -14,6 +13,7 @@ require('filetype').setup({
             [".*git/config"] = "gitconfig",  -- Included in the plugin
             ["/.pryrc"] = "ruby",
             ["/*.rake"] = "ruby",
+            [".bashrc"] = "bash",
         },
 
         -- The same as the ones above except the keys map to functions
