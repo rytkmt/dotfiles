@@ -25,6 +25,7 @@ alias ebrl='vim $HOME/.bashrc'
 alias ebpl='vim $HOME/.bash_profile'
 alias egc='vim $XDG_CONFIG_HOME/.gitconfig'
 alias cdv='cd $XDG_CONFIG_HOME'
+alias cdh='cd $XDG_CONFIG_HOME/../lighthouse'
 alias sbr='source $HOME/.bashrc'
 export EDITOR="nvim"
 

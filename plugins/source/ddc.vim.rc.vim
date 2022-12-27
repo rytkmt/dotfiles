@@ -11,13 +11,15 @@ call ddc#custom#patch_global('sourceOptions', {
     \   'matchers': ['matcher_fuzzy'],
     \   'sorters': ['sorter_rank'],
     \   'maxCandidates': 500,
+    \   'timeout': 5000,
+    \   'converters': ['converter_remove_overlap'],
     \ },
     \ 'nvim-lsp': {
     \   'mark': 'lsp',
     \   'forceCompletionPattern': '\.\w*|:\w*|->\w*'
     \ },
     \ 'around': {'mark': 'A'},
-    \ 'buffer': {'mark': 'B', 'limitBytes': 8000000},
+    \ 'buffer': {'mark': 'B', 'limitBytes': 4000000},
     \ })
 
 call ddc#custom#patch_global('sourceParams', {
@@ -39,7 +41,7 @@ call ddc#custom#patch_filetype(['markdown'], 'sourceOptions', {
     \   'forceCompletionPattern': '\.\w*|:\w*|->\w*'
     \ },
     \ 'around': {'mark': 'A'},
-    \ 'buffer': {'mark': 'B', 'limitBytes': 8000000},
+    \ 'buffer': {'mark': 'B', 'limitBytes': 4000000},
     \ 'gemojione': { 'mark': 'G' },
     \ })
 
@@ -77,22 +79,22 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 require('lspconfig').solargraph.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
+ on_attach = on_attach,
+ capabilities = capabilities,
 
-  settings = {
-    solargraph = {
-      auto_format = false,
-      diagnostics = false,
-      formatting = false,
-      folding = false,
-      hover = false,
-      reference = false,
-      rename = false,
-      symbols = false,
-      useBundler = false
-    }
-  }
+ settings = {
+   solargraph = {
+     auto_format = false,
+     diagnostics = false,
+     formatting = false,
+     folding = false,
+     hover = false,
+     reference = false,
+     rename = false,
+     symbols = false,
+     useBundler = false
+   }
+ }
 })
 EOF
 

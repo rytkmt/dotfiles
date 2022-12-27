@@ -24,11 +24,12 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
-  -- matchup = {
-  --   enable = true,              -- mandatory, false will disable the whole extension
-  --   disable = { },  -- optional, list of language that will be disabled
-  --   -- [options]
-  -- },
+  -- カスタマイズできないためmatchupはtreesitterのものは使わない
+  matchup = {
+    enable = true,              -- mandatory, false will disable the whole extension
+    disable = { },  -- optional, list of language that will be disabled
+    -- [options]
+  },
   playground = {
     enable = true,
     disable = {},

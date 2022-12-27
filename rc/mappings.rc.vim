@@ -283,6 +283,8 @@ nnoremap Yp :<C-u>YankFilePath<CR>
 nnoremap YP :<C-u>YankFilePathUnderRoot<CR>
 nnoremap Yd :<C-u>YankFileDir<CR>
 nnoremap Yh :<C-u>YankFileDir<CR>
+nnoremap Ygf :<C-u>YankGitlabFileUrl<CR>
+nnoremap Ygl :<C-u>YankGitlabFileUrlWithLine<CR>
 
 try
   nnoremap [other]r :<C-u>SourceCurrentFile<CR>

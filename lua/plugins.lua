@@ -51,7 +51,7 @@ require'packer'.startup(function()
     { 'tyru/stoptypofile.vim' },
     { 'tpope/vim-repeat' },
     { 'lewis6991/impatient.nvim' },
-    { 'itchyny/vim-qfedit' }
+    { 'itchyny/vim-qfedit' },
   }
   use_with_file("kana/vim-submode", "add")
   use_with_file("thinca/vim-quickrun", "add", { requires = { "lambdalisue/vim-quickrun-neovim-job" } })
@@ -94,6 +94,7 @@ require'packer'.startup(function()
   -- use_with_file('gelguy/wilder.nvim', "source")
   -- use { 'cohama/lexima.vim', setup = function() vim.g.lexima_accept_pum_with_enter = 0 end }
   use_with_file("rlane/pounce.nvim", "source_lua")
+  use_with_file("phaazon/hop.nvim", "source_lua")
   use_with_file("chentoast/marks.nvim", "source_lua")
   use_with_file("andymass/vim-matchup", "add_lua")
   use_with_file(
@@ -102,6 +103,7 @@ require'packer'.startup(function()
     { requires = { {'nvim-lua/plenary.nvim'} } }
   )
   use_with_file('mattn/vim-sqlfmt', "add", { opt = true, ft = "sql" })
+  use_with_file('uga-rosa/translate.nvim', "source_lua")
 
   -- 遅延系
 
@@ -165,6 +167,7 @@ require'packer'.startup(function()
       { 'Shougo/ddc-matcher_head' },
       { 'Shougo/ddc-sorter_rank' },
       { 'Shougo/ddc-ui-native' },
+      { 'Shougo/ddc-converter_remove_overlap' },
       { 'tani/ddc-fuzzy' },
       { 'Shougo/ddc-source-around' },
       { 'hrsh7th/vim-vsnip-integ', after = 'vim-vsnip' },

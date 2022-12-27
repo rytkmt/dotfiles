@@ -9,7 +9,7 @@ local colors = {
     gray      = '#2f2f2f',
     darkgray  = '#202020',
     lightgray = '#838383',
-    offwhite  = '#d8d8c6'
+    offwhite  = '#d0cbad'
 }
 
 local function mode_color(color)
