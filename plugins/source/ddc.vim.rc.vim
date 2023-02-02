@@ -10,8 +10,7 @@ call ddc#custom#patch_global('sourceOptions', {
     \ '_': {
     \   'matchers': ['matcher_fuzzy'],
     \   'sorters': ['sorter_rank'],
-    \   'maxCandidates': 500,
-    \   'timeout': 5000,
+    \   'maxItems': 30,
     \   'converters': ['converter_remove_overlap'],
     \ },
     \ 'nvim-lsp': {
@@ -19,11 +18,11 @@ call ddc#custom#patch_global('sourceOptions', {
     \   'forceCompletionPattern': '\.\w*|:\w*|->\w*'
     \ },
     \ 'around': {'mark': 'A'},
-    \ 'buffer': {'mark': 'B', 'limitBytes': 4000000},
+    \ 'buffer': {'mark': 'B'},
     \ })
 
 call ddc#custom#patch_global('sourceParams', {
-    \ 'around': {'maxSize': 1500},
+    \ 'around': {'maxSize': 200},
     \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
     \ })
 
@@ -34,16 +33,16 @@ call ddc#custom#patch_filetype(['markdown'], 'sourceOptions', {
     \ '_': {
     \   'matchers': ['matcher_fuzzy'],
     \   'sorters': ['sorter_rank'],
-    \   'maxCandidates': 500,
+    \   'maxItems': 30,
     \ },
     \ 'nvim-lsp': {
     \   'mark': 'lsp',
     \   'forceCompletionPattern': '\.\w*|:\w*|->\w*'
     \ },
     \ 'around': {'mark': 'A'},
-    \ 'buffer': {'mark': 'B', 'limitBytes': 4000000},
-    \ 'gemojione': { 'mark': 'G' },
+    \ 'buffer': {'mark': 'B'},
     \ })
+    " \ 'gemojione': { 'mark': 'G' },
 
 " imap <expr><C-s> "\<Right>\<C-R>=UltiSnips#ExpandSnippet()\<CR>"
 

@@ -1,6 +1,5 @@
 vim.o.encoding='utf-8'
 vim.o.fileencodings='utf-8'
-vim.g.loaded_netrwPlugin = 1
 
 vim.cmd('augroup MyAutoCmd')
 vim.cmd('autocmd!')
@@ -11,8 +10,7 @@ vim.cmd('autocmd!')
 vim.cmd('autocmd Syntax * if 1000 < line(\'$\') | syntax sync minlines=100 | endif')
 vim.cmd('augroup END')
 
-vim.cmd('so $XDG_CONFIG_HOME/rc/filetypes.rc.vim')
-vim.cmd('so $XDG_CONFIG_HOME/rc/options.rc.vim')
+require("rc.options")
 
 -- packer {{{
 local packer_dir = vim.env.HOME..'/.local/share/nvim/site/pack/packer/opt/packer.nvim'

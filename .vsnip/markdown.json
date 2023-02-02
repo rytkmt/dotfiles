@@ -22,5 +22,11 @@
       "${1}",
       "```"
     ]
+  },
+  "skinparam_linetype_ortho": {
+    "prefix": "skinparam_linetype_ortho",
+    "body": [
+      "skinparam linetype ortho"
+    ]
   }
 }

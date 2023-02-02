@@ -150,6 +150,9 @@ noremap zk 4<C-y>
 
 nnoremap W viw
 
+" 省略のため
+nnoremap ` @@
+
 " 現在行を前の行の末尾に繋げる
 nnoremap <C-l> ^d0dhj
 

@@ -128,6 +128,7 @@ require'packer'.startup(function()
   use("joker1007/vim-markdown-quote-syntax", markdown_option)
   use("ellisonleao/glow.nvim", markdown_option)
   use("mattn/vim-maketable", markdown_option)
+  use_with_file("dhruvasagar/vim-table-mode", "add", markdown_option)
   local options = markdown_option
   -- options.run = "cd app && npm install"
   options.run = function() vim.fn["mkdp#util#install"]() end

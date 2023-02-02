@@ -1,1 +1,1 @@
-set shiftwidth=2
+setl shiftwidth=2

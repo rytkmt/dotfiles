@@ -13,7 +13,10 @@ require('filetype').setup({
             [".*git/config"] = "gitconfig",  -- Included in the plugin
             ["/.pryrc"] = "ruby",
             ["/*.rake"] = "ruby",
+            ["/*.*.schema"] = "ruby",
             [".bashrc"] = "bash",
+            [".env"] = "bash",
+            [".env.sample"] = "bash",
         },
 
         -- The same as the ones above except the keys map to functions

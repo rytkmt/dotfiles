@@ -168,7 +168,8 @@ command! PackerRecompile call s:recompile_packer()
 "++ gitlabのfileリンク生成 {{{
 function! s:yank_gitlab_file_url(with_line)
   let l:git_project_path = split(system("git -C ". GitProjectRootWithCache() . " remote -v|awk '{print $2}'"), "\n")[0][0:-5]
-  let l:path = l:git_project_path . "/-/tree/develop/". FilePathUnderRoot()
+  let l:git_hash_value = system("git show --format='%h' --no-patch")[0:-2]
+  let l:path = l:git_project_path . "/-/tree/" . l:git_hash_value . "/". FilePathUnderRoot()
   let l:path = (a:with_line == 0 ? l:path : l:path . "#L" . line("."))
   call setreg('*', l:path)
   echo l:path
@@ -178,7 +179,8 @@ command! YankGitlabFileUrlWithLine call s:yank_gitlab_file_url(1)
 
 function! s:open_gitlab_file_url(with_line)
   let l:git_project_path = split(system("git -C ". GitProjectRootWithCache() . " remote -v|awk '{print $2}'"), "\n")[0][0:-5]
-  let l:path = l:git_project_path . "/-/tree/develop/". FilePathUnderRoot()
+  let l:git_hash_value = system("git show --format='%h' --no-patch")[0:-2]
+  let l:path = l:git_project_path . "/-/tree/" . l:git_hash_value . "/". FilePathUnderRoot()
   let l:path = (a:with_line == 0 ? l:path : l:path . "#L" . line("."))
   let l:command = "lemonade open " . l:path
   echo l:command

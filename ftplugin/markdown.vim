@@ -48,3 +48,4 @@ command! -range MarkdownCheckbox call s:markdown_checkbox(<line1>, <line2>)
 nnoremap <buffer> <C-CR> <Cmd>MarkdownCheckbox<CR>
 inoremap <buffer> <C-CR> <Cmd>MarkdownCheckbox<CR>
 xnoremap <buffer> <C-CR> <Cmd>MarkdownCheckbox<CR>
+setlocal cursorline
