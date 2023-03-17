@@ -27,7 +27,7 @@ call ddc#custom#patch_global('sourceParams', {
     \ })
 
 call ddc#custom#patch_filetype(['ruby'], 'sources', ['nvim-lsp', 'vsnip', 'around', 'buffer' ])
-call ddc#custom#patch_filetype(['markdown'], 'sources', ['gemojione', 'vsnip', 'around', 'buffer' ])
+call ddc#custom#patch_filetype(['markdown'], 'sources', ['vsnip', 'around', 'buffer' ])
 call ddc#custom#patch_filetype(['markdown'], 'keywordPattern', '[a-zA-Z_:]\w*')
 call ddc#custom#patch_filetype(['markdown'], 'sourceOptions', {
     \ '_': {
@@ -66,10 +66,11 @@ local on_attach = function (client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local opts = { noremap=true, silent=true }
   -- buf_set_keymap('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'ge', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'gd', '<cmd>vs | lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'gs', '<cmd>sp | lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'gf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   buf_set_keymap('n', 'g[', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', 'g]', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   -- require('folding').on_attach()

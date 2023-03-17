@@ -11,6 +11,7 @@ vim.cmd('autocmd Syntax * if 1000 < line(\'$\') | syntax sync minlines=100 | end
 vim.cmd('augroup END')
 
 require("rc.options")
+require("rc.settings")
 
 -- packer {{{
 local packer_dir = vim.env.HOME..'/.local/share/nvim/site/pack/packer/opt/packer.nvim'

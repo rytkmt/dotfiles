@@ -9,7 +9,9 @@ require('telescope').setup{
     layout_strategy = "horizontal",
     layout_config = {
       horizontal = {
+        height = 0.95,
         prompt_position = "top",
+        width = 0.9
       },
     },
     prompt_prefix = "$ ",
@@ -77,6 +79,8 @@ vim.keymap.set('n', '[finder]F', function()
   return ':lua require("telescope.builtin").find_files({cwd = vim.call("FindGitProjectRoot"), search_file = "'.. vim.fn.expand("<cword>") .. '"})<CR>'
 end, { expr = true, noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]if', ':lua require("telescope.builtin").find_files({cwd = vim.call("InputPath")})<CR>', { noremap = true, silent = true, nowait = true })
+vim.api.nvim_set_keymap('n', '[finder]M', ':lua require("telescope.builtin").find_files({cwd = "~/memo/"})<CR>', { noremap = true, silent = true, nowait = true })
+vim.api.nvim_set_keymap('n', '[finder]s', ':lua require("telescope.builtin").find_files({cwd = "$XDG_CONFIG_HOME/source_memo/"})<CR>', { noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]g', ':lua require("telescope.builtin").live_grep({cwd = vim.call("FindGitProjectRoot")})<CR>', { noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]ig', ':lua require("telescope.builtin").live_grep({cwd = vim.call("InputPath")})<CR>', { noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]G', ':lua require("telescope.builtin").grep_string({cwd = vim.call("FindGitProjectRoot")})<CR>', { noremap = true, silent = true, nowait = true })
@@ -85,3 +89,4 @@ vim.api.nvim_set_keymap('n', '[finder]b', ':lua require("telescope.builtin").cur
 vim.api.nvim_set_keymap('n', '[finder]m', ':lua require("telescope.builtin").oldfiles()<CR>', { noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]h', ':lua require("telescope.builtin").highlights()<CR>', { noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]l', ':lua require("telescope.builtin").buffers()<CR>', { noremap = true, silent = true, nowait = true })
+vim.api.nvim_set_keymap('n', '[finder]k', ':lua require("telescope.builtin").keymaps()<CR>', { noremap = true, silent = true, nowait = true })

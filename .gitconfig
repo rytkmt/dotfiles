@@ -70,7 +70,21 @@
   }; f"
   h = help
   st = status -s
-  stg = status -s | pipgre
+  stg = "!f() { \
+    if [ $# -eq 0 ]; then \
+      echo 'arguments are required.'; \
+    else \
+      str='git st | grep --color \"'$1'\"';\
+      if [ $# -gt 1 ]; then \
+        str=$str' | pipgre'; \
+        for x in ${@:2:$#-1}; do \
+          str=$str' '$x; \
+        done; \
+        str=$str' | grep --color \"'$1'\"'; \
+      fi; \
+      eval "$str"; \
+    fi; \
+  }; f"
   sti = status -s --ignored
   stv = "!f() { \
     if [ $# -ne 1 ];\

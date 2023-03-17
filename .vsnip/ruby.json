@@ -48,7 +48,7 @@
   "tap_pp": {
     "prefix": "tap_pp",
     "body": [
-      "tap(&method(:pp))"
+      "tap{|x|pp(x)}"
     ]
   },
   "benchmark": {
@@ -292,7 +292,9 @@
   "raise_not_implement": {
     "prefix": "raise_not_implement",
     "body": [
-      "raise(NotImplementedError)"
+      "# :nocov:",
+      "raise(NotImplementedError)",
+      "# :nocov:"
     ]
   },
   "concern_included": {
@@ -333,6 +335,24 @@
     "prefix": "context_vcr",
     "body": [
       "context \"${1:CONTEXT}\", vcr: { cassette_name: \"${2:CASSETTE_NAME}\" } do${3}",
+      "end"
+    ]
+  },
+  "context_include_validation": {
+    "prefix": "context_include_validation",
+    "body": [
+      "context \"${1:CONTEXT}の場合\" do",
+      "  let(:param) { { ${2} } }",
+      "  include_examples :include_validation_error",
+      "end"
+    ]
+  },
+  "context_not_include_validation": {
+    "prefix": "context_not_include_validation",
+    "body": [
+      "context \"${1:CONTEXT}の場合\" do",
+      "  let(:param) { { ${2} } }",
+      "  include_examples :not_include_validation_error",
       "end"
     ]
   },

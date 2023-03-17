@@ -94,6 +94,20 @@ function _G.diffview_open_current_file()
   vim.cmd(":DiffviewOpen -- " .. vim.fn.expand("%"))
   return
 end
+function _G.diffview_open_current_file_from_revision(revision)
+  vim.cmd(":DiffviewOpen "..revision.args.." -- " .. vim.fn.expand("%"))
+  return
+end
+
 
 vim.api.nvim_set_keymap("n", "[diff]d", ":lua diffview_open_current_file()<CR>", { noremap = false, silent = false, nowait = true })
+vim.api.nvim_set_keymap("n", "[diff]D", ":DiffviewOpenCurrentFileFromRevision", { noremap = false, silent = false, nowait = true })
+vim.api.nvim_create_user_command(
+  'DiffviewOpenCurrentFileFromRevision',
+  function(revision)
+    vim.cmd(":DiffviewOpen "..revision.args.." -- " .. vim.fn.expand("%"))
+    return
+  end,
+  { nargs = 1 }
+)
 vim.api.nvim_set_keymap("n", "[diff]h", ":DiffviewFileHistory %<CR>", { noremap = false, silent = false, nowait = true })

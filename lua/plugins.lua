@@ -156,7 +156,7 @@ require'packer'.startup(function()
     config = function() vim.call("denops#server#start") end,
   }
 
-  use_with_file("hrsh7th/vim-vsnip", "add", { requires = { 'rafamadriz/friendly-snippets' } })
+  use_with_file("hrsh7th/vim-vsnip", "add")
 
   use {
     'Shougo/ddc.vim',
@@ -173,7 +173,7 @@ require'packer'.startup(function()
       { 'Shougo/ddc-source-around' },
       { 'hrsh7th/vim-vsnip-integ', after = 'vim-vsnip' },
       { 'matsui54/ddc-buffer' },
-      { 'rytkmt/ddc-gemojione' }
+      -- { 'rytkmt/ddc-gemojione' }
     },
     after = 'denops.vim',
     config = function()
