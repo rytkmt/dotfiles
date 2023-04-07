@@ -390,19 +390,31 @@
   "timetravel_freeze": {
     "prefix": "timetravel_freeze",
     "body": [
-      "around do |e|",
+      "before do",
       "  @time = Time.zone.local(*Time.zone.now.to_a.take(6).reverse)",
-      "  travel_to(@time) { e.run }",
+      "  travel_to(@time)",
       "end"
     ]
   },
-  "around_travel_to": {
-    "prefix": "around_travel_to",
+  "before_travel_to": {
+    "prefix": "before_travel_to",
     "body": [
-      "around do |e|",
+      "before do",
       "  @time = Time.zone.local(*Time.zone.now.to_a.take(6).reverse)",
-      "  travel_to(@time) { e.run }",
+      "  travel_to(@time)",
       "end"
+    ]
+  },
+  "let": {
+    "prefix": "let",
+    "body": [
+      "let(:${1:NAME}) { ${2} }"
+    ]
+  },
+  "let_it_be": {
+    "prefix": "let_it_be",
+    "body": [
+      "let_it_be(:${1:NAME}) { ${2} }"
     ]
   },
   "let_create": {

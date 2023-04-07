@@ -128,6 +128,7 @@ vim.opt.fillchars = { eob = "-", diff = " " }
 -- [[ loaded ]]
 vim.g.did_install_default_menus  = 1
 vim.g.did_install_syntax_menu    = 1
+vim.g.loaded_man                 = 1
 vim.g.loaded_2html_plugin        = 1
 vim.g.loaded_gtags               = 1
 vim.g.loaded_gtags_cscope        = 1
@@ -138,11 +139,8 @@ vim.g.loaded_matchit             = 1
 vim.g.loaded_matchparen          = 1
 vim.g.loaded_netrwFileHandlers   = 1
 vim.g.loaded_netrwPlugin         = 1
-vim.g.loaded_netrwPlugin         = 1
 vim.g.loaded_netrwSettings       = 1
 vim.g.loaded_spellfile_plugin    = 1
-vim.g.loaded_tarPlugin           = 1
-vim.g.loaded_tarPlugin           = 1
 vim.g.loaded_tarPlugin           = 1
 vim.g.loaded_tutor_mode_plugin   = 1
 vim.g.loaded_vimballPlugin       = 1

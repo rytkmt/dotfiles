@@ -31,5 +31,7 @@ let g:switch_custom_definitions =
   \   switch#NormalizedCase(['税込', '税別']),
   \   switch#NormalizedCase(['include', 'exclude']),
   \   switch#NormalizedCase(['プラス', 'マイナス']),
+  \   switch#NormalizedCase(['カラー', 'サイズ']),
+  \   switch#NormalizedCase(['color', 'size']),
   \   switch#NormalizedCase(['-', '+'])
   \ ]

@@ -177,15 +177,28 @@ endfunction
 command! YankGitlabFileUrl call s:yank_gitlab_file_url(0)
 command! YankGitlabFileUrlWithLine call s:yank_gitlab_file_url(1)
 
+function! s:open_url(url)
+  " TODO lemonadeの存在チェック
+  let l:command = "lemonade open " . a:url
+  echo l:command
+  call system(l:command)
+endfunction
+
 function! s:open_gitlab_file_url(with_line)
   let l:git_project_path = split(system("git -C ". GitProjectRootWithCache() . " remote -v|awk '{print $2}'"), "\n")[0][0:-5]
   let l:git_hash_value = system("git show --format='%h' --no-patch")[0:-2]
   let l:path = l:git_project_path . "/-/tree/" . l:git_hash_value . "/". FilePathUnderRoot()
   let l:path = (a:with_line == 0 ? l:path : l:path . "#L" . line("."))
-  let l:command = "lemonade open " . l:path
-  echo l:command
-  call system(l:command)
+  call s:open_url(l:path)
 endfunction
 command! OpenGitlabFileUrl call s:open_gitlab_file_url(0)
 command! OpenGitlabFileUrlWithLine call s:open_gitlab_file_url(1)
+
+function! s:open_cursor_url()
+  let l:path = GetVisualSelection()
+  echom l:path
+  call s:open_url(l:path)
+endfunction
+
+command! -range OpenCursorUrl <line1>,<line2>call s:open_cursor_url()
 "++ }}}
