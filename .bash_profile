@@ -12,6 +12,10 @@ function prompt {
 }
 prompt
 
+if [[ $(command -v cargo) ]]; then
+  export PATH=$PATH:$HOME/.cargo/bin
+fi
+
 if [ -f ~/.bash_profile_local ]; then
   source ~/.bash_profile_local
 fi

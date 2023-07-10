@@ -411,6 +411,12 @@
       "let(:${1:NAME}) { ${2} }"
     ]
   },
+  "let!": {
+    "prefix": "let!",
+    "body": [
+      "let!(:${1:NAME}) { ${2} }"
+    ]
+  },
   "let_it_be": {
     "prefix": "let_it_be",
     "body": [

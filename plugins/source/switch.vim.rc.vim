@@ -33,5 +33,6 @@ let g:switch_custom_definitions =
   \   switch#NormalizedCase(['プラス', 'マイナス']),
   \   switch#NormalizedCase(['カラー', 'サイズ']),
   \   switch#NormalizedCase(['color', 'size']),
-  \   switch#NormalizedCase(['-', '+'])
+  \   switch#NormalizedCase(['-', '+']),
+  \   switch#NormalizedCase(['小さい', '大きい'])
   \ ]

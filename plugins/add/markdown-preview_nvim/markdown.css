@@ -1,5 +1,32 @@
+body {
+  font-size: 12px;
+  --borderColorDefault: #bdbdbd;
+}
 #page-ctn {
   margin: 0 auto;
   max-width: 80%;
   color: var(--foreground-color);
+}
+table {
+  border-spacing: unset;
+}
+table tr:first-child th {
+  border-top: solid 1px var(--borderColorDefault)!important;
+  border-left: solid 1px var(--borderColorDefault)!important;
+}
+table td:first-child, .loom table th:first-child {
+  border-left: solid 1px var(--borderColorDefault)!important;
+}
+
+table td, table th {
+  border-right: solid 1px var(--borderColorDefault)!important;
+  border-bottom: solid 1px var(--borderColorDefault)!important;
+  padding: 0.4em 0.65em!important;
+  line-height: 1.2rem;
+}
+h1 {
+  font-size: 2em !important;
+  margin-block-start: 0.67em !important;
+  margin-block-end: 0.67em !important;
+  border-bottom: solid 2px var(--borderColorDefault);
 }

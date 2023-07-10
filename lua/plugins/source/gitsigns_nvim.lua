@@ -12,29 +12,6 @@ require('gitsigns').setup {
   numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
   linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
   word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
-  keymaps = {
-    -- Default keymap options
-    noremap = true,
-
-    ['n ]g'] = { expr = true, "&diff ? ']g' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
-    ['n [g'] = { expr = true, "&diff ? '[g' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
-
-    -- ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-    -- ['v <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-    -- ['n gb'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-    ['n gb'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-    -- ['v gb'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-    -- ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-    ['n gi'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-    ['n gS'] = '<cmd>Gitsigns toggle_signs<CR>',
-    -- ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
-    -- ['n <leader>hS'] = '<cmd>lua require"gitsigns".stage_buffer()<CR>',
-    -- ['n <leader>hU'] = '<cmd>lua require"gitsigns".reset_buffer_index()<CR>',
-
-    -- Text objects
-    -- ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
-    -- ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
-  },
   watch_gitdir = {
     interval = 1000,
     follow_files = true
@@ -64,6 +41,32 @@ require('gitsigns').setup {
   yadm = {
     enable = false
   },
+  on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
+
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
+
+    -- Navigation
+    map('n', ']g', function()
+      if vim.wo.diff then return ']g' end
+      vim.schedule(function() gs.next_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+    map('n', '[g', function()
+      if vim.wo.diff then return '[g' end
+      vim.schedule(function() gs.prev_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+    -- Actions
+    map('n', 'gb', gs.reset_hunk)
+    map('n', 'gi', gs.preview_hunk)
+  end
 }
 
 vim.cmd("hi GitSignsAdd guifg=#728a7f gui=none guibg=none")
