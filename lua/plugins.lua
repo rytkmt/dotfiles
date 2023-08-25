@@ -171,7 +171,7 @@ require'packer'.startup(function()
       { 'Shougo/ddc-converter_remove_overlap' },
       { 'tani/ddc-fuzzy' },
       { 'Shougo/ddc-source-around' },
-      { 'hrsh7th/vim-vsnip-integ', after = 'vim-vsnip' },
+      { 'uga-rosa/ddc-source-vsnip', after = 'vim-vsnip' },
       { 'matsui54/ddc-buffer' },
       -- { 'rytkmt/ddc-gemojione' }
     },

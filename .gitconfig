@@ -214,3 +214,13 @@
     fi; \
   }; f"
   cle = clean -fd
+  cp = "!f() { \
+    echo 'feat: 新しい機能'; \
+    echo 'fix: バグの修正'; \
+    echo 'docs: ドキュメントのみの変更'; \
+    echo 'style: 空白、フォーマット、セミコロン追加など'; \
+    echo 'refactor: 仕様に影響がないコード改善(リファクタ)'; \
+    echo 'perf: パフォーマンス向上関連'; \
+    echo 'test: テスト関連'; \
+    echo 'chore: ビルド、補助ツール、ライブラリ関連'; \
+  }; f"

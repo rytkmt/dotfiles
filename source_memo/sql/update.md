@@ -1,4 +1,4 @@
 #### ノーマル
 
-- `UPDATE table SET column = value, column2 = value2 WHERE id = 3`
+- `UPDATE テーブル名 SET カラム名 = 値, カラム名2 = 値2 WHERE id = 3`
 
