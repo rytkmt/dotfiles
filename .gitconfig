@@ -140,7 +140,7 @@
   mos = merge origin/swagger-crossx_api -m \"Resolve behind\"
   fmos = !git fe && git merge origin/swagger-crossx_api -m \"Resolve behind\"
   mom = merge origin/master -m \"Resolve behind\"
-  d = diff --color-words
+  d = diff --color-words --no-prefix
   ds = diff --name-status
   di = diff --cached
   l = log --oneline --no-merges -n 18

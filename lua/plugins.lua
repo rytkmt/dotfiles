@@ -105,6 +105,8 @@ require'packer'.startup(function()
   use_with_file('mattn/vim-sqlfmt', "add", { opt = true, ft = "sql" })
   use_with_file('uga-rosa/translate.nvim', "source_lua")
 
+  use_with_file("rhysd/conflict-marker.vim", "source")
+
   -- 遅延系
 
   use {

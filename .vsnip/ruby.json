@@ -452,5 +452,41 @@
     "body": [
       "class BigDecimal; alias inspect to_s; end"
     ]
+  },
+  "yard_param": {
+    "prefix": "@param",
+    "body": [
+      "@param [${1:Class}] ${2:NAME} ${3:DETAILS}"
+    ]
+  },
+  "yard_comment_param": {
+    "prefix": "#param",
+    "body": [
+      "# @param [${1:Class}] ${2:NAME} ${3:DETAILS}"
+    ]
+  },
+  "yard_return": {
+    "prefix": "@return",
+    "body": [
+      "@return [${1:Class}] ${2:DETAILS}"
+    ]
+  },
+  "yard_comment_return": {
+    "prefix": "#return",
+    "body": [
+      "# @return [${1:Class}] ${2:DETAILS}"
+    ]
+  },
+  "yard_option": {
+    "prefix": "@option",
+    "body": [
+      "@option ${1:VARIABLE} [${2:Class}] ${3:OPT_NAME} ${4:DETAILS}"
+    ]
+  },
+  "yard_comment_option": {
+    "prefix": "#option",
+    "body": [
+      "# @option ${1:VARIABLE} [${2:Class}] ${3:OPT_NAME} ${4:DETAILS}"
+    ]
   }
 }

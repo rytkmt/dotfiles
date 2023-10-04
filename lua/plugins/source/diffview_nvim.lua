@@ -110,4 +110,5 @@ vim.api.nvim_create_user_command(
   end,
   { nargs = 1 }
 )
-vim.api.nvim_set_keymap("n", "[diff]h", ":DiffviewFileHistory %<CR>", { noremap = false, silent = false, nowait = true })
+vim.api.nvim_set_keymap("n", "[diff]h", ":DiffviewFileHistory % --no-merges<CR>", { noremap = false, silent = false, nowait = true })
+vim.api.nvim_set_keymap("n", "[diff]H", ":DiffviewFileHistory %<CR>", { noremap = false, silent = false, nowait = true })

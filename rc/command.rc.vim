@@ -199,6 +199,9 @@ function! s:open_cursor_url()
   echom l:path
   call s:open_url(l:path)
 endfunction
-
 command! -range OpenCursorUrl <line1>,<line2>call s:open_cursor_url()
+"++ }}}
+
+"++ 文字数カウント {{{
+:command! WordCount %s/./&/gn|nohlsearch 
 "++ }}}
