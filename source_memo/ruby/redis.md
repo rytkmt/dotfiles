@@ -5,3 +5,7 @@
 #### Redisのキー確認
 
 - `redis.keys`
+
+#### Redisのキーすべて削除
+
+- `redis.flushall`

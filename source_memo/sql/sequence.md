@@ -8,3 +8,7 @@
 ## 次に付与するシーケンス値の確認（incrementされてしまう）
 
 - `SELECT nextval('member_id_seq');`
+
+## シーケンス名の変更
+
+- `ALTER SEQUENCE public.import_csv_mapping_definitions_id_seq  RENAME TO import_csv_mappings_id_seq;`

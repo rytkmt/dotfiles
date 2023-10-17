@@ -153,8 +153,6 @@ require'packer'.startup(function()
   -- ddc周り
   use {
     'vim-denops/denops.vim',
-    opt = true,
-    ft = { 'git', 'snippet', 'ruby', 'toml', 'vim', 'markdown', 'sql' },
     config = function() vim.call("denops#server#start") end,
   }
 
