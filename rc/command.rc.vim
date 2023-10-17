@@ -53,7 +53,6 @@ command! -nargs=? ToSnakeCase call s:to_snake_case(<f-args>)
 " ++ }}}
 
 "++ ファイルやディレクトリのヤンク {{{
-
 function! s:yank_file_name()
   let l:name = substitute(expand("%:t"), "\.[a-zA-Z]*$", "", "")
   call setreg('*', l:name)
@@ -73,6 +72,14 @@ function! s:yank_file_path_under_root()
   echo l:path
 endfunction
 command! YankFilePathUnderRoot call s:yank_file_path_under_root()
+
+function! s:yank_git_branch()
+  let l:branch = system("git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' | sed -e 's/* // '")
+  let l:branch = substitute(l:branch, '\n', '', 'g')
+  call setreg('*', l:branch)
+  echo l:branch
+endfunction
+command! YankGitBranch call s:yank_git_branch()
 
 function! s:yank_git_root()
   let l:path = GitProjectRootWithCache()

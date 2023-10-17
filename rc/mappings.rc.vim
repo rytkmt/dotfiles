@@ -288,6 +288,7 @@ nnoremap Yd :<C-u>YankFileDir<CR>
 nnoremap Yh :<C-u>YankFileDir<CR>
 nnoremap Ygf :<C-u>YankGitlabFileUrl<CR>
 nnoremap Ygl :<C-u>YankGitlabFileUrlWithLine<CR>
+nnoremap Ygb :<C-u>YankGitBranch<CR>
 
 try
   nnoremap [other]r :<C-u>SourceCurrentFile<CR>
