@@ -190,6 +190,7 @@ function! s:open_url(url)
   echo l:command
   call system(l:command)
 endfunction
+command! -nargs=? OpenUrl call s:open_url("<args>")
 
 function! s:open_gitlab_file_url(with_line)
   let l:git_project_path = split(system("git -C ". GitProjectRootWithCache() . " remote -v|awk '{print $2}'"), "\n")[0][0:-5]
@@ -202,7 +203,7 @@ command! OpenGitlabFileUrl call s:open_gitlab_file_url(0)
 command! OpenGitlabFileUrlWithLine call s:open_gitlab_file_url(1)
 
 function! s:open_cursor_url()
-  let l:path = GetVisualSelection()
+  let l:path = matchstr(GetVisualSelection(), 'http[s]\?:\/\/[^ \t\n\r\)]\+')
   echom l:path
   call s:open_url(l:path)
 endfunction

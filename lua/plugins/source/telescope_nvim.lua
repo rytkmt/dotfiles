@@ -89,5 +89,5 @@ vim.api.nvim_set_keymap('n', '[finder]b', ':lua require("telescope.builtin").cur
 vim.api.nvim_set_keymap('n', '[finder]o', ':lua require("telescope.builtin").oldfiles()<CR>', { noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]m', ':lua require("telescope.builtin").marks()<CR>', { noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]h', ':lua require("telescope.builtin").highlights()<CR>', { noremap = true, silent = true, nowait = true })
-vim.api.nvim_set_keymap('n', '[finder]l', ':lua require("telescope.builtin").buffers()<CR>', { noremap = true, silent = true, nowait = true })
+vim.api.nvim_set_keymap('n', '[finder]l', ':lua require("telescope.builtin").loclist()<CR>', { noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]k', ':lua require("telescope.builtin").keymaps()<CR>', { noremap = true, silent = true, nowait = true })

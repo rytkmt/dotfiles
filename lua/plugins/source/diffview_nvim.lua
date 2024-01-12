@@ -101,6 +101,7 @@ end
 
 
 vim.api.nvim_set_keymap("n", "[diff]d", ":lua diffview_open_current_file()<CR>", { noremap = false, silent = false, nowait = true })
+vim.api.nvim_set_keymap("n", "[diff]b", ":DiffviewOpen", { noremap = false, silent = false, nowait = true })
 vim.api.nvim_set_keymap("n", "[diff]D", ":DiffviewOpenCurrentFileFromRevision", { noremap = false, silent = false, nowait = true })
 vim.api.nvim_create_user_command(
   'DiffviewOpenCurrentFileFromRevision',
