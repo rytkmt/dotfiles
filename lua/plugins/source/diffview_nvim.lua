@@ -113,3 +113,5 @@ vim.api.nvim_create_user_command(
 )
 vim.api.nvim_set_keymap("n", "[diff]h", ":DiffviewFileHistory % --no-merges<CR>", { noremap = false, silent = false, nowait = true })
 vim.api.nvim_set_keymap("n", "[diff]H", ":DiffviewFileHistory %<CR>", { noremap = false, silent = false, nowait = true })
+
+vim.cmd("hi! DiffviewFilePanelSelected guifg=#DCA561")

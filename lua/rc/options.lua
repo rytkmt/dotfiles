@@ -1,7 +1,6 @@
 -- autofmt: 日本語文章のフォーマット(折り返し)プラグイン.
 vim.opt.formatexpr="autofmt#japanese#formatexpr()"
 
-
 -- [[ 表示 ]]
 
 -- 行番号を非表示 (number:表示)
@@ -98,7 +97,7 @@ vim.opt.iminsert = 0
 -- 検索時のIMEのデフォルト値(-1はiminsertの値を参照するという意味)
 vim.opt.imsearch = -1
 -- Windows でもパスの区切り文字を / にする
-vim.opt.shellslash = true
+-- vim.opt.shellslash = true
 -- コマンドラインモードでTABキーによるファイル名補完を有効にする
 vim.opt.wildmenu = true
 vim.opt.wildmode= { "list:longest", "full" }
