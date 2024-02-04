@@ -13,7 +13,7 @@ call ddc#custom#patch_global('sourceOptions', {
     \   'maxItems': 30,
     \   'converters': ['converter_remove_overlap'],
     \ },
-    \ 'nvim-lsp': {
+    \ 'lsp': {
     \   'mark': 'lsp',
     \   'forceCompletionPattern': '\.\w*|:\w*|->\w*'
     \ },
@@ -23,19 +23,19 @@ call ddc#custom#patch_global('sourceOptions', {
 
 call ddc#custom#patch_global('sourceParams', {
     \ 'around': {'maxSize': 200},
-    \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
+    \ 'lsp': { 'kindLabels': { 'Class': 'c' } },
     \ })
 
-call ddc#custom#patch_filetype(['ruby'], 'sources', ['nvim-lsp', 'vsnip', 'around', 'buffer' ])
+call ddc#custom#patch_filetype(['ruby'], 'sources', ['lsp', 'vsnip', 'around', 'buffer' ])
 call ddc#custom#patch_filetype(['markdown'], 'sources', ['vsnip', 'around', 'buffer' ])
-call ddc#custom#patch_filetype(['markdown'], 'keywordPattern', '[a-zA-Z_:]\w*')
 call ddc#custom#patch_filetype(['markdown'], 'sourceOptions', {
     \ '_': {
     \   'matchers': ['matcher_fuzzy'],
     \   'sorters': ['sorter_rank'],
     \   'maxItems': 30,
+    \   'keywordPattern': '[a-zA-Z_:]\w*'
     \ },
-    \ 'nvim-lsp': {
+    \ 'lsp': {
     \   'mark': 'lsp',
     \   'forceCompletionPattern': '\.\w*|:\w*|->\w*'
     \ },
@@ -43,6 +43,7 @@ call ddc#custom#patch_filetype(['markdown'], 'sourceOptions', {
     \ 'buffer': {'mark': 'B'},
     \ })
     " \ 'gemojione': { 'mark': 'G' },
+call ddc#custom#patch_filetype(['yaml'], 'sources', ['lsp', 'around' ])
 
 " imap <expr><C-s> "\<Right>\<C-R>=UltiSnips#ExpandSnippet()\<CR>"
 
@@ -75,7 +76,9 @@ local on_attach = function (client, bufnr)
   buf_set_keymap('n', 'g]', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   -- require('folding').on_attach()
 end
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+local capabilities = require("ddc_source_lsp").make_client_capabilities()
+
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 require('lspconfig').solargraph.setup({
@@ -96,6 +99,23 @@ require('lspconfig').solargraph.setup({
    }
  }
 })
+require('lspconfig').yamlls.setup({
+ on_attach = on_attach,
+ capabilities = capabilities,
+ settings = {
+   yaml = {
+     validate = false,
+     -- hoverで何も候補を出すべきものが見当たらない・・
+     hover = false,
+     -- 効いていない？
+     completion = false,
+     -- schemaStore = {
+     --   enable = true,
+     --   url = "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json"
+     -- }
+   }
+ }
+})
 EOF
 
 
@@ -104,6 +124,6 @@ EOF
 " nnoremap <silent> [lsp]d :vsplit \| :LspDefinition<CR>
 " nmap <silent> gd :vsplit \| [lsp]d
 " nnoremap <silent> [lsp]u <plug>(lsp-peek-declaration)
-" nnoremap <silent> [lsp]i <plug>(lsp-type-hierarchy)
-" nnoremap <silent> [lsp]h <plug>(lsp-hover)
+nnoremap <silent> [lsp]i <plug>(lsp-type-hierarchy)
+nnoremap <silent> [lsp]h <plug>(lsp-hover)
 call ddc#enable()

@@ -106,6 +106,7 @@ require'packer'.startup(function()
   use_with_file('uga-rosa/translate.nvim', "source_lua")
 
   use_with_file("rhysd/conflict-marker.vim", "source")
+  use_with_file("cuducos/yaml.nvim", "source_lua", { ft = { "yaml" }, requires = { "nvim-treesitter/nvim-treesitter", "nvim-telescope/telescope.nvim" } })
 
   -- 遅延系
 
@@ -162,7 +163,7 @@ require'packer'.startup(function()
     'Shougo/ddc.vim',
     requires = {
       {
-        'Shougo/ddc-source-nvim-lsp',
+        'Shougo/ddc-source-lsp',
         requires = 'neovim/nvim-lspconfig'
       },
       { 'Shougo/ddc-matcher_head' },

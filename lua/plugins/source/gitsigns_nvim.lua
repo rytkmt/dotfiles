@@ -64,9 +64,14 @@ require('gitsigns').setup {
       return '<Ignore>'
     end, {expr=true})
 
+    -- 現在行の最終更新のコミット表示 =>変更した対象のコミットから対応を追いやすい
+    map('n', 'gL', gs.blame_line)
+    map('n', 'gA', gs.stage_buffer)
     map('n', 'ga', gs.stage_hunk)
-    map('n', 'gA', gs.undo_stage_hunk)
+    -- 直前のindexへの追加内容を取り消す
+    map('n', 'gu', gs.undo_stage_hunk)
     -- Actions
+    -- ローカルファイルの修正(未index状態)を取り消す
     map('n', 'gb', gs.reset_hunk)
     map('n', 'gi', gs.preview_hunk)
   end

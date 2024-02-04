@@ -113,7 +113,8 @@ vim.opt.synmaxcol = 320
 -- ヘルプの日本語化
 vim.opt.helplang = { "ja", "en" }
 vim.opt.wildignore:append({ "*.gif","*.png","*.jpg","*.jpeg","*.bak","tags","*.zip","*.jar","*.class","*.pdf","*.swf" })
-vim.opt.updatetime = 0
+-- CursorHoldなどを発火させる待ち時間 0だと処理数が増えすぎるためストレスにはならない200と設定
+vim.opt.updatetime = 300
 -- 再描画に掛ける時間
 vim.opt.redrawtime = 7000
 -- 折りたたみのレベル
