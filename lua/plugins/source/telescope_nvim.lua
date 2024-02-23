@@ -1,6 +1,6 @@
 local actions = require("telescope.actions")
 local action_layout = require("telescope.actions.layout")
-
+require('telescope').load_extension('arglist')
 require('telescope').setup{
   defaults = {
     preview = { hide_on_startup = true, treesitter = false, timeout = 1000 },
@@ -90,4 +90,6 @@ vim.api.nvim_set_keymap('n', '[finder]o', ':lua require("telescope.builtin").old
 vim.api.nvim_set_keymap('n', '[finder]m', ':lua require("telescope.builtin").marks()<CR>', { noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]h', ':lua require("telescope.builtin").highlights()<CR>', { noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]l', ':lua require("telescope.builtin").loclist()<CR>', { noremap = true, silent = true, nowait = true })
+vim.api.nvim_set_keymap('n', '[finder]a', ':lua require("telescope-arglist").arglist()<CR>', { noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]k', ':lua require("telescope.builtin").keymaps()<CR>', { noremap = true, silent = true, nowait = true })
+vim.api.nvim_set_keymap('n', '[finder]c', ':lua require("telescope.builtin").commands()<CR>', { noremap = true, silent = true, nowait = true })

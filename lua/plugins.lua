@@ -100,7 +100,12 @@ require'packer'.startup(function()
   use_with_file(
     'nvim-telescope/telescope.nvim',
     "source_lua",
-    { requires = { {'nvim-lua/plenary.nvim'} } }
+    {
+      requires = {
+        'nvim-lua/plenary.nvim',
+        'sam4llis/telescope-arglist.nvim'
+      }
+    }
   )
   use_with_file('mattn/vim-sqlfmt', "add", { opt = true, ft = "sql" })
   use_with_file('uga-rosa/translate.nvim', "source_lua")
