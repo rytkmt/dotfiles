@@ -137,9 +137,9 @@ vnoremap <C-Down> "zx"zp`[V`]
 " カーソル移動
 noremap <S-h>   ^
 noremap <S-j>  4gj
-noremap <C-j>   }
+" noremap <C-j>   }
 noremap <S-k>  4gk
-noremap <C-k>   {
+" noremap <C-k>   {
 noremap <S-l>   $
 
 " 画面移動

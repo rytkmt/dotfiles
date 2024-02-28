@@ -45,7 +45,6 @@ require'packer'.startup(function()
   use {
     { 'rytkmt/lighthouse' },
     { 'kana/vim-textobj-user' },
-    { 'vim-scripts/AnsiEsc.vim' },
     { 'vim-jp/vimdoc-ja' },
     { 'kana/vim-operator-user' },
     { 'tyru/stoptypofile.vim' },
@@ -57,8 +56,8 @@ require'packer'.startup(function()
   use_with_file("thinca/vim-quickrun", "add", { requires = { "lambdalisue/vim-quickrun-neovim-job" } })
   -- use_with_file("airblade/vim-gitgutter", "add")
   use_with_file("junegunn/vim-easy-align", "add")
-  use_with_file("glepnir/indent-guides.nvim", "source_lua")
-  use_with_file("vim-scripts/grep.vim", "add")
+  use_with_file("rytkmt/indent-blank-guides.nvim", "source_lua")
+  -- use_with_file("vim-scripts/grep.vim", "add")
   use_with_file("tomtom/tcomment_vim", "add")
   -- use_with_file("tpope/vim-surround", "add")
   use_with_file("ur4ltz/surround.nvim", "source_lua")
@@ -67,11 +66,12 @@ require'packer'.startup(function()
   -- use_with_file("rhysd/clever-f.vim", "add")
   -- 遅いため一回消す
   -- use_with_file("haya14busa/vim-operator-flashy", "add")
-  use_with_file("kana/vim-operator-replace", "add")
+  -- use_with_file("kana/vim-operator-replace", "add")
   -- use_with_file("rytkmt/vim-trailing-whitespace", "add")
   -- 遅いので一時的にコメントアウトしておく
   -- use_with_file("vim-syntastic/syntastic", "add")
 
+  use_with_file("haya14busa/vim-edgemotion", "source")
   use_with_file("skanehira/qfopen.vim", "source")
   use_with_file("nvim-treesitter/nvim-treesitter", "source_lua", { run = ':TSUpdate', requires = 'nvim-treesitter/playground' })
   use_with_file("haya14busa/vim-asterisk", "source")
@@ -80,7 +80,7 @@ require'packer'.startup(function()
   -- use_with_file("monkoose/matchparen.nvim", "source_lua")
   use_with_file("AndrewRadev/switch.vim", "add", "source")
   use_with_file("Pocco81/HighStr.nvim", "source_lua")
-  use_with_file("tkmpypy/chowcho.nvim", "source_lua")
+  -- use_with_file("tkmpypy/chowcho.nvim", "source_lua")
   -- use_with_file("Shougo/vimproc.vim", "add", "source")
   use_with_file('rytkmt/tabline.nvim', "source_lua", { branch = 'develop', requires = {'kyazdani42/nvim-web-devicons'} })
   use_with_file('nvim-lualine/lualine.nvim', "source_lua", { requires = 'kyazdani42/nvim-web-devicons' })
@@ -143,15 +143,16 @@ require'packer'.startup(function()
   use_with_file("iamcco/markdown-preview.nvim", "add", options)
 
   -- textile
-  use { "rytkmt/vim-textile", opt = true, ft = "textile" }
+  -- use { "rytkmt/vim-textile", opt = true, ft = "textile" }
 
   -- ruby
   -- use_with_file("rytkmt/vim-textobj-ruby", "add", "source", { opt = true, ft = "ruby", branch = "feature_textobj_ruby_method" })
   -- use_with_file("rhysd/vim-textobj-ruby", { opt = true, ft = "ruby", after = "vim-textobj-user" })
   -- use { "nvim-treesitter/nvim-treesitter-textobjects" }
 
+  use { 'vim-scripts/AnsiEsc.vim', opt = true, ft = { "log" } }
   -- vim
-  use { "thinca/vim-prettyprint", opt = true, ft = "vim" }
+  -- use { "thinca/vim-prettyprint", opt = true, ft = "vim" }
 
   -- lua, vim
   use { "norcalli/nvim-colorizer.lua", opt = true, ft = { "vim", "lua", "markdown" } }--, config = function() require'colorizer'.setup() end }

@@ -39,7 +39,7 @@ vim.opt.smartcase = true
 -- インクリメンタルサーチを行う
 vim.opt.incsearch = true
 -- substitute中に変換後の文字に置き換えがプレビューされるのを無効化
-vim.opt.inccommand = nil
+vim.opt.inccommand = ''
 -- 検索結果をハイライト
 vim.opt.hlsearch = true
 
