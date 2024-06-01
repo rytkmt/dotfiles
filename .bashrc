@@ -1,8 +1,39 @@
 source $HOME/.bashrc.local
+clear
+# コマンドの履歴を連続した同一コマンドは記録しない
+HISTCONTROL=ignoredups
+HISTSIZE=100000
+HISTFILESIZE=100000
+
+# 複数セッションがある場合に、履歴を上書きせず両方の履歴が追記される
+shopt -s histappend
+
+# ウィンドウサイズを変更した際にすぐ反映する
+shopt -s checkwinsize
+
+# 補完
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
 
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
 
 # xargsをパイプで実行するときに引数にエイリアスを使えるようにする
 alias xargs='xargs '

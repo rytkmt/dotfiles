@@ -2,32 +2,6 @@
 
 - `make` `cmake` `gettext` `sendfile` が入っていないとエラーになった
 
-## bashrcとbash_profileの読み込み
-
-```shell
-ln -s {cloneしたpath}/.bashrc ./
-ln -s {cloneしたpath}/.bash_profile ./
-```
-
-## .bash_profile.local
-
-### XDG_CONFIG_HOMEの設定
-
-```
-export XDG_CONFIG_HOME="${dotfilesをcloneしたパス}"
-```
-
-### githubにて取得したトークンを設定
-
-```
-export GITHUB_API_TOKEN="${トークン}"
-```
-
-### .profileが元からあった場合必要なものを転記
-
-何があるかは不明
-
-
 ## 本gitプロジェクト(dotfiles)の.git/config
 
 https://qiita.com/shiro01/items/e886aa1e4beb404f9038 を参考に
@@ -63,6 +37,32 @@ https://qiita.com/shiro01/items/e886aa1e4beb404f9038 を参考に
   name = ${仕事メールアドレスの名前部分}
 ```
 
+## bashrcとbash_profileの読み込み
+
+```shell
+ln -s {cloneしたpath}/.bashrc ./
+ln -s {cloneしたpath}/.bash_profile ./
+```
+
+## .bash_profile.local
+
+### XDG_CONFIG_HOMEの設定
+
+```
+export XDG_CONFIG_HOME="${dotfilesをcloneしたパス}"
+```
+
+### githubにて取得したトークンを設定
+
+```
+export GITHUB_API_TOKEN="${トークン}"
+```
+
+### .profileが元からあった場合必要なものを転記
+
+何があるかは不明
+
+
 ## .inputrcの設定
 
 $HOMEの下に.inputrcという名前でシンボリックリンクを貼る  
@@ -70,6 +70,17 @@ $HOMEの下に.inputrcという名前でシンボリックリンクを貼る
 ```shell
 ln -s {cloneしたpath}/.inputrc .inputrc
 ```
+
+## クリップボードの設定
+
+### wslの場合
+
+1. windows側でlemonadeを入れ、サーバー起動する
+2. wsl側で1のexeファイルを、PATHが通っているディレクトリ（`$HOME/.local/bin/` など）に `lemonade` という名前でシンボリックリンクを貼る
+
+### 仮想環境の場合
+
+- windowsと仮想環境間でlemonadeのサーバー・クライアントで疎通して同期
 
 ## deno
 
