@@ -4,12 +4,13 @@ require('pretty-fold').setup {
          'content',
       },
       right = {
-         ' ', 'number_of_folded_lines', ': ', 'percentage', ' ',
-         function(config) return config.fill_char:rep(3) end
+         ' ', 'number_of_folded_lines', ' ',
+         function(config) return config.fill_char:rep(5) end
       }
    },
    -- fill_char = '•',
-   fill_char = '',
+   -- fill_char = '',
+   fill_char = '·',
 
    remove_fold_markers = true,
 

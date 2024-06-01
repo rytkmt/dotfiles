@@ -53,6 +53,16 @@
       git pob; \
     fi; \
   }; f"
+  snpn = "!f() { \
+    if [ $# -ne 1 ];\
+    then \
+      echo 'required comment message by first args';\
+    else \
+      git add -A; \
+      git commit -m \"$1\" -n; \
+      git pob; \
+    fi; \
+  }; f"
   snprb = "!f() { \
     git add -A; \
     git commit -m \"Resolve behind\"; \
@@ -154,6 +164,9 @@
   lll = log
   lf = log -p
   l1 = ls-files
+  s = switch
+  # ブランチを作成し切り替える
+  sc = switch -c
   ss = stash push -u
   sss = stash show
   ssss = stash show -p

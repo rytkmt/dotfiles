@@ -2,17 +2,18 @@ require("surround").setup {
   load_keymaps = false,
 
   quotes = {"'", '"', '`'},
-  brackets = {"(", '{', '['},
+  brackets = {"(", '{', '[', '（'},
   pairs = {
     nestable = {
       {"(", ")"},
       {"[", "]"},
       {"{", "}"},
+      {"（", "）"},
     },
     linear = {
       {"'", "'"},
       {"`", "`"},
-      {'"', '"'}
+      {'"', '"'},
     }
   },
 }

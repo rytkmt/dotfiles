@@ -60,13 +60,14 @@ require'packer'.startup(function()
   -- use_with_file("vim-scripts/grep.vim", "add")
   use_with_file("tomtom/tcomment_vim", "add")
   -- use_with_file("tpope/vim-surround", "add")
-  use_with_file("ur4ltz/surround.nvim", "source_lua")
+  -- use_with_file("ur4ltz/surround.nvim", "source_lua")
+  use_with_file("kylechui/nvim-surround", "source_lua")
   use_with_file("LeafCage/yankround.vim", "add")
   use_with_file("osyo-manga/vim-anzu", "add")
   -- use_with_file("rhysd/clever-f.vim", "add")
   -- 遅いため一回消す
   -- use_with_file("haya14busa/vim-operator-flashy", "add")
-  -- use_with_file("kana/vim-operator-replace", "add")
+  use_with_file("kana/vim-operator-replace", "add")
   -- use_with_file("rytkmt/vim-trailing-whitespace", "add")
   -- 遅いので一時的にコメントアウトしておく
   -- use_with_file("vim-syntastic/syntastic", "add")
@@ -134,9 +135,9 @@ require'packer'.startup(function()
   local markdown_option = { opt = true, ft = { "markdown", "mkd" } }
   use_with_file("rcmdnk/vim-markdown", "add", markdown_option)
   use("joker1007/vim-markdown-quote-syntax", markdown_option)
-  use("ellisonleao/glow.nvim", markdown_option)
   use("mattn/vim-maketable", markdown_option)
   use_with_file("dhruvasagar/vim-table-mode", "add", markdown_option)
+  use_with_file("richardbizik/nvim-toc", "source_lua", markdown_options)
   local options = markdown_option
   -- options.run = "cd app && npm install"
   options.run = function() vim.fn["mkdp#util#install"]() end
