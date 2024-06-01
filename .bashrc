@@ -1,3 +1,9 @@
+source $HOME/.bashrc.local
+
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
 # xargsをパイプで実行するときに引数にエイリアスを使えるようにする
 alias xargs='xargs '
 alias vi='/usr/bin/vim'
@@ -27,7 +33,6 @@ alias egc='vim $XDG_CONFIG_HOME/.gitconfig'
 alias cdv='cd $XDG_CONFIG_HOME'
 alias cdh='cd $XDG_CONFIG_HOME/../lighthouse'
 alias sbr='source $HOME/.bashrc'
-export EDITOR="nvim"
 
 function flon() {
   sed -e 's/:.*$//' | grep -v '^D' | sed -e 's/^\s\?[AMUR\?]\{1,2\}\s\+//' | sed -e 's/^.*\ ->\ //' | uniq

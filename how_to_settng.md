@@ -4,23 +4,63 @@
 
 ## bashrcとbash_profileの読み込み
 
-$HOME/.bash_profileに下記を追加
 ```shell
-source ${gitからpath}/.bash_profile
+ln -s {cloneしたpath}/.bashrc ./
+ln -s {cloneしたpath}/.bash_profile ./
 ```
 
-$HOME/.bashrcに下記を追加
-```shell
-source ${gitからpath}/.bashrc
+## .bash_profile.local
+
+### XDG_CONFIG_HOMEの設定
+
+```
+export XDG_CONFIG_HOME="${dotfilesをcloneしたパス}"
+```
+
+### githubにて取得したトークンを設定
+
+```
+export GITHUB_API_TOKEN="${トークン}"
+```
+
+### .profileが元からあった場合必要なものを転記
+
+何があるかは不明
+
+
+## 本gitプロジェクト(dotfiles)の.git/config
+
+https://qiita.com/shiro01/items/e886aa1e4beb404f9038 を参考に
+
+```
+[remote "origin"]
+	url = https://rytkmt:${token}@github.com/rytkmt/dotfiles.git
+```
+
+都度入力しなくていいように設定しておく
+
+```
+[user]
+  name = rytkmt
+  email = r12tkmt@gmail.com
 ```
 
 ## .gitconfigの設定
 
-$HOMEの下に.gitconfigという名前でシンボリックリンクを貼る  
-ローカルなものを作りたい場合は、~/.gitconfig.localで設定ファイルを別途用意
+ローカルのconfigなどもありえるのでincludeでgitの内容を読み込む
 
 ```shell
-ln -s {cloneしたpath}/.gitconfig .gitconfig
+[include]
+  path = ${XDG_CONFIG_HOMEのパス}/.gitconfig
+```
+
+仕事などで
+同じアカウントで色々なgitプロジェクトを扱う場合は楽にするためになども設定しておく
+
+```
+[user]
+  email = ${仕事メールアドレス}
+  name = ${仕事メールアドレスの名前部分}
 ```
 
 ## .inputrcの設定
