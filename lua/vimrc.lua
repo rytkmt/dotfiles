@@ -26,12 +26,19 @@ require'plugins'
 vim.cmd[[autocmd BufWritePost plugins.lua PackerCompile]]
 -- }}}
 
--- function set_colorscheme ()
--- end
--- pcall(set_colorscheme)
-vim.cmd('colorscheme lighthouse')
+local state, mod = pcall(require, "lighthouse")
+if state then
+  vim.cmd('colorscheme lighthouse')
+end
 
 
 vim.cmd('set noimdisable')
 vim.cmd('so $XDG_CONFIG_HOME/rc/functions.rc.vim')
 vim.cmd('so $XDG_CONFIG_HOME/rc/mappings.rc.vim')
+
+local function is_wsl()
+  return os.execute("uname -a | grep -i microsoft > /dev/null 2>&1") == 0
+end
+if is_wsl() then
+  require("rc.wsl")
+end

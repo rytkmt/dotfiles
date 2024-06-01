@@ -16,8 +16,11 @@ if [[ $(command -v cargo) ]]; then
   export PATH=$PATH:$HOME/.cargo/bin
 fi
 
-if [ -f ~/.bash_profile_local ]; then
-  source ~/.bash_profile_local
+if [ -f ~/.bash_profile.local ]; then
+  source ~/.bash_profile.local
+fi
+if [ -f ~/.bashrc ]; then
+  source ~/.bashrc
 fi
 
 export XDG_CONFIG_HOME=$current_dir

@@ -123,7 +123,8 @@ vim.opt.foldlevel = 99
 vim.opt.foldmethod = "manual"
 -- バッファ終端以降の空行
 vim.opt.fillchars = { eob = "-", diff = " " }
-
+-- yankしたときに*や+のレジスタにコピーするかどうかのオプションなので、yankとclipboardは別にするなら指定しない（ただclipboardにコピー時にはヤンクの内容は上書きされる）
+-- vim.opt.clipboard = { 'unnamed', 'unnamedplus'}
 
 -- [[ loaded ]]
 vim.g.did_install_default_menus  = 1

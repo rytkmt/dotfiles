@@ -50,10 +50,6 @@ function M.select2ex()
   return text
 end
 
-function M.hoge()
-  return "aa"
-end
-
 vim.cmd("vmap <expr> <C-e> ':<C-u>' . v:lua.require('rc.scripts').select2ex()")
 
 return M

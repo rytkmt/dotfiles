@@ -1,36 +1,17 @@
+## neovimのインストール
 
-## vimrc などを紐付ける
-
-cloneしたものの.vimrc .gvimrc .ctagsが読まれるように  
-$HOMEにそれぞれシンボリックリンクを貼る
-
-#### windows
-
-```shell
-mklink .vimrc {cloneしたvimrcのpath}
-```
-
-#### mac/linux
-
-```shell
-ln -s {cloneしたvimrcのpath} .vimrc
-```
-
-## fontの設定(win)
-
-`http://www.rs.tus.ac.jp/yyusa/ricty_diminished.html`
-よりfontをダウンロード
+- `make` `cmake` `gettext` `sendfile` が入っていないとエラーになった
 
 ## bashrcとbash_profileの読み込み
 
 $HOME/.bash_profileに下記を追加
 ```shell
-source ${gitからcloneしたdotfilesのディレクトリ}/.bash_profile
+source ${gitからpath}/.bash_profile
 ```
 
 $HOME/.bashrcに下記を追加
 ```shell
-source ${gitからcloneしたdotfilesのディレクトリ}/.bashrc
+source ${gitからpath}/.bashrc
 ```
 
 ## .gitconfigの設定
@@ -38,9 +19,33 @@ source ${gitからcloneしたdotfilesのディレクトリ}/.bashrc
 $HOMEの下に.gitconfigという名前でシンボリックリンクを貼る  
 ローカルなものを作りたい場合は、~/.gitconfig.localで設定ファイルを別途用意
 
+```shell
+ln -s {cloneしたpath}/.gitconfig .gitconfig
+```
+
 ## .inputrcの設定
 
 $HOMEの下に.inputrcという名前でシンボリックリンクを貼る  
+
+```shell
+ln -s {cloneしたpath}/.inputrc .inputrc
+```
+
+## deno
+
+`https://docs.deno.com/runtime/manual/getting_started/installation` よりインストール
+
+- `unzip`が入っていないとエラーになった
+
+## ripgrep
+
+aptでいれる
+
+## go
+
+https://qiita.com/fukazawashun/items/ad1212ca16db2698a576
+
+を参考に
 
 ## ruby
 

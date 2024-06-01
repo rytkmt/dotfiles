@@ -64,3 +64,23 @@ function! GetVisualSelection()
     let lines[0] = lines[0][col1 - 1:]
     return join(lines, "\n")
 endfunction
+
+" function! YankOnlyClipboard()
+"   -- 現在の `"` レジスタの値を一時退避
+"   local original_quote_register = vim.fn.getreg('"')
+"   local original_quote_register_type = vim.fn.getregtype('"')
+"
+"   -- ビジュアルモードの開始行と終了行を取得
+"   local start_line = vim.fn.getpos("'<")[2]
+"   local end_line = vim.fn.getpos("'>")[2]
+"
+"   -- ビジュアルモードの開始列と終了列を取得
+"   local start_col = vim.fn.getpos("'<")[4]
+"   local end_col = vim.fn.getpos("'>")[4]
+"
+"
+"   vim.fn.setreg('*', visual_selection, visual_selection_type)
+"
+"   -- `"` レジスタの値を元に戻す
+"   vim.fn.setreg('"', original_quote_register, original_quote_register_type)
+" endfunction
