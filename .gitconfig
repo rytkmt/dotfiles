@@ -164,6 +164,8 @@
   lll = log
   lf = log -p
   l1 = ls-files
+  # git管理外のファイルを表示(ignoreファイルも表示される)
+  l1o = ls-files --others
   s = switch
   # ブランチを作成し切り替える
   sc = switch -c
@@ -187,6 +189,8 @@
     xargs -I@ git push origin @; \
   }; f"
   als = !"git config --list | grep ^alias\\. | sort | sed s/^alias\\.// | sed -e 's/=/ /' | awk '{printf \"%-10s %s\",$1,c=\"\";for(i=2;i<=NF;i++) c=c $i\" \"; print c}'"
+  # すべてのファイルの文字列を置換する
+  # 引数1: 置換前文字, 引数2: 置換後文字
   gs = "!f() { \
     if [ $# -ne 2 ];\
     then \
@@ -195,6 +199,7 @@
       git ls-files -z | xargs -0 sed -i -e \"s/$1/$2/g\";\
     fi; \
   }; f"
+  # ファイル検索
   fd = "!f() { \
     if [ $# -eq 0 ]; then \
       echo 'arguments are required.'; \

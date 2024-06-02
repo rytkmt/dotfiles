@@ -108,7 +108,7 @@ if [[ $(command -v exa) ]]; then
 else
   alias ll='ls -la'
   alias l1='ls -1'
-  alias lt='tree -I "node_modules|.git|.cache|vendor|tmp"'
+  alias lt='tree -I "node_modules|.git|.cache|vendor|tmp" -a '
   alias ltl='lt | less -r'
 fi
 
@@ -133,6 +133,20 @@ alias fp='readlink -f'
 function xrename_paths() {
   if [ $# == 2 ]; then
     xargs ruby -e "require\"fileutils\";ARGV.each{|v|new_n=v.gsub(\"$1\",\"$2\"); FileUtils.mkdir_p(File.dirname(new_n));puts \"#{v} => #{new_n}\"; FileUtils.mv(v, new_n)}"
+  else
+    echo "argument error. please set from_name, to_name"
+  fi
+}
+
+# e.g. ルートから見た各ファイルの相対パスを、コピーしたいディレクトリにまるっと階層ごとコピーする
+#   `git ls-files --others |cp_with_relative_path ~/git/dev_settings/rx_1/`
+function cp_with_relative_path() {
+  if [ $# == 1 ]; then
+    local arg1=$1
+    shift
+    xargs -I {} ruby -e "require\"fileutils\";require\"pathname\"; v1,v2 = ARGV.tap(&method(:p)); to_path = Pathname(v1).join(v2).to_s.tap(&method(:p)); FileUtils.mkdir_p(File.dirname(to_path).tap(&method(:p))); FileUtils.cp_r(v2, to_path)" "$arg1" {}
+    tree -a $arg1
+    # 引数1: 遷移先ディレクトリ, 引数2: パイプでの遷移したいファイルパスの相対パスを複数行
   else
     echo "argument error. please set from_name, to_name"
   fi
