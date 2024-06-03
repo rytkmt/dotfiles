@@ -11,10 +11,6 @@ function prompt {
 }
 prompt
 
-if [[ $(command -v cargo) ]]; then
-  export PATH=$PATH:$HOME/.cargo/bin
-fi
-
 if [ -f ~/.bash_profile.local ]; then
   source ~/.bash_profile.local
 fi
@@ -33,8 +29,7 @@ export RI="-f markdown"
 export RI_PAGER="nvim -RM -c 'set ft=markdown cocu=nc cole=2' -c 'nn q :q<cr>' -"
 export EDITOR="nvim"
 
-# デフォルトパス
-export DEFAULT_CD_PATH=$HOME/workspace/rx_1
+# デフォルトパスを定義してあればshellを開いたときにそこをhomeディレクトリとして遷移させる
 if ! [ -z "$DEFAULT_CD_PATH" ]; then
   if [ -d $DEFAULT_CD_PATH ]; then
     cd $DEFAULT_CD_PATH

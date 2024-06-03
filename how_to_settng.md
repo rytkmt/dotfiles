@@ -37,6 +37,13 @@ https://qiita.com/shiro01/items/e886aa1e4beb404f9038 を参考に
   name = ${仕事メールアドレスの名前部分}
 ```
 
+## .git-credentialsを用意
+
+gitプロジェクトとの疎通時にユーザーIDとパスワードを聞かれるものを、`.git-credentials` に保存するようにしているが  
+パスワードなどを平文で保持することになるので権限は絞っておく
+
+`chmod 600 .git-credentials`
+
 ## bashrcとbash_profileの読み込み
 
 ```shell
@@ -99,6 +106,11 @@ https://qiita.com/fukazawashun/items/ad1212ca16db2698a576
 を参考に
 
 ## ruby
+
+### rbenvをインストール
+
+- aptでいれるとrubyの最新バージョン対応していないためcloneする手順より行う
+  - https://github.com/rbenv/rbenv?tab=readme-ov-file#basic-git-checkout
 
 ```shell
 gem install solargraph

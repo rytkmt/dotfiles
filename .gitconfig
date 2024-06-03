@@ -33,6 +33,11 @@
   keepBackup = false
 [mergetool "nvimdiff"]
   cmd = "nvim -d $BASE $LOCAL $MERGED $REMOTE -c 'wincmd -w'"
+# ~/.git-credentials にユーザーIDとパスワードを記憶する
+[credential]
+  helper = store
+[credential]
+  helper = store
 [alias]
   sn = "!f() { \
     if [ $# -ne 1 ];\
