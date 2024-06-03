@@ -20,9 +20,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+alias ll='ls -la'
+alias l1='ls -1'
+alias l1r='find . -type f | sed "s|^\./||"'
+alias lt='tree -I "node_modules|.git|.cache|vendor|tmp" -a '
+alias ltl='lt | less -r'
 
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -58,11 +60,12 @@ else
 fi
 alias ebr='vim $XDG_CONFIG_HOME/.bashrc'
 alias ebp='vim $XDG_CONFIG_HOME/.bash_profile'
-alias ebrl='vim $HOME/.bashrc'
-alias ebpl='vim $HOME/.bash_profile'
+alias ebrl='vim $HOME/.bashrc.local'
+alias ebpl='vim $HOME/.bash_profile.local'
 alias egc='vim $XDG_CONFIG_HOME/.gitconfig'
 alias cdv='cd $XDG_CONFIG_HOME'
 alias cdh='cd $XDG_CONFIG_HOME/../lighthouse'
+alias cdg='cd $HOME/git'
 alias sbr='source $HOME/.bashrc'
 
 function flon() {
@@ -100,17 +103,12 @@ if [[ $(command -v csview) ]]; then
   alias xcsview='xargs -I% bash -c "csview %"'
 fi
 
-if [[ $(command -v exa) ]]; then
-  alias ll='exa --icons -la'
-  alias l1='exa -1'
-  alias lt='exa -Ta --icons -I "node_modules|.git|.cache|vendor|tmp"'
-  alias ltl='lt | less -r'
-else
-  alias ll='ls -la'
-  alias l1='ls -1'
-  alias lt='tree -I "node_modules|.git|.cache|vendor|tmp" -a '
-  alias ltl='lt | less -r'
-fi
+# if [[ $(command -v exa) ]]; then
+#   alias ll='exa --icons -la'
+#   alias l1='exa -1'
+#   alias lt='exa -Ta --icons -I "node_modules|.git|.cache|vendor|tmp"'
+#   alias ltl='lt | less -r'
+# fi
 
 if [[ $(command -v bat) ]]; then
   alias cat='bat --style="grid,header"'
@@ -142,10 +140,22 @@ function xrename_paths() {
 #   `git ls-files --others |cp_with_relative_path ~/git/dev_settings/rx_1/`
 function cp_with_relative_path() {
   if [ $# == 1 ]; then
-    local arg1=$1
+    local save_dir=$1
     shift
-    xargs -I {} ruby -e "require\"fileutils\";require\"pathname\"; v1,v2 = ARGV.tap(&method(:p)); to_path = Pathname(v1).join(v2).to_s.tap(&method(:p)); FileUtils.mkdir_p(File.dirname(to_path).tap(&method(:p))); FileUtils.cp_r(v2, to_path)" "$arg1" {}
-    tree -a $arg1
+    xargs -I {} ruby -e "require\"fileutils\";require\"pathname\"; v1,v2 = ARGV.tap(&method(:p)); to_path = Pathname(v1).join(v2).to_s.tap(&method(:p)); FileUtils.mkdir_p(File.dirname(to_path).tap(&method(:p))); FileUtils.cp_r(v2, to_path)" "$save_dir" {}
+    tree -a $save_dir
+    # 引数1: 遷移先ディレクトリ, 引数2: パイプでの遷移したいファイルパスの相対パスを複数行
+  else
+    echo "argument error. please set from_name, to_name"
+  fi
+}
+
+# cp_with_relative_pathで特定のディレクトリの全ファイルを相対パス通りにシンボリックリンクを貼る
+function ln_with_relative_path() {
+  if [ $# == 1 ]; then
+    local target_dir=$1
+    shift
+    xargs -I {} ruby -e "require\"fileutils\";require\"pathname\"; v1,v2 = ARGV; to_path = Pathname(v1).join(v2).to_s.tap(&method(:p)); FileUtils.mkdir_p(File.dirname(to_path)); FileUtils.ln_s(Pathname(Dir.pwd).join(v2).to_s.tap(&method(:p)), to_path.tap(&method(:p)))" "$target_dir" {}
     # 引数1: 遷移先ディレクトリ, 引数2: パイプでの遷移したいファイルパスの相対パスを複数行
   else
     echo "argument error. please set from_name, to_name"
