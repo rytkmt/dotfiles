@@ -89,15 +89,29 @@ ln -s {cloneしたpath}/.inputrc .inputrc
 
 - windowsと仮想環境間でlemonadeのサーバー・クライアントで疎通して同期
 
+## node + npm
+
+- https://github.com/nodesource/distributions?tab=readme-ov-file#installation-instructions-deb
+  - `sudo npm install -g neovim` も実行
+
 ## deno
 
 `https://docs.deno.com/runtime/manual/getting_started/installation` よりインストール
 
 - `unzip`が入っていないとエラーになった
 
-## ripgrep
+## こまごま
 
-aptでいれる
+- ripgrep
+  - aptでいれる
+- fd
+  - aptで`fd-find`でいれるが、ubuntuだと`fdfind` というコマンド名なので `fd` にシンボリックリンクを貼ってパスを通す
+
+## python
+
+- aptでpython3を入れる
+  - pipが入っていない場合、aptでpython3-pipもいれる
+- `sudo python3 -m pip install pynvim neovim`
 
 ## go
 
@@ -112,8 +126,14 @@ https://qiita.com/fukazawashun/items/ad1212ca16db2698a576
 - aptでいれるとrubyの最新バージョン対応していないためcloneする手順より行う
   - https://github.com/rbenv/rbenv?tab=readme-ov-file#basic-git-checkout
 
+- rbenvだけだとrbenv installが実行できない。rbenvの中にruby-buildもインストール必要
+
+```
+$ git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+```
+
 ```shell
-gem install solargraph
+gem install neovim solargraph
 ```
 
 #### ターミナルにも適用

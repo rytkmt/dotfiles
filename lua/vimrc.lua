@@ -43,3 +43,7 @@ end
 if is_wsl() then
   require("rc.wsl")
 end
+
+if vim.fn.has("python3") == 1 then
+  vim.g.python3_host_prog = string.gsub(vim.fn.system("which python3"), "\n", "")
+end

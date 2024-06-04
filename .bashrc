@@ -155,9 +155,15 @@ function ln_with_relative_path() {
   if [ $# == 1 ]; then
     local target_dir=$1
     shift
-    xargs -I {} ruby -e "require\"fileutils\";require\"pathname\"; v1,v2 = ARGV; to_path = Pathname(v1).join(v2).to_s.tap(&method(:p)); FileUtils.mkdir_p(File.dirname(to_path)); FileUtils.ln_s(Pathname(Dir.pwd).join(v2).to_s.tap(&method(:p)), to_path.tap(&method(:p)))" "$target_dir" {}
+    xargs -I {} ruby -e "require\"fileutils\";require\"pathname\"; v1,v2 = ARGV; to_path = Pathname(v1).join(v2).to_s.tap(&method(:p)); FileUtils.mkdir_p(File.dirname(to_path)); FileUtils.ln_s(Pathname(Dir.pwd).join(v2).to_s, to_path)" "$target_dir" {}
     # 引数1: 遷移先ディレクトリ, 引数2: パイプでの遷移したいファイルパスの相対パスを複数行
   else
     echo "argument error. please set from_name, to_name"
   fi
+}
+
+function vimqf() {
+  local tempfile=$(mktemp)
+
+  sed -e 's/$/:1:-/' > $tempfile | vim -q $tempfile -c "copen"
 }
