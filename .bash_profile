@@ -37,4 +37,5 @@ if ! [ -z "$DEFAULT_CD_PATH" ]; then
 fi
 # vim
 export FILER_DEFAULT=$HOME/workspace
-. "$HOME/.cargo/env"
+# ruby
+RUBYOPT='-W:deprecated'
