@@ -211,5 +211,8 @@ command! -range OpenCursorUrl <line1>,<line2>call s:open_cursor_url()
 "++ }}}
 
 "++ 文字数カウント {{{
-:command! WordCount %s/./&/gn|nohlsearch 
+command! WordCount %s/./&/gn|nohlsearch
 "++ }}}
+
+" ↓もしくは deno cache -r /home/xxx/.local/share/nvim/site/pack/packer/opt/ddc.vim/denops/ddc/deps.ts
+command! DenopsFixCache call denops#cache#update(#{reload: v:true})

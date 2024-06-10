@@ -162,8 +162,10 @@ require'packer'.startup(function()
   use {
     'vim-denops/denops.vim',
     config = function() vim.call("denops#server#start") end,
+    -- setup = function()
+    --   -- vim.g.denops_server_addr = '127.0.0.1:32123'
+    -- end
   }
-
   use_with_file("hrsh7th/vim-vsnip", "add")
 
   use {
