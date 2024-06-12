@@ -21,6 +21,7 @@ require('filetype').setup({
             ["%.bash_profile.local"] = "bash",
             ["%.env"] = "bash",
             ["%.env%..*"] = "bash",
+            [".git/hooks/pre-commit"] = "bash",
         },
 
         -- The same as the ones above except the keys map to functions
