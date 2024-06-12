@@ -1,3 +1,8 @@
+## 環境変数の設定
+
+- WORK_MEMO_DIR
+  - 仕事関係のメモ用のディレクトリパスを.bash_profile.localなどで設定する
+
 ## neovimのインストール
 
 - `make` `cmake` `gettext` `sendfile` が入っていないとエラーになった

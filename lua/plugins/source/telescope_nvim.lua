@@ -79,7 +79,9 @@ vim.keymap.set('n', '[finder]F', function()
   return ':lua require("telescope.builtin").find_files({cwd = vim.call("FindGitProjectRoot"), search_file = "'.. vim.fn.expand("<cword>") .. '"})<CR>'
 end, { expr = true, noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]if', ':lua require("telescope.builtin").find_files({cwd = vim.call("InputPath")})<CR>', { noremap = true, silent = true, nowait = true })
-vim.api.nvim_set_keymap('n', '[finder]M', ':lua require("telescope.builtin").find_files({cwd = "~/memo/"})<CR>', { noremap = true, silent = true, nowait = true })
+if os.getenv("WORK_MEMO_DIR") then
+  vim.api.nvim_set_keymap('n', '[finder]M', ':lua require("telescope.builtin").find_files({cwd = "$WORK_MEMO_DIR/"})<CR>', { noremap = true, silent = true, nowait = true })
+end
 vim.api.nvim_set_keymap('n', '[finder]s', ':lua require("telescope.builtin").find_files({cwd = "$XDG_CONFIG_HOME/source_memo/"})<CR>', { noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]g', ':lua require("telescope.builtin").live_grep({cwd = vim.call("FindGitProjectRoot")})<CR>', { noremap = true, silent = true, nowait = true })
 vim.api.nvim_set_keymap('n', '[finder]ig', ':lua require("telescope.builtin").live_grep({cwd = vim.call("InputPath")})<CR>', { noremap = true, silent = true, nowait = true })
