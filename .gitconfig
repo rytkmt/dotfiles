@@ -196,7 +196,17 @@
     sed -e 's/* // ' | \
     xargs -I@ git push origin @; \
   }; f"
-  als = !"git config --list | grep ^alias\\. | sort | sed s/^alias\\.// | sed -e 's/=/ /' | awk '{printf \"%-10s %s\",$1,c=\"\";for(i=2;i<=NF;i++) c=c $i\" \"; print c}'"
+  # als = !"git config --list | grep ^alias\\. | sort | sed s/^alias\\.// | sed -e 's/=/ /' | awk '{printf \"%-10s %s\",$1,c=\"\";for(i=2;i<=NF;i++) c=c $i\" \"; print c}'"
+  als = "!f() { \
+    str='git config --list | grep ^alias\\. | sort | sed \"s/^alias\\.//\" | sed -e \"s/= / /\" | awk \"{printf \\\"%-10s %s\\\",\\$1,\\$2; for(i=3;i<=NF;i++) printf \\\"%s \\\",\\$i; print \\\"\\\"}\"'; \
+    if [ $# -gt 0 ]; then \
+      str=$str' | pipgre'; \
+      for x in \"$@\"; do \
+        str=$str' '$x; \
+      done; \
+    fi; \
+    eval \"$str\"; \
+  }; f"
   gs = "!f() { \
     if [ $# -ne 2 ];\
     then \
