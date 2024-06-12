@@ -173,7 +173,7 @@ set_open_keymap("h", "vim.env.HOME")
 set_open_keymap("v", "vim.env.XDG_CONFIG_HOME")
 set_open_keymap("s", "vim.env.XDG_CONFIG_HOME..'/source_memo/'")
 if os.getenv("WORK_MEMO_DIR") then
-  set_open_keymap("m", "vim.env.WORK_MEMO_DIR/'")
+  set_open_keymap("m", "vim.env.WORK_MEMO_DIR")
 end
 
 vim.cmd [[augroup lir-settings]]
