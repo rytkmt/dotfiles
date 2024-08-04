@@ -49,6 +49,36 @@ gitプロジェクトとの疎通時にユーザーIDとパスワードを聞か
 
 `chmod 600 .git-credentials`
 
+## go
+
+https://qiita.com/fukazawashun/items/ad1212ca16db2698a576
+
+を参考に
+
+## zshの設定
+
+### インストール
+
+```
+sudo apt install zsh
+sudo chsh -s $(which zsh)
+cargo install sheldon
+```
+
+#### 補完の準備
+
+```
+mkdir ~/.zsh
+cd ~/.zsh
+curl -o git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+curl -o _git https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
+```
+
+#### フィルタリングの準備
+
+- `sudo apt install peco`
+- `.zshrc.profile`にて環境変数の `REPOS` に検索したいgitリポジトリをフィルターしたい親ディレクトリを複数セットする
+
 ## bashrcとbash_profileの読み込み
 
 ```shell
@@ -117,12 +147,6 @@ ln -s {cloneしたpath}/.inputrc .inputrc
 - aptでpython3を入れる
   - pipが入っていない場合、aptでpython3-pipもいれる
 - `sudo python3 -m pip install pynvim neovim`
-
-## go
-
-https://qiita.com/fukazawashun/items/ad1212ca16db2698a576
-
-を参考に
 
 ## ruby
 

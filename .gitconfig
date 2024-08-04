@@ -261,3 +261,5 @@
     echo 'test: テスト関連'; \
     echo 'chore: ビルド、補助ツール、ライブラリ関連'; \
   }; f"
+[ghq]
+	root = ~/ghq

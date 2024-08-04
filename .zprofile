@@ -1,21 +1,9 @@
 function parse_git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1/'
 }
-# export PS1='\h \[\033[1;33m\]\W \[\033[0m\]$(parse_git_branch)$ '
-function prompt {
-    # 色は気分で変えたいかもしれないので変す宣言しておく
-    local  LIGHT_BLUE="\[\e[36m\]"
-    local  PURPLE="\[\e[95m\]"
-    local  WHITE="\[\e[0m\]"
-    export PS1="${LIGHT_BLUE}\w [\u]${PURPLE}\$(parse_git_branch)${WHITE} \$ "
-}
-prompt
 
-if [ -f ~/.bash_profile.local ]; then
-  source ~/.bash_profile.local
-fi
-if [ -f ~/.bashrc ]; then
-  source ~/.bashrc
+if [ -f ~/.zprofile.local ]; then
+  source ~/.zprofile.local
 fi
 
 if [ -d "$HOME/.local/bin" ] ; then

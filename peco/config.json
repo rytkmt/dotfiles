@@ -1,0 +1,25 @@
+{
+  "Prompt": ">",
+  "InitialFilter": "Fuzzy",
+  "FuzzyLongestSort": true,
+  "StickySelection": true,
+  "Keymap": {
+    "C-j": "peco.SelectDown",
+    "C-k": "peco.SelectUp",
+    "C-d": "peco.ScrollPageUp",
+    "C-u": "peco.ScrollPageDown",
+    "C-r": "peco.ToggleRangeMode",
+    "C-h": "peco.DeleteBackwardChar",
+    "C-w": "peco.DeleteBackwardWord",
+    "C-u": "peco.DeleteAll",
+    "C-a": "peco.SelectAll",
+    "C-g": "peco.SelectNone"
+  },
+  "Style": {
+    "Basic": ["on_default", "default"],
+    "SavedSelection": ["magenta"],
+    "Selected": ["default", "underline"],
+    "Query": ["white", "bold"],
+    "Matched": ["red"]
+  }
+}

@@ -1,24 +1,119 @@
-source $HOME/.bashrc.local
-clear
-# コマンドの履歴を連続した同一コマンドは記録しない
-HISTCONTROL=ignoredups
+eval "$(sheldon source)"
+
+bindkey -e
+
+fpath=(
+  $XDG_CONFIG_HOME/zsh/prompts
+  $HOME/.zsh
+  $fpath
+)
+autoload -U promptinit
+promptinit
+prompt rytkmt
+
+if [ -f ~/.zshrc ]; then
+  # gitのブランチ名などの補完
+  zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
+fi
+autoload -U compinit
+compinit
+
+
+# shift-tabで候補を逆戻り
+bindkey "\e[Z" reverse-menu-complete
+
+# TODO shift-tabで候補を戻りたい
+
+if [ -f ~/.zshrc.local ]; then
+  source ~/.zshrc.local
+fi
+
+HISTFILE="$HOME/.zsh_history"
+SAVEHIST=100000
 HISTSIZE=100000
 HISTFILESIZE=100000
+# ヒストリに追加されるコマンド行が古いものと同じなら古いものを削除
+setopt hist_ignore_all_dups
+# 余分な空白は詰めて記録
+setopt hist_reduce_blanks
+# historyコマンドは履歴に登録しない
+setopt hist_no_store
+# 履歴検索中、(連続してなくとも)重複を飛ばす
+setopt hist_find_no_dups
+# コマンド履歴ファイルを共有する
+setopt share_history
+# 履歴を追加
+setopt appendhistory
+zstyle ':completion:*:default' menu select
 
-# 複数セッションがある場合に、履歴を上書きせず両方の履歴が追記される
-# shopt -s histappend
+# 補完候補を詰めて表示
+setopt list_packed
 
-# ウィンドウサイズを変更した際にすぐ反映する
-# shopt -s checkwinsize
+export LSCOLORS=exfxcxdxbxegedabagacad
+if [[ $(command -v vivid) ]]; then
+  export LS_COLORS="$(vivid generate ayu)"
+fi
+# lsコマンドの補完候補にも色付き表示
+zstyle ':completion:*:default' list-colors ${LS_COLORS}
 
-# 補完
-# if ! shopt -oq posix; then
-#   if [ -f /usr/share/bash-completion/bash_completion ]; then
-#     . /usr/share/bash-completion/bash_completion
-#   elif [ -f /etc/bash_completion ]; then
-#     . /etc/bash_completion
-#   fi
-# fi
+if [[ $(command -v peco) ]]; then
+  ## コマンド履歴検索
+  function peco-history-selection() {
+    BUFFER=`history -n 1 | tac  | awk '!a[$0]++' | peco`
+    CURSOR=$#BUFFER
+    zle reset-prompt
+  }
+  zle -N peco-history-selection
+  bindkey '^R' peco-history-selection
+
+  ## コマンド履歴からディレクトリ検索・移動
+  if [[ -n $(echo ${^fpath}/chpwd_recent_dirs(N)) && -n $(echo ${^fpath}/cdr(N)) ]]; then
+    autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+    add-zsh-hook chpwd chpwd_recent_dirs
+    zstyle ':completion:*' recent-dirs-insert both
+    zstyle ':chpwd:*' recent-dirs-default true
+    zstyle ':chpwd:*' recent-dirs-max 1000
+    zstyle ':chpwd:*' recent-dirs-file "$HOME/.cache/chpwd-recent-dirs"
+  fi
+  function peco-cdr () {
+    local selected_dir="$(cdr -l | sed 's/^[0-9]* *//' | peco)"
+    if [ -n "$selected_dir" ]; then
+      BUFFER="cd ${selected_dir}"
+      zle accept-line
+    fi
+  }
+  zle -N peco-cdr
+  bindkey '^E' peco-cdr
+
+  ## カレントディレクトリ以下のディレクトリ検索・移動
+  function find_cd() {
+    local selected_dir=$(find . -type d | peco)
+    if [ -n "$selected_dir" ]; then
+      BUFFER="cd ${selected_dir}"
+      zle accept-line
+    fi
+  }
+  zle -N find_cd
+  bindkey '^X' find_cd
+
+  ## gitリポジトリ検索・移動
+  function peco-src () {
+    dir_array=("${(s/:/)REPOS}")
+    local command=""
+    if [ -n "$dir_array" ]; then
+      for dir in "${dir_array[@]}"; do
+        command+="find ${dir} -maxdepth 1 -mindepth 1 -type d -print;"
+      done
+    fi
+    local selected_dir=$(eval $command | peco)
+    if [ -n "$selected_dir" ]; then
+      BUFFER="cd ${selected_dir}"
+      zle accept-line
+    fi
+  }
+  zle -N peco-src
+  bindkey '^G' peco-src
+fi
 
 alias ll='ls -la'
 alias l1='ls -1'
@@ -58,6 +153,7 @@ if [[ $(command -v pipgre) ]]; then
 else
   alias als="alias | sort | sed s/^alias\.// | sed -e 's/=/ /' | awk '{printf \"%-10s %s\",\$1,c=\"\";for(i=2;i<=NF;i++) c=c \$i\" \"; print c}' | sed s/\'// | sed s/\'//"
 fi
+alias ezr='vim $XDG_CONFIG_HOME/.zshrc'
 alias ebr='vim $XDG_CONFIG_HOME/.bashrc'
 alias ebp='vim $XDG_CONFIG_HOME/.bash_profile'
 alias ebrl='vim $HOME/.bashrc.local'
@@ -98,7 +194,7 @@ if [[ $(command -v csview) ]]; then
   function csviewxs() {
     xargs -l -iREPLACE command iconv -f shift-jis -t UTF8//TRANSLIT REPLACE | csview --style grid
   }
-  export -f csviews
+  functions -T csviews
   alias xcsviews='xargs -I% bash -c "csviews %"'
   alias xcsview='xargs -I% bash -c "csview %"'
 fi
@@ -117,12 +213,6 @@ if [[ $(command -v bat) ]]; then
   alias xbatf='xargs bat'
   alias fxbat='flon|xbat'
   alias fxbatf='flon|xbatf'
-fi
-alias xcat='xargs cat'
-alias fxcat='flon|xcat'
-
-if [[ $(command -v vivid) ]]; then
-  export LS_COLORS="$(vivid generate ayu)"
 fi
 
 # fullpathを表示する
