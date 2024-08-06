@@ -11,15 +11,15 @@ function prompt {
 }
 prompt
 
+if [ -d "$HOME/.local/bin" ] ; then
+  PATH="$HOME/.local/bin:$PATH"
+fi
+
 if [ -f ~/.bash_profile.local ]; then
   source ~/.bash_profile.local
 fi
 if [ -f ~/.bashrc ]; then
   source ~/.bashrc
-fi
-
-if [ -d "$HOME/.local/bin" ] ; then
-  PATH="$HOME/.local/bin:$PATH"
 fi
 
 export XDG_DATA_HOME=$HOME/.local/share

@@ -1,12 +1,12 @@
 require('gitsigns').setup {
   signs = {
-    add          = {hl = 'GitSignsAdd'   , text = '▎', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+    add          = {text = '▎'},
 
-    change       = {hl = 'GitSignsChange', text = '▎', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-    delete       = {hl = 'GitSignsDelete', text = '▁', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    change       = {text = '▎'},
+    delete       = {text = '▁'},
 
-    topdelete    = {hl = 'GitSignsDelete', text = '▔', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    topdelete    = {text = '▔'},
+    changedelete = {text = '~'},
   },
   signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
 
@@ -24,9 +24,10 @@ require('gitsigns').setup {
     virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
     delay = 1000,
   },
-  current_line_blame_formatter_opts = {
-    relative_time = false
-  },
+  -- 廃止された
+  -- current_line_blame_formatter_opts = {
+  --   relative_time = false
+  -- },
   sign_priority = 6,
   update_debounce = 100,
   status_formatter = nil, -- Use default
@@ -39,9 +40,10 @@ require('gitsigns').setup {
     row = 0,
     col = 1
   },
-  yadm = {
-    enable = false
-  },
+  -- 廃止された
+  -- yadm = {
+  --   enable = false
+  -- },
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
 
