@@ -69,7 +69,7 @@ alias cdg='cd $HOME/git'
 alias sbr='source $HOME/.bashrc'
 
 function flon() {
-  sed -e 's/:.*$//' | grep -v '^D' | sed -e 's/^\s\?[AMUR\?]\{1,2\}\s\+//' | sed -e 's/^.*\ ->\ //' | uniq
+  sed -e 's/:.*$//' | grep -v '^D' | sed -e 's/^\s\?[AMURD\?]\{1,2\}\s\+//' | sed -e 's/^.*\ ->\ //' | uniq
 }
 function vimtemp() {
   vim -c "Tempe $1"
@@ -122,7 +122,7 @@ alias xcat='xargs cat'
 alias fxcat='flon|xcat'
 
 if [[ $(command -v vivid) ]]; then
-  export LS_COLORS="$(vivid generate ayu)"
+  export LS_COLORS="$(vivid generate catppuccin-macchiato)"
 fi
 
 # fullpathを表示する

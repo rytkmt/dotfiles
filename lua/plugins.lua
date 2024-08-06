@@ -74,10 +74,17 @@ require'packer'.startup(function()
 
   use_with_file("haya14busa/vim-edgemotion", "source")
   use_with_file("skanehira/qfopen.vim", "source")
-  use_with_file("nvim-treesitter/nvim-treesitter", "source_lua", { run = ':TSUpdate', requires = 'nvim-treesitter/playground' })
+  use_with_file("nvim-treesitter/nvim-treesitter", "source_lua", { 
+    -- run = ':TSUpdate',
+    run = function()
+        local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+        ts_update()
+    end,
+    requires = 'nvim-treesitter/playground'
+  })
   use_with_file("haya14busa/vim-asterisk", "source")
   use_with_file("nathom/filetype.nvim", "source_lua")
-  use_with_file("anuvyklack/pretty-fold.nvim", "source_lua")
+  use_with_file("bbjornstad/pretty-fold.nvim", "source_lua")
   -- use_with_file("monkoose/matchparen.nvim", "source_lua")
   use_with_file("AndrewRadev/switch.vim", "add", "source")
   use_with_file("Pocco81/HighStr.nvim", "source_lua")

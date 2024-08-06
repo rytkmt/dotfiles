@@ -74,7 +74,7 @@ endfunction
 command! YankFilePathUnderRoot call s:yank_file_path_under_root()
 
 function! s:yank_git_branch()
-  let l:branch = system("git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' | sed -e 's/* // '")
+  let l:branch = SystemCommandWithoutEscapeChars("git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' | sed -e 's/* // '")
   let l:branch = substitute(l:branch, '\n', '', 'g')
   call setreg('*', l:branch)
   echo l:branch
@@ -174,8 +174,9 @@ command! PackerRecompile call s:recompile_packer()
 
 "++ gitlabのfileリンク生成 {{{
 function! s:yank_gitlab_file_url(with_line)
-  let l:git_project_path = split(system("git -C ". GitProjectRootWithCache() . " remote -v|awk '{print $2}'"), "\n")[0][0:-5]
-  let l:git_hash_value = system("git show --format='%h' --no-patch")[0:-2]
+  let l:git_project_path = split(SystemCommandWithoutEscapeChars("git -C ". GitProjectRootWithCache() . " remote -v|awk '{print $2}'"), "\n")[0][0:-5]
+  " エスケープシーケンスは削除
+  let l:git_hash_value = SystemCommandWithoutEscapeChars("git show --format='%h' --no-patch")[0:-2]
   let l:path = l:git_project_path . "/-/tree/" . l:git_hash_value . "/". FilePathUnderRoot()
   let l:path = (a:with_line == 0 ? l:path : l:path . "#L" . line("."))
   call setreg('*', l:path)
@@ -188,13 +189,14 @@ function! s:open_url(url)
   " TODO lemonadeの存在チェック
   let l:command = "lemonade open " . a:url
   echo l:command
-  call system(l:command)
+  call SystemCommandWithoutEscapeChars(l:command)
 endfunction
 command! -nargs=? OpenUrl call s:open_url("<args>")
 
 function! s:open_gitlab_file_url(with_line)
-  let l:git_project_path = split(system("git -C ". GitProjectRootWithCache() . " remote -v|awk '{print $2}'"), "\n")[0][0:-5]
-  let l:git_hash_value = system("git show --format='%h' --no-patch")[0:-2]
+  let l:git_project_path = split(SystemCommandWithoutEscapeChars("git -C ". GitProjectRootWithCache() . " remote -v|awk '{print $2}'"), "\n")[0][0:-5]
+  " エスケープシーケンスは削除
+  let l:git_hash_value = SystemCommandWithoutEscapeChars("git show --format='%h' --no-patch")[0:-2]
   let l:path = l:git_project_path . "/-/tree/" . l:git_hash_value . "/". FilePathUnderRoot()
   let l:path = (a:with_line == 0 ? l:path : l:path . "#L" . line("."))
   call s:open_url(l:path)

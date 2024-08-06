@@ -1,3 +1,11 @@
+function! RemoveShellEscapeChars(text)
+  return substitute(a:text, '\v\e\[[0-9;]*[A-Za-z]', '', 'g')
+endfunction
+
+function! SystemCommandWithoutEscapeChars(command)
+  return RemoveShellEscapeChars(system(a:command))
+endfunction
+
 function! FindGitProjectRoot()
   let pathMaker='%:p'
   while(len(expand(pathMaker))>1)

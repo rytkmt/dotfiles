@@ -111,6 +111,8 @@ ln -s {cloneしたpath}/.inputrc .inputrc
   - aptでいれる
 - fd
   - aptで`fd-find`でいれるが、ubuntuだと`fdfind` というコマンド名なので `fd` にシンボリックリンクを貼ってパスを通す
+- sqlformat
+  - aptでいれる
 
 ## python
 

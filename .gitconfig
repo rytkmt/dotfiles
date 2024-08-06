@@ -159,7 +159,7 @@
   }; f"
   mos = merge origin/swagger-crossx_api -m \"Resolve behind\"
   fmos = !git fe && git merge origin/swagger-crossx_api -m \"Resolve behind\"
-  mom = merge origin/master -m \"Resolve behind\"
+  mom = merge origin/main -m \"Resolve behind\"
   d = diff --color-words --no-prefix
   ds = diff --name-status
   di = diff --cached
@@ -236,7 +236,7 @@
     if [ $# -eq 0 ]; then \
       echo 'arguments are required.'; \
     else \
-      pathspec=' -- :^*.csv :^*.tsv :^*.pdf :^*.zip :^*.json :^*.java :^*.bat :^*.ttf :^*.css :^*.js'; \
+      pathspec=' -- :^*.csv :^*.tsv :^*.pdf :^*.zip :^*.json :^*.java :^*.bat :^*.ttf :^*.html :^*.css :^*.js'; \
       str='git grep -n \"'$1'\"'$pathspec; \
       if [ $# -gt 1 ]; then \
         str=$str' | pipgre'; \

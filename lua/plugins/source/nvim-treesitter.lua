@@ -16,7 +16,7 @@ require'nvim-treesitter.configs'.setup {
     -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
     -- the name of the parser)
     -- list of language that will be disabled
-    disable = { "yaml" },
+    disable = { "yaml", "help" },
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -27,12 +27,12 @@ require'nvim-treesitter.configs'.setup {
   -- カスタマイズできないためmatchupはtreesitterのものは使わない
   matchup = {
     enable = true,              -- mandatory, false will disable the whole extension
-    disable = { },  -- optional, list of language that will be disabled
+    disable = { "help" },  -- optional, list of language that will be disabled
     -- [options]
   },
   playground = {
     enable = true,
-    disable = {},
+    disable = { "help" },
     updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
     persist_queries = false, -- Whether the query persists across vim sessions
     keybindings = {
