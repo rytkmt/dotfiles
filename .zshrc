@@ -45,6 +45,7 @@ setopt share_history
 # 履歴を追加
 setopt appendhistory
 zstyle ':completion:*:default' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # 補完候補を詰めて表示
 setopt list_packed
@@ -115,22 +116,16 @@ if [[ $(command -v peco) ]]; then
   bindkey '^G' peco-src
 fi
 
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
 alias ll='ls -la'
 alias l1='ls -1'
 alias l1r='find . -type f | sed "s|^\./||"'
 alias lt='tree -I "node_modules|.git|.cache|vendor|tmp" -a '
 alias ltl='lt | less -r'
-
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
 
 # xargsをパイプで実行するときに引数にエイリアスを使えるようにする
 alias xargs='xargs '

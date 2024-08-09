@@ -163,7 +163,7 @@ require'packer'.startup(function()
   -- use { "thinca/vim-prettyprint", opt = true, ft = "vim" }
 
   -- lua, vim
-  use { "norcalli/nvim-colorizer.lua", opt = true, ft = { "vim", "lua", "markdown" } }--, config = function() require'colorizer'.setup() end }
+  use { "norcalli/nvim-colorizer.lua", opt = true, ft = { "vim", "lua", "zsh", "markdown" } }--, config = function() require'colorizer'.setup() end }
 
   -- ddc周り
   use {
