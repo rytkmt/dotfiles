@@ -175,26 +175,23 @@ require'packer'.startup(function()
   }
   use_with_file("hrsh7th/vim-vsnip", "add")
 
-  use {
-    'Shougo/ddc.vim',
-    requires = {
-      {
-        'Shougo/ddc-source-lsp',
-        requires = 'neovim/nvim-lspconfig'
-      },
-      { 'Shougo/ddc-matcher_head' },
-      { 'Shougo/ddc-sorter_rank' },
-      { 'Shougo/ddc-ui-native' },
-      { 'Shougo/ddc-converter_remove_overlap' },
-      { 'tani/ddc-fuzzy' },
-      { 'Shougo/ddc-source-around' },
-      { 'uga-rosa/ddc-source-vsnip', after = 'vim-vsnip' },
-      { 'matsui54/ddc-buffer' },
-      -- { 'rytkmt/ddc-gemojione' }
-    },
-    after = 'denops.vim',
-    config = function()
-      vim.cmd('so $XDG_CONFIG_HOME/plugins/source/ddc.vim.rc.vim')
-    end
-  }
+  use_with_file(
+    'hrsh7th/nvim-cmp',
+    'source_lua',
+    {
+      requires = {
+        {
+          'hrsh7th/cmp-nvim-lsp',
+          requires = 'neovim/nvim-lspconfig'
+        },
+        { 'hrsh7th/cmp-buffer' },
+        { 'hrsh7th/cmp-path' },
+        { 'hrsh7th/cmp-cmdline' },
+        {
+          'hrsh7th/cmp-vsnip',
+          requires = 'hrsh7th/vim-vsnip'
+        }
+      }
+    }
+  )
 end)
