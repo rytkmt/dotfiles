@@ -3,6 +3,7 @@ local action_layout = require("telescope.actions.layout")
 require('telescope').load_extension('arglist')
 require('telescope').setup{
   defaults = {
+    borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
     preview = { hide_on_startup = true, treesitter = false, timeout = 1000 },
     sorting_strategy = "ascending",
     scroll_strategy = "limit",
