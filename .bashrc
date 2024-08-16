@@ -49,7 +49,7 @@ function vimd() {
 alias sudo="sudo env PATH=$PATH"
 if [[ $(command -v pipgre) ]]; then
   function als() {
-    if [ $# == 0 ]; then
+    if [ $# -eq 0 ]; then
       alias | sort | sed s/^alias\.// | sed -e 's/=/ /' | awk '{printf "%-10s %s",$1,c="";for(i=2;i<=NF;i++) c=c $i" "; print c}' | sed s/\'// | sed s/\'//
     else
       alias | sort | sed s/^alias\.// | sed -e 's/=/ /' | awk '{printf "%-10s %s",$1,c="";for(i=2;i<=NF;i++) c=c $i" "; print c}' | sed s/\'// | sed s/\'// | pipgre $*
