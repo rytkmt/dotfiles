@@ -139,7 +139,7 @@ function vimd() {
 alias sudo="sudo env PATH=$PATH"
 if [[ $(command -v pipgre) ]]; then
   function als() {
-    if [ $# == 0 ]; then
+    if [ $# -eq 0 ]; then
       alias | sort | sed s/^alias\.// | sed -e 's/=/ /' | awk '{printf "%-10s %s",$1,c="";for(i=2;i<=NF;i++) c=c $i" "; print c}' | sed s/\'// | sed s/\'//
     else
       alias | sort | sed s/^alias\.// | sed -e 's/=/ /' | awk '{printf "%-10s %s",$1,c="";for(i=2;i<=NF;i++) c=c $i" "; print c}' | sed s/\'// | sed s/\'// | pipgre $*
@@ -149,15 +149,14 @@ else
   alias als="alias | sort | sed s/^alias\.// | sed -e 's/=/ /' | awk '{printf \"%-10s %s\",\$1,c=\"\";for(i=2;i<=NF;i++) c=c \$i\" \"; print c}' | sed s/\'// | sed s/\'//"
 fi
 alias ezr='vim $XDG_CONFIG_HOME/.zshrc'
-alias ebr='vim $XDG_CONFIG_HOME/.bashrc'
-alias ebp='vim $XDG_CONFIG_HOME/.bash_profile'
-alias ebrl='vim $HOME/.bashrc.local'
-alias ebpl='vim $HOME/.bash_profile.local'
+alias ezp='vim $XDG_CONFIG_HOME/.zprofile'
+alias ezrl='vim $HOME/.zshrc.local'
+alias ezpl='vim $HOME/.zprofile.local'
 alias egc='vim $XDG_CONFIG_HOME/.gitconfig'
 alias cdv='cd $XDG_CONFIG_HOME'
 alias cdh='cd $XDG_CONFIG_HOME/../lighthouse'
 alias cdg='cd $HOME/git'
-alias sbr='source $HOME/.bashrc'
+alias szr='source $HOME/.zshrc'
 
 function flon() {
   sed -e 's/:.*$//' | grep -v '^D' | sed -e 's/^\s\?[AMURD\?]\{1,2\}\s\+//' | sed -e 's/^.*\ ->\ //' | uniq
@@ -214,7 +213,7 @@ fi
 alias fp='readlink -f'
 
 function xrename_paths() {
-  if [ $# == 2 ]; then
+  if [ $# -eq 2 ]; then
     xargs ruby -e "require\"fileutils\";ARGV.each{|v|new_n=v.gsub(\"$1\",\"$2\"); FileUtils.mkdir_p(File.dirname(new_n));puts \"#{v} => #{new_n}\"; FileUtils.mv(v, new_n)}"
   else
     echo "argument error. please set from_name, to_name"
@@ -224,7 +223,7 @@ function xrename_paths() {
 # e.g. ルートから見た各ファイルの相対パスを、コピーしたいディレクトリにまるっと階層ごとコピーする
 #   `git ls-files --others |cp_with_relative_path ~/git/dev_settings/rx_1/`
 function cp_with_relative_path() {
-  if [ $# == 1 ]; then
+  if [ $# -eq 1 ]; then
     local save_dir=$1
     shift
     xargs -I {} ruby -e "require\"fileutils\";require\"pathname\"; v1,v2 = ARGV.tap(&method(:p)); to_path = Pathname(v1).join(v2).to_s.tap(&method(:p)); FileUtils.mkdir_p(File.dirname(to_path).tap(&method(:p))); FileUtils.cp_r(v2, to_path)" "$save_dir" {}
@@ -237,7 +236,7 @@ function cp_with_relative_path() {
 
 # cp_with_relative_pathで特定のディレクトリの全ファイルを相対パス通りにシンボリックリンクを貼る
 function ln_with_relative_path() {
-  if [ $# == 1 ]; then
+  if [ $# -eq 1 ]; then
     local target_dir=$1
     shift
     xargs -I {} ruby -e "require\"fileutils\";require\"pathname\"; v1,v2 = ARGV; to_path = Pathname(v1).join(v2).to_s.tap(&method(:p)); FileUtils.mkdir_p(File.dirname(to_path)); FileUtils.ln_s(Pathname(Dir.pwd).join(v2).to_s, to_path)" "$target_dir" {}

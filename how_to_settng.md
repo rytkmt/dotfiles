@@ -143,6 +143,9 @@ ln -s {cloneしたpath}/.inputrc .inputrc
   - aptで`fd-find`でいれるが、ubuntuだと`fdfind` というコマンド名なので `fd` にシンボリックリンクを貼ってパスを通す
 - sqlformat
   - aptでいれる
+- mmv
+  - https://github.com/itchyny/mmv にある手順でインストール
+  - goでいれる場合、goのディレクトリにパスを通すのもお忘れなく
 
 ## python
 

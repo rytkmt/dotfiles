@@ -134,7 +134,8 @@ require'lir'.setup {
       local height = math.floor(vim.o.lines * 0.7)
       return {
         border = require("lir.float.helper").make_border_opts({
-          "╭", "─", "╮", "│", "╯", "─", "╰", "│",
+          -- "╭", "─", "╮", "│", "╯", "─", "╰", "│",
+          "┌", "─", "┐", "│", "┘", "─", "└", "│",
         }, "Normal"),
         width = width,
         height = height,

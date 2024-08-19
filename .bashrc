@@ -129,7 +129,7 @@ fi
 alias fp='readlink -f'
 
 function xrename_paths() {
-  if [ $# == 2 ]; then
+  if [ $# -eq 2 ]; then
     xargs ruby -e "require\"fileutils\";ARGV.each{|v|new_n=v.gsub(\"$1\",\"$2\"); FileUtils.mkdir_p(File.dirname(new_n));puts \"#{v} => #{new_n}\"; FileUtils.mv(v, new_n)}"
   else
     echo "argument error. please set from_name, to_name"
@@ -139,7 +139,7 @@ function xrename_paths() {
 # e.g. ルートから見た各ファイルの相対パスを、コピーしたいディレクトリにまるっと階層ごとコピーする
 #   `git ls-files --others |cp_with_relative_path ~/git/dev_settings/rx_1/`
 function cp_with_relative_path() {
-  if [ $# == 1 ]; then
+  if [ $# -eq 1 ]; then
     local save_dir=$1
     shift
     xargs -I {} ruby -e "require\"fileutils\";require\"pathname\"; v1,v2 = ARGV.tap(&method(:p)); to_path = Pathname(v1).join(v2).to_s.tap(&method(:p)); FileUtils.mkdir_p(File.dirname(to_path).tap(&method(:p))); FileUtils.cp_r(v2, to_path)" "$save_dir" {}
@@ -152,7 +152,7 @@ function cp_with_relative_path() {
 
 # cp_with_relative_pathで特定のディレクトリの全ファイルを相対パス通りにシンボリックリンクを貼る
 function ln_with_relative_path() {
-  if [ $# == 1 ]; then
+  if [ $# -eq 1 ]; then
     local target_dir=$1
     shift
     xargs -I {} ruby -e "require\"fileutils\";require\"pathname\"; v1,v2 = ARGV; to_path = Pathname(v1).join(v2).to_s.tap(&method(:p)); FileUtils.mkdir_p(File.dirname(to_path)); FileUtils.ln_s(Pathname(Dir.pwd).join(v2).to_s, to_path)" "$target_dir" {}
