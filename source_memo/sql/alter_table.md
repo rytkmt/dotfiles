@@ -14,6 +14,8 @@
     - string => text
     - boolean => bool
     - date => date
+- `DEFAULT false` などを付けるとデフォルトあり
+- `NOT NULL` を付けるとNULL禁止
 
 ## 制約
 

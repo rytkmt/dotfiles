@@ -459,6 +459,12 @@
       "@param [${1:Class}] ${2:NAME} ${3:DETAILS}"
     ]
   },
+  "yard_note": {
+    "prefix": "@note",
+    "body": [
+      "@note ${1:DETAILS}"
+    ]
+  },
   "yard_comment_param": {
     "prefix": "#param",
     "body": [
@@ -487,6 +493,12 @@
     "prefix": "#option",
     "body": [
       "# @option ${1:VARIABLE} [${2:Class}] ${3:OPT_NAME} ${4:DETAILS}"
+    ]
+  },
+  "property_doc": {
+    "prefix": "property_doc",
+    "body": [
+      "property :${1:COLUUMN},               reader: -> (doc:, **) { doc.dig(:${2}) }"
     ]
   }
 }

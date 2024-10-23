@@ -173,10 +173,18 @@ command! PackerRecompile call s:recompile_packer()
 "++ }}}
 
 "++ gitlabのfileリンク生成 {{{
+function! s:fetch_git_project_url()
+  let l:project_url = split(SystemCommandWithoutEscapeChars("git -C ". GitProjectRootWithCache() . " remote -v|awk '{print $2}'"), "\n")[0][0:-5]
+  return substitute(l:project_url, '\v(https://).*\@(.*)', '\1\2', '')
+endfunction
+function! s:fetch_git_current_revision()
+  return SystemCommandWithoutEscapeChars("git show --format='%h' --no-patch")[0:-2]
+endfunction
+
 function! s:yank_gitlab_file_url(with_line)
-  let l:git_project_path = split(SystemCommandWithoutEscapeChars("git -C ". GitProjectRootWithCache() . " remote -v|awk '{print $2}'"), "\n")[0][0:-5]
+  let l:git_project_path = s:fetch_git_project_url()
   " エスケープシーケンスは削除
-  let l:git_hash_value = SystemCommandWithoutEscapeChars("git show --format='%h' --no-patch")[0:-2]
+  let l:git_hash_value = s:fetch_git_current_revision()
   let l:path = l:git_project_path . "/-/tree/" . l:git_hash_value . "/". FilePathUnderRoot()
   let l:path = (a:with_line == 0 ? l:path : l:path . "#L" . line("."))
   call setreg('*', l:path)
@@ -194,9 +202,9 @@ endfunction
 command! -nargs=? OpenUrl call s:open_url("<args>")
 
 function! s:open_gitlab_file_url(with_line)
-  let l:git_project_path = split(SystemCommandWithoutEscapeChars("git -C ". GitProjectRootWithCache() . " remote -v|awk '{print $2}'"), "\n")[0][0:-5]
+  let l:git_project_path = s:fetch_git_project_url()
   " エスケープシーケンスは削除
-  let l:git_hash_value = SystemCommandWithoutEscapeChars("git show --format='%h' --no-patch")[0:-2]
+  let l:git_hash_value = s:fetch_git_current_revision()
   let l:path = l:git_project_path . "/-/tree/" . l:git_hash_value . "/". FilePathUnderRoot()
   let l:path = (a:with_line == 0 ? l:path : l:path . "#L" . line("."))
   call s:open_url(l:path)

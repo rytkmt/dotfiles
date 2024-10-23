@@ -118,7 +118,7 @@ nnoremap <C-c> viws
 nnoremap <ESC><ESC> :<C-u>noh<CR>
 cmap <C-j> <Tab>
 cmap <C-k> <S-Tab>
-cmap <C-e> <C-u>e %:h/
+cmap <C-c> <C-u><C-r>=expand("%:p:h")<CR>
 
 nnoremap g? ga
 inoremap <C-g> <C-v>

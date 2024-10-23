@@ -48,6 +48,10 @@
       git commit -m \"$1\"; \
     fi; \
   }; f"
+  snm = "!f() { \
+    git add -A; \
+    git commit; \
+  }; f"
   snp = "!f() { \
     if [ $# -ne 1 ];\
     then \

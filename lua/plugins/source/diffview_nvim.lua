@@ -1,4 +1,5 @@
 local cb = require'diffview.config'.diffview_callback
+local actions = require("diffview.actions")
 
 require'diffview'.setup {
   diff_binaries = false,    -- Show diffs for binaries
@@ -36,57 +37,58 @@ require'diffview'.setup {
     DiffviewFileHistory = {},
   },
   hooks = {},         -- See ':h diffview-config-hooks'
-  key_bindings = {
+  keymaps = {
     disable_defaults = false,                   -- Disable the default key bindings
     -- The `view` bindings are active in the diff buffers, only when the current
     -- tabpage is a Diffview.
     view = {
-      ["[diff]e"]    = cb("goto_file"),          -- Open the file in a new split in previous tabpage
-      ["[diff]s"]    = cb("goto_file_split"),    -- Open the file in a new split
-      ["[diff]t"]    = cb("goto_file_tab"),      -- Open the file in a new tabpage
-      ["[diff]f"]    = cb("focus_files"),        -- Bring focus to the files panel
-      ["[diff]b"]    = cb("toggle_files"),       -- Toggle the files panel.
-      ["[diff]j"]    = cb("select_next_entry"),           -- Bring the cursor to the next file entry
-      ["[diff]k"]    = cb("select_prev_entry"),
+      -- [c ]c でjumpできる
+      { "n", "[diff]e", actions.goto_file, {} },          -- Open the file in a new split in previous tabpage
+      { "n", "[diff]s", actions.goto_file_split, {} },    -- Open the file in a new split
+      { "n", "[diff]t", actions.goto_file_tab, {} },      -- Open the file in a new tabpage
+      { "n", "[diff]f", actions.focus_files, {} },        -- Bring focus to the files panel
+      { "n", "[diff]b", actions.toggle_files, {} },       -- Toggle the files panel.
+      { "n", "[diff]j", actions.select_next_entry, {} },           -- Bring the cursor to the next file entry
+      { "n", "[diff]k", actions.select_prev_entry, {} },
     },
     file_panel = {
-      ["j"]             = cb("next_entry"),           -- Bring the cursor to the next file entry
-      ["<down>"]        = cb("next_entry"),
-      ["k"]             = cb("prev_entry"),           -- Bring the cursor to the previous file entry.
-      ["<up>"]          = cb("prev_entry"),
-      ["<cr>"]          = cb("select_entry"),         -- Open the diff for the selected entry.
-      ["o"]             = cb("select_entry"),
-      ["-"]             = cb("toggle_stage_entry"),   -- Stage / unstage the selected entry.
-      ["S"]             = cb("stage_all"),            -- Stage all entries.
-      ["U"]             = cb("unstage_all"),          -- Unstage all entries.
-      ["X"]             = cb("restore_entry"),        -- Restore entry to the state on the left side.
-      ["R"]             = cb("refresh_files"),        -- Update stats and entries in the file list.
-      ["e"]             = cb("goto_file"),
-      ["s"]             = cb("goto_file_split"),
-      ["t"]             = cb("goto_file_tab"),
-      ["i"]             = cb("listing_style"),        -- Toggle between 'list' and 'tree' views
-      ["f"]             = cb("toggle_flatten_dirs"),  -- Flatten empty subdirectories in tree listing style.
+      { "n", "j", actions.next_entry, {} },           -- Bring the cursor to the next file entry
+      { "n", "<down>", actions.next_entry, {} },
+      { "n", "k", actions.prev_entry, {} },           -- Bring the cursor to the previous file entry.
+      { "n", "<up>", actions.prev_entry, {} },
+      { "n", "<cr>", actions.select_entry, {} },         -- Open the diff for the selected entry.
+      { "n", "o", actions.select_entry, {} },
+      { "n", "-", actions.toggle_stage_entry, {} },   -- Stage / unstage the selected entry.
+      { "n", "S", actions.stage_all, {} },            -- Stage all entries.
+      { "n", "U", actions.unstage_all, {} },          -- Unstage all entries.
+      { "n", "X", actions.restore_entry, {} },        -- Restore entry to the state on the left side.
+      { "n", "R", actions.refresh_files, {} },        -- Update stats and entries in the file list.
+      { "n", "e", actions.goto_file, {} },
+      { "n", "s", actions.goto_file_split, {} },
+      { "n", "t", actions.goto_file_tab, {} },
+      { "n", "i", actions.listing_style, {} },        -- Toggle between 'list' and 'tree' views
+      { "n", "f", actions.toggle_flatten_dirs, {} },  -- Flatten empty subdirectories in tree listing style.
     },
     file_history_panel = {
-      ["g!"]            = cb("options"),            -- Open the option panel
-      ["<C-A-d>"]       = cb("open_in_diffview"),   -- Open the entry under the cursor in a diffview
-      ["y"]             = cb("copy_hash"),          -- Copy the commit hash of the entry under the cursor
-      ["zR"]            = cb("open_all_folds"),
-      ["zM"]            = cb("close_all_folds"),
-      ["j"]             = cb("next_entry"),
-      ["<down>"]        = cb("next_entry"),
-      ["k"]             = cb("prev_entry"),
-      ["<up>"]          = cb("prev_entry"),
-      ["<cr>"]          = cb("select_entry"),
-      ["o"]             = cb("select_entry"),
-      ["e"]             = cb("goto_file"),
-      ["s"]             = cb("goto_file_split"),
-      ["t"]             = cb("goto_file_tab"),
+      { "n", "g?", actions.options, {} },            -- Open the option panel
+      { "n", "<C-A-d>", actions.open_in_diffview, {} },   -- Open the entry under the cursor in a diffview
+      { "n", "y", actions.copy_hash, {} },          -- Copy the commit hash of the entry under the cursor
+      { "n", "zR", actions.open_all_folds, {} },
+      { "n", "zM", actions.close_all_folds, {} },
+      { "n", "j", actions.next_entry, {} },
+      { "n", "<down>", actions.next_entry, {} },
+      { "n", "k", actions.prev_entry, {} },
+      { "n", "<up>", actions.prev_entry, {} },
+      { "n", "<cr>", actions.select_entry, {} },
+      { "n", "o", actions.select_entry, {} },
+      { "n", "e", actions.goto_file, {} },
+      { "n", "s", actions.goto_file_split, {} },
+      { "n", "t", actions.goto_file_tab, {} },
     },
-    option_panel = {
-      ["<tab>"] = cb("select"),
-      ["q"]     = cb("close"),
-    },
+    -- option_panel = {
+    --   { "n", "<tab>", actions.select, {} },
+    --   { "n", "q", actions.close, {} },
+    -- },
   },
 }
 

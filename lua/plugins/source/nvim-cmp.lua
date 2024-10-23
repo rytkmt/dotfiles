@@ -22,10 +22,11 @@ cmp.setup({
     ['<Enter>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'vsnip' }, -- For vsnip users.
+    { name = 'vsnip', priority = 1 }, -- For vsnip users.
+    { name = 'nvim_lsp', priority = 2 },
     {
       name = 'buffer',
+      priority = 3,
       option = {
         get_bufnrs = function()
           local bufs = {}
@@ -36,13 +37,70 @@ cmp.setup({
         end
       }
     },
-    { name = 'path' }
+    {
+      name = "dictionary",
+      keyword_length = 2,
+      priority = 4
+    },
+    { name = 'path', priority = 5 }
   })
+})
+
+local dicts_hash = {}
+local dicts_dir = os.getenv('XDG_CONFIG_HOME')..'/dicts'
+if vim.fn.isdirectory(dicts_dir) then
+  for i,ft in ipairs(vim.fn.readdir(dicts_dir)) do
+    dicts_hash[ft] = vim.fn.globpath('$XDG_CONFIG_HOME/dicts/'..ft..'/', '*', true, true)
+  end
+end
+
+local function select_dicts()
+  local dicts = dicts_hash["all"]
+  local ft_dicts = dicts_hash[vim.bo.filetype]
+  if ft_dicts then
+    vim.list_extend(dicts, ft_dicts)
+  end
+  return dicts
+end
+local function cache_dicts()
+  if not vim.b.dict then
+    vim.b.dict = select_dicts()
+  end
+  return vim.b.dict
+end
+local function cache_or_select_dicts()
+  return vim.b.dict or select_dicts()
+end
+
+require("cmp_dictionary").setup({
+  paths = select_dicts(),
+  exact_length = 2,
+  first_case_insensitive = true,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function(ev)
+    require("cmp_dictionary").setup({
+      paths = cache_dicts(),
+    })
+  end
+})
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*",
+  callback = function(ev)
+    require("cmp_dictionary").setup({
+      paths = cache_or_select_dicts(),
+    })
+  end
 })
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ '/', '?' }, {
-  mapping = cmp.mapping.preset.cmdline(),
+  mapping = cmp.mapping.preset.cmdline({
+    ["<C-N>"] = function() end,
+    ["<C-P>"] = function() end,
+  }),
   sources = {
     { name = 'buffer' }
   }
@@ -50,7 +108,10 @@ cmp.setup.cmdline({ '/', '?' }, {
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
-  mapping = cmp.mapping.preset.cmdline(),
+  mapping = cmp.mapping.preset.cmdline({
+    ["<C-N>"] = function() end,
+    ["<C-P>"] = function() end,
+  }),
   sources = cmp.config.sources({
     { name = 'path' }
   }, {
@@ -73,6 +134,7 @@ local on_attach = function (client, bufnr)
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'g[', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', 'g]', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  vim.keymap.set('c', '<tab>', '<C-z>', { silent = false })
   -- require('folding').on_attach()
 end
 

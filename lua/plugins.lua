@@ -62,6 +62,7 @@ require'packer'.startup(function()
   -- use_with_file("tpope/vim-surround", "add")
   -- use_with_file("ur4ltz/surround.nvim", "source_lua")
   use_with_file("kylechui/nvim-surround", "source_lua")
+  use_with_file("nacro90/numb.nvim", "source_lua")
   use_with_file("LeafCage/yankround.vim", "add")
   use_with_file("osyo-manga/vim-anzu", "add")
   -- use_with_file("rhysd/clever-f.vim", "add")
@@ -120,6 +121,11 @@ require'packer'.startup(function()
 
   use_with_file("rhysd/conflict-marker.vim", "source")
   use_with_file("cuducos/yaml.nvim", "source_lua", { ft = { "yaml" }, requires = { "nvim-treesitter/nvim-treesitter", "nvim-telescope/telescope.nvim" } })
+  use_with_file(
+    'mfussenegger/nvim-lint',
+    'source_lua',
+    { ft = { "ruby" } }
+  )
 
   -- 遅延系
 
@@ -186,6 +192,7 @@ require'packer'.startup(function()
         },
         { 'hrsh7th/cmp-buffer' },
         { 'hrsh7th/cmp-path' },
+        { 'uga-rosa/cmp-dictionary' },
         { 'hrsh7th/cmp-cmdline' },
         {
           'hrsh7th/cmp-vsnip',
