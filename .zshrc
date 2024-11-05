@@ -220,6 +220,13 @@ function xrename_paths() {
     echo "argument error. please set from_name, to_name"
   fi
 }
+function xrename_copy_paths() {
+  if [ $# -eq 2 ]; then
+    xargs ruby -e "require\"fileutils\";ARGV.each{|v|new_n=v.gsub(\"$1\",\"$2\"); FileUtils.mkdir_p(File.dirname(new_n));puts \"#{v} => #{new_n}\"; FileUtils.copy(v, new_n)}"
+  else
+    echo "argument error. please set from_name, to_name"
+  fi
+}
 
 # e.g. ルートから見た各ファイルの相対パスを、コピーしたいディレクトリにまるっと階層ごとコピーする
 #   `git ls-files --others |cp_with_relative_path ~/git/dev_settings/rx_1/`

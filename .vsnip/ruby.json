@@ -1,4 +1,16 @@
 {
+  "m": {
+    "prefix": "m",
+    "body": [
+      "module $1"
+    ]
+  },
+  "c": {
+    "prefix": "c",
+    "body": [
+      "class $1"
+    ]
+  },
   "rescue_e": {
     "prefix": "rescue_e",
     "body": [
