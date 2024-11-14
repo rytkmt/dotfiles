@@ -57,6 +57,9 @@ fi
 # lsコマンドの補完候補にも色付き表示
 zstyle ':completion:*:default' list-colors ${LS_COLORS}
 
+# C-jを右カーソルに割当
+bindkey -s '^J' '^[[C'
+
 if [[ $(command -v peco) ]]; then
   ## コマンド履歴検索
   function peco-history-selection() {

@@ -1,11 +1,11 @@
 {
-  "vsnip": {
-    "prefix": "vsnip",
+  "snip": {
+    "prefix": "snip",
     "body": [
       "\"${1:TITLE}\": {",
       "  \"prefix\": \"${1}\",",
       "  \"body\": [",
-      "    ${2}",
+      "    \"${2}\"",
       "  ]",
       "}"
     ]

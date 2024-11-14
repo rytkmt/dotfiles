@@ -512,5 +512,11 @@
     "body": [
       "property :${1:COLUUMN},               reader: -> (doc:, **) { doc.dig(:${2}) }"
     ]
+  },
+  "nocov": {
+    "prefix": "nocov",
+    "body": [
+      "# :nocov:"
+    ]
   }
 }

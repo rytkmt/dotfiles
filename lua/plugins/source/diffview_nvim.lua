@@ -43,47 +43,46 @@ require'diffview'.setup {
     -- tabpage is a Diffview.
     view = {
       -- [c ]c でjumpできる
-      { "n", "[diff]e", actions.goto_file, {} },          -- Open the file in a new split in previous tabpage
-      { "n", "[diff]s", actions.goto_file_split, {} },    -- Open the file in a new split
-      { "n", "[diff]t", actions.goto_file_tab, {} },      -- Open the file in a new tabpage
-      { "n", "[diff]f", actions.focus_files, {} },        -- Bring focus to the files panel
-      { "n", "[diff]b", actions.toggle_files, {} },       -- Toggle the files panel.
-      { "n", "[diff]j", actions.select_next_entry, {} },           -- Bring the cursor to the next file entry
-      { "n", "[diff]k", actions.select_prev_entry, {} },
+      { "n", "[diff]s", actions.goto_file_split, { desc="open new split"} },    -- Open the file in a new split
+      { "n", "[diff]t", actions.goto_file_tab, { desc="open new tab" } },      -- Open the file in a new tabpage
+      { "n", "[diff]f", actions.focus_files, { desc="focus files panel"} },        -- Bring focus to the files panel
+      { "n", "[diff]b", actions.toggle_files, { desc="toggle files panel" } },       -- Toggle the files panel.
+      { "n", "[diff]j", actions.select_next_entry, { desc="select next entry" } },           -- Bring the cursor to the next file entry
+      { "n", "[diff]k", actions.select_prev_entry, { desc="select prev entry" } },
     },
     file_panel = {
-      { "n", "j", actions.next_entry, {} },           -- Bring the cursor to the next file entry
-      { "n", "<down>", actions.next_entry, {} },
-      { "n", "k", actions.prev_entry, {} },           -- Bring the cursor to the previous file entry.
-      { "n", "<up>", actions.prev_entry, {} },
-      { "n", "<cr>", actions.select_entry, {} },         -- Open the diff for the selected entry.
-      { "n", "o", actions.select_entry, {} },
-      { "n", "-", actions.toggle_stage_entry, {} },   -- Stage / unstage the selected entry.
-      { "n", "S", actions.stage_all, {} },            -- Stage all entries.
-      { "n", "U", actions.unstage_all, {} },          -- Unstage all entries.
-      { "n", "X", actions.restore_entry, {} },        -- Restore entry to the state on the left side.
-      { "n", "R", actions.refresh_files, {} },        -- Update stats and entries in the file list.
-      { "n", "e", actions.goto_file, {} },
-      { "n", "s", actions.goto_file_split, {} },
-      { "n", "t", actions.goto_file_tab, {} },
-      { "n", "i", actions.listing_style, {} },        -- Toggle between 'list' and 'tree' views
-      { "n", "f", actions.toggle_flatten_dirs, {} },  -- Flatten empty subdirectories in tree listing style.
+      { "n", "j", actions.next_entry, { desc="next entry" } },           -- Bring the cursor to the next file entry
+      { "n", "<down>", actions.next_entry, { desc="next entry" } },
+      { "n", "k", actions.prev_entry, { desc="prev entry" } },           -- Bring the cursor to the previous file entry.
+      { "n", "<up>", actions.prev_entry, { desc="prev entry" } },
+      { "n", "<cr>", actions.select_entry, { desc="select entry" } },         -- Open the diff for the selected entry.
+      { "n", "o", actions.select_entry, { desc="select entry" } },
+      { "n", "-", actions.toggle_stage_entry, { desc="toggle git stage/unstage"} },   -- Stage / unstage the selected entry.
+      { "n", "S", actions.stage_all, { desc="git stage all"} },            -- Stage all entries.
+      { "n", "U", actions.unstage_all, { desc="git unstage all" } },          -- Unstage all entries.
+      { "n", "X", actions.restore_entry, { desc="git restore entry"} },        -- Restore entry to the state on the left side.
+      { "n", "R", actions.refresh_files, { desc="refresh files" } },        -- Update stats and entries in the file list.
+      { "n", "e", actions.goto_file, { desc="goto file"} },
+      { "n", "s", actions.goto_file_split, { desc="goto file split"} },
+      { "n", "t", actions.goto_file_tab, { desc="goto file new tab"} },
+      { "n", "i", actions.listing_style, { desc="toggle style list/tree"} },        -- Toggle between 'list' and 'tree' views
+      { "n", "f", actions.toggle_flatten_dirs, { desc="toggle flatten style subdirectories"} },  -- Flatten empty subdirectories in tree listing style.
     },
     file_history_panel = {
-      { "n", "g?", actions.options, {} },            -- Open the option panel
-      { "n", "<C-A-d>", actions.open_in_diffview, {} },   -- Open the entry under the cursor in a diffview
-      { "n", "y", actions.copy_hash, {} },          -- Copy the commit hash of the entry under the cursor
-      { "n", "zR", actions.open_all_folds, {} },
-      { "n", "zM", actions.close_all_folds, {} },
-      { "n", "j", actions.next_entry, {} },
-      { "n", "<down>", actions.next_entry, {} },
-      { "n", "k", actions.prev_entry, {} },
-      { "n", "<up>", actions.prev_entry, {} },
-      { "n", "<cr>", actions.select_entry, {} },
-      { "n", "o", actions.select_entry, {} },
-      { "n", "e", actions.goto_file, {} },
-      { "n", "s", actions.goto_file_split, {} },
-      { "n", "t", actions.goto_file_tab, {} },
+      { "n", "g?", actions.options, { desc="help" } },            -- Open the option panel
+      { "n", "<C-A-d>", actions.open_in_diffview, { desc="open diffview"} },   -- Open the entry under the cursor in a diffview
+      { "n", "y", actions.copy_hash, { desc="copy commit hash"} },          -- Copy the commit hash of the entry under the cursor
+      { "n", "zR", actions.open_all_folds, { desc="open all folds"} },
+      { "n", "zM", actions.close_all_folds, { desc="close all folds"} },
+      { "n", "j", actions.next_entry, { desc="next entry"} },
+      { "n", "<down>", actions.next_entry, { desc="next entry"} },
+      { "n", "k", actions.prev_entry, { desc="prev entry"} },
+      { "n", "<up>", actions.prev_entry, { desc="prev entry"} },
+      { "n", "<cr>", actions.select_entry, { desc="select entry"} },
+      { "n", "o", actions.select_entry, { desc="select entry"} },
+      { "n", "e", actions.goto_file, { desc="goto file"} },
+      { "n", "s", actions.goto_file_split, { desc="goto file split"} },
+      { "n", "t", actions.goto_file_tab, { desc="goto file tab"} },
     },
     -- option_panel = {
     --   { "n", "<tab>", actions.select, {} },
