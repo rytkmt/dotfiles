@@ -56,7 +56,10 @@ require('gitsigns').setup {
     -- Navigation
     map('n', ']g', function()
       if vim.wo.diff then return ']g' end
-      vim.schedule(function() gs.next_hunk() end)
+      vim.schedule(function()
+        gs.next_hunk()
+        vim.cmd("normal! zz")
+      end)
       return '<Ignore>'
     end, {expr=true})
 

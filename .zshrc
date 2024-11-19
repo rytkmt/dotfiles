@@ -61,9 +61,25 @@ zstyle ':completion:*:default' list-colors ${LS_COLORS}
 bindkey -s '^J' '^[[C'
 
 if [[ $(command -v peco) ]]; then
+  # https://github.com/peco/peco/issues/554 と同じTERMによる表示バグがあったためラップ
+  function npeco() {
+    export TERM=xterm
+
+    if [[ $# -eq 0 ]]; then
+      peco_flags=""
+    else
+      peco_flags="--query $1"
+    fi
+
+    peco $peco_flags
+
+    export TERM=xterm-256color
+  }
+
+
   ## コマンド履歴検索
   function peco-history-selection() {
-    BUFFER=`history -n 1 | tac  | awk '!a[$0]++' | peco`
+    BUFFER=`history -n 1 | tac  | awk '!a[$0]++' | npeco`
     CURSOR=$#BUFFER
     zle reset-prompt
   }
@@ -80,7 +96,7 @@ if [[ $(command -v peco) ]]; then
     zstyle ':chpwd:*' recent-dirs-file "$HOME/.cache/chpwd-recent-dirs"
   fi
   function peco-cdr () {
-    local selected_dir="$(cdr -l | sed 's/^[0-9]* *//' | peco)"
+    local selected_dir="$(cdr -l | sed 's/^[0-9]* *//' | npeco)"
     if [ -n "$selected_dir" ]; then
       BUFFER="cd ${selected_dir}"
       zle accept-line
@@ -91,7 +107,7 @@ if [[ $(command -v peco) ]]; then
 
   ## カレントディレクトリ以下のディレクトリ検索・移動
   function find_cd() {
-    local selected_dir=$(find . -type d | peco)
+    local selected_dir=$(find . -type d | npeco)
     if [ -n "$selected_dir" ]; then
       BUFFER="cd ${selected_dir}"
       zle accept-line
@@ -109,7 +125,7 @@ if [[ $(command -v peco) ]]; then
         command+="find ${dir} -maxdepth 1 -mindepth 1 -type d -print;"
       done
     fi
-    local selected_dir=$(eval $command | peco)
+    local selected_dir=$(eval $command | npeco)
     if [ -n "$selected_dir" ]; then
       BUFFER="cd ${selected_dir}"
       zle accept-line
@@ -139,7 +155,7 @@ alias vimo='vim -O'
 function vimd() {
   eval "vim -c \"DiffviewOpen $@\""; \
 }
-alias sudo="sudo env PATH=$PATH"
+# alias sudo="sudo env PATH=$PATH"
 if [[ $(command -v pipgre) ]]; then
   function als() {
     if [ $# -eq 0 ]; then
