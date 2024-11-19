@@ -162,9 +162,7 @@ ln -s {cloneしたpath}/.inputrc .inputrc
 
 - rbenvだけだとrbenv installが実行できない。rbenvの中にruby-buildもインストール必要
 
-```
-$ git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
-```
+`git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build`
 
 ```shell
 gem install neovim solargraph
