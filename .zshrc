@@ -229,6 +229,9 @@ if [[ $(command -v bat) ]]; then
   alias fxbatf='flon|xbatf'
 fi
 
+# -xvfは細かい拡張子の違いを自動判別してくれるためtarはすべてこれで解凍できる
+alias untar='tar -xvf'
+
 # fullpathを表示する
 alias fp='readlink -f'
 

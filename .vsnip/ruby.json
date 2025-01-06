@@ -441,6 +441,12 @@
       "let(:${1:NAME}) { create(:${1}${2}) }"
     ]
   },
+  "let_it_be_create": {
+    "prefix": "let_it_be_create",
+    "body": [
+      "let_it_be(:${1:NAME}) { create(:${1}${2}) }"
+    ]
+  },
   "rubocop_disable": {
     "prefix": "rubocop_disable",
     "body": [

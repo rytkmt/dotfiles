@@ -39,7 +39,6 @@ local function location()
 end
 
 require'lualine'.setup{
-
   options = {
     theme  = custom_theme,
     component_separators = { left = '', right = '|'},

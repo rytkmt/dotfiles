@@ -17,6 +17,7 @@ let g:switch_custom_definitions =
   \   switch#NormalizedCase(['なる', 'ならない']),
   \   switch#NormalizedCase(['はい', 'いいえ']),
   \   switch#NormalizedCase(['ある', 'ない']),
+  \   switch#NormalizedCase(['なし', 'あり']),
   \   switch#NormalizedCase(['いる', 'いない']),
   \   switch#NormalizedCase(['される', 'されない']),
   \   switch#NormalizedCase(['正常', '異常']),

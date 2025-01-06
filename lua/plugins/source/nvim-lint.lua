@@ -1,52 +1,61 @@
-require('lint').linters_by_ft = {
-  ruby = {'ruby'},
-}
 local ruby = require('lint').linters.ruby
 ruby.cmd = 'rbenv'
 ruby.args = {  'exec', 'ruby', '-w', '-c' }
--- InsertLeaveはstdinを受け付けているケースのみしか使えないためrubyは不可
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  callback = function()
-    require("lint").try_lint()
-  end,
-})
 
--- local pattern1 = '([^:]+):(%d+): warning: (.+)'
--- local groups1 = { 'file', 'lnum', 'message' }
---
--- local pattern2 = '([^:]+):(%d+): syntax error, (.+)'
--- local groups2 = { 'file', 'lnum', 'message' }
---
--- local parsers = {
---   require('lint.parser').from_pattern(
---     pattern1,
---     groups1,
---     nil,
---     { ['severity'] = vim.diagnostic.severity.WARN, ['source'] = 'ruby' }
---   ),
---   require('lint.parser').from_pattern(
---     pattern2,
---     groups2,
---     nil,
---     { ['severity'] = vim.diagnostic.severity.ERROR, ['source'] = 'ruby' }
---   ),
--- }
---
--- return {
---   cmd = 'ruby',
---   stdin = false,
---   args = { '-w', '-c' },
---   ignore_exitcode = true,
---   stream = 'stderr',
---   parser = function(output, bufnr)
---     local diagnostics = {}
---     for _, parser in ipairs(parsers) do
---       local result = parser(output, bufnr)
---       for _, diagnostic in ipairs(result) do
---         table.insert(diagnostics, diagnostic)
---       end
---     end
---
---     return diagnostics
---   end,
--- }
+local rubocop = require('lint').linters.rubocop
+rubocop.cmd = 'bundle'
+rubocop.args = {
+  'exec',
+  'rubocop',
+  '--format',
+  'json',
+  '--force-exclusion',
+  -- '--server',
+  '--stdin',
+  function() return vim.api.nvim_buf_get_name(0) end,
+}
+
+local rubocop_severity_map = {
+  ['fatal'] = vim.diagnostic.severity.ERROR,
+  ['error'] = vim.diagnostic.severity.ERROR,
+  ['warning'] = vim.diagnostic.severity.WARN,
+  ['convention'] = vim.diagnostic.severity.HINT,
+  ['refactor'] = vim.diagnostic.severity.INFO,
+  ['info'] = vim.diagnostic.severity.INFO,
+}
+local old_parser = rubocop.parser
+rubocop.parser = function(output, bufnr)
+  local diagnostics = old_parser(output, bufnr)
+  for _, diagnostic in ipairs(diagnostics) do
+    -- 診断結果の表示のためにcopに変更
+    diagnostic.source = 'cop'
+  end
+  return diagnostics
+end
+require('lint').linters_by_ft = {
+  ruby = {
+    "ruby", "rubocop"
+  },
+  lua = { 'luacheck' }
+}
+-- InsertLeaveはstdinを受け付けているケースのみしか使えないためrubyは不可
+vim.api.nvim_create_autocmd(
+  { "BufWinEnter", "BufWritePost" },
+  { callback = function() require("lint").try_lint() end }
+)
+
+-- 診断結果の表示/非表示を切り替える関数
+local function toggle_diagnostics()
+  if vim.b.diagnostics_enabled == nil or vim.b.diagnostics_enabled == true then
+    vim.b.diagnostics_enabled = false
+    vim.diagnostic.disable(0)
+    print("Diagnostics disabled")
+  else
+    vim.b.diagnostics_enabled = true
+    vim.diagnostic.enable(0)
+    print("Diagnostics enabled")
+  end
+end
+
+-- コマンドを作成
+vim.api.nvim_create_user_command('ToggleDiagnostics', toggle_diagnostics, {})

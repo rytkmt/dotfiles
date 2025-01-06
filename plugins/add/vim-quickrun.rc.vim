@@ -12,13 +12,6 @@
   \     'cmdopt': 'swift',
   \     'exec': '%c %o %s',
   \   },
-  \   'ruby_syntax_check': {
-  \     "command" : "ruby",
-  \     "exec"    : "%c %o %s:p ",
-  \     "cmdopt"  : "-c",
-  \     "vimproc/sleep"    : 0,
-  \     "outputter/buffer/into" : 1
-  \   },
   \   'bundle_ruby': {
   \     "vimproc/sleep"    : 0,
   \     "outputter/buffer/into" : 1
@@ -45,6 +38,5 @@ command! -nargs=? QuickRunBundle call s:bundle_ruby(<f-args>)
 nnoremap [quick]r :<C-u>QuickRun
 nnoremap [quick]b :<C-u>QuickRunBundle
 vnoremap [map]r :QuickRun<CR>
-nnoremap [quick]c :<C-u>QuickRun ruby_syntax_check<CR>
 nnoremap [quick]a :<C-u>QuickRun -args
 nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"

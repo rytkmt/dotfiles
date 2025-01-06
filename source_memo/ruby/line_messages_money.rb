@@ -1,5 +1,4 @@
 path = "/tmp/nvim.r_tsukamoto/mIHrwt/0"
-
 TYPES = %w[
   きいちゃん
   食材

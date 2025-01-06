@@ -13,6 +13,7 @@ vim.cmd('augroup END')
 require("rc.options")
 require("rc.settings")
 require("rc.ambwidth")
+require("rc.lsp")
 
 -- packer {{{
 local packer_dir = vim.env.HOME..'/.local/share/nvim/site/pack/packer/opt/packer.nvim'
@@ -36,13 +37,6 @@ end
 vim.cmd('set noimdisable')
 vim.cmd('so $XDG_CONFIG_HOME/rc/functions.rc.vim')
 vim.cmd('so $XDG_CONFIG_HOME/rc/mappings.rc.vim')
-
-local function is_wsl()
-  return os.execute("uname -a | grep -i microsoft > /dev/null 2>&1") == 0
-end
-if is_wsl() then
-  require("rc.wsl")
-end
 
 if vim.fn.has("python3") == 1 then
   vim.g.python3_host_prog = string.gsub(vim.fn.system("which python3"), "\n", "")

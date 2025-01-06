@@ -158,6 +158,9 @@ nnoremap ` @@
 " 現在行を前の行の末尾に繋げる
 nnoremap <C-l> ^d0dhj
 
+nnoremap <nowait> <tab> >>
+nnoremap <nowait> <s-tab> <<
+
 " カーソル位置の単語を置換
 nnoremap <expr> [map]s ':%s/\<' . expand('<cword>') . '\>/'
 vnoremap <expr> [map]s ':<C-u>%s/\<' . expand('<cword>') . '\>/'

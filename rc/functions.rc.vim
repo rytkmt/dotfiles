@@ -6,6 +6,7 @@ function! SystemCommandWithoutEscapeChars(command)
   return RemoveShellEscapeChars(system(a:command))
 endfunction
 
+" luaに移植済み
 function! FindGitProjectRoot()
   let pathMaker='%:p'
   while(len(expand(pathMaker))>1)
@@ -20,6 +21,7 @@ function! FindGitProjectRoot()
   return expand("%:h")
 endfunction
 
+" luaに移植済み
 function! GitProjectRootWithCache()
   if exists("b:git_project_root")
   else

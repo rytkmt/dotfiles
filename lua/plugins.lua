@@ -1,15 +1,11 @@
 vim.cmd[[packadd packer.nvim]]
 require'packer'.startup(function()
   local function split(s, delimiter)
-    result = {};
+    local result = {};
     for match in (s..delimiter):gmatch("(.-)"..delimiter) do
       table.insert(result, match);
     end
     return result;
-  end
-
-  local function eval(inStr)
-    return assert(load(inStr))()
   end
 
   local function use_with_file(repo, ...)
@@ -75,7 +71,7 @@ require'packer'.startup(function()
 
   use_with_file("haya14busa/vim-edgemotion", "source")
   use_with_file("skanehira/qfopen.vim", "source")
-  use_with_file("nvim-treesitter/nvim-treesitter", "source_lua", { 
+  use_with_file("nvim-treesitter/nvim-treesitter", "source_lua", {
     -- run = ':TSUpdate',
     run = function()
         local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
@@ -124,7 +120,11 @@ require'packer'.startup(function()
   use_with_file(
     'mfussenegger/nvim-lint',
     'source_lua',
-    { ft = { "ruby" } }
+    { ft = { "ruby", "lua" } }
+  )
+  use_with_file(
+    'petertriho/nvim-scrollbar',
+    'source_lua'
   )
 
   -- 遅延系

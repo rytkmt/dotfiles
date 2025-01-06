@@ -15,9 +15,14 @@ WHERE EXISTS (
 ## JOINによる更新値取得
 
 ```sql
-UPDATE ec_shop_items
-SET mall_type = ec_shop.mall_type
-FROM ec_shop_items
-INNER JOIN ec_shops
-ON ec_shop_items.ec_shop_id = ec_shops.id
+UPDATE products SET popular_flag = true
+FROM reviews -- 実質 INNER JOIN と同じ
+WHERE products.id = reviews.product_id; -- ONと同じ
+
+-- postgresではupdateにて下記のようなjoinは使えない https://www.postgresql.jp/document/9.4/html/sql-update.html
+-- UPDATE ec_shop_items
+-- SET mall_type = ec_shop.mall_type
+-- FROM ec_shop_items
+-- INNER JOIN ec_shops
+-- ON ec_shop_items.ec_shop_id = ec_shops.id
 ```
