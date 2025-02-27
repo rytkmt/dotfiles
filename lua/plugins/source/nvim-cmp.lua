@@ -135,58 +135,7 @@ local on_attach = function (client, bufnr)
   buf_set_keymap('n', 'g[', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', 'g]', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   vim.keymap.set('c', '<tab>', '<C-z>', { silent = false })
-  -- if client.name == 'null-ls' then
-    -- vim.api.nvim_command([[
-    --   augroup LspDiagnostics
-    --     autocmd!
-    --     autocmd BufReadPost <buffer> lua vim.lsp.diagnostic.set_loclist({open_loclist = false})
-    --   augroup END
-    -- ]])
-
-    -- vim.api.nvim_create_augroup( 'LspDiagnostics', { clear = true } )
-    -- vim.api.nvim_create_autocmd( 'BufWinEnter', {
-    --   group = 'LspDiagnostics',
-    --   buffer = 0,
-    --   callback = function() vim.lsp.buf.formatting_seq_sync() end
-    -- })
-    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gf', '<cmd>lua vim.lsp.buf.format()<CR>', { noremap=true, silent=true })
-  -- end
 end
-
--- 必要なプラグインの読み込み
--- require('lspconfig')
--- local rubocop_command = { "bundle", "exec", "rubocop", "--format", "json", "--stdin", "$FILENAME" }
--- local null_ls = require('null-ls')
--- local conditional = function(fn)
---     local utils = require("null-ls.utils").make_conditional_utils()
---     return fn(utils)
--- end
--- null_ls.setup({
---   sources = {
---     conditional(function(utils)
---       return utils.root_has_file("Gemfile")
---       and null_ls.builtins.formatting.rubocop.with({
---         command = "bundle",
---         args = vim.list_extend({ "exec", "rubocop" }, null_ls.builtins.formatting.rubocop._opts.args),
---       })
---       or null_ls.builtins.formatting.rubocop
---     end),
---     -- conditional(function(utils)
---     --   return utils.root_has_file("Gemfile")
---     --   and null_ls.builtins.diagnostics.rubocop.with({
---     --     command = "bundle",
---     --     args = vim.list_extend({ "exec", "rubocop" }, null_ls.builtins.diagnostics.rubocop._opts.args),
---     --   })
---     --   or null_ls.builtins.diagnostics.rubocop
---     -- end),
---   },
---   -- notify_format = "[cop] %s",
---     -- Rubocopの診断設定
---     -- null_ls.builtins.diagnostics.rubocop.with({ command = rubocop_command[1], args = rubocop_command }),
---     -- Rubocopのフォーマッティング設定
---     -- require('null-ls').builtins.formatting.rubocop.with({ command = rubocop_command[1], args = rubocop_command })
---   on_attach = on_attach,
--- })
 
 require('lspconfig').solargraph.setup({
  on_attach = on_attach,

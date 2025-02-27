@@ -524,5 +524,12 @@
     "body": [
       "# :nocov:"
     ]
+  },
+  "memory_size": {
+    "prefix": "memory_size",
+    "body": [
+      "require 'objspace'",
+      "ObjectSpace.memsize_of($1)"
+    ]
   }
 }

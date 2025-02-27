@@ -281,3 +281,14 @@ function vimqf() {
 
   sed -e 's/$/:1:-/' > $tempfile | vim -q $tempfile -c "copen"
 }
+
+# rubyプロセスのメモリサイズを計測したほうが良さそう
+# function watch_free_memory_to_log() {
+#   if [[ $# -ne 2 ]]; then
+#     echo "Usage: watch_free_memory_to_log() interval_sec log_path"
+#     return 1
+#   fi
+#   rm $2
+#   free -m | head -n 1 >> $2
+#   watch -n $1 "free -m | grep Mem | awk '{printf \"%s \", \$0; system(\"date \\\"+%Y-%m-%d %H:%M:%S\\\"\")}' >> $2 && { head -n 1 $2; tail -n +2 $2 | tail -n 10; }"
+# }

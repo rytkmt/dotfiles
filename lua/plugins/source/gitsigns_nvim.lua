@@ -77,8 +77,16 @@ require('gitsigns').setup {
     map('n', 'gu', gs.undo_stage_hunk)
     -- Actions
     -- ローカルファイルの修正(未index状態)を取り消す
-    map('n', 'gb', gs.reset_hunk)
+    map('n', 'gB', gs.reset_hunk)
     map('n', 'gi', gs.preview_hunk)
+    map('n', 'gb', function()
+      vim.schedule(function()
+        gs.reset_hunk()
+        gs.next_hunk()
+        vim.cmd("normal! zz")
+      end)
+      return '<Ignore>'
+    end)
   end
 }
 
