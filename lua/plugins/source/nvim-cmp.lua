@@ -1,4 +1,5 @@
 local cmp = require('cmp')
+local navic = require("nvim-navic")
 
 cmp.setup({
   snippet = {
@@ -80,18 +81,24 @@ require("cmp_dictionary").setup({
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "*",
-  callback = function(ev)
+  callback = function(_)
     require("cmp_dictionary").setup({
       paths = cache_dicts(),
     })
+    if pcall(vim.api.nvim_buf_get_var, 0, 'navic_enabled') then
+      vim.wo.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+    end
   end
 })
 vim.api.nvim_create_autocmd("BufEnter", {
   pattern = "*",
-  callback = function(ev)
+  callback = function(_)
     require("cmp_dictionary").setup({
       paths = cache_or_select_dicts(),
     })
+    if pcall(vim.api.nvim_buf_get_var, 0, 'navic_enabled') then
+      vim.wo.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+    end
   end
 })
 
@@ -135,6 +142,11 @@ local on_attach = function (client, bufnr)
   buf_set_keymap('n', 'g[', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', 'g]', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   vim.keymap.set('c', '<tab>', '<C-z>', { silent = false })
+
+  if client.server_capabilities.documentSymbolProvider then
+    vim.api.nvim_buf_set_var(0, 'navic_enabled', true)
+    navic.attach(client, bufnr)
+  end
 end
 
 require('lspconfig').solargraph.setup({
@@ -154,6 +166,31 @@ require('lspconfig').solargraph.setup({
      useBundler = false
    }
  }
+})
+require('lspconfig').lua_ls.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+
+  settings = {
+    Lua = {
+      runtime = {
+        version = "LuaJIT",
+        pathStrict = true,
+        path = { "?.lua", "?/init.lua" },
+      },
+      workspace = {
+        library = vim.list_extend(vim.api.nvim_get_runtime_file("lua", true), {
+          "${3rd}/luv/library",
+          "${3rd}/busted/library",
+          "${3rd}/luassert/library",
+        }),
+        checkThirdParty = "Disable",
+      },
+      diagnostics = {
+        globals = { "use" }
+      }
+    },
+  },
 })
 -- 正しい設定方法がわからず現状はsolargraphを採用しておく
 -- require('lspconfig').ruby_lsp.setup({

@@ -1,4 +1,5 @@
 vim.cmd[[packadd packer.nvim]]
+
 require'packer'.startup(function()
   local function split(s, delimiter)
     local result = {};
@@ -89,6 +90,7 @@ require'packer'.startup(function()
   -- use_with_file("Shougo/vimproc.vim", "add", "source")
   use_with_file('rytkmt/tabline.nvim', "source_lua", { branch = 'develop', requires = {'kyazdani42/nvim-web-devicons'} })
   use_with_file('nvim-lualine/lualine.nvim', "source_lua", { requires = 'kyazdani42/nvim-web-devicons' })
+  use_with_file('SmiteshP/nvim-navic', "source_lua")
   use_with_file('tamago324/lir.nvim', "source_lua", { requires = { { 'kyazdani42/nvim-web-devicons' }, { 'nvim-lua/plenary.nvim' } } })
   use_with_file('tamago324/lir-git-status.nvim', "source_lua", { requires = { { 'tamago324/lir-git-status.nvim' } } })
   use_with_file('lewis6991/gitsigns.nvim', "source_lua")
@@ -150,7 +152,7 @@ require'packer'.startup(function()
   use("joker1007/vim-markdown-quote-syntax", markdown_option)
   use("mattn/vim-maketable", markdown_option)
   use_with_file("dhruvasagar/vim-table-mode", "add", markdown_option)
-  use_with_file("richardbizik/nvim-toc", "source_lua", markdown_options)
+  use_with_file("richardbizik/nvim-toc", "source_lua", markdown_option)
   local options = markdown_option
   -- options.run = "cd app && npm install"
   options.run = function() vim.fn["mkdp#util#install"]() end
