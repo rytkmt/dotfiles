@@ -16,7 +16,7 @@ M.rubocop = function()
   -- Full specification of configurations is down below and in Vim help
   -- files
   --
-  command_args = {
+  local command_args = {
     "bundle",
     "exec",
     "rubocop",

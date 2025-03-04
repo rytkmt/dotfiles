@@ -111,9 +111,30 @@ require'lir'.setup {
     ['Y']     = actions.yank_path,
     ['.']     = actions.toggle_show_hidden,
     ['d']     = actions.delete,
+    ['D']     = function()
+      local context = lir.get_context()
+      local marked_items = context:get_marked_items()
+      if #marked_items == 0 then
+        utils.error("Please mark one or more.")
+        return
+      end
 
+      for _, f in ipairs(marked_items) do
+        local path = Path:new(f.fullpath)
+        if path:is_dir() then
+          path:rm({ recursive = true })
+        else
+          if not vim.loop.fs_unlink(path:absolute()) then
+            utils.error("Delete file failed")
+            return
+          end
+        end
+
+        vim.cmd([[edit]])
+      end
+    end,
     ['+']     = function()
-      mark_actions.toggle_mark()
+      mark_actions.toggle_mark('n')
       vim.cmd('normal! j')
     end,
     ['c']     = clipboard_actions.copy,
