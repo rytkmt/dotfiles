@@ -21,9 +21,6 @@ local colors = require("high-str.tools.tool-highlight.modules.colors")
 local function fkey_hs_vmap(key, number)
   vim.api.nvim_set_keymap("v", key, ":<c-u>HSHighlight ".. number .. "<cr>", { nowait = true, noremap = true, silent = true })
 end
-local function fkey_hs_vmap(key, number)
-  vim.api.nvim_set_keymap("v", key, ":<c-u>HSHighlight ".. number .. "<cr>", { nowait = true, noremap = true, silent = true })
-end
 
 
 fkey_hs_vmap("<f1>",  "1")
@@ -42,7 +39,7 @@ vim.api.nvim_set_keymap("n", "<f12>", ":<c-u>HSRmHighlight rm_all<cr>", { nowait
 
 
 -- 現在の検索パターンに一致する位置を取得して返す関数
-function highstr_get_matches()
+local function highstr_get_matches()
   local search_term = vim.fn.getreg('/')
 
   local matches = {}
@@ -61,7 +58,7 @@ function highstr_get_matches()
   return matches
 end
 
-function highstr_hl_all_matches(number)
+_G.highstr_hl_all_matches = function(number)
   colors.parse_colors()
   local matches = highstr_get_matches()
 

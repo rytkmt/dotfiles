@@ -28,7 +28,7 @@ require'plugins'
 vim.cmd[[autocmd BufWritePost plugins.lua PackerCompile]]
 -- }}}
 
-local state, mod = pcall(require, "lighthouse")
+local state, _ = pcall(require, "lighthouse")
 if state then
   vim.cmd('colorscheme lighthouse')
 end

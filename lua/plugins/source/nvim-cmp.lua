@@ -50,7 +50,7 @@ cmp.setup({
 local dicts_hash = {}
 local dicts_dir = os.getenv('XDG_CONFIG_HOME')..'/dicts'
 if vim.fn.isdirectory(dicts_dir) then
-  for i,ft in ipairs(vim.fn.readdir(dicts_dir)) do
+  for _,ft in ipairs(vim.fn.readdir(dicts_dir)) do
     dicts_hash[ft] = vim.fn.globpath('$XDG_CONFIG_HOME/dicts/'..ft..'/', '*', true, true)
   end
 end
@@ -188,7 +188,7 @@ require('lspconfig').lua_ls.setup({
       },
       diagnostics = {
         globals = { "use" },
-        disable = { 'missing-fields' }
+        disable = { 'missing-fields', 'undefined-field' }
       }
     },
   },

@@ -1,4 +1,4 @@
-yaml = require("yaml_nvim")
+local yaml = require("yaml_nvim")
 yaml.setup({ ft = { "yaml" } })
 
 -- vim.api.nvim_set_keymap("n", "[ft]f", ":lua require('yaml_nvim').get_yaml_key()<CR>", { noremap = true, nowait = true })

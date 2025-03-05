@@ -15,14 +15,6 @@ rubocop.args = {
   function() return vim.api.nvim_buf_get_name(0) end,
 }
 
-local rubocop_severity_map = {
-  ['fatal'] = vim.diagnostic.severity.ERROR,
-  ['error'] = vim.diagnostic.severity.ERROR,
-  ['warning'] = vim.diagnostic.severity.WARN,
-  ['convention'] = vim.diagnostic.severity.HINT,
-  ['refactor'] = vim.diagnostic.severity.INFO,
-  ['info'] = vim.diagnostic.severity.INFO,
-}
 local old_parser = rubocop.parser
 rubocop.parser = function(output, bufnr)
   local diagnostics = old_parser(output, bufnr)
@@ -56,11 +48,11 @@ vim.api.nvim_create_autocmd(
 local function toggle_diagnostics()
   if vim.b.diagnostics_enabled == nil or vim.b.diagnostics_enabled == true then
     vim.b.diagnostics_enabled = false
-    vim.diagnostic.disable(0)
+    vim.diagnostic.enable(false)
     print("Diagnostics disabled")
   else
     vim.b.diagnostics_enabled = true
-    vim.diagnostic.enable(0)
+    vim.diagnostic.enable(true)
     print("Diagnostics enabled")
   end
 end

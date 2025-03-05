@@ -1,4 +1,3 @@
-local cb = require'diffview.config'.diffview_callback
 local actions = require("diffview.actions")
 
 require'diffview'.setup {
@@ -83,6 +82,15 @@ require'diffview'.setup {
       { "n", "e", actions.goto_file, { desc="goto file"} },
       { "n", "s", actions.goto_file_split, { desc="goto file split"} },
       { "n", "t", actions.goto_file_tab, { desc="goto file tab"} },
+      -- copy revision
+      { "n", "c", function()
+          local view = require("diffview.lib").get_current_view()
+          if view then
+            local revision = view:infer_cur_file().commit.hash
+            vim.print(revision)
+          end
+        end, { desc="open gitlab revision URL"}
+      }
     },
     -- option_panel = {
     --   { "n", "<tab>", actions.select, {} },
@@ -93,11 +101,9 @@ require'diffview'.setup {
 
 function _G.diffview_open_current_file()
   vim.cmd(":DiffviewOpen -- " .. vim.fn.expand("%"))
-  return
 end
 function _G.diffview_open_current_file_from_revision(revision)
   vim.cmd(":DiffviewOpen "..revision.args.." -- " .. vim.fn.expand("%"))
-  return
 end
 
 
@@ -108,7 +114,6 @@ vim.api.nvim_create_user_command(
   'DiffviewOpenCurrentFileFromRevision',
   function(revision)
     vim.cmd(":DiffviewOpen "..revision.args.." -- " .. vim.fn.expand("%"))
-    return
   end,
   { nargs = 1 }
 )
@@ -116,3 +121,4 @@ vim.api.nvim_set_keymap("n", "[diff]h", ":DiffviewFileHistory % --no-merges<CR>"
 vim.api.nvim_set_keymap("n", "[diff]H", ":DiffviewFileHistory %<CR>", { noremap = false, silent = false, nowait = true })
 
 vim.cmd("hi! DiffviewFilePanelSelected guifg=#DCA561")
+vim.api.nvim_set_keymap("n", "[diff]l", "v:DiffviewFileHistory<CR>", { noremap = false, silent = false, nowait = true })

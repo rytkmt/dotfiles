@@ -11,22 +11,22 @@ M.path = {
   end,
 }
 
-M.find_git_project_root = function()
-  local path = vim.fn.expand('%:p')
-  while #path > 1 do
-    path = vim.fn.fnamemodify(path, ':h')
-    if vim.fn.isdirectory(path .. '/.git') ~= 0 or
-      vim.fn.filereadable(path .. '/README.md') ~= 0 or
-      vim.fn.filereadable(path .. '/Gemfile') ~= 0 then
-
-      return path
-    end
-  end
-
-  -- 無かったら現在のバッファのディレクトリを返す
-  print("not found git root")
-  return vim.fn.expand("%:h")
-end
+-- M.find_git_project_root = function()
+--   local path = vim.fn.expand('%:p')
+--   while #path > 1 do
+--     path = vim.fn.fnamemodify(path, ':h')
+--     if vim.fn.isdirectory(path .. '/.git') ~= 0 or
+--       vim.fn.filereadable(path .. '/README.md') ~= 0 or
+--       vim.fn.filereadable(path .. '/Gemfile') ~= 0 then
+--
+--       return path
+--     end
+--   end
+--
+--   -- 無かったら現在のバッファのディレクトリを返す
+--   print("not found git root")
+--   return vim.fn.expand("%:h")
+-- end
 
 M.git_project_root_with_cache = function()
   if vim.b.git_project_root == nil then

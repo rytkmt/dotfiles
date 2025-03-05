@@ -6,7 +6,7 @@ chowcho.setup {
   active_border_color = '#0A8BFF',
   border_style = 'rounded', -- 'default', 'rounded',
   use_exclude_default = false,
-  exclude = function(buf, win)
+  exclude = function(buf, _)
     -- Exclude a window from the choice based on its buffer information.
     -- This option is applied iff `use_exclude_default = false`.
     -- Note that below is identical to the `use_exclude_default = true`.
