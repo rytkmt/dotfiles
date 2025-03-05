@@ -203,4 +203,6 @@ require'packer'.startup(function()
       }
     }
   )
+  use {'kevinhwang91/nvim-bqf', ft = 'qf'}
+  -- lazy.nvim
 end)

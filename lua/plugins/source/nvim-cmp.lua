@@ -187,7 +187,8 @@ require('lspconfig').lua_ls.setup({
         checkThirdParty = "Disable",
       },
       diagnostics = {
-        globals = { "use" }
+        globals = { "use" },
+        disable = { 'missing-fields' }
       }
     },
   },

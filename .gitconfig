@@ -92,6 +92,11 @@
     git commit -m \"Change back core\"; \
     git pob; \
   }; f"
+  snpcbcs = "!f() { \
+    git add -A; \
+    git commit -m \"Change back core [skip ci]\"; \
+    git pob; \
+  }; f"
   h = help
   st = status -s
   stg = "!f() { \
