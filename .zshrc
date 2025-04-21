@@ -135,6 +135,7 @@ if [[ $(command -v peco) ]]; then
   bindkey '^G' peco-src
 fi
 
+alias less='less -R'
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'

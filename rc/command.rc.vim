@@ -230,3 +230,5 @@ command! WordCount %s/./&/gn|nohlsearch
 
 " ↓もしくは deno cache -r /home/xxx/.local/share/nvim/site/pack/packer/opt/ddc.vim/denops/ddc/deps.ts
 command! DenopsFixCache call denops#cache#update(#{reload: v:true})
+
+command! DeleteAnsi %s/\e\[[0-9;]*m//g

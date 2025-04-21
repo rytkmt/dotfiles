@@ -90,7 +90,16 @@ require('gitsigns').setup {
   end
 }
 
-vim.cmd("hi GitSignsAdd guifg=#728a7f gui=none guibg=none")
-vim.cmd("hi GitSignsAddPreview guifg=#a0a0b0 gui=none guibg=#1c3333")
-vim.cmd("hi GitSignsDelete guifg=#d48585 gui=none guibg=none")
-vim.cmd("hi GitSignsChange guifg=#819cdf gui=none guibg=none")
+vim.cmd("hi! GitSignsAdd guifg=#728a7f gui=none guibg=none")
+vim.cmd("hi! GitSignsStagedAdd guifg=#609020 gui=none guibg=none")
+vim.cmd("hi! GitSignsAddPreview guifg=#a0a0b0 gui=none guibg=#1c3333")
+vim.cmd("hi! GitSignsDelete guifg=#d48585 gui=none guibg=none")
+vim.cmd("hi! GitSignsStagedDelete guifg=#b47545 gui=none guibg=none")
+vim.cmd("hi! GitSignsChange guifg=#819cdf gui=none guibg=none")
+vim.cmd("hi! GitSignsStagedChange guifg=#7470c8 gui=none guibg=none")
+
+vim.cmd("hi! link GitSignsChangedelete GitSignsChange")
+vim.cmd("hi! link GitSignsStagedChangedelete GitSignsStagedChange")
+
+vim.cmd("hi! link GitSignsTopdelete GitSignsDelete")
+vim.cmd("hi! link GitSignsStagedTopdelete GitSignsStagedDelete")
