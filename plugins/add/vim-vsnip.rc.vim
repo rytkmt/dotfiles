@@ -9,7 +9,10 @@ let g:vsnip_snippet_dir = $XDG_CONFIG_HOME.'/.vsnip'
 let g:vsnip_sync_delay = -1
 imap <expr> <C-s>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-s>'
 smap <expr> <C-s>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-s>'
-
+imap <expr> <C-b> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-b>'
+smap <expr> <C-b> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-b>'
+imap <expr> <C-t>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-t>'
+smap <expr> <C-t>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-t>'
 imap <expr> <C-n>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-n>'
 smap <expr> <C-n>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-n>'
 imap <expr> <C-p> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-p>'

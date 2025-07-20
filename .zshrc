@@ -11,13 +11,21 @@ autoload -U promptinit
 promptinit
 prompt rytkmt
 
+# タブ名を更新
+function update_tab_title {
+  echo -ne "\033]0;$(basename $PWD)\a"
+}
+
+zle -N update_tab_title
+autoload -Uz add-zle-hook-widget
+add-zle-hook-widget line-init update_tab_title
+
 if [ -f ~/.zshrc ]; then
   # gitのブランチ名などの補完
   zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
 fi
 autoload -U compinit
 compinit
-
 
 # shift-tabで候補を逆戻り
 bindkey "\e[Z" reverse-menu-complete

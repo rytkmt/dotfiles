@@ -37,6 +37,17 @@
       "ActiveRecord::Base.logger = nil"
     ]
   },
+  "around_logger_stdout": {
+    "prefix": "around_logger_stdout",
+    "body": [
+      "around do |e|",
+      "  ActiveRecord::Base.logger = Logger.new(STDOUT)",
+      "  e.run",
+      "ensure",
+      "  ActiveRecord::Base.logger = nil",
+      "end"
+    ]
+  },
   "pex": {
     "prefix": "pex",
     "body": [

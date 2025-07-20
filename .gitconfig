@@ -261,5 +261,7 @@
   }; f"
   cle = clean -fd
   cp = cherry-pick
+  cpa = cherry-pick --abort
+  cpc = cherry-pick --continue
 [ghq]
 	root = ~/ghq

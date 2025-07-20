@@ -41,3 +41,7 @@ FROM sample
 ### ハッシュ `{"a": 1, "b": 2}`の場合
 
 `value - 'a'` => `{"b": 2}`
+
+## jsonを全部文字列として判断したい
+
+`value::TEXT LIKE '%hoge%'`
