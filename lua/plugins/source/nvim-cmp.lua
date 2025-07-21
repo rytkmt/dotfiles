@@ -43,7 +43,8 @@ cmp.setup({
       keyword_length = 2,
       priority = 4
     },
-    { name = 'path', priority = 5 }
+    { name = 'path', priority = 5 },
+    { name = 'emoji', priority = 6 }
   })
 })
 
@@ -198,7 +199,7 @@ lspconfig.lua_ls.setup({
 -- 正しい設定方法がわからず現状はsolargraphを採用しておく
 configs.ruby_lsp = {
   default_config = {
-    cmd = { "bundle", "exec", "ruby-lsp" },
+    cmd = { "ruby-lsp" },
     filetypes = { "ruby" },
     root_dir = util.root_pattern("Gemfile", ".git"),
     init_options = {
