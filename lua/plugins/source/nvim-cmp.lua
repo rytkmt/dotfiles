@@ -133,7 +133,6 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local on_attach = function (client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local opts = { noremap=true, silent=true }
-  -- buf_set_keymap('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'ge', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'gd', '<cmd>vs | lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'gs', '<cmd>sp | lua vim.lsp.buf.definition()<CR>', opts)
@@ -148,26 +147,29 @@ local on_attach = function (client, bufnr)
     navic.attach(client, bufnr)
   end
 end
+local lspconfig = require("lspconfig")
+local configs = require("lspconfig.configs")
+local util = require("lspconfig.util")
 
-require('lspconfig').solargraph.setup({
- on_attach = on_attach,
- capabilities = capabilities,
-
- settings = {
-   solargraph = {
-     auto_format = false,
-     diagnostics = false,
-     formatting = false,
-     folding = false,
-     hover = false,
-     reference = false,
-     rename = false,
-     symbols = false,
-     useBundler = false
-   }
- }
-})
-require('lspconfig').lua_ls.setup({
+-- lspconfig.solargraph.setup({
+--  on_attach = on_attach,
+--  capabilities = capabilities,
+--
+--  settings = {
+--    solargraph = {
+--      auto_format = false,
+--      diagnostics = false,
+--      formatting = false,
+--      folding = false,
+--      hover = false,
+--      reference = false,
+--      rename = false,
+--      symbols = false,
+--      useBundler = false
+--    }
+--  }
+-- })
+lspconfig.lua_ls.setup({
   on_attach = on_attach,
   capabilities = capabilities,
 
@@ -194,37 +196,44 @@ require('lspconfig').lua_ls.setup({
   },
 })
 -- 正しい設定方法がわからず現状はsolargraphを採用しておく
--- require('lspconfig').ruby_lsp.setup({
---  on_attach = on_attach,
---  capabilities = capabilities,
---
---  init_options = {
---    formatter = 'standard',
---    linters = { 'standard' },
---    enabledFeatures = {
---      hover = true,
---      diagnostics = true,
---      definition = true,
---      completion = true,
---      inlayHint = false,
---      signatureHelp = true,
---      typeHierarchy = false,
---      documentHighlights = true,
---      documentLink = false,
---      documentSymbols = true,
---      codeActions = false,
---      codeLens = false,
---      foldingRanges = false,
---      formatting = false,
---      onTypeFormatting = false,
---      selectionRanges = false,
---      semanticHighlighting = false,
---      workspaceSymbol = false
---    }
---  }
--- })
+configs.ruby_lsp = {
+  default_config = {
+    cmd = { "bundle", "exec", "ruby-lsp" },
+    filetypes = { "ruby" },
+    root_dir = util.root_pattern("Gemfile", ".git"),
+    init_options = {
+      formatter = 'standard',
+      linters = { 'standard' },
+      enabledFeatures = {
+        hover = true,
+        diagnostics = true,
+        definition = true,
+        completion = true,
+        inlayHint = false,
+        signatureHelp = true,
+        typeHierarchy = false,
+        documentHighlights = true,
+        documentLink = false,
+        documentSymbols = false,
+        codeActions = false,
+        codeLens = false,
+        foldingRanges = false,
+        formatting = false,
+        onTypeFormatting = false,
+        selectionRanges = false,
+        semanticHighlighting = false,
+        workspaceSymbol = false
+      }
+    },
+    settings = {}
+  }
+}
+lspconfig.ruby_lsp.setup({
+ on_attach = on_attach,
+ capabilities = capabilities,
+})
 
-require('lspconfig').yamlls.setup({
+lspconfig.yamlls.setup({
  on_attach = on_attach,
  capabilities = capabilities,
  settings = {
