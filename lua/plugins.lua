@@ -128,6 +128,7 @@ require'packer'.startup(function()
     'petertriho/nvim-scrollbar',
     'source_lua'
   )
+  use_with_file("ysmb-wtsg/in-and-out.nvim", "source_lua")
 
   -- 遅延系
 
@@ -157,6 +158,16 @@ require'packer'.startup(function()
   -- options.run = "cd app && npm install"
   options.run = function() vim.fn["mkdp#util#install"]() end
   use_with_file("iamcco/markdown-preview.nvim", "add", options)
+  use({
+    'MeanderingProgrammer/render-markdown.nvim',
+    after = { 'nvim-treesitter' },
+    requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
+    -- requires = { 'echasnovski/mini.icons', opt = true }, -- if you use standalone mini plugins
+    -- requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
+    config = function()
+      require('render-markdown').setup({})
+    end,
+  })
 
   -- textile
   -- use { "rytkmt/vim-textile", opt = true, ft = "textile" }
