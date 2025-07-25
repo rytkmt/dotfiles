@@ -9,7 +9,7 @@ cmp.setup({
   },
   window = {
     completion = cmp.config.window.bordered({border = 'single'}),
-    documentation = cmp.config.window.bordered({border = 'single'}),
+    documentation = cmp.config.disable,
   },
   mapping = cmp.mapping.preset.insert({
     ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
@@ -44,9 +44,63 @@ cmp.setup({
       priority = 4
     },
     { name = 'path', priority = 5 },
-    { name = 'emoji', priority = 6 }
   })
 })
+cmp.setup.filetype({ 'lua' }, {
+  sources = cmp.config.sources({
+    { name = 'vsnip', priority = 1 }, -- For vsnip users.
+    { name = 'nvim_lsp', priority = 2 },
+    {
+      name = 'buffer',
+      priority = 3,
+      option = {
+        get_bufnrs = function()
+          local bufs = {}
+          for _, win in ipairs(vim.api.nvim_list_wins()) do
+            bufs[vim.api.nvim_win_get_buf(win)] = true
+          end
+          return vim.tbl_keys(bufs)
+        end
+      }
+    },
+    {
+      name = "dictionary",
+      keyword_length = 2,
+      priority = 4
+    },
+    { name = 'path', priority = 5 },
+    { name = 'emoji', priority = 6 },
+    { name = 'nerdfonts', priority = 7 }
+  })
+})
+
+cmp.setup.filetype({ 'markdown' }, {
+  sources = cmp.config.sources({
+    { name = 'vsnip', priority = 1 }, -- For vsnip users.
+    { name = 'nvim_lsp', priority = 2 },
+    {
+      name = 'buffer',
+      priority = 3,
+      option = {
+        get_bufnrs = function()
+          local bufs = {}
+          for _, win in ipairs(vim.api.nvim_list_wins()) do
+            bufs[vim.api.nvim_win_get_buf(win)] = true
+          end
+          return vim.tbl_keys(bufs)
+        end
+      }
+    },
+    {
+      name = "dictionary",
+      keyword_length = 2,
+      priority = 4
+    },
+    { name = 'path', priority = 5 },
+    { name = 'emoji', priority = 6 },
+  })
+})
+
 
 local dicts_hash = {}
 local dicts_dir = os.getenv('XDG_CONFIG_HOME')..'/dicts'
@@ -254,3 +308,4 @@ lspconfig.yamlls.setup({
 
 vim.api.nvim_set_keymap("n", "[lsp]i", "<plug>(lsp-type-hierarchy)", { noremap = true, nowait = true, silent = true })
 vim.api.nvim_set_keymap("n", "[lsp]h", "<plug>(lsp-hover)", { noremap = true, nowait = true, silent = true })
+

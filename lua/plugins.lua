@@ -194,6 +194,7 @@ require'packer'.startup(function()
   }
   use_with_file("hrsh7th/vim-vsnip", "add")
 
+  -- lspの読み込み進捗表示
   use_with_file("j-hui/fidget.nvim", "source_lua")
   use_with_file(
     'hrsh7th/nvim-cmp',
@@ -207,6 +208,7 @@ require'packer'.startup(function()
         { 'hrsh7th/cmp-buffer' },
         { 'hrsh7th/cmp-path' },
         { 'hrsh7th/cmp-emoji' },
+        { 'davidmh/cmp-nerdfonts' },
         { 'uga-rosa/cmp-dictionary' },
         { 'hrsh7th/cmp-cmdline' },
         {
