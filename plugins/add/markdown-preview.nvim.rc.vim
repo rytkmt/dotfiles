@@ -37,7 +37,9 @@ let g:mkdp_open_to_the_world = 1
 " useful when you work in remote vim and preview on local browser
 " more detail see: https://github.com/iamcco/markdown-preview.nvim/pull/9
 " default empty
-let g:mkdp_open_ip = '192.168.33.21'
+" let g:mkdp_open_ip = '172.23.181.207'
+" 動的に取得してみる 上手くいかなかったら固定値にもどす
+let g:mkdp_open_ip = trim(system("ifconfig|grep inet |grep broadcast|awk '{ print $2 }'"))
 
 " specify browser to open preview page
 " default: ''

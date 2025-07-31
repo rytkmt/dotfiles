@@ -1,18 +1,10 @@
 vim.cmd[[packadd packer.nvim]]
 
 require'packer'.startup(function()
-  local function split(s, delimiter)
-    local result = {};
-    for match in (s..delimiter):gmatch("(.-)"..delimiter) do
-      table.insert(result, match);
-    end
-    return result;
-  end
-
   local function use_with_file(repo, ...)
     local a = { ... }
     local args = { repo }
-    local plugin_name = split(repo, "/")[2]
+    local plugin_name = require("rytkmt/utils/split").split(repo, "/")[2]
 
     -- 最後の仮引数がtableの場合はそれをマージする
     if type(a[#a]) == "table" then
@@ -56,6 +48,7 @@ require'packer'.startup(function()
   use_with_file("rytkmt/indent-blank-guides.nvim", "source_lua")
   -- use_with_file("vim-scripts/grep.vim", "add")
   use_with_file("tomtom/tcomment_vim", "add")
+  use_with_file("folke/todo-comments.nvim", "source_lua", { requires = 'nvim-lua/plenary.nvim' })
   -- use_with_file("tpope/vim-surround", "add")
   -- use_with_file("ur4ltz/surround.nvim", "source_lua")
   use_with_file("kylechui/nvim-surround", "source_lua")
@@ -156,18 +149,15 @@ require'packer'.startup(function()
   use_with_file("richardbizik/nvim-toc", "source_lua", markdown_option)
   local options = markdown_option
   -- options.run = "cd app && npm install"
-  options.run = function() vim.fn["mkdp#util#install"]() end
+  options.run = "cd app && npm install"
   use_with_file("iamcco/markdown-preview.nvim", "add", options)
-  use({
-    'MeanderingProgrammer/render-markdown.nvim',
+  use_with_file("MeanderingProgrammer/render-markdown.nvim", "source_lua", {
     after = { 'nvim-treesitter' },
     requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
     -- requires = { 'echasnovski/mini.icons', opt = true }, -- if you use standalone mini plugins
     -- requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
-    config = function()
-      require('render-markdown').setup({})
-    end,
   })
+  use_with_file("Wansmer/treesj", "source_lua", { requires = { 'nvim-treesitter/nvim-treesitter' } })
 
   -- textile
   -- use { "rytkmt/vim-textile", opt = true, ft = "textile" }

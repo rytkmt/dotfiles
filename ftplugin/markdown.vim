@@ -49,3 +49,6 @@ nnoremap <buffer> <C-CR> <Cmd>MarkdownCheckbox<CR>
 inoremap <buffer> <C-CR> <Cmd>MarkdownCheckbox<CR>
 xnoremap <buffer> <C-CR> <Cmd>MarkdownCheckbox<CR>
 setlocal cursorline
+" インデントを4スペースに設定
+setlocal tabstop=4
+setlocal shiftwidth=4
