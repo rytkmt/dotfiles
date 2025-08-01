@@ -162,6 +162,9 @@ require'packer'.startup(function()
   -- textile
   -- use { "rytkmt/vim-textile", opt = true, ft = "textile" }
 
+  -- csv
+  use_with_file("hat0uma/csvview.nvim", "source_lua", { ft = "csv" })
+
   -- ruby
   -- use_with_file("rytkmt/vim-textobj-ruby", "add", "source", { opt = true, ft = "ruby", branch = "feature_textobj_ruby_method" })
   -- use_with_file("rhysd/vim-textobj-ruby", { opt = true, ft = "ruby", after = "vim-textobj-user" })

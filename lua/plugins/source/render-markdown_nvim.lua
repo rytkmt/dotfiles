@@ -7,6 +7,7 @@ require('render-markdown').setup({
     language_left = "󱘹󱘹 ",
     language_right = " 󱘹󱘹󱘹󱘹󱘹󱘹󱘹󱘹",
     border = 'thin',
+    above = '󱘹',
     below = '󱘹',
     -- highlight_border = '',
     width = 'block',
