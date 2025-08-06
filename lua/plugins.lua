@@ -147,10 +147,9 @@ require'packer'.startup(function()
   use("mattn/vim-maketable", markdown_option)
   use_with_file("dhruvasagar/vim-table-mode", "add", markdown_option)
   use_with_file("richardbizik/nvim-toc", "source_lua", markdown_option)
-  local options = markdown_option
-  -- options.run = "cd app && npm install"
-  options.run = "cd app && npm install"
-  use_with_file("iamcco/markdown-preview.nvim", "add", options)
+  -- g:mkdp_filetypes という設定項目の仕様のせいでファイル拡張子がmdじゃないファイルを開いた場合にft=markdownだったとしてもコマンドが読み込まれないためft依存にしないようにしておく
+  use_with_file("iamcco/markdown-preview.nvim", "add", { run = "cd app && npm install" })
+
   use_with_file("MeanderingProgrammer/render-markdown.nvim", "source_lua", {
     after = { 'nvim-treesitter' },
     requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite

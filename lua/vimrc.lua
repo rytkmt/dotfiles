@@ -14,6 +14,7 @@ require("rc.options")
 require("rc.settings")
 require("rc.ambwidth")
 require("rc.lsp")
+require("rc.commands")
 
 -- packer {{{
 local packer_dir = vim.env.HOME..'/.local/share/nvim/site/pack/packer/opt/packer.nvim'
