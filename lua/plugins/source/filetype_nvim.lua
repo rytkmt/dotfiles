@@ -27,6 +27,7 @@ require('filetype').setup({
             ["%.env%..*"] = "bash",
             [".git/hooks/pre-commit"] = "bash",
             ["/%.luacheckrc"] = "lua",
+            ["/*%.log%.*"] = "log",
         },
 
         -- The same as the ones above except the keys map to functions

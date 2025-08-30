@@ -212,4 +212,7 @@ require'packer'.startup(function()
   )
   use {'kevinhwang91/nvim-bqf', ft = 'qf'}
   -- lazy.nvim
+
+  -- log
+  use_with_file('fei6409/log-highlight.nvim', "source_lua")
 end)

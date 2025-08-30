@@ -308,4 +308,3 @@ lspconfig.yamlls.setup({
 
 vim.api.nvim_set_keymap("n", "[lsp]i", "<plug>(lsp-type-hierarchy)", { noremap = true, nowait = true, silent = true })
 vim.api.nvim_set_keymap("n", "[lsp]h", "<plug>(lsp-hover)", { noremap = true, nowait = true, silent = true })
-

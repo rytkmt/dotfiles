@@ -5,6 +5,11 @@ require("nvim-surround").setup({
       find = function() end,
       delete = function() end
     },
+    ["j"] = {
+      add = { "「", "」" },
+      find = function() end,
+      delete = function() end
+    }
   },
   aliases = {
     ["b"] = ":"
