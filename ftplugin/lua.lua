@@ -1,4 +1,4 @@
-vim.keymap.set("n", "<leader>;s", function()
+vim.keymap.set("n", "[ft]s", function()
   local prev_text = vim.fn.getreg('"', true)
   vim.cmd('normal! yi"')
   local plugin_name = require("rytkmt/utils/split").split(vim.fn.getreg('"', 1), "/")[2]

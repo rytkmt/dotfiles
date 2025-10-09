@@ -73,6 +73,13 @@ local function open_spec_file()
   vim.fn.mkdir(vim.fn.fnamemodify(spec_path, ":h"), "p")
   vim.cmd("vs " .. spec_path)
 end
+local function open_app_file()
+  local path = vim.fn.FilePathUnderRoot()
+
+  local app_path = path:gsub('^spec/', 'app/'):gsub('_spec%.rb', '%.rb')
+  vim.fn.mkdir(vim.fn.fnamemodify(app_path, ":h"), "p")
+  vim.cmd("vs " .. app_path)
+end
 
 local function open_factory_file()
   local path = vim.fn.FilePathUnderRoot()
@@ -96,12 +103,14 @@ end
 
 vim.api.nvim_create_user_command("OpenModelFile", open_model_file, {})
 vim.api.nvim_create_user_command("OpenSpecFile", open_spec_file, {})
+vim.api.nvim_create_user_command("OpenAppFile", open_app_file, {})
 vim.api.nvim_create_user_command("OpenFactoryFile", open_factory_file, {})
 vim.api.nvim_create_user_command("OpenSchemaFile", open_schema_file, {})
 
 local keymap_option = { noremap = true, silent = true }
 vim.keymap.set("n", "[ft]m", ":OpenModelFile<CR>", keymap_option)
 vim.keymap.set("n", "[ft]s", ":OpenSpecFile<CR>", keymap_option)
+vim.keymap.set("n", "[ft]a", ":OpenAppFile<CR>", keymap_option)
 vim.keymap.set("n", "[ft]f", ":OpenFactoryFile<CR>", keymap_option)
 vim.keymap.set("n", "[ft]d", ":OpenSchemaFile<CR>", keymap_option)
 

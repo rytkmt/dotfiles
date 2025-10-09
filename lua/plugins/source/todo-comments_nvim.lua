@@ -67,5 +67,5 @@ require("todo-comments").setup(
   }
 })
 
-vim.keymap.set("n", "]t", function() require("todo-comments").jump_next() end, { noremap = true })
-vim.keymap.set("n", "[t", function() require("todo-comments").jump_prev() end, { noremap = true })
+vim.keymap.set("n", "]t", function() require("todo-comments").jump_next() end, { noremap = true, nowait = true })
+vim.keymap.set("n", "[t", function() require("todo-comments").jump_prev() end, { noremap = true, nowait = true })

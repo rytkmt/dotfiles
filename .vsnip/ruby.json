@@ -542,5 +542,9 @@
       "require 'objspace'",
       "ObjectSpace.memsize_of($1)"
     ]
+  },
+  "yokisenu": {
+    "prefix": "yokisenu",
+    "body": ["予期せぬエラーが発生しました。"]
   }
 }

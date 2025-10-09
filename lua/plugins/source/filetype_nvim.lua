@@ -28,6 +28,7 @@ require('filetype').setup({
             [".git/hooks/pre-commit"] = "bash",
             ["/%.luacheckrc"] = "lua",
             ["/*%.log%.*"] = "log",
+            ["/Guardfile"] = "ruby",
         },
 
         -- The same as the ones above except the keys map to functions

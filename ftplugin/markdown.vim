@@ -48,6 +48,9 @@ command! -range MarkdownCheckbox call s:markdown_checkbox(<line1>, <line2>)
 nnoremap <buffer> <C-CR> <Cmd>MarkdownCheckbox<CR>
 inoremap <buffer> <C-CR> <Cmd>MarkdownCheckbox<CR>
 xnoremap <buffer> <C-CR> <Cmd>MarkdownCheckbox<CR>
+
+nmap <buffer><nowait> zh vahzf
+
 setlocal cursorline
 " インデントを4スペースに設定
 setlocal tabstop=4

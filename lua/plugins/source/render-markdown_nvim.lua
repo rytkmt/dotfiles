@@ -10,6 +10,9 @@ require('render-markdown').setup({
       'RenderMarkdownH6',
     },
   },
+  indent = {
+    enabled = true
+  },
   code = {
     language_border = '󱘹',
     language_left = "󱘹󱘹 ",
@@ -23,8 +26,10 @@ require('render-markdown').setup({
     right_pad = 4
   }
 })
+vim.api.nvim_set_hl(0, "RenderMarkdownIndent", { fg = "#7863a8" })
 vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = "#282840" })
-vim.api.nvim_set_hl(0, "RenderMarkdownCodeBorder", { bg = "#191927" })
+vim.api.nvim_set_hl(0, "RenderMarkdownCodeBorder", { fg = "#515960" })
+-- vim.api.nvim_set_hl(0, "RenderMarkdownCodeInfo", { bg = "#F82840" })
 
 -- vim.api.nvim_set_hl(0, "RenderMarkdownHH1", { fg = "#d8d8d8", bg = "#787838" })
 -- vim.api.nvim_set_hl(0, "RenderMarkdownHH2", { fg = "#5c3a0a", bg = "#c89858" })

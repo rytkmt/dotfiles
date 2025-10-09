@@ -1,6 +1,6 @@
 vim.cmd[[packadd packer.nvim]]
 
-require'packer'.startup(function()
+require"packer".startup(function()
   local function use_with_file(repo, ...)
     local a = { ... }
     local args = { repo }
@@ -32,14 +32,13 @@ require'packer'.startup(function()
   end
 
   use {
-    { 'rytkmt/lighthouse' },
-    { 'kana/vim-textobj-user' },
-    { 'vim-jp/vimdoc-ja' },
-    { 'kana/vim-operator-user' },
-    { 'tyru/stoptypofile.vim' },
-    { 'tpope/vim-repeat' },
-    { 'lewis6991/impatient.nvim' },
-    { 'itchyny/vim-qfedit' },
+    { "rytkmt/lighthouse" },
+    { "kana/vim-textobj-user" },
+    { "kana/vim-operator-user" },
+    { "tyru/stoptypofile.vim" },
+    { "tpope/vim-repeat" },
+    { "lewis6991/impatient.nvim" },
+    { "itchyny/vim-qfedit" },
   }
   use_with_file("kana/vim-submode", "add")
   use_with_file("thinca/vim-quickrun", "add", { requires = { "lambdalisue/vim-quickrun-neovim-job" } })
@@ -48,7 +47,7 @@ require'packer'.startup(function()
   use_with_file("rytkmt/indent-blank-guides.nvim", "source_lua")
   -- use_with_file("vim-scripts/grep.vim", "add")
   use_with_file("tomtom/tcomment_vim", "add")
-  use_with_file("folke/todo-comments.nvim", "source_lua", { requires = 'nvim-lua/plenary.nvim' })
+  use_with_file("folke/todo-comments.nvim", "source_lua", { requires = "nvim-lua/plenary.nvim" })
   -- use_with_file("tpope/vim-surround", "add")
   -- use_with_file("ur4ltz/surround.nvim", "source_lua")
   use_with_file("kylechui/nvim-surround", "source_lua")
@@ -62,16 +61,16 @@ require'packer'.startup(function()
   -- use_with_file("rytkmt/vim-trailing-whitespace", "add")
   -- 遅いので一時的にコメントアウトしておく
   -- use_with_file("vim-syntastic/syntastic", "add")
-
+  use("RRethy/nvim-treesitter-endwise")
   use_with_file("haya14busa/vim-edgemotion", "source")
   use_with_file("skanehira/qfopen.vim", "source")
   use_with_file("nvim-treesitter/nvim-treesitter", "source_lua", {
-    -- run = ':TSUpdate',
+    -- run = ":TSUpdate",
     run = function()
-        local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+        local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
         ts_update()
     end,
-    requires = 'nvim-treesitter/playground'
+    requires = "nvim-treesitter/playground"
   })
   use_with_file("haya14busa/vim-asterisk", "source")
   use_with_file("nathom/filetype.nvim", "source_lua")
@@ -79,65 +78,67 @@ require'packer'.startup(function()
   -- use_with_file("monkoose/matchparen.nvim", "source_lua")
   use_with_file("AndrewRadev/switch.vim", "add", "source")
   use_with_file("Pocco81/HighStr.nvim", "source_lua")
-  -- use_with_file("tkmpypy/chowcho.nvim", "source_lua")
+  use_with_file("tkmpypy/chowcho.nvim", "source_lua")
   -- use_with_file("Shougo/vimproc.vim", "add", "source")
-  use_with_file('rytkmt/tabline.nvim', "source_lua", { branch = 'develop', requires = {'kyazdani42/nvim-web-devicons'} })
-  use_with_file('nvim-lualine/lualine.nvim', "source_lua", { requires = 'kyazdani42/nvim-web-devicons' })
-  use_with_file('SmiteshP/nvim-navic', "source_lua")
-  use_with_file('tamago324/lir.nvim', "source_lua", { requires = { { 'kyazdani42/nvim-web-devicons' }, { 'nvim-lua/plenary.nvim' } } })
-  use_with_file('tamago324/lir-git-status.nvim', "source_lua", { requires = { { 'tamago324/lir-git-status.nvim' } } })
-  use_with_file('lewis6991/gitsigns.nvim', "source_lua")
-  use_with_file('sindrets/diffview.nvim', "source_lua", { requires = 'nvim-lua/plenary.nvim' })
-  -- use_with_file("windwp/nvim-autopairs", "source_lua", { requires = { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } })
-  use_with_file("windwp/nvim-autopairs", "source_lua", { requires = 'nvim-treesitter/nvim-treesitter' })
+  use_with_file("rytkmt/tabline.nvim", "source_lua", { branch = "develop", requires = {"kyazdani42/nvim-web-devicons"} })
+  use_with_file("nvim-lualine/lualine.nvim", "source_lua", { requires = "kyazdani42/nvim-web-devicons" })
+  use_with_file("SmiteshP/nvim-navic", "source_lua")
+  use_with_file("tamago324/lir.nvim", "source_lua", { requires = { { "kyazdani42/nvim-web-devicons" }, { "nvim-lua/plenary.nvim" } } })
+  use_with_file("tamago324/lir-git-status.nvim", "source_lua", { requires = { { "tamago324/lir-git-status.nvim" } } })
+  use_with_file("lewis6991/gitsigns.nvim", "source_lua")
+  use_with_file("sindrets/diffview.nvim", "source_lua", { requires = "nvim-lua/plenary.nvim" })
+  use_with_file("windwp/nvim-autopairs", "source_lua", { requires = "nvim-treesitter/nvim-treesitter" })
   -- 遅いため一旦・・
-  -- use_with_file('gelguy/wilder.nvim', "source")
-  -- use { 'cohama/lexima.vim', setup = function() vim.g.lexima_accept_pum_with_enter = 0 end }
+  -- use_with_file("gelguy/wilder.nvim", "source")
+  -- use { "cohama/lexima.vim", setup = function() vim.g.lexima_accept_pum_with_enter = 0 end }
   use_with_file("rlane/pounce.nvim", "source_lua")
   use_with_file("phaazon/hop.nvim", "source_lua")
   use_with_file("chentoast/marks.nvim", "source_lua")
   use_with_file("andymass/vim-matchup", "add_lua")
   use_with_file(
-    'nvim-telescope/telescope.nvim',
+    "nvim-telescope/telescope.nvim",
     "source_lua",
     {
       requires = {
-        'nvim-lua/plenary.nvim',
-        'sam4llis/telescope-arglist.nvim'
+        "nvim-lua/plenary.nvim",
+        "sam4llis/telescope-arglist.nvim"
       }
     }
   )
-  use_with_file('mattn/vim-sqlfmt', "add", { opt = true, ft = "sql" })
-  use_with_file('uga-rosa/translate.nvim', "source_lua")
+  use_with_file("mattn/vim-sqlfmt", "add", { opt = true, ft = "sql" })
+  use_with_file("uga-rosa/translate.nvim", "source_lua")
 
   use_with_file("rhysd/conflict-marker.vim", "source")
   use_with_file("cuducos/yaml.nvim", "source_lua", { ft = { "yaml" }, requires = { "nvim-treesitter/nvim-treesitter", "nvim-telescope/telescope.nvim" } })
   use_with_file(
-    'mfussenegger/nvim-lint',
-    'source_lua',
+    "mfussenegger/nvim-lint",
+    "source_lua",
     { ft = { "ruby", "lua" } }
   )
+
+  -- ruby用だが、ftを指定すると最初に開いたrubyファイルがplugin読み込みだけで終わってしまい、FileTypeのautocmdが発火しないためft指定なしでインストールする
+  use_with_file("jgdavey/vim-blockle", "add")
   use_with_file(
-    'petertriho/nvim-scrollbar',
-    'source_lua'
+    "petertriho/nvim-scrollbar",
+    "source_lua"
   )
   use_with_file("ysmb-wtsg/in-and-out.nvim", "source_lua")
 
   -- 遅延系
 
   use {
-    'tyru/capture.vim',
+    "tyru/capture.vim",
     opt = true,
-    cmd = { 'Capture' }
+    cmd = { "Capture" }
   }
 
   use {
-    'cocopon/inspecthi.vim',
+    "cocopon/inspecthi.vim",
     -- opt = true,
-    -- cmd = { 'Inspecthi', 'InspecthiShowInspector', 'InspecthiHideInspector' }
+    -- cmd = { "Inspecthi", "InspecthiShowInspector", "InspecthiHideInspector" }
   }
 
-  -- use { 'kana/vim-smartinput', opt = true, event = "InsertEnter *" }
+  -- use { "kana/vim-smartinput", opt = true, event = "InsertEnter *" }
   -- use_with_file("cohama/vim-smartinput-endwise", "source", { opt = true, event = "InsertEnter *" })
 
   -- markdown
@@ -145,18 +146,20 @@ require'packer'.startup(function()
   use_with_file("rcmdnk/vim-markdown", "add", markdown_option)
   use("joker1007/vim-markdown-quote-syntax", markdown_option)
   use("mattn/vim-maketable", markdown_option)
+  use("jghauser/follow-md-links.nvim", markdown_option)
   use_with_file("dhruvasagar/vim-table-mode", "add", markdown_option)
+  -- NOTE: BufEnterで*.md,*.markdown時にTOCコマンドを定義しているためftがmarkdownなだけでは実行できない
   use_with_file("richardbizik/nvim-toc", "source_lua", markdown_option)
   -- g:mkdp_filetypes という設定項目の仕様のせいでファイル拡張子がmdじゃないファイルを開いた場合にft=markdownだったとしてもコマンドが読み込まれないためft依存にしないようにしておく
   use_with_file("iamcco/markdown-preview.nvim", "add", { run = "cd app && npm install" })
 
   use_with_file("MeanderingProgrammer/render-markdown.nvim", "source_lua", {
-    after = { 'nvim-treesitter' },
-    requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
-    -- requires = { 'echasnovski/mini.icons', opt = true }, -- if you use standalone mini plugins
-    -- requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
+    after = { "nvim-treesitter" },
+    requires = { "echasnovski/mini.nvim", opt = true }, -- if you use the mini.nvim suite
+    -- requires = { "echasnovski/mini.icons", opt = true }, -- if you use standalone mini plugins
+    -- requires = { "nvim-tree/nvim-web-devicons", opt = true }, -- if you prefer nvim-web-devicons
   })
-  use_with_file("Wansmer/treesj", "source_lua", { requires = { 'nvim-treesitter/nvim-treesitter' } })
+  use_with_file("Wansmer/treesj", "source_lua", { requires = { "nvim-treesitter/nvim-treesitter" } })
 
   -- textile
   -- use { "rytkmt/vim-textile", opt = true, ft = "textile" }
@@ -169,19 +172,19 @@ require'packer'.startup(function()
   -- use_with_file("rhysd/vim-textobj-ruby", { opt = true, ft = "ruby", after = "vim-textobj-user" })
   -- use { "nvim-treesitter/nvim-treesitter-textobjects" }
 
-  use { 'vim-scripts/AnsiEsc.vim', opt = true, ft = { "log" } }
+  use { "vim-scripts/AnsiEsc.vim", opt = true, ft = { "log" } }
   -- vim
   -- use { "thinca/vim-prettyprint", opt = true, ft = "vim" }
 
   -- lua, vim
-  use { "norcalli/nvim-colorizer.lua", opt = true, ft = { "vim", "lua", "zsh", "markdown" } }--, config = function() require'colorizer'.setup() end }
+  use { "norcalli/nvim-colorizer.lua", opt = true, ft = { "vim", "lua", "zsh", "markdown" } }--, config = function() require"colorizer".setup() end }
 
   -- ddc周り
   use {
-    'vim-denops/denops.vim',
+    "vim-denops/denops.vim",
     config = function() vim.call("denops#server#start") end,
     -- setup = function()
-    --   -- vim.g.denops_server_addr = '127.0.0.1:32123'
+    --   -- vim.g.denops_server_addr = "127.0.0.1:32123"
     -- end
   }
   use_with_file("hrsh7th/vim-vsnip", "add")
@@ -189,30 +192,30 @@ require'packer'.startup(function()
   -- lspの読み込み進捗表示
   use_with_file("j-hui/fidget.nvim", "source_lua")
   use_with_file(
-    'hrsh7th/nvim-cmp',
-    'source_lua',
+    "hrsh7th/nvim-cmp",
+    "source_lua",
     {
       requires = {
         {
-          'hrsh7th/cmp-nvim-lsp',
-          requires = 'neovim/nvim-lspconfig'
+          "hrsh7th/cmp-nvim-lsp",
+          requires = "neovim/nvim-lspconfig"
         },
-        { 'hrsh7th/cmp-buffer' },
-        { 'hrsh7th/cmp-path' },
-        { 'hrsh7th/cmp-emoji' },
-        { 'davidmh/cmp-nerdfonts' },
-        { 'uga-rosa/cmp-dictionary' },
-        { 'hrsh7th/cmp-cmdline' },
+        { "hrsh7th/cmp-buffer" },
+        { "hrsh7th/cmp-path" },
+        { "hrsh7th/cmp-emoji" },
+        { "davidmh/cmp-nerdfonts" },
+        { "uga-rosa/cmp-dictionary" },
+        { "hrsh7th/cmp-cmdline" },
         {
-          'hrsh7th/cmp-vsnip',
-          requires = 'hrsh7th/vim-vsnip'
+          "hrsh7th/cmp-vsnip",
+          requires = "hrsh7th/vim-vsnip"
         }
       }
     }
   )
-  use {'kevinhwang91/nvim-bqf', ft = 'qf'}
+  use {"kevinhwang91/nvim-bqf", ft = "qf"}
   -- lazy.nvim
 
   -- log
-  use_with_file('fei6409/log-highlight.nvim', "source_lua")
+  use_with_file("fei6409/log-highlight.nvim", "source_lua")
 end)
