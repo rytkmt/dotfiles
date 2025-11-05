@@ -15,7 +15,7 @@ navic.setup {
     Array         = "󰅪 ",
     Object        = "󰅩 ",
     Boolean       = "  ",
-    String        = "A ",
+    String        = " ",
     Number        = "󰎠 ",
     Variable      = "󰆧 ",
     Function      = "󰊕 ",
@@ -23,15 +23,15 @@ navic.setup {
     Package       = " ",
 
     File          = "󰈙 ",
-    Namespace     = "󰌗 ",
-    Field         = " ",
+    Namespace     = "󰐷 ",
+    Field         = "󰁥 ",
     Constructor   = " ",
     Enum          = "󰕘",
     Interface     = "󰕘",
     Key           = "󰌋 ",
     Null          = "󰟢 ",
     EnumMember    = " ",
-    Struct        = "󰌗 ",
+    Struct        = "󰌗 y",
     Event         = " ",
     Operator      = "󰆕 ",
     TypeParameter = "󰊄 ",
@@ -45,6 +45,8 @@ vim.api.nvim_set_hl(0, 'NavicIconsClass', { fg = '#998811' })
 vim.api.nvim_set_hl(0, 'NavicIconsMethod', { fg = '#994433' })
 vim.api.nvim_set_hl(0, 'NavicIconsConstant', { fg = '#6644aa' })
 vim.api.nvim_set_hl(0, 'NavicIconsProperty', { fg = '#222299' })
+vim.api.nvim_set_hl(0, 'NavicIconsNamespace', { fg = '#ba6733' })
+vim.api.nvim_set_hl(0, 'NavicIconsField', { fg = '#ba6733' })
 
 vim.api.nvim_set_hl(0, 'NavicIconsObject', { fg = '#aa7733' })
 vim.api.nvim_set_hl(0, 'NavicIconsArray', { fg = '#7777cc' })

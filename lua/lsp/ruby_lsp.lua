@@ -1,5 +1,5 @@
 return {
-  cmd = { "bundle", "exec", "ruby-lsp" },
+  cmd = { "bundle_or_global", "ruby-lsp" },
   filetypes = { "ruby" },
   root_markers = { "Gemfile", ".git" },
   init_options = {

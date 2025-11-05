@@ -1,0 +1,31 @@
+#!/bin/bash
+bundle platform --ruby 1>/dev/null 2>/dev/null
+
+# bundleプロジェクトならbundle execで実行
+if [ $? -eq 0 ]; then
+  bundle exec $1 "${@:2}"
+# bundleプロジェクト以外ならglobalのもので実行
+else
+  # ruby-lspはglobalでもGemfileによるbundle installが必要なので、global用のディレクトリを自動作成
+  if [ $1 == "ruby-lsp" ]; then
+    GLOBAL_RUBY_LSP_DIR="$HOME/.cache/nvim/global_ruby-lsp"
+    mkdir -p "$GLOBAL_RUBY_LSP_DIR"
+    RUBY_LSP_GEMFILE_PATH="$GLOBAL_RUBY_LSP_DIR/Gemfile"
+    # まだGemfileが未作成なら自動作成する
+    if [ ! -f $RUBY_LSP_GEMFILE_PATH ]; then
+      cat <<EOF > $RUBY_LSP_GEMFILE_PATH
+source "https://rubygems.org"
+gem "ruby-lsp", require: false, group: :development
+gem "debug", require: false, group: :development, platforms: :mri
+EOF
+      BUNDLE_GEMFILE="$RUBY_LSP_GEMFILE_PATH" bundle install
+    fi
+    BUNDLE_GEMFILE="$RUBY_LSP_GEMFILE_PATH" bundle check 1>/dev/null 2>/dev/null
+    if [ $? -ne 0 ]; then
+      BUNDLE_GEMFILE="$RUBY_LSP_GEMFILE_PATH" bundle install
+    fi
+    BUNDLE_GEMFILE="$RUBY_LSP_GEMFILE_PATH" bundle exec ruby-lsp "${@:2}"
+  else
+    $1 "${@:2}"
+  fi
+fi

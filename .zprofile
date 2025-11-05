@@ -12,6 +12,9 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
   PATH="$HOME/.local/bin:$PATH"
 fi
+if [ -d "$XDG_CONFIG_HOME/bin" ] ; then
+  PATH="$XDG_CONFIG_HOME/bin:$PATH"
+fi
 
 export XDG_DATA_HOME=$HOME/.local/share
 export DOT_FILES=$XDG_CONFIG_HOME

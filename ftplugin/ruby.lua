@@ -108,10 +108,10 @@ vim.api.nvim_create_user_command("OpenFactoryFile", open_factory_file, {})
 vim.api.nvim_create_user_command("OpenSchemaFile", open_schema_file, {})
 
 local keymap_option = { noremap = true, silent = true }
-vim.keymap.set("n", "[ft]m", ":OpenModelFile<CR>", keymap_option)
-vim.keymap.set("n", "[ft]s", ":OpenSpecFile<CR>", keymap_option)
-vim.keymap.set("n", "[ft]a", ":OpenAppFile<CR>", keymap_option)
-vim.keymap.set("n", "[ft]f", ":OpenFactoryFile<CR>", keymap_option)
-vim.keymap.set("n", "[ft]d", ":OpenSchemaFile<CR>", keymap_option)
+vim.api.nvim_buf_set_keymap(0, "n", "[ft]m", "<cmd>OpenModelFile<CR>", keymap_option)
+vim.api.nvim_buf_set_keymap(0, "n", "[ft]s", "<cmd>OpenSpecFile<CR>", keymap_option)
+vim.api.nvim_buf_set_keymap(0, "n", "[ft]a", "<cmd>OpenAppFile<CR>", keymap_option)
+vim.api.nvim_buf_set_keymap(0, "n", "[ft]f", "<cmd>OpenFactoryFile<CR>", keymap_option)
+vim.api.nvim_buf_set_keymap(0, "n", "[ft]d", "<cmd>OpenSchemaFile<CR>", keymap_option)
 
 vim.api.nvim_buf_set_keymap(0, "n", "gf", "<cmd>lua require'rytkmt.formatter'.rubocop()<cr>", keymap_option)

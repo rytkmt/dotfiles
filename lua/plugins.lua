@@ -115,6 +115,10 @@ require"packer".startup(function()
     "source_lua",
     { ft = { "ruby", "lua" } }
   )
+  use_with_file(
+    "stevearc/aerial.nvim",
+    "source_lua"
+  )
 
   -- ruby用だが、ftを指定すると最初に開いたrubyファイルがplugin読み込みだけで終わってしまい、FileTypeのautocmdが発火しないためft指定なしでインストールする
   use_with_file("jgdavey/vim-blockle", "add")
@@ -209,7 +213,8 @@ require"packer".startup(function()
         {
           "hrsh7th/cmp-vsnip",
           requires = "hrsh7th/vim-vsnip"
-        }
+        },
+        { "SmiteshP/nvim-navic" }
       }
     }
   )

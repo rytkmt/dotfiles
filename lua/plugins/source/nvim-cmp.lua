@@ -139,9 +139,6 @@ vim.api.nvim_create_autocmd("FileType", {
     require("cmp_dictionary").setup({
       paths = cache_dicts(),
     })
-    if pcall(vim.api.nvim_buf_get_var, 0, 'navic_enabled') then
-      vim.wo.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
-    end
   end
 })
 vim.api.nvim_create_autocmd("BufEnter", {
@@ -150,9 +147,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
     require("cmp_dictionary").setup({
       paths = cache_or_select_dicts(),
     })
-    if pcall(vim.api.nvim_buf_get_var, 0, 'navic_enabled') then
-      vim.wo.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
-    end
   end
 })
 

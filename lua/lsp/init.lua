@@ -1,4 +1,3 @@
-local navic = require("nvim-navic")
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
@@ -16,7 +15,8 @@ local on_attach = function (client, bufnr)
 
   if client.server_capabilities.documentSymbolProvider then
     vim.api.nvim_buf_set_var(0, 'navic_enabled', true)
-    navic.attach(client, bufnr)
+    vim.wo.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+    require("nvim-navic").attach(client, bufnr)
   end
 end
 
@@ -36,3 +36,6 @@ vim.lsp.enable('ruby_lsp')
 local yamlls_opts = require("lsp.yamlls")
 vim.lsp.config("yamlls", yamlls_opts)
 vim.lsp.enable("yamlls")
+
+vim.lsp.config("marksman", {})
+vim.lsp.enable("marksman")

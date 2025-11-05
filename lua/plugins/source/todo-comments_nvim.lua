@@ -16,14 +16,13 @@ require("todo-comments").setup(
     -- PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
     -- NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
     -- TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+    RUNNING = { icon = "🏃", color = "running" }
   },
   gui_style = {
     fg = "NONE", -- The gui style to use for the fg highlight group.
     bg = "BOLD", -- The gui style to use for the bg highlight group.
   },
   merge_keywords = false, -- when true, custom keywords will be merged with the defaults
-  -- TODO 1
-  -- WARN hoge
   -- highlighting of the line containing the todo comment
   -- * before: highlights before the keyword (typically comment characters)
   -- * keyword: highlights of the keyword
@@ -36,16 +35,21 @@ require("todo-comments").setup(
     keyword = "bg", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
     after = "fg", -- "fg" or "bg" or empty
     pattern = [[.*<(KEYWORDS)\s*]], -- pattern or table of patterns, used for highlighting (vim regex)
-    comments_only = true, -- uses treesitter to match keywords in comments only
+    -- markdown でtodo付けたいためコメント以外も適用とする
+    comments_only = false, -- uses treesitter to match keywords in comments only
     max_line_len = 400, -- ignore lines longer than this
     exclude = {}, -- list of file types to exclude highlighting
   },
   -- list of named colors where we try to extract the guifg from the
   -- list of highlight groups or use the hex color if hl not found as a fallback
+  -- TODO hoge
+  -- WARN fuga
+  -- RUNNING bar
   colors = {
     warning = { "Todo", "#f6d380" },
     -- error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
     todo = { "#ce9860" },
+    running = { "#80c280" },
     -- info = { "DiagnosticInfo", "#2563EB" },
     -- hint = { "DiagnosticHint", "#10B981" },
     -- default = { "Identifier", "#7C3AED" },

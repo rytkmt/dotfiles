@@ -38,6 +38,29 @@ local function location()
   return 'C%-3v'
 end
 
+local function is_lsp_attached()
+  -- vim.lsp.get_clients() は、現在のバッファ (bufnr=0) にアタッチされている
+  -- LSPクライアントのリスト (テーブル) を返す
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
+
+  -- クライアントのリストが空でなければ (テーブルの要素数が 0 より大きければ)、LSPは有効
+  return #clients > 0
+end
+local function lsp_attached()
+  if is_lsp_attached() then
+    return ''
+  else
+    return ''
+  end
+end
+local function lsp_attached_color()
+  if is_lsp_attached() then
+    return { fg = '#14ba19' }
+  else
+    return { fg = '#ff0000' }
+  end
+end
+
 require'lualine'.setup{
   options = {
     theme  = custom_theme,
@@ -56,6 +79,7 @@ require'lualine'.setup{
     lualine_x = { function() return vim.call("FileDirUnderRootWithCache") end },
     lualine_y = {
       'filetype',
+      { lsp_attached, color = lsp_attached_color },
       'encoding',
       {
         'fileformat',

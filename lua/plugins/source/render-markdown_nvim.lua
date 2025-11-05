@@ -26,7 +26,7 @@ require('render-markdown').setup({
     right_pad = 4
   }
 })
-vim.api.nvim_set_hl(0, "RenderMarkdownIndent", { fg = "#7863a8" })
+vim.api.nvim_set_hl(0, "RenderMarkdownIndent", { fg = "#444282" })
 vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = "#282840" })
 vim.api.nvim_set_hl(0, "RenderMarkdownCodeBorder", { fg = "#515960" })
 -- vim.api.nvim_set_hl(0, "RenderMarkdownCodeInfo", { bg = "#F82840" })
