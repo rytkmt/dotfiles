@@ -55,10 +55,14 @@ nnoremap <buffer> g1 <CMD>s/\v^\s*(- )?/- /<CR>:noh<CR>
 nnoremap <buffer> g2 <CMD>s/\v^\s*(- )?/    - /<CR>:noh<CR>
 nnoremap <buffer> g3 <CMD>s/\v^\s*(- )?/        - /<CR>:noh<CR>
 nnoremap <buffer> g4 <CMD>s/\v^\s*(- )?/            - /<CR>:noh<CR>
+nnoremap <buffer> g5 <CMD>s/\v^\s*(- )?/                - /<CR>:noh<CR>
+nnoremap <buffer> g6 <CMD>s/\v^\s*(- )?/                    - /<CR>:noh<CR>
 xnoremap <buffer> g1 :<C-u>'<,'>s/\v^\s*(- )?/- /<CR>:noh<CR>
 xnoremap <buffer> g2 :<C-u>'<,'>s/\v^\s*(- )?/    - /<CR>:noh<CR>
 xnoremap <buffer> g3 :<C-u>'<,'>s/\v^\s*(- )?/        - /<CR>:noh<CR>
 xnoremap <buffer> g4 :<C-u>'<,'>s/\v^\s*(- )?/            - /<CR>:noh<CR>
+xnoremap <buffer> g5 :<C-u>'<,'>s/\v^\s*(- )?/                - /<CR>:noh<CR>
+xnoremap <buffer> g6 :<C-u>'<,'>s/\v^\s*(- )?/                    - /<CR>:noh<CR>
 
 setlocal cursorline
 " インデントを4スペースに設定

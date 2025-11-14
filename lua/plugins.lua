@@ -155,7 +155,8 @@ require"packer".startup(function()
   -- NOTE: BufEnterで*.md,*.markdown時にTOCコマンドを定義しているためftがmarkdownなだけでは実行できない
   use_with_file("richardbizik/nvim-toc", "source_lua", markdown_option)
   -- g:mkdp_filetypes という設定項目の仕様のせいでファイル拡張子がmdじゃないファイルを開いた場合にft=markdownだったとしてもコマンドが読み込まれないためft依存にしないようにしておく
-  use_with_file("iamcco/markdown-preview.nvim", "add", { run = "cd app && npm install" })
+  -- 本来はiamcco/markdown-preview.nvim だが mermaidが旧バージョンで困っているため誰かのforkを使う
+  use_with_file("Gowa2017/markdown-preview.nvim", "add", { run = "cd app && npm install" })
 
   use_with_file("MeanderingProgrammer/render-markdown.nvim", "source_lua", {
     after = { "nvim-treesitter" },
