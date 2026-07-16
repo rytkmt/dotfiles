@@ -22,6 +22,7 @@
 - name: Sync pixi global environments
   ansible.builtin.command:
     cmd: "{{ ansible_env.HOME }}/.pixi/bin/pixi global sync"
+  changed_when: false
 
 # Python: neovim venv
 - name: Create neovim python venv
