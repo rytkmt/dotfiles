@@ -39,15 +39,15 @@
 # Node: global npm packages
 - name: Install global npm packages
   ansible.builtin.command:
-    cmd: "{{ ansible_env.HOME }}/.pixi/bin/npm install -g {{ item }}"
-    creates: "{{ ansible_env.HOME }}/.pixi/envs/node/bin/{{ item }}"
+    cmd: "{{ ansible_env.HOME }}/.pixi/bin/npm install -g {{ item.pkg }}"
+    creates: "{{ ansible_env.HOME }}/.pixi/envs/node/bin/{{ item.bin }}"
   loop:
-    - neovim
-    - yarn
-    - tree-sitter-cli
-    - jsonlint
-    - json-refs
-    - yaml-language-server
+    - { pkg: neovim,              bin: neovim-node-host }
+    - { pkg: yarn,                bin: yarn }
+    - { pkg: tree-sitter-cli,     bin: tree-sitter }
+    - { pkg: jsonlint,            bin: jsonlint }
+    - { pkg: json-refs,           bin: json-refs }
+    - { pkg: yaml-language-server, bin: yaml-language-server }
 
 # Go: go install packages
 - name: Install go packages

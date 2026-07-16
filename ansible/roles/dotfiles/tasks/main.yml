@@ -13,8 +13,6 @@
     state: link
     force: true
   loop:
-    - { src: .bashrc,        dest: .bashrc }
-    - { src: .bash_profile,  dest: .bash_profile }
     - { src: .zshrc,         dest: .zshrc }
     - { src: .zprofile,      dest: .zprofile }
     - { src: .inputrc,       dest: .inputrc }
