@@ -7,3 +7,7 @@
 - **Neovim** — Luaベースの設定、LSP、telescope、自作プラグイン等
 - **Zsh** — sheldon + pure prompt
 - **Ansible** — 環境構築の完全自動化（Ruby, Go, Rust, Node, Deno, Python, Lua ...）
+
+## Note
+
+privateリポジトリから公開用に分離した際、履歴をリセットしています。
