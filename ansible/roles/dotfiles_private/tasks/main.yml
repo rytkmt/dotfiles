@@ -1,0 +1,24 @@
+- name: Clone dotfiles-private
+  ansible.builtin.git:
+    repo: "{{ dotfiles_private_repo }}"
+    dest: "{{ dotfiles_private_dir }}"
+    update: true
+  ignore_errors: true
+
+- name: Ensure parent directories exist
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - .claude
+
+- name: Create symlinks
+  ansible.builtin.file:
+    src: "{{ dotfiles_private_dir }}/{{ item.src }}"
+    dest: "{{ ansible_env.HOME }}/{{ item.dest }}"
+    state: link
+    force: true
+  loop:
+    - { src: claude/skills,  dest: .claude/skills }
+    - { src: claude/rules,   dest: .claude/rules }

@@ -1,0 +1,27 @@
+- name: Add NodeSource repository
+  become: true
+  ansible.builtin.shell: |
+    curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
+  args:
+    creates: /etc/apt/sources.list.d/nodesource.sources
+
+- name: Install nodejs
+  become: true
+  ansible.builtin.apt:
+    name: nodejs
+    state: present
+    update_cache: true
+
+- name: Install global npm packages
+  become: true
+  community.general.npm:
+    name: "{{ item }}"
+    global: true
+    state: present
+  loop:
+    - neovim
+    - yarn
+    - tree-sitter-cli
+    - jsonlint
+    - json-refs
+    - yaml-language-server

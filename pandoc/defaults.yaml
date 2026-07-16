@@ -1,0 +1,10 @@
+pdf-engine: weasyprint
+standalone: true
+metadata:
+  toc-title: "目次"
+table-of-contents: false
+css:
+  - /home/rytkmt/.config/pandoc/modern.css
+filters:
+  - /home/rytkmt/.config/pandoc/pdf-setup.lua
+highlight-style: /home/rytkmt/.config/pandoc/highlight.theme

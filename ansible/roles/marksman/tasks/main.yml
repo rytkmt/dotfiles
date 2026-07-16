@@ -1,0 +1,5 @@
+- name: Install marksman
+  ansible.builtin.get_url:
+    url: https://github.com/artempyanykh/marksman/releases/latest/download/marksman-linux-x64
+    dest: "{{ ansible_env.HOME }}/.local/bin/marksman"
+    mode: '0755'

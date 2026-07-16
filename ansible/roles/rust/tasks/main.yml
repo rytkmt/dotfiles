@@ -1,0 +1,14 @@
+- name: Install rustup
+  ansible.builtin.shell: |
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
+  args:
+    creates: "{{ ansible_env.HOME }}/.cargo/bin/rustup"
+
+- name: Install cargo packages
+  ansible.builtin.shell: |
+    {{ ansible_env.HOME }}/.cargo/bin/cargo install {{ item }}
+  args:
+    creates: "{{ ansible_env.HOME }}/.cargo/bin/{{ item }}"
+  loop:
+    - sheldon
+    - csview

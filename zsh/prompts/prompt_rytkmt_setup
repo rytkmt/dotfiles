@@ -1,0 +1,72 @@
+#!/bin/zsh
+zmodload zsh/nearcolor
+
+function prompt_rytkmt_setup() {
+  add-zsh-hook precmd prompt_rytkmt_precmd
+
+  # precmdの内容を実行しつつclear
+  function clear_screen() {
+    clear
+    prompt_rytkmt_precmd
+    zle reset-prompt
+  }
+  zle -N clear_screen
+  bindkey '^L' clear_screen
+}
+
+function prompt_rytkmt_precmd() {
+  if [ -n "$(git status --short 2>/dev/null)" ];then
+    # export GIT_HAS_DIFF="⚡"
+    export GIT_HAS_DIFF="x"
+    export GIT_NON_DIFF=""
+  else 
+    export GIT_HAS_DIFF=""
+    export GIT_NON_DIFF=""
+  fi
+  # git管理されているか確認
+  git status --porcelain >/dev/null 2>&1
+  if [ $? -ne 0 ];then
+    export GIT_HAS_DIFF=""
+    export GIT_NON_DIFF=""
+  fi
+  export BRANCH_NAME=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1/')
+
+  local -a preline=(
+    "$(prompt_rytkmt_pwd)"
+    "$(prompt_rytkmt_git)"
+    "$(prompt_rytkmt_user)"
+  )
+  print -P $preline
+  PROMPT="%F{#f8caa6}❯ %f"
+
+}
+
+function prompt_rytkmt_user() {
+  print -n "%F{#5a8a80}[%n]%f"
+}
+
+function prompt_rytkmt_pwd() {
+  local pwd_symbol="\uf115"
+  local result
+
+  result="%F{#98b0c8}${pwd_symbol} %~%f"
+
+  print -n "${result}"
+}
+
+function prompt_rytkmt_git() {
+  local purple="#a08fca"
+  local symbol=""
+  local branch=$BRANCH_NAME
+  if [ -n "$branch" ]; then
+    local line=("%F{$purple}${symbol}${branch}%f")
+
+    [ -n "${GIT_NON_DIFF}" ] && line+=("%F{green}${GIT_NON_DIFF}%f")
+    [ -n "${GIT_HAS_DIFF}" ] && line+=("%F{red}${GIT_HAS_DIFF}%f")
+
+    # 配列を文字列に連結して表示する
+    print -n "${(j: :)line}"
+  fi
+}
+
+prompt_rytkmt_setup "$@"

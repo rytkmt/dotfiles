@@ -1,0 +1,29 @@
+- name: Download HackGen font
+  ansible.builtin.get_url:
+    url: https://github.com/yuru7/HackGen/releases/download/v2.10.0/HackGen_v2.10.0.zip
+    dest: /tmp/hackgen.zip
+
+- name: Unzip HackGen font
+  ansible.builtin.unarchive:
+    src: /tmp/hackgen.zip
+    dest: /tmp/
+    remote_src: true
+    creates: /tmp/HackGen_v2.10.0
+
+- name: Create hackgen font directory
+  become: true
+  ansible.builtin.file:
+    path: /usr/share/fonts/truetype/hackgen
+    state: directory
+    mode: '0755'
+
+- name: Install HackGen fonts
+  become: true
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /usr/share/fonts/truetype/hackgen/
+    remote_src: true
+  loop:
+    - /tmp/HackGen_v2.10.0/HackGenConsole-Regular.ttf
+    - /tmp/HackGen_v2.10.0/HackGenConsole-Bold.ttf
+  notify: Update font cache

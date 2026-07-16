@@ -1,0 +1,232 @@
+/* ==========================================================
+   Modern Markdown PDF — monospace base
+   Inspired by: GitHub, Notion, Obsidian, Typora
+   ========================================================== */
+
+/* Page */
+@page {
+  size: A4;
+  margin: 1.5cm 1.3cm;
+}
+
+/* Suppress title header block */
+header#title-block-header,
+header#title-block-header * {
+  display: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  line-height: 0;
+  height: 0;
+}
+
+/* First heading: remove extra top margin */
+body > h1:first-of-type,
+body > :first-child {
+  margin-top: 0;
+}
+
+/* Space between TOC and content */
+nav#TOC,
+section#TOC {
+  margin-bottom: 2em;
+}
+
+/* Base — monospace for the entire document */
+body {
+  font-family: "Noto Sans Mono CJK JP", "Ubuntu Sans Mono", "DejaVu Sans Mono", monospace;
+  font-size: 9pt;
+  line-height: 1.75;
+  color: #2e3440;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: 1.8em;
+  padding-bottom: 0.35em;
+  border-bottom: 2.5px solid #4c566a;
+  border-left: 6px solid #5e81ac;
+  padding-left: 0.5em;
+}
+
+h2 {
+  font-size: 1.4em;
+  padding-bottom: 0.25em;
+  border-bottom: 1.5px solid #d8dee9;
+  border-left: 5px solid #81a1c1;
+  padding-left: 0.5em;
+}
+
+h3 {
+  font-size: 1.15em;
+  color: #2e3440;
+  border-left: 4px solid #4c566a;
+  padding-left: 0.5em;
+}
+
+h4 {
+  font-size: 1.05em;
+  color: #3b4252;
+  border-left: 3px solid #d8dee9;
+  padding-left: 0.5em;
+}
+
+h5, h6 {
+  font-size: 1em;
+  color: #4c566a;
+  border-left: 2px solid #e5e9f0;
+  padding-left: 0.5em;
+}
+
+/* Paragraph */
+p {
+  margin: 0.6em 0;
+}
+
+/* Links */
+a {
+  color: #5e81ac;
+  text-decoration: none;
+}
+
+/* Emphasis */
+strong {
+  font-weight: 700;
+  color: #2e3440;
+}
+
+em {
+  font-style: italic;
+  color: #4c566a;
+}
+
+/* Horizontal rule */
+hr {
+  border: none;
+  border-top: 1px solid #e5e9f0;
+  margin: 2em 0;
+}
+
+/* Code blocks */
+pre {
+  background: #f8f9fb;
+  border: 1px solid #e5e9f0;
+  border-radius: 6px;
+  padding: 0.9em 1.1em;
+  font-size: 8.5pt;
+  line-height: 1.16;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 1em 0;
+}
+
+code, pre code, .sourceCode {
+  font-family: "HackGen Console", monospace !important;
+  font-size: 8.5pt;
+  font-variant-numeric: normal;
+}
+
+/* Inline code */
+:not(pre) > code {
+  background: #eceff4;
+  border-radius: 3px;
+  padding: 0.1em 0.35em;
+  font-size: 0.9em;
+  color: #434c5e;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  font-size: 8.5pt;
+  line-height: 1.5;
+}
+
+th, td {
+  border: 1px solid #d8dee9;
+  padding: 0.45em 0.75em;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eceff4;
+  font-weight: 700;
+  color: #2e3440;
+}
+
+tr:nth-child(even) {
+  background: #f8f9fb;
+}
+
+/* Lists */
+ul, ol {
+  padding-left: 1.6em;
+  margin: 0.5em 0;
+}
+
+li {
+  margin-bottom: 0.25em;
+}
+
+li > ul, li > ol {
+  margin: 0.15em 0;
+}
+
+ul ul {
+  list-style-type: circle;
+}
+
+ul ul ul {
+  list-style-type: square;
+}
+
+/* Blockquote */
+blockquote {
+  border-left: 3.5px solid #5e81ac;
+  padding: 0.5em 1em;
+  margin: 1em 0;
+  background: #f8f9fb;
+  color: #4c566a;
+  border-radius: 0 4px 4px 0;
+}
+
+blockquote p {
+  margin: 0.3em 0;
+}
+
+/* Definition lists */
+dt {
+  font-weight: 700;
+  margin-top: 0.8em;
+}
+
+dd {
+  margin-left: 1.5em;
+  margin-bottom: 0.4em;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+/* Page break control */
+pre, table, blockquote {
+  page-break-inside: avoid;
+}
+
+h1, h2, h3, h4 {
+  page-break-after: avoid;
+}

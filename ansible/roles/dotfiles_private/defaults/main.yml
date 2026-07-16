@@ -1,0 +1,2 @@
+dotfiles_private_repo: "git@github.com:rytkmt/dotfiles-private.git"
+dotfiles_private_dir: "{{ ansible_env.HOME }}/git/dotfiles-private"

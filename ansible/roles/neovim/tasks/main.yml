@@ -1,0 +1,14 @@
+- name: Clone neovim
+  ansible.builtin.git:
+    repo: https://github.com/neovim/neovim.git
+    dest: "{{ ansible_env.HOME }}/temporary/neovim"
+    depth: 1
+
+- name: Build and install neovim
+  become: true
+  ansible.builtin.shell: |
+    cd {{ ansible_env.HOME }}/temporary/neovim
+    make CMAKE_BUILD_TYPE=RelWithDebInfo
+    make install
+  args:
+    creates: /usr/local/bin/nvim

@@ -1,0 +1,17 @@
+- name: Setup local dev environment
+  hosts: local
+  roles:
+    - common
+    - dotfiles
+    - dotfiles_private
+    - neovim
+    - rust
+    - zsh
+    - go
+    - node
+    - deno
+    - python
+    - ruby
+    - lua
+    - marksman
+    - pandoc

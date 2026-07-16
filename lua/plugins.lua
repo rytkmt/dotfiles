@@ -1,0 +1,231 @@
+vim.cmd[[packadd packer.nvim]]
+
+require"packer".startup(function()
+  local function use_with_file(repo, ...)
+    local a = { ... }
+    local args = { repo }
+    local plugin_name = require("rytkmt/utils/split").split(repo, "/")[2]
+
+    -- 最後の仮引数がtableの場合はそれをマージする
+    if type(a[#a]) == "table" then
+      for k, v in pairs(a[#a]) do
+        args[k] = v
+      end
+      table.remove(a)
+    end
+
+    for i = 1 , #a do
+      if a[i] == "add" then
+        args["setup"] = loadstring("vim.cmd('so $XDG_CONFIG_HOME/plugins/add/" .. plugin_name .. ".rc.vim')")
+      elseif a[i] == "add_lua" then
+        plugin_name = string.gsub(plugin_name, "[.]", "_")
+        args["setup"] = loadstring("require('plugins.add." .. plugin_name .. "')")
+      elseif a[i] == "source" then
+        args["config"] = loadstring("vim.cmd('so $XDG_CONFIG_HOME/plugins/source/" .. plugin_name .. ".rc.vim')")
+      elseif a[i] == "source_lua" then
+        plugin_name = string.gsub(plugin_name, "[.]", "_")
+        args["config"] = loadstring("require('plugins.source." .. plugin_name .. "')")
+      end
+    end
+
+    use(args)
+  end
+
+  use {
+    { "rytkmt/lighthouse" },
+    { "kana/vim-textobj-user" },
+    { "kana/vim-operator-user" },
+    { "tyru/stoptypofile.vim" },
+    { "tpope/vim-repeat" },
+    { "lewis6991/impatient.nvim" },
+    { "itchyny/vim-qfedit" },
+  }
+  use_with_file("kana/vim-submode", "add")
+  use_with_file("thinca/vim-quickrun", "add", { requires = { "lambdalisue/vim-quickrun-neovim-job" } })
+  -- use_with_file("airblade/vim-gitgutter", "add")
+  use_with_file("junegunn/vim-easy-align", "add")
+  use_with_file("rytkmt/indent-blank-guides.nvim", "source_lua")
+  -- use_with_file("vim-scripts/grep.vim", "add")
+  use_with_file("tomtom/tcomment_vim", "add")
+  use_with_file("folke/todo-comments.nvim", "source_lua", { requires = "nvim-lua/plenary.nvim" })
+  -- use_with_file("tpope/vim-surround", "add")
+  -- use_with_file("ur4ltz/surround.nvim", "source_lua")
+  use_with_file("kylechui/nvim-surround", "source_lua")
+  use_with_file("nacro90/numb.nvim", "source_lua")
+  use_with_file("LeafCage/yankround.vim", "add")
+  use_with_file("osyo-manga/vim-anzu", "add")
+  -- use_with_file("rhysd/clever-f.vim", "add")
+  -- 遅いため一回消す
+  -- use_with_file("haya14busa/vim-operator-flashy", "add")
+  use_with_file("kana/vim-operator-replace", "add")
+  -- use_with_file("rytkmt/vim-trailing-whitespace", "add")
+  -- 遅いので一時的にコメントアウトしておく
+  -- use_with_file("vim-syntastic/syntastic", "add")
+  use("RRethy/nvim-treesitter-endwise")
+  use_with_file("haya14busa/vim-edgemotion", "source")
+  use_with_file("skanehira/qfopen.vim", "source")
+  use_with_file("nvim-treesitter/nvim-treesitter", "source_lua", {
+    run = function()
+        local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
+        ts_update()
+    end,
+  })
+  use_with_file("haya14busa/vim-asterisk", "source")
+  use_with_file("nathom/filetype.nvim", "source_lua")
+  use_with_file("bbjornstad/pretty-fold.nvim", "source_lua")
+  -- use_with_file("monkoose/matchparen.nvim", "source_lua")
+  use_with_file("AndrewRadev/switch.vim", "add", "source")
+  use_with_file("Pocco81/HighStr.nvim", "source_lua")
+  use_with_file("tkmpypy/chowcho.nvim", "source_lua")
+  -- use_with_file("Shougo/vimproc.vim", "add", "source")
+  use_with_file("rytkmt/tabline.nvim", "source_lua", { branch = "develop", requires = {"kyazdani42/nvim-web-devicons"} })
+  use_with_file("nvim-lualine/lualine.nvim", "source_lua", { requires = "kyazdani42/nvim-web-devicons" })
+  use_with_file("SmiteshP/nvim-navic", "source_lua")
+  use_with_file("tamago324/lir.nvim", "source_lua", { requires = { { "kyazdani42/nvim-web-devicons" }, { "nvim-lua/plenary.nvim" } } })
+  use_with_file("tamago324/lir-git-status.nvim", "source_lua", { requires = { { "tamago324/lir-git-status.nvim" } } })
+  use_with_file("lewis6991/gitsigns.nvim", "source_lua")
+  use_with_file("sindrets/diffview.nvim", "source_lua", { requires = "nvim-lua/plenary.nvim" })
+  use_with_file("windwp/nvim-autopairs", "source_lua", { requires = "nvim-treesitter/nvim-treesitter" })
+  -- 遅いため一旦・・
+  -- use_with_file("gelguy/wilder.nvim", "source")
+  -- use { "cohama/lexima.vim", setup = function() vim.g.lexima_accept_pum_with_enter = 0 end }
+  use_with_file("rlane/pounce.nvim", "source_lua")
+  use_with_file("phaazon/hop.nvim", "source_lua")
+  use_with_file("chentoast/marks.nvim", "source_lua")
+  use_with_file("andymass/vim-matchup", "add_lua")
+  use_with_file(
+    "nvim-telescope/telescope.nvim",
+    "source_lua",
+    {
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "sam4llis/telescope-arglist.nvim"
+      }
+    }
+  )
+  use_with_file("mattn/vim-sqlfmt", "add", { opt = true, ft = "sql" })
+  use_with_file("uga-rosa/translate.nvim", "source_lua")
+
+  use_with_file("rhysd/conflict-marker.vim", "source")
+  use_with_file("cuducos/yaml.nvim", "source_lua", { ft = { "yaml" }, requires = { "nvim-treesitter/nvim-treesitter", "nvim-telescope/telescope.nvim" } })
+  use_with_file(
+    "mfussenegger/nvim-lint",
+    "source_lua",
+    { ft = { "ruby", "lua" } }
+  )
+  use_with_file(
+    "stevearc/aerial.nvim",
+    "source_lua"
+  )
+
+  use_with_file("folke/snacks.nvim", "source_lua")
+  use_with_file("coder/claudecode.nvim", "source_lua", { requires = { "folke/snacks.nvim", "nvim-lua/plenary.nvim" } })
+
+  -- ruby用だが、ftを指定すると最初に開いたrubyファイルがplugin読み込みだけで終わってしまい、FileTypeのautocmdが発火しないためft指定なしでインストールする
+  use_with_file("jgdavey/vim-blockle", "add")
+  use_with_file(
+    "petertriho/nvim-scrollbar",
+    "source_lua"
+  )
+  use_with_file("ysmb-wtsg/in-and-out.nvim", "source_lua")
+
+  -- 遅延系
+
+  use {
+    "tyru/capture.vim",
+    opt = true,
+    cmd = { "Capture" }
+  }
+
+  use {
+    "cocopon/inspecthi.vim",
+    -- opt = true,
+    -- cmd = { "Inspecthi", "InspecthiShowInspector", "InspecthiHideInspector" }
+  }
+
+  -- use { "kana/vim-smartinput", opt = true, event = "InsertEnter *" }
+  -- use_with_file("cohama/vim-smartinput-endwise", "source", { opt = true, event = "InsertEnter *" })
+
+  -- markdown
+  local markdown_option = { opt = true, ft = { "markdown", "mkd" } }
+  use_with_file("rcmdnk/vim-markdown", "add", markdown_option)
+  use("joker1007/vim-markdown-quote-syntax", markdown_option)
+  use("mattn/vim-maketable", markdown_option)
+  use("jghauser/follow-md-links.nvim", markdown_option)
+  use_with_file("dhruvasagar/vim-table-mode", "add", markdown_option)
+  -- NOTE: BufEnterで*.md,*.markdown時にTOCコマンドを定義しているためftがmarkdownなだけでは実行できない
+  use_with_file("richardbizik/nvim-toc", "source_lua", markdown_option)
+  -- g:mkdp_filetypes という設定項目の仕様のせいでファイル拡張子がmdじゃないファイルを開いた場合にft=markdownだったとしてもコマンドが読み込まれないためft依存にしないようにしておく
+  -- 本来はiamcco/markdown-preview.nvim だが mermaidが旧バージョンで困っているため誰かのforkを使う
+  use_with_file("Gowa2017/markdown-preview.nvim", "add", { run = "cd app && npm install" })
+
+  use_with_file("MeanderingProgrammer/render-markdown.nvim", "source_lua", {
+    after = { "nvim-treesitter" },
+    requires = { "echasnovski/mini.nvim", opt = true }, -- if you use the mini.nvim suite
+    -- requires = { "echasnovski/mini.icons", opt = true }, -- if you use standalone mini plugins
+    -- requires = { "nvim-tree/nvim-web-devicons", opt = true }, -- if you prefer nvim-web-devicons
+  })
+  use_with_file("Wansmer/treesj", "source_lua", { requires = { "nvim-treesitter/nvim-treesitter" } })
+
+  -- textile
+  -- use { "rytkmt/vim-textile", opt = true, ft = "textile" }
+
+  -- csv
+  use_with_file("hat0uma/csvview.nvim", "source_lua", { ft = "csv" })
+
+  -- ruby
+  -- use_with_file("rytkmt/vim-textobj-ruby", "add", "source", { opt = true, ft = "ruby", branch = "feature_textobj_ruby_method" })
+  -- use_with_file("rhysd/vim-textobj-ruby", { opt = true, ft = "ruby", after = "vim-textobj-user" })
+  -- use { "nvim-treesitter/nvim-treesitter-textobjects" }
+
+  use_with_file("Makaze/AnsiEsc", "add", { opt = true, ft = { "log" } })
+  -- vim
+  -- use { "thinca/vim-prettyprint", opt = true, ft = "vim" }
+
+  -- lua, vim
+  use { "norcalli/nvim-colorizer.lua", opt = true, ft = { "vim", "lua", "zsh", "markdown" } }--, config = function() require"colorizer".setup() end }
+
+  -- ddc周り
+  use {
+    "vim-denops/denops.vim",
+    config = function() vim.call("denops#server#start") end,
+    -- setup = function()
+    --   -- vim.g.denops_server_addr = "127.0.0.1:32123"
+    -- end
+  }
+  use_with_file("hrsh7th/vim-vsnip", "add")
+
+  use_with_file("rytkmt/tempaste.nvim", "source_lua")
+
+  -- lspの読み込み進捗表示
+  use_with_file("j-hui/fidget.nvim", "source_lua")
+  use_with_file(
+    "hrsh7th/nvim-cmp",
+    "source_lua",
+    {
+      requires = {
+        {
+          "hrsh7th/cmp-nvim-lsp",
+          requires = "neovim/nvim-lspconfig"
+        },
+        { "hrsh7th/cmp-buffer" },
+        { "hrsh7th/cmp-path" },
+        { "hrsh7th/cmp-emoji" },
+        { "davidmh/cmp-nerdfonts" },
+        { "uga-rosa/cmp-dictionary" },
+        { "hrsh7th/cmp-cmdline" },
+        {
+          "hrsh7th/cmp-vsnip",
+          requires = "hrsh7th/vim-vsnip"
+        },
+        { "SmiteshP/nvim-navic" }
+      }
+    }
+  )
+  use {"kevinhwang91/nvim-bqf", ft = "qf"}
+  -- lazy.nvim
+
+  -- log
+  use_with_file("fei6409/log-highlight.nvim", "source_lua")
+
+end)

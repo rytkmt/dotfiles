@@ -1,0 +1,21 @@
+- name: Ensure parent directories exist
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - .config
+
+- name: Create symlinks
+  ansible.builtin.file:
+    src: "{{ dotfiles_dir }}/{{ item.src }}"
+    dest: "{{ ansible_env.HOME }}/{{ item.dest }}"
+    state: link
+    force: true
+  loop:
+    - { src: .bashrc,        dest: .bashrc }
+    - { src: .bash_profile,  dest: .bash_profile }
+    - { src: .zshrc,         dest: .zshrc }
+    - { src: .zprofile,      dest: .zprofile }
+    - { src: .inputrc,       dest: .inputrc }
+    - { src: pandoc,         dest: .config/pandoc }

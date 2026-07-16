@@ -1,0 +1,63 @@
+{
+  "ruby": {
+    "prefix": "ruby",
+    "body": [
+      "```ruby",
+      "${1}",
+      "```"
+    ]
+  },
+  "shell": {
+    "prefix": "shell",
+    "body": [
+      "```shell",
+      "${1}",
+      "```"
+    ]
+  },
+  "plantuml": {
+    "prefix": ["plantuml", "uml"],
+    "body": [
+      "```plantuml",
+      "${1}",
+      "```"
+    ]
+  },
+  "skinparam_linetype_ortho": {
+    "prefix": "skinparam_linetype_ortho",
+    "body": [
+      "skinparam linetype ortho"
+    ]
+  },
+  "prompt_basic": {
+    "prefix": "prompt_basic",
+    "body": [
+      "# 役割と目的 (Context & Goal)",
+      "あなたは${1:ROLE}です。",
+      "今回の目的は、${2:PURPOSE}です。",
+      "",
+      "# 前提条件 (Constraints / Rules)",
+      "- 出力ファイル名: [例: output_summary.xlsx]",
+      "- エラーハンドリングを含めること。",
+      "- [例: 元のデータファイルを直接上書きせず、別名で保存すること。]",
+      "",
+      "# 入力データ情報 (Input Data)",
+      "- ファイルパス: `[例: ./data/sales_export.xlsx]`",
+      "- シート名: `[例: Sheet1]`",
+      "- 主なカラム構成:",
+      "  - `A列 (Date)`: 日付（YYYY-MM-DD）",
+      "  - `B列 (Product)`: 商品名",
+      "  - `C列 (Amount)`: 売上金額（数値）",
+      "",
+      "# 期待する処理手順 (Step-by-Step Instructions)",
+      "1. 入力データを読み込む。",
+      "2. `Amount` が空欄、またはマイナスの行はノイズとして除外する。",
+      "3. `Date` から「月」を抽出し、月ごと・商品ごとの売上合計をピボット集計する。",
+      "4. 集計結果を新しいExcelシートに書き出す。",
+      "",
+      "# 出力フォーマット (Output Format)",
+      "- 作成したスクリプトのコード全体。",
+      "- 実行方法と、必要なライブラリをインストールするための `pip` コマンド。"
+    ]
+  }
+}

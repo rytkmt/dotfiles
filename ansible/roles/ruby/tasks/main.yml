@@ -1,0 +1,14 @@
+- name: Clone rbenv
+  ansible.builtin.git:
+    repo: https://github.com/rbenv/rbenv.git
+    dest: "{{ ansible_env.HOME }}/.rbenv"
+    version: master
+
+- name: Clone ruby-build
+  ansible.builtin.git:
+    repo: https://github.com/rbenv/ruby-build.git
+    dest: "{{ ansible_env.HOME }}/.rbenv/plugins/ruby-build"
+    version: master
+
+# ruby本体のインストールは手動で実施（rbenv install <version> && rbenv global <version>）
+# gem install はruby本体インストール後に手動で実行: gem install neovim

@@ -1,0 +1,44 @@
+{
+  "alter_add_column": {
+    "prefix": "alter_add_column",
+    "body": [
+      "ALTER TABLE ${1:TABLE} ADD COLUMN ${2:COLUMN} ${3:FORMAT};"
+    ]
+  },
+  "add_column": {
+    "prefix": "add_column",
+    "body": [
+      "ADD COLUMN ${2:COLUMN} ${3:FORMAT};"
+    ]
+  },
+  "alter_set_default": {
+    "prefix": "alter_set_default",
+    "body": [
+      "ALTER TABLE ${1:TABLE} ALTER COLUMN ${2:COLUMN} SET DEFAULT ${4:DEFAULT};"
+    ]
+  },
+  "set_default": {
+    "prefix": "set_default",
+    "body": [
+      "ALTER COLUMN ${2:COLUMN} SET DEFAULT ${4:DEFAULT}"
+    ]
+  },
+  "update_default": {
+    "prefix": "update_default",
+    "body": [
+      "UPDATE ${1:TABLE} SET ${2:COLUMN} = ${4:DEFAULT};"
+    ]
+  },
+  "alter_set_not_null": {
+    "prefix": "alter_set_not_null",
+    "body": [
+      "ALTER TABLE ${1:TABLE} ALTER COLUMN ${2:COLUMN} SET NOT NULL;"
+    ]
+  },
+  "set_not_null": {
+    "prefix": "set_not_null",
+    "body": [
+      "ALTER COLUMN ${2:COLUMN} SET NOT NULL;"
+    ]
+  }
+}

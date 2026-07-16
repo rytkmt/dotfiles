@@ -1,0 +1,38 @@
+- name: Install apt packages
+  become: true
+  ansible.builtin.apt:
+    name:
+      - make
+      - cmake
+      - gettext
+      - sendfile
+      - zsh
+      - peco
+      - ripgrep
+      - fd-find
+      - sqlformat
+      - unzip
+      - python3
+      - python3-pip
+      - pandoc
+      - weasyprint
+      - fonts-noto-cjk
+      - fonts-noto-color-emoji
+      - poppler-utils
+      - libssl-dev
+      - pkg-config
+    state: present
+    update_cache: true
+
+- name: Ensure ~/.local/bin exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.local/bin"
+    state: directory
+    mode: '0755'
+
+- name: Symlink fdfind to fd
+  ansible.builtin.file:
+    src: /usr/bin/fdfind
+    dest: "{{ ansible_env.HOME }}/.local/bin/fd"
+    state: link
+    force: true

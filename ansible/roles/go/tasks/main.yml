@@ -1,0 +1,32 @@
+- name: Download go
+  ansible.builtin.get_url:
+    url: "https://go.dev/dl/go{{ go_version }}.linux-amd64.tar.gz"
+    dest: /tmp/go.tar.gz
+
+- name: Extract go
+  become: true
+  ansible.builtin.unarchive:
+    src: /tmp/go.tar.gz
+    dest: /usr/local
+    remote_src: true
+    creates: /usr/local/go/bin/go
+
+- name: Install mmv
+  ansible.builtin.shell: |
+    /usr/local/go/bin/go install github.com/itchyny/mmv/cmd/mmv@latest
+  args:
+    creates: "{{ ansible_env.HOME }}/go/bin/mmv"
+  environment:
+    GOPATH: "{{ ansible_env.HOME }}/go"
+
+- name: Clone pipgre
+  ansible.builtin.git:
+    repo: https://github.com/rytkmt/pipgre
+    dest: "{{ ansible_env.HOME }}/temporary/pipgre"
+
+- name: Install pipgre
+  ansible.builtin.copy:
+    src: "{{ ansible_env.HOME }}/temporary/pipgre/bin/pipgre"
+    dest: "{{ ansible_env.HOME }}/.local/bin/pipgre"
+    mode: '0755'
+    remote_src: true

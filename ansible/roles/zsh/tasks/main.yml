@@ -1,0 +1,21 @@
+- name: Change default shell to zsh
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_env.USER }}"
+    shell: /usr/bin/zsh
+
+- name: Create ~/.zsh directory
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.zsh"
+    state: directory
+    mode: '0755'
+
+- name: Download git completion files
+  ansible.builtin.get_url:
+    url: "{{ item.url }}"
+    dest: "{{ ansible_env.HOME }}/.zsh/{{ item.name }}"
+  loop:
+    - url: https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+      name: git-completion.bash
+    - url: https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
+      name: _git
