@@ -32,15 +32,15 @@ GitLabなど複数ホストがある場合は行を追加する：
 https://${ユーザー名}:${トークン}@gitlab.example.com
 ```
 
-### [手動] dotfilesのclone
+### [手動] リポジトリのclone
 
 ```shell
 cd ~/git
 git clone https://github.com/rytkmt/dotfiles.git
+git clone git@github.com:rytkmt/dotfiles-private.git
 ```
 
-Username は rytkmt
-Password は トークン値
+dotfilesはHTTPS（Username: rytkmt, Password: トークン値）、dotfiles-privateはSSHで認証。
 
 ### [手動] 本gitプロジェクト(dotfiles)の.git/config
 
@@ -102,20 +102,16 @@ cd ~/git/dotfiles/ansible
 ansible-playbook -i inventory/localhost site.yml --ask-become-pass
 ```
 
-ansibleが自動化する内容（詳細は `ansible_migration_plan.md` 参照）：
+ansibleが自動化する内容：
 
+- **[ansible] pixi** - Python, Node, Deno, Go, Lua のランタイムとツールを `pixi-global.toml` で宣言的管理
 - **[ansible] neovim** - 依存パッケージ(`make` `cmake` `gettext` `sendfile`)含めビルド・インストール
-- **[ansible] dotfiles シンボリックリンク** - `.bashrc` `.bash_profile` `.zshrc` `.zprofile` `.inputrc` `pandoc` `claude/skills` `claude/rules`
+- **[ansible] dotfiles シンボリックリンク** - `.zshrc` `.zprofile` `.inputrc` `pandoc` `claude/skills` `claude/rules`
 - **[ansible] rust/cargo** - rustup + sheldon + csview
 - **[ansible] zsh** - デフォルトシェル変更・補完ファイル取得
-- **[ansible] go** - バイナリDL・展開・mmv・pipgreインストール
-- **[ansible] node + npm** - nodesource経由・neovim npm package
-- **[ansible] deno** - インストールスクリプト実行（`unzip`が必要）
-- **[ansible] python** - python3 + pynvim/neovim
-- **[ansible] ruby** - rbenv + ruby-build + gem(neovim/solargraph)
-- **[ansible] lua** - lua5.1 + luarocks + luacheck
+- **[ansible] ruby** - rbenv + ruby-build
 - **[ansible] marksman** - Markdown用LSP
-- **[ansible] pandoc** - apt + HackGenフォント + シンボリックリンク
+- **[ansible] pandoc** - HackGenフォント
 
 ---
 

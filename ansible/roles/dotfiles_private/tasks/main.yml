@@ -1,9 +1,12 @@
-- name: Clone dotfiles-private
-  ansible.builtin.git:
-    repo: "{{ dotfiles_private_repo }}"
-    dest: "{{ dotfiles_private_dir }}"
-    update: true
-  ignore_errors: true
+- name: Check dotfiles-private exists
+  ansible.builtin.stat:
+    path: "{{ dotfiles_private_dir }}"
+  register: dotfiles_private_stat
+
+- name: Warn if dotfiles-private not cloned
+  ansible.builtin.debug:
+    msg: "dotfiles-private not found. Please clone manually: git clone git@github.com:rytkmt/dotfiles-private.git {{ dotfiles_private_dir }}"
+  when: not dotfiles_private_stat.stat.exists
 
 - name: Ensure parent directories exist
   ansible.builtin.file:
