@@ -18,9 +18,6 @@ fi
 if [ -d "$HOME/.cargo/bin" ] ; then
   PATH="$HOME/.cargo/bin:$PATH"
 fi
-if [ -d "$HOME/.deno/bin" ] ; then
-  PATH="$HOME/.deno/bin:$PATH"
-fi
 # luarocks
 if [ -d "$HOME/.luarocks/bin" ] ; then
   PATH="$HOME/.luarocks/bin:$PATH"
@@ -30,13 +27,7 @@ if [ -d "$HOME/.rbenv/bin" ] ; then
   eval "$($HOME/.rbenv/bin/rbenv init - --no-rehash zsh)"
 fi
 # go
-if [ -d "/usr/local/go/bin" ] ; then
-  PATH="/usr/local/go/bin:$PATH"
-fi
-if [ -d "$HOME/go/bin" ] ; then
-  PATH="$HOME/go/bin:$PATH"
-fi
-export GOPATH=$HOME/go
+export GOBIN=$HOME/.local/bin
 export GOTELEMETRYDIR="$HOME/.local/state/go/telemetry"
 
 export XDG_DATA_HOME=$HOME/.local/share

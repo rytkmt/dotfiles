@@ -4,14 +4,10 @@
     - common
     - dotfiles
     - dotfiles_private
+    - pixi
     - neovim
     - rust
     - zsh
-    - go
-    - node
-    - deno
-    - python
     - ruby
-    - lua
     - marksman
     - pandoc

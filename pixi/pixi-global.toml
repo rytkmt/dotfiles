@@ -1,0 +1,42 @@
+[envs.python]
+channels = ["conda-forge"]
+[envs.python.dependencies]
+python = ">=3.12"
+pip = "*"
+[envs.python.exposed]
+python = "python"
+python3 = "python3"
+pip = "pip"
+
+[envs.node]
+channels = ["conda-forge"]
+[envs.node.dependencies]
+nodejs = ">=22"
+[envs.node.exposed]
+node = "node"
+npm = "npm"
+npx = "npx"
+
+[envs.deno]
+channels = ["conda-forge"]
+[envs.deno.dependencies]
+deno = "*"
+[envs.deno.exposed]
+deno = "deno"
+
+[envs.go]
+channels = ["conda-forge"]
+[envs.go.dependencies]
+go = "*"
+[envs.go.exposed]
+go = "go"
+gofmt = "gofmt"
+
+[envs.lua]
+channels = ["conda-forge"]
+[envs.lua.dependencies]
+lua = "5.1.*"
+luarocks = "*"
+[envs.lua.exposed]
+lua = "lua"
+luarocks = "luarocks"

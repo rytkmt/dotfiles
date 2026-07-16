@@ -1,0 +1,92 @@
+- name: Install pixi
+  ansible.builtin.shell: |
+    curl -fsSL https://pixi.sh/install.sh | bash
+  args:
+    creates: "{{ ansible_env.HOME }}/.pixi/bin/pixi"
+
+- name: Ensure pixi manifests directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.pixi/manifests"
+    state: directory
+    mode: '0755'
+
+- name: Symlink pixi-global.toml
+  ansible.builtin.file:
+    src: "{{ ansible_env.HOME }}/git/dotfiles/pixi/pixi-global.toml"
+    dest: "{{ ansible_env.HOME }}/.pixi/manifests/pixi-global.toml"
+    state: link
+    force: true
+
+- name: Sync pixi global environments
+  ansible.builtin.command:
+    cmd: "{{ ansible_env.HOME }}/.pixi/bin/pixi global sync"
+
+# Python: neovim venv
+- name: Create neovim python venv
+  ansible.builtin.command:
+    cmd: "{{ ansible_env.HOME }}/.pixi/bin/python3 -m venv {{ ansible_env.HOME }}/.venvs/neovim"
+    creates: "{{ ansible_env.HOME }}/.venvs/neovim/bin/python3"
+
+- name: Install python pip packages in neovim venv
+  ansible.builtin.pip:
+    name:
+      - pynvim
+      - neovim
+    executable: "{{ ansible_env.HOME }}/.venvs/neovim/bin/pip3"
+
+# Node: global npm packages
+- name: Install global npm packages
+  ansible.builtin.command:
+    cmd: "{{ ansible_env.HOME }}/.pixi/bin/npm install -g {{ item }}"
+    creates: "{{ ansible_env.HOME }}/.pixi/envs/node/bin/{{ item }}"
+  loop:
+    - neovim
+    - yarn
+    - tree-sitter-cli
+    - jsonlint
+    - json-refs
+    - yaml-language-server
+
+# Go: go install packages
+- name: Install go packages
+  ansible.builtin.shell: |
+    {{ ansible_env.HOME }}/.pixi/bin/go install {{ item.pkg }}
+  args:
+    creates: "{{ ansible_env.HOME }}/.local/bin/{{ item.bin }}"
+  environment:
+    GOBIN: "{{ ansible_env.HOME }}/.local/bin"
+  loop:
+    - { pkg: "github.com/itchyny/mmv/cmd/mmv@latest", bin: mmv }
+
+# Go: pipgre
+- name: Clone pipgre
+  ansible.builtin.git:
+    repo: https://github.com/rytkmt/pipgre
+    dest: "{{ ansible_env.HOME }}/temporary/pipgre"
+
+- name: Install pipgre
+  ansible.builtin.copy:
+    src: "{{ ansible_env.HOME }}/temporary/pipgre/bin/pipgre"
+    dest: "{{ ansible_env.HOME }}/.local/bin/pipgre"
+    mode: '0755'
+    remote_src: true
+
+# Lua: luarocks packages
+- name: Install lua build dependencies
+  become: true
+  ansible.builtin.apt:
+    name:
+      - libreadline-dev
+    state: present
+
+- name: Install luacheck
+  ansible.builtin.shell: |
+    {{ ansible_env.HOME }}/.pixi/bin/luarocks install --local luacheck
+  args:
+    creates: "{{ ansible_env.HOME }}/.luarocks/bin/luacheck"
+
+- name: Install lanes
+  ansible.builtin.shell: |
+    {{ ansible_env.HOME }}/.pixi/bin/luarocks install --local lanes
+  args:
+    creates: "{{ ansible_env.HOME }}/.luarocks/lib/lua/5.1/lanes/core.so"

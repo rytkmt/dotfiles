@@ -341,3 +341,5 @@ function mkPrompt() {
     echo "argument error. please set prompt path";
   fi
 }
+
+export PATH="/home/rytkmt/.pixi/bin:$PATH"

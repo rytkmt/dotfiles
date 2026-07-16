@@ -13,7 +13,6 @@
       - sqlformat
       - unzip
       - python3
-      - python3-pip
       - pandoc
       - weasyprint
       - fonts-noto-cjk
