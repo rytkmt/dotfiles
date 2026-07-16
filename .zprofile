@@ -18,6 +18,10 @@ fi
 if [ -d "$HOME/.cargo/bin" ] ; then
   PATH="$HOME/.cargo/bin:$PATH"
 fi
+# pixi envs (npm global etc.)
+if [ -d "$HOME/.pixi/envs/node/bin" ] ; then
+  PATH="$HOME/.pixi/envs/node/bin:$PATH"
+fi
 # luarocks
 if [ -d "$HOME/.luarocks/bin" ] ; then
   PATH="$HOME/.luarocks/bin:$PATH"
