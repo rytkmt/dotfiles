@@ -1,7 +1,7 @@
 require("snacks").setup({
   -- ここで使いたい機能を true にします
   bigfile = { enabled = true },      -- 大容量ファイルの処理最適化
-  dashboard = { enabled = false },    -- かっこいい起動画面 packerを使ってるとエラーになるためfalseに
+  dashboard = { enabled = false },
   notifier = { enabled = false },     -- 綺麗な通知ポップアップ
   quickfile = { enabled = true },    -- ファイル読み込みの高速化
   statuscolumn = { enabled = false }, -- 行番号横の表示を綺麗に

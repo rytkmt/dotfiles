@@ -16,19 +16,29 @@ require("rc.ambwidth")
 require("rc.lsp")
 require("rc.commands")
 
--- packer {{{
-local packer_dir = vim.env.HOME..'/.local/share/nvim/site/pack/packer/opt/packer.nvim'
-if not string.match(vim.o.runtimepath, '/packer.nvim') then
-  if vim.fn.isdirectory(packer_dir) ~= 1 then
-    os.execute('git clone https://github.com/wbthomason/packer.nvim '..packer_dir)
-  end
-  vim.o.runtimepath = packer_dir..','..vim.o.runtimepath
+-- lazy.nvim {{{
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.uv.fs_stat(lazypath) then
+  vim.fn.system({
+    "git", "clone", "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-vim.tbl_islist = vim.tbl_islist or vim.islist
-
-require'plugins'
-vim.cmd[[autocmd BufWritePost plugins.lua PackerCompile]]
+require("lazy").setup(require("plugins_spec"), {
+  defaults = { lazy = false },
+  install = { colorscheme = { "lighthouse" } },
+  checker = { enabled = false },
+  change_detection = { notify = false },
+  performance = {
+    rtp = {
+      paths = { vim.env.XDG_CONFIG_HOME },
+    },
+  },
+})
 -- }}}
 
 pcall(require, "lsp")
