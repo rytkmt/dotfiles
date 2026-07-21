@@ -10,3 +10,7 @@ vim.g.matchup_delim_noskips = 1
 vim.g.matchup_delim_nomids = 1
 vim.g.matchup_matchparen_deferred = 1
 vim.g.matchup_matchparen_nomode = 'i'
+
+require('match-up').setup({
+  treesitter = { enabled = true },
+})

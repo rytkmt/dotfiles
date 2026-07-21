@@ -20,6 +20,7 @@
       - poppler-utils
       - libssl-dev
       - pkg-config
+      - httpie
     state: present
     update_cache: true
 

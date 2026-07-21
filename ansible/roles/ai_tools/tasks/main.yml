@@ -1,0 +1,72 @@
+# apt packages
+- name: Add GitHub CLI GPG key
+  become: true
+  ansible.builtin.shell: |
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+      | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+    chmod a+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+  args:
+    creates: /usr/share/keyrings/githubcli-archive-keyring.gpg
+
+- name: Add GitHub CLI apt repository
+  become: true
+  ansible.builtin.apt_repository:
+    repo: "deb [arch={{ ansible_architecture | regex_replace('x86_64', 'amd64') }} signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main"
+    filename: github-cli
+    state: present
+
+- name: Install apt packages for AI tools
+  become: true
+  ansible.builtin.apt:
+    name:
+      - gh
+      - jq
+      - graphviz
+    state: present
+    update_cache: true
+
+# GitLab CLI (replace directives in go.mod require go get + go install)
+- name: Install glab
+  ansible.builtin.shell: |
+    tmpdir=$(mktemp -d)
+    cd "$tmpdir"
+    export GOBIN="{{ ansible_env.HOME }}/.local/bin"
+    export CGO_ENABLED=0
+    {{ ansible_env.HOME }}/.pixi/bin/go mod init tmp
+    {{ ansible_env.HOME }}/.pixi/bin/go get gitlab.com/gitlab-org/cli/cmd/glab@v1.79.0
+    {{ ansible_env.HOME }}/.pixi/bin/go install gitlab.com/gitlab-org/cli/cmd/glab
+    rm -rf "$tmpdir"
+  args:
+    creates: "{{ ansible_env.HOME }}/.local/bin/glab"
+
+# yq (mikefarah/yq)
+- name: Install yq
+  ansible.builtin.get_url:
+    url: https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+    dest: "{{ ansible_env.HOME }}/.local/bin/yq"
+    mode: '0755'
+
+# pipgre
+- name: Clone pipgre
+  ansible.builtin.git:
+    repo: https://github.com/rytkmt/pipgre
+    dest: "{{ ansible_env.HOME }}/temporary/pipgre"
+
+- name: Install pipgre
+  ansible.builtin.copy:
+    src: "{{ ansible_env.HOME }}/temporary/pipgre/bin/pipgre"
+    dest: "{{ ansible_env.HOME }}/.local/bin/pipgre"
+    mode: '0755'
+    remote_src: true
+
+# Codebase Memory MCP
+- name: Install codebase-memory-mcp
+  ansible.builtin.shell: |
+    curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/install.sh | bash
+  args:
+    creates: "{{ ansible_env.HOME }}/.local/bin/codebase-memory-mcp"
+
+- name: Configure codebase-memory-mcp auto_index
+  ansible.builtin.command:
+    cmd: codebase-memory-mcp config set auto_index true
+  changed_when: false

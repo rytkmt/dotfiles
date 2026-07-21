@@ -15,8 +15,11 @@ require("rc.settings")
 require("rc.ambwidth")
 require("rc.lsp")
 require("rc.commands")
+require("plugins.source.filetype_nvim")
 
 -- lazy.nvim {{{
+vim.g.mapleader = " "
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({

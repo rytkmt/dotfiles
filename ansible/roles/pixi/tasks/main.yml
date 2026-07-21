@@ -61,19 +61,6 @@
   loop:
     - { pkg: "github.com/itchyny/mmv/cmd/mmv@latest", bin: mmv }
 
-# Go: pipgre
-- name: Clone pipgre
-  ansible.builtin.git:
-    repo: https://github.com/rytkmt/pipgre
-    dest: "{{ ansible_env.HOME }}/temporary/pipgre"
-
-- name: Install pipgre
-  ansible.builtin.copy:
-    src: "{{ ansible_env.HOME }}/temporary/pipgre/bin/pipgre"
-    dest: "{{ ansible_env.HOME }}/.local/bin/pipgre"
-    mode: '0755'
-    remote_src: true
-
 # Lua: luarocks packages
 - name: Install lua build dependencies
   become: true

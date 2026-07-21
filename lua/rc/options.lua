@@ -157,8 +157,6 @@ vim.g.loaded_vimballPlugin       = 1
 vim.g.loaded_zipPlugin           = 1
 vim.g.skip_loading_mswin         = 1
 
--- filetype.nvimにて判別
-vim.g.did_load_filetypes = 1
 
 vim.opt.cursorline = true
 

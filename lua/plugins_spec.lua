@@ -80,7 +80,6 @@ return {
     build = ":TSUpdate",
   }),
   { "RRethy/nvim-treesitter-endwise", dependencies = { "nvim-treesitter/nvim-treesitter" } },
-  spec_with_file("nathom/filetype.nvim", "source_lua"),
   spec_with_file("bbjornstad/pretty-fold.nvim", "source_lua"),
   spec_with_file("Pocco81/HighStr.nvim", "source_lua"),
   spec_with_file("tkmpypy/chowcho.nvim", "source_lua"),
