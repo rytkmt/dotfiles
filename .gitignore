@@ -1,4 +1,6 @@
 configstore
+sheldon/plugins.lock
+sheldon/repos
 nvim/.netrwhist
 .ruby-version
 nvim/plugin/packer_compiled.lua

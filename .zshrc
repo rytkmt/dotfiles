@@ -3,7 +3,7 @@ eval "$(sheldon source)"
 bindkey -e
 
 fpath=(
-  $XDG_CONFIG_HOME/zsh/prompts
+  $DOT_FILES/zsh/prompts
   $HOME/.zsh
   $fpath
 )
@@ -175,14 +175,14 @@ if [[ $(command -v pipgre) ]]; then
 else
   alias als="alias | sort | sed s/^alias\.// | sed -e 's/=/ /' | awk '{printf \"%-10s %s\",\$1,c=\"\";for(i=2;i<=NF;i++) c=c \$i\" \"; print c}' | sed s/\'// | sed s/\'//"
 fi
-alias ezr='vim $XDG_CONFIG_HOME/.zshrc'
-alias ezp='vim $XDG_CONFIG_HOME/.zprofile'
+alias ezr='vim $DOT_FILES/.zshrc'
+alias ezp='vim $DOT_FILES/.zprofile'
 alias ezrl='vim $HOME/.zshrc.local'
 alias ezpl='vim $HOME/.zprofile.local'
-alias egc='vim $XDG_CONFIG_HOME/.gitconfig'
+alias egc='vim $DOT_FILES/.gitconfig'
 alias egcl='vim $HOME/.gitconfig'
-alias cdv='cd $XDG_CONFIG_HOME'
-alias cdh='cd $XDG_CONFIG_HOME/../lighthouse'
+alias cdv='cd $DOT_FILES'
+alias cdh='cd $DOT_FILES/../lighthouse'
 alias cdg='cd $HOME/git'
 alias szr='source $HOME/.zshrc'
 
@@ -259,13 +259,13 @@ function xrename_copy_paths() {
 }
 
 # e.g. ルートから見た各ファイルの相対パスを、コピーしたいディレクトリにまるっと階層ごとコピーする
-#   `git ls-files --others |cp_with_relative_path ~/git/dev_settings/rx_1/`
+#   `git ls-files --others | cp_with_relative_path ~/git/dev_settings/rx_1/`
+#   `cd /home/rytkmt/workspace/rx_1 && find . -type f -name "*.yml" | cp_with_relative_path ~/git/dev_settings/links/rx_1/`
 function cp_with_relative_path() {
   if [ $# -eq 1 ]; then
     local save_dir=$1
     shift
     xargs -I {} ruby -e "require\"fileutils\";require\"pathname\"; v1,v2 = ARGV.tap(&method(:p)); to_path = Pathname(v1).join(v2).to_s.tap(&method(:p)); FileUtils.mkdir_p(File.dirname(to_path).tap(&method(:p))); FileUtils.cp_r(v2, to_path)" "$save_dir" {}
-    tree -a $save_dir
     # 引数1: 遷移先ディレクトリ, 引数2: パイプでの遷移したいファイルパスの相対パスを複数行
   else
     echo "argument error. please set from_name, to_name"
@@ -273,11 +273,14 @@ function cp_with_relative_path() {
 }
 
 # cp_with_relative_pathで特定のディレクトリの全ファイルを相対パス通りにシンボリックリンクを貼る
+# パイプで受け取った相対パスのファイル群を、指定ディレクトリに同じ階層構造でシンボリックリンクを作成する
+# e.g. find . -name "*.rb" | ln_with_relative_path ~/link_dest/
+#   `cd /home/rytkmt/git/dev_settings/links/rx_1 && find . -type f | ln_with_relative_path /home/rytkmt/workspace/rx_1/`
 function ln_with_relative_path() {
   if [ $# -eq 1 ]; then
     local target_dir=$1
     shift
-    xargs -I {} ruby -e "require\"fileutils\";require\"pathname\"; v1,v2 = ARGV; to_path = Pathname(v1).join(v2).to_s.tap(&method(:p)); FileUtils.mkdir_p(File.dirname(to_path)); FileUtils.ln_s(Pathname(Dir.pwd).join(v2).to_s, to_path)" "$target_dir" {}
+    xargs -I {} ruby -e "require\"fileutils\";require\"pathname\"; v1,v2 = ARGV; to_path = Pathname(v1).join(v2).to_s.tap(&method(:p)); unless File.exist?(to_path)||File.symlink?(to_path); FileUtils.mkdir_p(File.dirname(to_path)); FileUtils.ln_s(Pathname(Dir.pwd).join(v2).to_s, to_path); end" "$target_dir" {}
     # 引数1: 遷移先ディレクトリ, 引数2: パイプでの遷移したいファイルパスの相対パスを複数行
   else
     echo "argument error. please set from_name, to_name"

@@ -102,10 +102,10 @@ cmp.setup.filetype({ 'markdown' }, {
 
 
 local dicts_hash = {}
-local dicts_dir = os.getenv('XDG_CONFIG_HOME')..'/dicts'
+local dicts_dir = os.getenv('DOT_FILES')..'/dicts'
 if vim.fn.isdirectory(dicts_dir) then
   for _,ft in ipairs(vim.fn.readdir(dicts_dir)) do
-    dicts_hash[ft] = vim.fn.globpath('$XDG_CONFIG_HOME/dicts/'..ft..'/', '*', true, true)
+    dicts_hash[ft] = vim.fn.globpath('$DOT_FILES/dicts/'..ft..'/', '*', true, true)
   end
 end
 

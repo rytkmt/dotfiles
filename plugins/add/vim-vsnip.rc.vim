@@ -3,8 +3,8 @@
 " let g:UltiSnipsExpandTrigger="<C-s>"
 " let g:UltiSnipsJumpForwardTrigger="<nop>"
 " let g:UltiSnipsJumpBackwardTrigger="<nop>"
-" let g:UltiSnipsSnippetDirectories=[$XDG_CONFIG_HOME.'/ultisnips']
-let g:vsnip_snippet_dir = $XDG_CONFIG_HOME.'/.vsnip'
+" let g:UltiSnipsSnippetDirectories=[$DOT_FILES.'/ultisnips']
+let g:vsnip_snippet_dir = $DOT_FILES.'/.vsnip'
 " 候補が出るのが遅くて展開できないケースがあるため一度syncを辞めてみる
 let g:vsnip_sync_delay = -1
 imap <expr> <C-s>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-s>'

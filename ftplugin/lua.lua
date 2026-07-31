@@ -5,5 +5,5 @@ vim.keymap.set("n", "[ft]s", function()
   plugin_name = string.gsub(plugin_name, "[.]", "_")
 
   vim.fn.setreg('"', prev_text)
-  vim.cmd("vs $XDG_CONFIG_HOME/lua/plugins/source/" .. plugin_name .. ".lua")
+  vim.cmd("vs $DOT_FILES/lua/plugins/source/" .. plugin_name .. ".lua")
 end, { desc = "vsplit source_lua file", noremap = true, silent = true, buffer = 0 })

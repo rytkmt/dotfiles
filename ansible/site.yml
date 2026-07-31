@@ -5,6 +5,7 @@
     - dotfiles
     - dotfiles_private
     - pixi
+    - herdr
     - ai_tools
     - neovim
     - rust

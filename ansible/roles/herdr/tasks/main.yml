@@ -1,0 +1,5 @@
+- name: Install herdr
+  ansible.builtin.shell: |
+    curl -fsSL https://herdr.dev/install.sh | sh
+  args:
+    creates: "{{ ansible_env.HOME }}/.local/bin/herdr"

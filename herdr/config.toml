@@ -1,0 +1,75 @@
+onboarding = false
+[keys]
+prefix = "ctrl+b"
+help = "prefix+?"
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+settings = "prefix+shift+o"
+
+# 分割
+new_workspace = "prefix+shift+s"
+close_workspace = "prefix+shift+d"
+new_tab = "prefix+t"
+close_tab = "prefix+d"
+split_vertical = "prefix+v"
+split_horizontal = "prefix+s"
+close_pane = "prefix+x"
+
+# 移動
+previous_workspace = "prefix+shift+p"
+next_workspace = "prefix+shift+n"
+previous_tab = "prefix+p"
+next_tab = "prefix+n"
+
+# 選択
+workspace_picker = "prefix+shift+w"
+switch_workspace = "prefix+shift+1..9"
+switch_tab = "prefix+1..9"
+
+# リネーム
+rename_workspace = "prefix+shift+m"
+rename_tab = "prefix+m"
+rename_pane = "prefix+i"
+
+toggle_sidebar = "prefix+b"
+zoom = "prefix+z"
+resize_mode = "prefix+r"
+
+detach = "prefix+q"
+reload_config = "prefix+shift+r"
+
+new_worktree = ""
+open_worktree = ""
+remove_worktree = ""
+
+remote_image_paste = "ctrl+v"
+
+
+edit_scrollback = ""
+last_pane = ""
+previous_agent = ""
+next_agent = ""
+focus_agent = ""
+cycle_pane_next = ""
+cycle_pane_previous = ""
+goto = ""
+open_notification_target = ""
+
+[ui]
+right_click_passthrough_modifier = "ctrl"
+agent_panel_sort = "spaces"
+show_agent_labels_on_pane_borders = true
+sidebar_start_collapsed = true
+prompt_new_workspace_name = true
+
+[ui.sidebar.agents]
+row_gap = 1
+
+[ui.sidebar.spaces]
+row_gap = 1
+
+[theme]
+name = "vesper"
+auto_switch = false

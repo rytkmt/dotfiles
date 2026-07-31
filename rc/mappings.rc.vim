@@ -259,12 +259,12 @@ nmap <Leader>; [ft]
 "=================================
 
 " nnoremap [other]h :so $VIMRUNTIME/syntax/hitest.vim
-nnoremap [other]v :<C-u>tabedit $XDG_CONFIG_HOME/vimrc.vim<CR>
-nnoremap [other]d :<C-u>tabedit $XDG_CONFIG_HOME/dein.toml<CR>
-nnoremap [other]o :<C-u>tabedit $XDG_CONFIG_HOME/rc/options.rc.vim<CR>
-nnoremap [other]m :<C-u>tabedit $XDG_CONFIG_HOME/rc/mappings.rc.vim<CR>
-nnoremap [other]c :<C-u>tabedit $XDG_CONFIG_HOME/rc/command.rc.vim<CR>
-nnoremap [other]s :<C-u>tabedit $XDG_CONFIG_HOME/plugins/source/switch.vim.rc.vim<CR>
+nnoremap [other]v :<C-u>tabedit $DOT_FILES/vimrc.vim<CR>
+nnoremap [other]d :<C-u>tabedit $DOT_FILES/dein.toml<CR>
+nnoremap [other]o :<C-u>tabedit $DOT_FILES/rc/options.rc.vim<CR>
+nnoremap [other]m :<C-u>tabedit $DOT_FILES/rc/mappings.rc.vim<CR>
+nnoremap [other]c :<C-u>tabedit $DOT_FILES/rc/command.rc.vim<CR>
+nnoremap [other]s :<C-u>tabedit $DOT_FILES/plugins/source/switch.vim.rc.vim<CR>
 nnoremap [edit]s :e ++enc=shift_jis ++ff=dos<CR>
 nnoremap [edit]u :e ++enc=utf-8 ++ff=unix<CR>
 nnoremap [edit]e :e ++enc=euc-jp<CR>
@@ -283,7 +283,7 @@ lua require("rc.scripts")
 
 "+ 自作コマンド {{{
 
-source $XDG_CONFIG_HOME/rc/command.rc.vim
+source $DOT_FILES/rc/command.rc.vim
 
 nnoremap <expr> Cc ':ToCamelCase ' . expand('<cword>') .'<CR>'
 nnoremap <expr> Cp ':ToPascalCase ' . expand('<cword>') .'<CR>'

@@ -16,7 +16,7 @@ local function spec_with_file(repo, ...)
   for _, kind in ipairs(a) do
     if kind == "add" then
       init_fn = function()
-        vim.cmd('so $XDG_CONFIG_HOME/plugins/add/' .. plugin_name .. '.rc.vim')
+        vim.cmd('so $DOT_FILES/plugins/add/' .. plugin_name .. '.rc.vim')
       end
     elseif kind == "add_lua" then
       local mod_name = plugin_name:gsub("[.]", "_")
@@ -25,7 +25,7 @@ local function spec_with_file(repo, ...)
       end
     elseif kind == "source" then
       config_fn = function()
-        vim.cmd('so $XDG_CONFIG_HOME/plugins/source/' .. plugin_name .. '.rc.vim')
+        vim.cmd('so $DOT_FILES/plugins/source/' .. plugin_name .. '.rc.vim')
       end
     elseif kind == "source_lua" then
       local mod_name = plugin_name:gsub("[.]", "_")
@@ -112,6 +112,9 @@ return {
   spec_with_file("uga-rosa/translate.nvim", "source_lua"),
   spec_with_file("stevearc/aerial.nvim", "source_lua"),
   spec_with_file("folke/snacks.nvim", "source_lua"),
+  spec_with_file("rytkmt/herdr-diff-review.nvim", "source_lua", {
+    dir = "~/git/herdr-diff-review",
+  }),
   spec_with_file("coder/claudecode.nvim", "source_lua", {
     dependencies = { "folke/snacks.nvim", "nvim-lua/plenary.nvim" },
   }),

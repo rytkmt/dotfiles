@@ -38,7 +38,7 @@ require("lazy").setup(require("plugins_spec"), {
   change_detection = { notify = false },
   performance = {
     rtp = {
-      paths = { vim.env.XDG_CONFIG_HOME },
+      paths = { vim.env.DOT_FILES },
     },
   },
 })
@@ -53,7 +53,7 @@ end
 
 
 vim.cmd('set noimdisable')
-vim.cmd('so $XDG_CONFIG_HOME/rc/functions.rc.vim')
-vim.cmd('so $XDG_CONFIG_HOME/rc/mappings.rc.vim')
+vim.cmd('so $DOT_FILES/rc/functions.rc.vim')
+vim.cmd('so $DOT_FILES/rc/mappings.rc.vim')
 
 vim.g.python3_host_prog = vim.env.HOME .. "/.venvs/neovim/bin/python"

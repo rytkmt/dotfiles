@@ -63,12 +63,13 @@ touch ~/.zprofile.local
 以下を設定する：
 
 ```shell
-export XDG_CONFIG_HOME=$HOME/git/dotfiles
 export REPOS=$HOME/workspace:$HOME/git
 export WORK_MEMO_DIR="${メモディレクトリパス}"
 ```
 
 元の `.profile` がある場合は必要な内容を転記する。
+
+> **注意:** `XDG_CONFIG_HOME` は設定しない（デフォルトの `~/.config` を使用）。dotfiles内の設定は ansible の symlink で `~/.config/` 配下に配置される。
 
 ### [手動] ~/.gitconfigの設定
 
@@ -76,7 +77,7 @@ export WORK_MEMO_DIR="${メモディレクトリパス}"
 
 ```
 [include]
-  path = ${XDG_CONFIG_HOMEのパス}/.gitconfig
+  path = ~/git/dotfiles/.gitconfig
 ```
 
 仕事などで同じアカウントで色々なgitプロジェクトを扱う場合：
