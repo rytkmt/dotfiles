@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+  echo "Usage: herdr-open-nvim <file_path>"
+  exit 1
+fi
+pane_id=$(herdr pane split --current --direction right 2>/dev/null | jq -r '.result.pane.pane_id')
+if [ -z "$pane_id" ]; then
+  echo "Failed to split pane"
+  exit 1
+fi
+
+herdr pane run "$pane_id" nvim "$1"

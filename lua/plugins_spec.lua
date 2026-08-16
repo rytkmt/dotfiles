@@ -115,6 +115,9 @@ return {
   spec_with_file("rytkmt/herdr-diff-review.nvim", "source_lua", {
     dir = "~/git/herdr-diff-review",
   }),
+  spec_with_file("rytkmt/herdr-send.nvim", "source_lua", {
+    dir = "~/git/herdr-send.nvim"
+  }),
   spec_with_file("coder/claudecode.nvim", "source_lua", {
     dependencies = { "folke/snacks.nvim", "nvim-lua/plenary.nvim" },
   }),
@@ -137,7 +140,7 @@ return {
   spec_with_file("mfussenegger/nvim-lint", "source_lua", { ft = { "ruby", "lua" } }),
   spec_with_file("hat0uma/csvview.nvim", "source_lua", { ft = "csv" }),
   spec_with_file("Makaze/AnsiEsc", "add", { ft = { "log" } }),
-  { "norcalli/nvim-colorizer.lua", ft = { "vim", "lua", "zsh", "markdown" } },
+  { "norcalli/nvim-colorizer.lua", cmd = { "ColorizerAttachToBuffer" } },
 
   { "tyru/capture.vim", cmd = { "Capture" } },
 

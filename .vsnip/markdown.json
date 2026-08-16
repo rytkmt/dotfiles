@@ -59,5 +59,24 @@
       "- 作成したスクリプトのコード全体。",
       "- 実行方法と、必要なライブラリをインストールするための `pip` コマンド。"
     ]
+  },
+  "skill_md": {
+    "prefix": "skill_md",
+    "body": [
+      "---",
+      "name: ${1: NAME}",
+      "description: \"${2: DESCRIPTION}\"",
+      "when_to_use: \"#{3: WHEN_TO_USE}\"",
+      "user-invocable: true",
+      "disable-model-invocation: false",
+      "---"
+    ]
+  },
+  "skill_md_args": {
+    "prefix": "skill_md_args",
+    "body": [
+      "arguments: [issue_number, branch]",
+      "argument-hint: \"[issue番号] [ブランチ名]\""
+    ]
   }
 }

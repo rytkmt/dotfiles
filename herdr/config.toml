@@ -46,7 +46,6 @@ remove_worktree = ""
 
 remote_image_paste = "ctrl+v"
 
-
 edit_scrollback = ""
 last_pane = ""
 previous_agent = ""
@@ -71,5 +70,30 @@ row_gap = 1
 row_gap = 1
 
 [theme]
-name = "vesper"
+name = "nord"
 auto_switch = false
+
+[theme.custom]
+panel_bg = "#2e3440"       # サイドバー・タブバー・ステータスバーなどパネルの背景色
+accent = "#88c0d0"         # アクティブなタブのボーダー、選択項目のハイライト、フォーカスインジケータ
+text = "#eceff4"           # メインのテキスト色（タブ名、ペイン内テキスト等）
+surface_dim = "#3b4252"    # アクティブタブの背景、ホバー前の薄い区別面
+red = "#c8616a"            # エラー表示、削除系アクション、危険な操作の強調
+green = "#a3be8c"          # 成功表示、追加系アクション、正常ステータス
+yellow = "#ebcb8b"         # 警告表示、変更インジケータ
+blue = "#81a1c1"           # リンク、情報表示、セカンダリアクセント
+mauve = "#b48ead"          # キーワード、タグ、構造的要素のハイライト
+peach = "#d08770"          # 関数名、バッジ、通知カウント
+teal = "#8fbcbb"           # ミント系のアクセント
+
+[[keys.command]]
+key = "prefix+shift+t"
+type = "shell"
+command = "herdr pane move $HERDR_ACTIVE_PANE_ID --new-tab --focus"
+
+[[keys.command]]
+key = "prefix+shift+g"
+type = "popup"
+command = "$HOME/git/dotfiles/herdr/scripts/move-pane-to-tab.sh"
+width = "60%"
+height = "40%"

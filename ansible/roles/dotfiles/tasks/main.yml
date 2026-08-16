@@ -25,3 +25,4 @@
     - { src: peco,           dest: .config/peco }
     - { src: luacheck,       dest: .config/luacheck }
     - { src: herdr/config.toml, dest: .config/herdr/config.toml }
+    - { src: git/ignore,     dest: .gitignore }

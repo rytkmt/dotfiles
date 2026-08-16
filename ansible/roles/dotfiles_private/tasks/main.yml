@@ -15,8 +15,12 @@
     mode: '0755'
   loop:
     - .claude
+    - .kiro
+    - .kiro/agents
+    - .kiro/settings
+    - .kiro/hooks
 
-- name: Create symlinks
+- name: Create Claude symlinks
   ansible.builtin.file:
     src: "{{ dotfiles_private_dir }}/{{ item.src }}"
     dest: "{{ ansible_env.HOME }}/{{ item.dest }}"
@@ -25,3 +29,31 @@
   loop:
     - { src: claude/skills,  dest: .claude/skills }
     - { src: claude/rules,   dest: .claude/rules }
+    - { src: claude/hooks,   dest: .claude/hooks }
+
+- name: Create Kiro symlinks
+  ansible.builtin.file:
+    src: "{{ dotfiles_private_dir }}/{{ item.src }}"
+    dest: "{{ ansible_env.HOME }}/{{ item.dest }}"
+    state: link
+    force: true
+  loop:
+    - { src: kiro/skills,                   dest: .kiro/skills }
+    - { src: kiro/steering,                 dest: .kiro/steering }
+    - { src: kiro/agents/default.json,      dest: .kiro/agents/default.json }
+    - { src: kiro/agents/lightweight.json,  dest: .kiro/agents/lightweight.json }
+    - { src: kiro/settings/mcp.json,        dest: .kiro/settings/mcp.json }
+    - { src: kiro/settings/cli.json,        dest: .kiro/settings/cli.json }
+    - { src: kiro/settings/kiro_cli_theme.json, dest: .kiro/settings/kiro_cli_theme.json }
+
+- name: Create Kiro hooks symlinks
+  ansible.builtin.file:
+    src: "{{ item.src }}"
+    dest: "{{ ansible_env.HOME }}/.kiro/hooks/{{ item.name }}"
+    state: link
+    force: true
+  loop:
+    - { src: "{{ ansible_env.HOME }}/.claude/hooks/cbm-code-discovery-gate", name: cbm-code-discovery-gate }
+    - { src: "{{ ansible_env.HOME }}/.claude/hooks/cbm-session-reminder",    name: cbm-session-reminder }
+    - { src: "{{ ansible_env.HOME }}/.claude/hooks/herdr-agent-state.sh",    name: herdr-agent-state.sh }
+    - { src: "{{ dotfiles_private_dir }}/claude/hooks/rubocop-post-edit.sh", name: rubocop-post-edit.sh }

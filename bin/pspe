@@ -1,0 +1,62 @@
+#!/bin/bash
+#
+# rspec ラッパースクリプト
+# - flockで排他ロックを取得し、空いているTEST_ENV_NUMBERを自動選択
+# - 対応するDBが存在しなければ自動で作成＆スキーマロード
+# - 複数プロセスで同時実行してもDBがバッティングしない
+#
+
+set -eu
+
+LOCK_DIR="/tmp/rspec_locks"
+MAX_SLOTS=8
+DB_BASE_NAME="test_crossxdb"
+
+mkdir -p "$LOCK_DIR"
+
+# DB接続情報（環境変数で上書き可能）
+DB_HOST="${RSPEC_DB_HOST:-localhost}"
+DB_PORT="${RSPEC_DB_PORT:-5432}"
+DB_USER="${RSPEC_DB_USER:-postgres}"
+DB_PASSWORD="${RSPEC_DB_PASSWORD:-pstgrsdb}"
+
+check_db_exists() {
+  local db_name="$1"
+  PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -lqt 2>/dev/null \
+    | cut -d'|' -f1 | grep -qw "$db_name"
+}
+
+setup_db() {
+  local env_num="$1"
+  echo "==> DB '${DB_BASE_NAME}${env_num}' が存在しないため作成します..."
+  TEST_ENV_NUMBER="$env_num" RAILS_ENV=test bundle exec rake db:create 2>/dev/null || true
+  echo "==> スキーマをロードしています..."
+  TEST_ENV_NUMBER="$env_num" RAILS_ENV=test bundle exec rake db:schema:load
+  echo "==> DB作成完了"
+}
+
+for i in $(seq 2 "$MAX_SLOTS"); do
+  lock_file="$LOCK_DIR/$i.lock"
+
+  # ファイルディスクリプタを開く
+  exec {fd}>"$lock_file"
+
+  # 非ブロッキングで排他ロックを試みる
+  if flock -n "$fd"; then
+    export TEST_ENV_NUMBER="$i"
+
+    # DBの存在チェック＆自動作成
+    db_name="${DB_BASE_NAME}${i}"
+    if ! check_db_exists "$db_name"; then
+      setup_db "$i"
+    fi
+
+    # rspec実行（このスクリプトが終了するとflockは自動解放される）
+    echo "==> TEST_ENV_NUMBER='${i}' で実行します (slot $i)"
+    bundle exec rspec "$@"
+    exit $?
+  fi
+done
+
+echo "エラー: 全てのテストDBスロット(2-${MAX_SLOTS})が使用中です" >&2
+exit 1

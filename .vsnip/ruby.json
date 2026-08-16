@@ -546,5 +546,17 @@
   "yokisenu": {
     "prefix": "yokisenu",
     "body": ["予期せぬエラーが発生しました。"]
+  },
+  "lines_argf": {
+    "prefix": "lines_argf",
+    "body": [
+      "ARGF.read.lines(chomp: true)"
+    ]
+  },
+  "puts_yn": {
+    "prefix": "puts_yn",
+    "body": [
+      "puts($1 ? \"Yes\" : \"No\")"
+    ]
   }
 }

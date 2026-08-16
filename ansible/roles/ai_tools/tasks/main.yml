@@ -59,6 +59,20 @@
     mode: '0755'
     remote_src: true
 
+# Claude Code
+- name: Install Claude Code
+  ansible.builtin.shell: |
+    curl -fsSL https://claude.ai/install.sh | bash
+  args:
+    creates: "{{ ansible_env.HOME }}/.local/bin/claude"
+
+# Kiro CLI
+- name: Install Kiro CLI
+  ansible.builtin.shell: |
+    curl -fsSL https://cli.kiro.dev/install | bash
+  args:
+    creates: "{{ ansible_env.HOME }}/.local/bin/kiro-cli"
+
 # Codebase Memory MCP
 - name: Install codebase-memory-mcp
   ansible.builtin.shell: |

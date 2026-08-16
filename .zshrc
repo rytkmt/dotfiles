@@ -345,4 +345,48 @@ function mkPrompt() {
   fi
 }
 
+# function herdr-open-nvim() {
+#   if [ $# -eq 0 ]; then
+#     echo "Usage: herdr-open-nvim <file_path>"
+#     return 1
+#   fi
+#   local pane_id=$(herdr pane split --current --direction right 2>/dev/null | jq -r '.result.pane.pane_id')
+#   if [ -z "$pane_id" ]; then
+#     echo "Failed to split pane"
+#     return 1
+#   fi
+#   herdr pane run "$pane_id" nvim "$1"
+# }
+
 export PATH="/home/rytkmt/.pixi/bin:$PATH"
+
+alias kiro='kiro-cli'
+
+function gwtab() {
+  if [ $# -lt 1 ]; then
+    echo 'usage: gwtab <branch-name> [base-branch]'
+    return 1
+  fi
+  local dir=$(basename "$(git rev-parse --show-toplevel)")
+  local wt_path="../${dir}__${1}"
+  git worktree add -b "$1" "$wt_path" ${2:-} && cd "$wt_path"
+}
+
+function gwtb() {
+  if [ $# -lt 1 ]; then
+    echo 'usage: gwtb <branch-name>'
+    return 1
+  fi
+  local dir=$(basename "$(git rev-parse --show-toplevel)")
+  local wt_path="../${dir}__${1}"
+  git worktree add "$wt_path" "$1" && cd "$wt_path"
+}
+
+function gwtr() {
+  printf 'Remove this worktree? [y/N] '
+  read ans
+  case "$ans" in
+    [yY]*) git worktree remove ./ && cd ../ ;;
+    *) echo 'Cancelled.' ;;
+  esac
+}
