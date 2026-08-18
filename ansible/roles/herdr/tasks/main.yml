@@ -3,3 +3,10 @@
     curl -fsSL https://herdr.dev/install.sh | sh
   args:
     creates: "{{ ansible_env.HOME }}/.local/bin/herdr"
+
+- name: Link herdr wsl-notify plugin
+  ansible.builtin.command:
+    cmd: "{{ ansible_env.HOME }}/.local/bin/herdr plugin link {{ ansible_env.DOT_FILES }}/herdr/plugins/wsl-notify"
+  register: plugin_link
+  changed_when: "'linked' in plugin_link.stdout"
+  failed_when: false

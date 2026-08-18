@@ -1,0 +1,10 @@
+id = "wsl.agent-notify"
+name = "WSL Agent Notify"
+version = "0.1.0"
+min_herdr_version = "0.7.0"
+description = "Windows balloon notification on agent state change (WSL)"
+platforms = ["linux"]
+
+[[events]]
+on = "pane.agent_status_changed"
+command = ["bash", "bin/notify.sh"]
