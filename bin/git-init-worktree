@@ -1,0 +1,63 @@
+#!/bin/bash
+set -e
+
+# 現在のworktreeのルートを取得
+current_root="$(git rev-parse --show-toplevel)"
+
+# main worktreeのルートを取得
+main_root="$(git worktree list --porcelain | head -1 | sed 's/^worktree //')"
+
+if [ "$current_root" = "$main_root" ]; then
+  echo "error: already in main worktree" >&2
+  exit 1
+fi
+
+# .worktreeincludeをmain worktreeから読む
+include_file="$main_root/.worktreeinclude"
+if [ ! -f "$include_file" ]; then
+  echo "no .worktreeinclude found, nothing to do"
+  exit 0
+fi
+
+echo "copying from: $main_root"
+echo "copying to:   $current_root"
+echo ""
+
+copied=0
+skipped=0
+
+while IFS= read -r line || [ -n "$line" ]; do
+  # 空行・コメント行をスキップ
+  [[ -z "$line" || "$line" == \#* ]] && continue
+
+  src="$main_root/$line"
+
+  # ソースが存在しない場合スキップ
+  if [ ! -e "$src" ]; then
+    continue
+  fi
+
+  # gitignoreされているファイルのみ対象
+  if ! git -C "$main_root" check-ignore -q "$line" 2>/dev/null; then
+    echo "skip (not ignored): $line"
+    skipped=$((skipped + 1))
+    continue
+  fi
+
+  dest="$current_root/$line"
+
+  # コピー先に既に存在する場合はスキップ
+  if [ -e "$dest" ]; then
+    echo "skip (exists): $line"
+    skipped=$((skipped + 1))
+    continue
+  fi
+
+  mkdir -p "$(dirname "$dest")"
+  cp -a "$src" "$dest"
+  echo "copied: $line"
+  copied=$((copied + 1))
+done < "$include_file"
+
+echo ""
+echo "done: $copied copied, $skipped skipped"

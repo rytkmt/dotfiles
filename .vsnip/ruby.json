@@ -558,5 +558,17 @@
     "body": [
       "puts($1 ? \"Yes\" : \"No\")"
     ]
+  },
+  "gets_splitted_numbers": {
+    "prefix": "gets_splitted_numbers",
+    "body": [
+      "${1: VARIABLES} = gets.strip.split(\" \").map(&:to_i)"
+    ]
+  },
+  "ARGF_splitted_numbers": {
+    "prefix": "ARGF_splitted_numbers",
+    "body": [
+      "${1: VARIABLE} = ARGF.read.lines(chomp: true).map { _1.include?(\" \") ? _1.split(\" \").map(&:to_i) : _1.to_i }"
+    ]
   }
 }

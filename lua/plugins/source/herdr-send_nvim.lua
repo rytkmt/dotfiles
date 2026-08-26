@@ -1,5 +1,5 @@
 require("herdr-send").setup({
-  agent_cmd = "kiro-cli"
+  agent_cmd = "kiro"
 })
 
 local map = vim.keymap.set

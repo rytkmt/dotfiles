@@ -369,7 +369,13 @@ function gwtab() {
   fi
   local dir=$(basename "$(git rev-parse --show-toplevel)")
   local wt_path="../${dir}__${1}"
-  git worktree add -b "$1" "$wt_path" ${2:-} && cd "$wt_path"
+  if [ -n "${2:-}" ]; then
+    git fetch origin && git worktree add -b "$1" "$wt_path" "origin/$2" && cd "$wt_path"
+  else
+    git worktree add -b "$1" "$wt_path" && cd "$wt_path"
+  fi
+
+  git init-worktree
 }
 
 function gwtb() {
@@ -379,7 +385,9 @@ function gwtb() {
   fi
   local dir=$(basename "$(git rev-parse --show-toplevel)")
   local wt_path="../${dir}__${1}"
-  git worktree add "$wt_path" "$1" && cd "$wt_path"
+  git fetch origin && git worktree add "$wt_path" "$1" && cd "$wt_path"
+
+  git init-worktree
 }
 
 function gwtr() {

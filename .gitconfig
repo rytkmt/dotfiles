@@ -261,3 +261,4 @@
   cp = cherry-pick
   cpa = cherry-pick --abort
   cpc = cherry-pick --continue
+  init-worktree = "!~/git/dotfiles/bin/git-init-worktree"
