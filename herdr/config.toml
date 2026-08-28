@@ -20,8 +20,9 @@ close_pane = "prefix+x"
 # 移動
 previous_workspace = "prefix+shift+p"
 next_workspace = "prefix+shift+n"
-previous_tab = "prefix+p"
-next_tab = "prefix+n"
+# n/pが逆のほうが挙動のイメージがあうためいれかえ
+previous_tab = "prefix+n"
+next_tab = "prefix+p"
 
 # 選択
 workspace_picker = "prefix+shift+w"

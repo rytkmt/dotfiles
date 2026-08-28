@@ -182,6 +182,7 @@ alias ezpl='vim $HOME/.zprofile.local'
 alias egc='vim $DOT_FILES/.gitconfig'
 alias egcl='vim $HOME/.gitconfig'
 alias cdv='cd $DOT_FILES'
+alias cdvp='cd $DOT_FILES_PRIVATE'
 alias cdh='cd $DOT_FILES/../lighthouse'
 alias cdg='cd $HOME/git'
 alias szr='source $HOME/.zshrc'
@@ -385,8 +386,13 @@ function gwtb() {
   fi
   local dir=$(basename "$(git rev-parse --show-toplevel)")
   local wt_path="../${dir}__${1}"
-  git fetch origin && git worktree add "$wt_path" "$1" && cd "$wt_path"
+  git fetch origin || return 1
 
+  if git show-ref --verify --quiet "refs/heads/$1"; then
+    git branch -f "$1" "origin/$1" 2>/dev/null
+  fi
+
+  git worktree add "$wt_path" "$1" && cd "$wt_path"
   git init-worktree
 }
 

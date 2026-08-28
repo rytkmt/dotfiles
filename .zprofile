@@ -6,6 +6,7 @@ function parse_git_branch {
 }
 
 export DOT_FILES=$HOME/git/dotfiles
+export DOT_FILES_PRIVATE=$HOME/git/dotfiles-private
 
 if [ -f ~/.zprofile.local ]; then
   source ~/.zprofile.local
