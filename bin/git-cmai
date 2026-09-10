@@ -1,0 +1,139 @@
+#!/bin/bash
+set -euo pipefail
+
+# git-cmai: ステージ済みの差分からKiroにコミットメッセージを生成させ、コミットする。
+#   - チャットUIを起動せず headless モード(kiro-cli chat --no-interactive)を使う
+#   - hooksなしの軽量agent(lightweight)+ effort low で高速・低コストに生成
+#   - 生成メッセージを表示し y/n 確認のうえコミット
+#
+# 使い方:
+#   git add <files>
+#   git cmai          # 差分からメッセージ生成 → y/n確認 → コミット
+#
+# 環境変数:
+#   GIT_CMAI_DIFF_LINE_LIMIT  差分本文の行数上限 (default: 1500)
+
+# --- リポジトリ確認 ---
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  echo "error: not a git repository" >&2
+  exit 1
+fi
+
+# --- ステージ済み差分の確認 ---
+if git diff --cached --quiet; then
+  echo "error: no staged changes. use 'git add' first." >&2
+  exit 1
+fi
+
+# --- 言語判定 (gitlab.point-service.jp なら日本語、それ以外は英語) ---
+remote_url="$(git config --get remote.origin.url 2>/dev/null || true)"
+if [[ "$remote_url" == *"gitlab.point-service.jp"* ]]; then
+  lang_rule="コミットメッセージは日本語で書くこと。"
+else
+  lang_rule="Write the commit message in English."
+fi
+
+# --- 差分の取得 ---
+# 環境依存(色設定・ページャ・外部diff)を避けるため -c color.ui=false --no-pager を明示。
+# `git diff | head -n N` は head が先に閉じると git が SIGPIPE で死に pipefail+set -e で
+# 静かに終了するため、行数制限は sed を使う(入力を読み切るので安全)。
+DIFF_LINE_LIMIT="${GIT_CMAI_DIFF_LINE_LIMIT:-1500}"
+git_diff() { git -c color.ui=false --no-pager diff --cached "$@"; }
+
+stat="$(git_diff --stat)"
+full_line_count="$(git_diff | wc -l)"
+diff_body="$(git_diff | sed -n "1,${DIFF_LINE_LIMIT}p")"
+
+# 行数制限に達した場合はプロンプトに明示(切れた分の存在を生成側に伝える)
+truncated_note=""
+if [ "$full_line_count" -gt "$DIFF_LINE_LIMIT" ]; then
+  truncated_note="※ 差分は全${full_line_count}行のうち先頭${DIFF_LINE_LIMIT}行のみ掲載。残りは省略。全体像は上記の統計を参照。"
+fi
+
+# --- プロンプト組み立て ---
+prompt=$(cat <<EOF
+あなたはコミットメッセージ生成器です。以下のステージ済み差分に対する
+コミットメッセージを1行だけ出力してください。
+
+厳守事項:
+- Conventional Commits 形式 "type: description" で書く
+  (type一覧: feat, fix, refactor, docs, test, chore, style, perf)
+- subject行のみ。本文・箇条書き・引用符・コードブロック・前置き・説明は一切付けない
+- 出力はコミットメッセージそのもの1行のみ
+- ${lang_rule}
+
+# 変更ファイル統計
+${stat}
+
+# 差分(先頭${DIFF_LINE_LIMIT}行まで)
+${truncated_note}
+${diff_body}
+EOF
+)
+
+# --- Kiro headless 実行 ---
+# hooksなしの軽量agent + effort low で高速・低コスト。ツールは使わないので trust系不要。
+# stderr は起動ログ等で大量なため一時ファイルに退避し、失敗時のみ表示する。
+echo "generating commit message..." >&2
+err_file="$(mktemp)"
+trap 'rm -f "$err_file"' EXIT
+set +e
+raw="$(kiro-cli chat --no-interactive --agent lightweight --effort low "$prompt" 2>"$err_file")"
+kiro_rc=$?
+set -e
+if [ "$kiro_rc" -ne 0 ]; then
+  echo "error: kiro-cli exited with code $kiro_rc" >&2
+  echo "--- kiro-cli stderr ---" >&2
+  cat "$err_file" >&2
+  exit 1
+fi
+
+# --- 出力からコミットメッセージ1行を抽出 ---
+# ANSIエスケープ・TUIプロンプト記号(> )・コードフェンス・空行を除去し最初の1行を採用。
+# grep が0件マッチだと exit 1 を返し pipefail+set -e で落ちるためパイプ全体を set +e で保護。
+strip_ansi='s/\x1B\[[0-9;]*[A-Za-z]//g'
+set +e
+msg="$(printf '%s\n' "$raw" \
+  | sed -e "$strip_ansi" \
+  | sed -e 's/\r$//' \
+  | sed -E 's/^[[:space:]]*>[[:space:]]*//' \
+  | grep -vE '^\s*$' \
+  | grep -vE '^\s*```' \
+  | sed -n '1p' \
+  | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' \
+  | sed -e 's/^["'\''`]//' -e 's/["'\''`]$//')"
+set -e
+
+if [ -z "$msg" ]; then
+  echo "error: failed to generate commit message" >&2
+  echo "--- raw output ---" >&2
+  printf '%s\n' "$raw" >&2
+  exit 1
+fi
+
+# --- メッセージ妥当性チェック ---
+# Conventional Commits の type: で始まるか / 長すぎないかを簡易検証。
+if ! printf '%s' "$msg" | grep -qE '^(feat|fix|refactor|docs|test|chore|style|perf)(\([^)]+\))?: .+'; then
+  echo "warning: generated message does not match Conventional Commits format:" >&2
+  echo "  $msg" >&2
+fi
+msg_len="$(printf '%s' "$msg" | wc -m | tr -d ' ')"
+if [ "$msg_len" -gt 72 ]; then
+  echo "warning: commit message is long (${msg_len} chars)." >&2
+fi
+
+# --- y/n 確認のうえコミット ---
+echo "" >&2
+echo "commit message:" >&2
+echo "  $msg" >&2
+printf 'commit with this message? [y/N]: ' >&2
+read -r answer </dev/tty
+case "$answer" in
+  y|Y|yes|YES)
+    git commit -m "$msg"
+    ;;
+  *)
+    echo "aborted." >&2
+    exit 1
+    ;;
+esac

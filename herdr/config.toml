@@ -98,3 +98,16 @@ type = "popup"
 command = "$HOME/git/dotfiles/herdr/scripts/move-pane-to-tab.sh"
 width = "60%"
 height = "40%"
+
+# herdr-pane-stash-recall plugin
+[[keys.command]]
+key = "prefix+shift+e"
+type = "plugin_action"
+command = "stash-recall.pane.stash"
+description = "stash pane (enqueue)"
+
+[[keys.command]]
+key = "prefix+e"
+type = "plugin_action"
+command = "stash-recall.pane.recall-replace"
+description = "recall (replace current pane)"

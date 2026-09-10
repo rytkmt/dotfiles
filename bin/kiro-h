@@ -1,0 +1,127 @@
+#!/bin/bash
+#
+# kiro-h : Kiro CLI のセッションをプロジェクト横断で選択して resume する
+#
+# - `.history`（自分が入力したプロンプト）を検索源にする（chat.historyMode=session 前提）
+# - `.json` からメタ（title / cwd / updated_at / session_id）を取得して一覧化
+# - fzf で選択し、該当 cwd に移動して `kiro-cli chat --resume-id <id>` を実行
+#
+# 使い方:
+#   kiro-h            全セッションを fzf で選択
+#   kiro-h <word>     入力プロンプトに <word> を含むセッションだけを事前絞り込み
+#
+# 依存: fzf, jq
+#
+
+set -euo pipefail
+
+SESSIONS_DIR="$HOME/.kiro/sessions/cli"
+
+# --- 依存チェック ---
+for cmd in fzf jq; do
+  if ! command -v "$cmd" >/dev/null 2>&1; then
+    echo "kiro-h: '$cmd' が見つかりません。インストールしてください。" >&2
+    exit 1
+  fi
+done
+
+if [ ! -d "$SESSIONS_DIR" ]; then
+  echo "kiro-h: セッションディレクトリが見つかりません: $SESSIONS_DIR" >&2
+  exit 1
+fi
+
+# --- historyMode チェック（session でなければ警告のみ。動作は継続） ---
+mode="$(kiro-cli settings all 2>/dev/null | sed -n 's/^chat\.historyMode = "\(.*\)"$/\1/p')"
+if [ -n "$mode" ] && [ "$mode" != "session" ]; then
+  echo "kiro-h: 警告 chat.historyMode='$mode' です（session 前提のツールです）。" >&2
+  echo "        新しいセッションは .history が作られず検索に出ません。" >&2
+  echo "        戻すには: kiro-cli settings chat.historyMode session" >&2
+fi
+
+query="${1:-}"
+
+# --- fzf に流す一覧を生成 ---
+# 出力フォーマット（TAB区切り）: session_id \t 表示行
+#   表示行: <更新日> <ディレクトリ名>  <title>
+build_list() {
+  local h base json id
+  for h in "$SESSIONS_DIR"/*.history; do
+    [ -e "$h" ] || continue
+    base="${h%.history}"
+    json="$base.json"
+    [ -f "$json" ] || continue
+
+    # query 指定時は .history 本文で事前絞り込み（大文字小文字無視）
+    if [ -n "$query" ]; then
+      grep -qi -- "$query" "$h" 2>/dev/null || continue
+    fi
+
+    id="$(basename "$base")"
+
+    # メタを1回の jq で取り出す（updated_at / cwd / title）
+    local meta date dir title
+    meta="$(jq -r '[.updated_at, .cwd, .title] | @tsv' "$json" 2>/dev/null)" || continue
+    IFS=$'\t' read -r date dir title <<<"$meta"
+
+    date="${date:0:10}"                 # YYYY-MM-DD
+    dir="$(basename "${dir:-}")"         # 末端ディレクトリ名
+    dir="${dir:0:30}"                    # 長いディレクトリ名は切り詰め
+    title="${title:-(untitled)}"
+    title="${title//$'\n'/ }"           # 念のため改行除去
+
+    # fzf の検索対象にする本文（.history 全文）を1行に整形（TAB/改行→スペース）
+    local body
+    body="$(tr '\t\n' '  ' <"$h")"
+
+    # 2列(TAB区切り): 表示＋本文（1列目） \t session_id（2列目）
+    #   1列目=表示ラベル(日付/dir/title)＋本文… fzf の表示・検索の両方に使う。
+    #         本文は行末側に連結し、--no-hscroll で画面右へ流さず行頭を固定表示する。
+    #   2列目=session_id… --nth=1 で検索対象から除外。preview/選択結果に使う。
+    printf '%s  %-30s  %s    %s\t%s\n' "$date" "$dir" "$title" "$body" "$id"
+  done | sort -r          # 表示（日付先頭）で新しい順
+}
+
+list="$(build_list)"
+if [ -z "$list" ]; then
+  if [ -n "$query" ]; then
+    echo "kiro-h: '$query' にマッチするセッションがありません。" >&2
+  else
+    echo "kiro-h: 選択できるセッションがありません（.history が存在しません）。" >&2
+  fi
+  exit 1
+fi
+
+# --- fzf で選択 ---
+# 検索は1列目のみ（--nth=1）＝表示ラベル＋本文。session_id(2列目)は検索対象外。
+# --with-nth は使わない（このfzfでは検索対象まで絞られ本文検索が効かなくなるため）。
+# --no-hscroll でマッチ箇所への横スクロールを止め、常に行頭を固定表示する
+#   （本文は行末側にあり画面右外なので、選択中の行が右に流れて見えなくならない）。
+# プレビューは選択中セッションの .history を検索語ハイライト付きで表示。
+selected="$(
+  printf '%s\n' "$list" \
+    | fzf --nth=1 \
+          --delimiter='\t' \
+          --no-hscroll \
+          ${query:+--query="$query"} \
+          --prompt='kiro session> ' \
+          --height='80%' \
+          --border \
+          --preview="kiro-h-preview '$SESSIONS_DIR'/{2}.history {q}" \
+          --preview-window='up,55%,wrap'
+)" || exit 0   # ESC/Ctrl-C は静かに終了
+
+[ -n "$selected" ] || exit 0
+
+# 選択行の最終列（最後のTAB以降）が session_id（2列目）
+session_id="${selected##*$'\t'}"
+cwd="$(jq -r '.cwd' "$SESSIONS_DIR/$session_id.json" 2>/dev/null)"
+
+if [ -z "$cwd" ] || [ ! -d "$cwd" ]; then
+  echo "kiro-h: cwd が見つかりません: ${cwd:-（空）}" >&2
+  exit 1
+fi
+
+echo "resume: $session_id"
+echo "cwd:    $cwd"
+cd "$cwd"
+exec kiro-cli chat --resume-id "$session_id"

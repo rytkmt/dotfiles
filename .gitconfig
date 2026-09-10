@@ -141,6 +141,9 @@
   }; f"
   amm = commit --amend -m
   amc = commit --amend --no-edit
+  cmaip = "!f() { git cmai && git pob; }; f"
+  snai = "!f() { git add -A && git cmai; }; f"
+  snaip = "!f() { git add -A && git cmai && git pob; }; f"
   co = checkout
   aa = add -A
   b = branch -vv
@@ -261,4 +264,35 @@
   cp = cherry-pick
   cpa = cherry-pick --abort
   cpc = cherry-pick --continue
-  init-worktree = "!~/git/dotfiles/bin/git-init-worktree"
+  wtab = "!f() { \
+    if [ $# -lt 1 ]; then \
+      echo 'usage: git gwtab <branch-name> [base-branch]' >&2; \
+      return 1; \
+    fi; \
+    dir=$(basename \"$(git rev-parse --show-toplevel)\"); \
+    wt_path=\"../${dir}__${1}\"; \
+    if [ -n \"${2:-}\" ]; then \
+      git fetch -q origin && git worktree add -q -b \"$1\" \"$wt_path\" --no-track \"origin/$2\"; \
+    else \
+      git worktree add -q -b \"$1\" \"$wt_path\"; \
+    fi && \
+    git -C \"$wt_path\" init-worktree >/dev/null && \
+    { [ -e \"$wt_path/.envrc\" ] && command -v direnv >/dev/null 2>&1 && direnv allow \"$wt_path\" || true; } && \
+    echo \"$wt_path\"; \
+  }; f"
+  wtb = "!f() { \
+    if [ $# -lt 1 ]; then \
+      echo 'usage: git gwtb <branch-name>' >&2; \
+      return 1; \
+    fi; \
+    dir=$(basename \"$(git rev-parse --show-toplevel)\"); \
+    wt_path=\"../${dir}__${1}\"; \
+    git fetch -q origin || return 1; \
+    if git show-ref --verify --quiet \"refs/heads/$1\"; then \
+      git branch -f \"$1\" \"origin/$1\" 2>/dev/null; \
+    fi; \
+    git worktree add -q \"$wt_path\" \"$1\" && \
+    git -C \"$wt_path\" init-worktree >/dev/null && \
+    { [ -e \"$wt_path/.envrc\" ] && command -v direnv >/dev/null 2>&1 && direnv allow \"$wt_path\" || true; } && \
+    echo \"$wt_path\"; \
+  }; f"

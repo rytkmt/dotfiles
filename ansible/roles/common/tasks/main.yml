@@ -7,7 +7,6 @@
       - gettext
       - sendfile
       - zsh
-      - peco
       - ripgrep
       - fd-find
       - sqlformat
@@ -21,6 +20,7 @@
       - libssl-dev
       - pkg-config
       - httpie
+      - direnv
     state: present
     update_cache: true
 
@@ -36,3 +36,38 @@
     dest: "{{ ansible_env.HOME }}/.local/bin/fd"
     state: link
     force: true
+
+# fzf はここ以上のバージョンを保証する。apt 版は古いため公式リリースバイナリを使う。
+- name: Set fzf minimum version
+  ansible.builtin.set_fact:
+    fzf_min_version: "0.74.3"
+
+- name: Check installed fzf version
+  ansible.builtin.command: fzf --version
+  register: fzf_installed
+  changed_when: false
+  failed_when: false
+
+- name: Determine installed fzf version string
+  ansible.builtin.set_fact:
+    fzf_current_version: "{{ (fzf_installed.stdout | default('') | regex_search('[0-9]+\\.[0-9]+\\.[0-9]+')) | default('0.0.0', true) }}"
+
+- name: Install/upgrade fzf when below minimum version
+  when: fzf_installed.rc != 0 or fzf_current_version is version(fzf_min_version, '<')
+  block:
+    - name: Map ansible architecture to fzf release arch
+      ansible.builtin.set_fact:
+        fzf_arch: "{{ {'x86_64': 'amd64', 'aarch64': 'arm64', 'armv7l': 'armv7'}[ansible_architecture] }}"
+
+    - name: Download fzf release archive
+      ansible.builtin.get_url:
+        url: "https://github.com/junegunn/fzf/releases/download/v{{ fzf_min_version }}/fzf-{{ fzf_min_version }}-linux_{{ fzf_arch }}.tar.gz"
+        dest: "/tmp/fzf-{{ fzf_min_version }}-linux_{{ fzf_arch }}.tar.gz"
+        mode: '0644'
+
+    - name: Extract fzf binary to ~/.local/bin
+      ansible.builtin.unarchive:
+        src: "/tmp/fzf-{{ fzf_min_version }}-linux_{{ fzf_arch }}.tar.gz"
+        dest: "{{ ansible_env.HOME }}/.local/bin"
+        remote_src: true
+        mode: '0755'

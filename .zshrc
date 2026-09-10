@@ -1,5 +1,10 @@
 eval "$(sheldon source)"
 
+# direnv: ディレクトリごとの環境変数を自動適用（rx_1系の BEADS_DIR 共有などで使用）
+if command -v direnv >/dev/null 2>&1; then
+  eval "$(direnv hook zsh)"
+fi
+
 bindkey -e
 
 fpath=(
@@ -364,43 +369,38 @@ export PATH="/home/rytkmt/.pixi/bin:$PATH"
 alias kiro='kiro-cli'
 
 function gwtab() {
-  if [ $# -lt 1 ]; then
-    echo 'usage: gwtab <branch-name> [base-branch]'
-    return 1
-  fi
-  local dir=$(basename "$(git rev-parse --show-toplevel)")
-  local wt_path="../${dir}__${1}"
-  if [ -n "${2:-}" ]; then
-    git fetch origin && git worktree add -b "$1" "$wt_path" "origin/$2" && cd "$wt_path"
-  else
-    git worktree add -b "$1" "$wt_path" && cd "$wt_path"
-  fi
-
-  git init-worktree
+  local wt_path
+  wt_path=$(git wtab "$@") && cd "$wt_path"
 }
 
 function gwtb() {
-  if [ $# -lt 1 ]; then
-    echo 'usage: gwtb <branch-name>'
-    return 1
-  fi
-  local dir=$(basename "$(git rev-parse --show-toplevel)")
-  local wt_path="../${dir}__${1}"
-  git fetch origin || return 1
-
-  if git show-ref --verify --quiet "refs/heads/$1"; then
-    git branch -f "$1" "origin/$1" 2>/dev/null
-  fi
-
-  git worktree add "$wt_path" "$1" && cd "$wt_path"
-  git init-worktree
+  local wt_path
+  wt_path=$(git wtb "$@") && cd "$wt_path"
 }
 
 function gwtr() {
   printf 'Remove this worktree? [y/N] '
   read ans
   case "$ans" in
-    [yY]*) git worktree remove ./ && cd ../ ;;
+    [yY]*)
+      local main_root branch
+      main_root=$(git worktree list --porcelain | head -1 | sed 's/^worktree //')
+      branch=$(git rev-parse --abbrev-ref HEAD)
+      git worktree remove ./ && cd "$main_root" || return
+      # 削除したworktreeのブランチも削除（マージ済みなら -d、未マージなら確認の上 -D）
+      if [ -n "$branch" ] && [ "$branch" != HEAD ]; then
+        if git branch -d "$branch" 2>/dev/null; then
+          :
+        else
+          printf "Branch '%s' is not fully merged. Force delete? [y/N] " "$branch"
+          read bans
+          case "$bans" in
+            [yY]*) git branch -D "$branch" ;;
+            *) echo "Kept branch '$branch'." ;;
+          esac
+        fi
+      fi
+      ;;
     *) echo 'Cancelled.' ;;
   esac
 }

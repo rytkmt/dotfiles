@@ -1,0 +1,42 @@
+#!/bin/bash
+set -e
+
+# git-sync-init-worktrees
+#
+# 現在のリポジトリの全 worktree に対して `git init-worktree` を再適用する。
+# `.worktreeinclude` に後からファイルを追加したとき、既存の全 worktree へ
+# 一括で反映するために使う。
+#
+# init-worktree は「コピー先に既に存在する場合はスキップ」する実装なので、
+# 既存ファイルは触らず、未反映のファイルだけがコピーされる（冪等）。
+# main worktree では init-worktree が何もしない（early exit）ため、単純に全件回してよい。
+
+# 現在のリポジトリの全 worktree パスを取得
+worktrees="$(git worktree list --porcelain | awk '/^worktree /{print $2}')"
+
+# main worktree のパス（先頭 = main）
+main_root="$(printf '%s\n' "$worktrees" | head -1)"
+
+total=0
+applied=0
+
+while IFS= read -r wt || [ -n "$wt" ]; do
+  [ -z "$wt" ] && continue
+  total=$((total + 1))
+
+  # main worktree は init-worktree が拒否する（対象外）のでスキップ
+  if [ "$wt" = "$main_root" ]; then
+    echo "skip (main): $wt"
+    continue
+  fi
+
+  echo "=== $wt ==="
+  # init-worktree 自体が既存ファイルをスキップするので、そのまま流す
+  git -C "$wt" init-worktree || echo "  (init-worktree failed for $wt)"
+  applied=$((applied + 1))
+  echo ""
+done <<EOF
+$worktrees
+EOF
+
+echo "done: applied to $applied worktree(s) ($total total, main excluded)"

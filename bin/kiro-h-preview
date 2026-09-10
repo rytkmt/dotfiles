@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+# kiro-h の fzf プレビュー用ヘルパー
+# 引数: $1 = .history のファイルパス, $2 = fzf の現在クエリ(空可)
+# .history を表示し、クエリ内の各語（スペース区切り）をハイライトする。
+#
+set -u
+
+file="${1:-}"
+query="${2:-}"
+
+[ -f "$file" ] || exit 0
+
+if [ -z "$query" ]; then
+  cat "$file"
+  exit 0
+fi
+
+# 正規表現メタ文字をエスケープし、スペース区切りを OR(|) に変換
+pattern="$(printf '%s' "$query" | sed -E 's/[][(){}.^$*+?|\\]/\\&/g; s/ +/|/g')"
+
+if [ -n "$pattern" ]; then
+  # マッチ部分を色付け（|$ で非マッチ行も残す）。失敗時は素の表示
+  grep --color=always -iE "$pattern|$" "$file" 2>/dev/null || cat "$file"
+else
+  cat "$file"
+fi
