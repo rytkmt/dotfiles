@@ -84,3 +84,10 @@
   ansible.builtin.command:
     cmd: codebase-memory-mcp config set auto_index true
   changed_when: false
+
+# Beads (bd)
+- name: Install beads (bd)
+  ansible.builtin.shell: |
+    curl -fsSL https://raw.githubusercontent.com/gastownhall/beads/main/scripts/install.sh | bash
+  args:
+    creates: "{{ ansible_env.HOME }}/.local/bin/bd"
