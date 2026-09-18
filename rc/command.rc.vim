@@ -164,11 +164,11 @@ command! ProfileEnd call s:profile_end()
 "++ }}}
 
 "++ packer {{{
-function! s:recompile_packer() abort
-  exe "luafile ".$DOT_FILES."/lua/plugins.lua"
-  PackerSync
-endfunction
-command! PackerRecompile call s:recompile_packer()
+" function! s:recompile_packer() abort
+"   exe "luafile ".$DOT_FILES."/lua/plugins.lua"
+"   PackerSync
+" endfunction
+" command! PackerRecompile call s:recompile_packer()
 "++ }}}
 
 "++ gitlabのfileリンク生成 {{{

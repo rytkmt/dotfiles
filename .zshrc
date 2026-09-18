@@ -168,6 +168,13 @@ alias vimo='vim -O'
 function vimd() {
   eval "vim -c \"DiffviewOpen $@\""; \
 }
+_vimd() {
+  local -a refs
+  refs=(${(f)"$(git for-each-ref --format='%(refname:short)' refs/heads refs/remotes refs/tags 2>/dev/null)"})
+  _describe 'git ref' refs
+}
+compdef _vimd vimd
+
 # alias sudo="sudo env PATH=$PATH"
 if [[ $(command -v pipgre) ]]; then
   function als() {
@@ -372,11 +379,31 @@ function gwtab() {
   local wt_path
   wt_path=$(git wtab "$@") && cd "$wt_path"
 }
+_gwtab() {
+  # 第1引数: 新規ブランチ名（補完なし） / 第2引数: base-branch（リモートブランチを候補）
+  _arguments \
+    '1:new branch name:' \
+    '2:base branch:->base'
+  case $state in
+    base)
+      local -a branches
+      branches=(${(f)"$(git for-each-ref --format='%(refname:short)' refs/remotes 2>/dev/null | sed 's#^origin/##')"})
+      _describe 'base branch' branches
+      ;;
+  esac
+}
+compdef _gwtab gwtab
 
 function gwtb() {
   local wt_path
   wt_path=$(git wtb "$@") && cd "$wt_path"
 }
+_gwtb() {
+  local -a branches
+  branches=(${(f)"$(git for-each-ref --format='%(refname:short)' refs/heads refs/remotes 2>/dev/null | sed 's#^origin/##' | grep -v '^HEAD$' | sort -u)"})
+  _describe 'branch' branches
+}
+compdef _gwtb gwtb
 
 function gwtr() {
   printf 'Remove this worktree? [y/N] '

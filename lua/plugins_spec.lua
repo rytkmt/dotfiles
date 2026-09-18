@@ -118,9 +118,9 @@ return {
   spec_with_file("rytkmt/herdr-send.nvim", "source_lua", {
     dir = "~/git/herdr-send.nvim"
   }),
-  spec_with_file("coder/claudecode.nvim", "source_lua", {
-    dependencies = { "folke/snacks.nvim", "nvim-lua/plenary.nvim" },
-  }),
+  -- spec_with_file("coder/claudecode.nvim", "source_lua", {
+  --   dependencies = { "folke/snacks.nvim", "nvim-lua/plenary.nvim" },
+  -- }),
   spec_with_file("petertriho/nvim-scrollbar", "source_lua"),
   spec_with_file("ysmb-wtsg/in-and-out.nvim", "source_lua"),
   spec_with_file("rytkmt/tempaste.nvim", "source_lua"),

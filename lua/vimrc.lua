@@ -15,6 +15,7 @@ require("rc.settings")
 require("rc.ambwidth")
 require("rc.lsp")
 require("rc.commands")
+require("rc.autocmds")
 require("plugins.source.filetype_nvim")
 
 -- lazy.nvim {{{
