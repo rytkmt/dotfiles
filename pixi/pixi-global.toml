@@ -40,3 +40,13 @@ luarocks = "*"
 [envs.lua.exposed]
 lua = "lua"
 luarocks = "luarocks"
+
+# markitdown: 各種ファイル(Office/PDF/HTML/画像 等)をMarkdownへ変換するCLI。
+# conda-forge の markitdown は PDF/DOCX/PPTX/XLSX/HTML/画像メタdata 等の
+# [all] extra 相当を run 依存に含む（音声文字起こし・Azure Content Understanding は除く）。
+[envs.markitdown]
+channels = ["conda-forge"]
+[envs.markitdown.dependencies]
+markitdown = "*"
+[envs.markitdown.exposed]
+markitdown = "markitdown"
