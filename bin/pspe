@@ -30,8 +30,10 @@ setup_db() {
   local env_num="$1"
   echo "==> DB '${DB_BASE_NAME}${env_num}' が存在しないため作成します..."
   TEST_ENV_NUMBER="$env_num" RAILS_ENV=test bundle exec rake db:create 2>/dev/null || true
-  echo "==> スキーマをロードしています..."
-  TEST_ENV_NUMBER="$env_num" RAILS_ENV=test bundle exec rake db:schema:load
+  echo "==> スキーマをロードしています (migrate_all_schemas)..."
+  # ridgepole方式(db/Schemafile)のため db:schema:load ではなく migrate_all_schemas を使う
+  # (public + tenant 両スキーマを構築する。タスクはengine dummy app経由の app: 名前空間)
+  TEST_ENV_NUMBER="$env_num" RAILS_ENV=test bundle exec rake app:migrate_all_schemas
   echo "==> DB作成完了"
 }
 
