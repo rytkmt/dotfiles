@@ -173,7 +173,7 @@ command! ProfileEnd call s:profile_end()
 
 "++ gitlabのfileリンク生成 {{{
 function! s:fetch_git_project_url()
-  let l:project_url = split(SystemCommandWithoutEscapeChars("git -C ". GitProjectRootWithCache() . " remote -v|awk '{print $2}'"), "\n")[0]
+  let l:project_url = split(SystemCommandWithoutEscapeChars("git -C ". GitProjectRootWithCache() . " remote -v|grep origin|awk '{print $2}'"), "\n")[0]
   return substitute(substitute(l:project_url, '\v(https://).*\@(.*)(\.git)?', '\1\2', ''), '\.git$', '', '')
 endfunction
 function! s:fetch_git_current_revision()
