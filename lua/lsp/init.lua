@@ -42,3 +42,19 @@ vim.lsp.enable("jsonls")
 
 vim.lsp.config("marksman", {})
 vim.lsp.enable("marksman")
+
+local vtsls_opts = require('lsp.vtsls')
+vim.lsp.config('vtsls', vtsls_opts)
+vim.lsp.enable('vtsls')
+
+local cssls_opts = require('lsp.cssls')
+vim.lsp.config('cssls', cssls_opts)
+vim.lsp.enable('cssls')
+
+local html_opts = require('lsp.html')
+vim.lsp.config('html', html_opts)
+vim.lsp.enable('html')
+
+local eslint_opts = require('lsp.eslint')
+vim.lsp.config('eslint', eslint_opts)
+vim.lsp.enable('eslint')
