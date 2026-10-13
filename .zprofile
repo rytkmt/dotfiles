@@ -18,6 +18,9 @@ fi
 if [ -d "$DOT_FILES/bin" ] ; then
   PATH="$DOT_FILES/bin:$PATH"
 fi
+if [ -d "$DOT_FILES_PRIVATE/bin" ] ; then
+  PATH="$DOT_FILES_PRIVATE/bin:$PATH"
+fi
 if [ -d "$HOME/.cargo/bin" ] ; then
   PATH="$HOME/.cargo/bin:$PATH"
 fi

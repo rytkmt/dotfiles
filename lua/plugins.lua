@@ -104,6 +104,13 @@ return {
   spec_with_file("windwp/nvim-autopairs", "source_lua", {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
   }),
+  spec_with_file("windwp/nvim-ts-autotag", "source_lua", {
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    ft = { "html", "javascript", "javascriptreact", "typescript", "typescriptreact", "markdown", "xml" }
+  }),
+  spec_with_file("nemanjamalesija/ts-expand-hover.nvim", "source_lua", {
+    ft = { "typescript", "typescriptreact" },
+  }),
   spec_with_file("rlane/pounce.nvim", "source_lua"),
   spec_with_file("chentoast/marks.nvim", "source_lua"),
   spec_with_file("nvim-telescope/telescope.nvim", "source_lua", {
