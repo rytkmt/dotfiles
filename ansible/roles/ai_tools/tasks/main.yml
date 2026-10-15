@@ -46,6 +46,20 @@
     dest: "{{ ansible_env.HOME }}/.local/bin/yq"
     mode: '0755'
 
+# slotlock (rytkmt/slotlock) — スロット番号ロッカー。pspe が利用する
+- name: Install slotlock
+  ansible.builtin.get_url:
+    url: https://github.com/rytkmt/slotlock/releases/download/v0.1.0/slotlock
+    dest: "{{ ansible_env.HOME }}/.local/bin/slotlock"
+    mode: '0755'
+
+# slotlock-herdr — key を $HERDR_WORKSPACE_ID で埋める slotlock の herdr ラッパー
+- name: Install slotlock-herdr
+  ansible.builtin.get_url:
+    url: https://github.com/rytkmt/slotlock/releases/download/v0.1.0/slotlock-herdr
+    dest: "{{ ansible_env.HOME }}/.local/bin/slotlock-herdr"
+    mode: '0755'
+
 # pipgre
 - name: Clone pipgre
   ansible.builtin.git:
