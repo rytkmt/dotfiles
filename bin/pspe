@@ -4,7 +4,18 @@
 # - slotlock(-herdr) で TEST_ENV_NUMBER 用のスロット番号を確保する
 #   （排他ロックの保持・空きスロット探索・同時実行禁止は slotlock に委譲）
 # - .env.test があれば dotenv(overload) で読み込む（呼び出し側で dotenv を前置き不要）
-# - 対応するDBが存在しなければ自動で作成＆スキーマロード
+# - このワークスペースにとって新規確保のスロット(slotlock get が未割り当て)のときだけ
+#   DBをフル再構築する(db:rebuild = drop→create→migrate+seed+apartment+initial_data。
+#   Rails エンジン(rx_1_core, spec/dummy あり)は spec/dummy に cd して実行、
+#   通常アプリ(rx_1/rx_1_batch)はルートで実行。どちらも prefix 無し db:rebuild)。
+#   新規確保スロットには別作業の古いDBが残っている可能性があるため確実に作り直す。
+# - 再利用スロット(2回目以降)では再構築せず、さらに NO_MIGRATE=true を付けて rspec を
+#   起動し、spec の before(:suite) 内の migrate(ridgepole diff が重い)をスキップして高速化する。
+#   ※新規確保時に db:rebuild 済みでスキーマ/seed は最新なので migrate 不要。
+# - 常時 NO_MIGRATE のため、スキーマ(db/Schemafile)を変更しても再利用スロットでは
+#   自動反映されない。スキーマ変更後は PSPE_REBUILD=1 pspe で強制再構築する。
+# - rspec は --format RSpec::AiFormatter::Formatter で実行する(gem 'rspec-ai-formatter'
+#   導入前提。AI向けにノイズを削った構造化出力でトークンを節約する)。
 # - herdr ワークスペースごとに安定したスロット番号が割り当てられ、同じDBを使い回す
 #
 # スロット番号は slotlock が渡す $SLOT_NUMBER を TEST_ENV_NUMBER として使う。
@@ -17,12 +28,6 @@ MIN_SLOT="${PSPE_MIN_SLOT:-2}"
 DB_BASE_NAME="test_crossxdb"
 SCOPE="rspec"
 
-# DB接続情報（環境変数で上書き可能）
-DB_HOST="${RSPEC_DB_HOST:-localhost}"
-DB_PORT="${RSPEC_DB_PORT:-5432}"
-DB_USER="${RSPEC_DB_USER:-postgres}"
-DB_PASSWORD="${RSPEC_DB_PASSWORD:-pstgrsdb}"
-
 # dotenv 内包:
 # カレントに .env.test があれば `bundle exec dotenv -o -f <files>` を prefix として使い、
 # rspec / rake を同じ env 下で実行する。Kiro のプロセス環境変数（AWS系など）と
@@ -30,7 +35,7 @@ DB_PASSWORD="${RSPEC_DB_PASSWORD:-pstgrsdb}"
 # .env.test.local も存在すれば後ろに追加（後勝ちで上書き優先）。
 # .env.test が無いプロジェクトでは dotenv を使わずそのまま実行する。
 #   DOTENV_PREFIX は空文字 or "bundle exec dotenv -o -f <files> --" が入る。
-#   pspe_inner / setup_db では `$DOTENV_PREFIX bundle exec ...` のように前置する。
+#   pspe_inner / rebuild_db では `$DOTENV_PREFIX bundle exec ...` のように前置する。
 build_dotenv_prefix() {
   if [ ! -f .env.test ]; then
     echo ""
@@ -50,39 +55,83 @@ pspe_inner() {
   local env_num="$SLOT_NUMBER"
   export TEST_ENV_NUMBER="$env_num"
 
-  local db_name="${DB_BASE_NAME}${env_num}"
-  if ! check_db_exists "$db_name"; then
-    setup_db "$env_num"
+  if [ "$PSPE_NEW_SLOT" = "1" ]; then
+    # 新規確保スロット: 古いDBが残っている可能性があるのでフル再構築する。
+    rebuild_db "$env_num"
+    echo "==> TEST_ENV_NUMBER='${env_num}' で実行します (slot $env_num / 再構築済み)"
+  elif [ "${PSPE_REBUILD:-}" = "1" ]; then
+    # 再利用スロットだが PSPE_REBUILD=1 指定: スキーマ変更後などに強制再構築する。
+    # 常時 NO_MIGRATE のため、スキーマを変えても自動では反映されない。このフラグで反映する。
+    rebuild_db "$env_num"
+    echo "==> TEST_ENV_NUMBER='${env_num}' で実行します (slot $env_num / 強制再構築)"
+  else
+    # 再利用スロット: 前回 pspe が db:rebuild 済み。再構築不要。
+    echo "==> TEST_ENV_NUMBER='${env_num}' で実行します (slot $env_num / 再利用)"
   fi
 
-  echo "==> TEST_ENV_NUMBER='${env_num}' で実行します (slot $env_num)"
+  # どの経路でもスキーマ/seed は構築済みなので、rspec 起動時の
+  # before(:suite) 内 migrate(ridgepole diff が重い)をスキップして高速化する。
+  export NO_MIGRATE="true"
+
+  # rspec-ai-formatter で AI 向けにノイズを削った構造化出力にする(トークン節約)。
+  # gem 'rspec-ai-formatter' が導入済みである前提。ユーザーが別の --format を
+  # 引数で足した場合は両方のフォーマッタが有効になる(RSpec は複数指定を許容)。
   # shellcheck disable=SC2086
-  $DOTENV_PREFIX bundle exec rspec "$@"
+  $DOTENV_PREFIX bundle exec rspec --format RSpec::AiFormatter::Formatter "$@"
 }
 
-check_db_exists() {
-  local db_name="$1"
-  PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -lqt 2>/dev/null \
-    | cut -d'|' -f1 | grep -qw "$db_name"
-}
-
-setup_db() {
+# 新規確保したスロット、または PSPE_REBUILD=1 指定時に呼ぶ。
+# 別作業の古いDBが残っている可能性があるため、DBを drop から作り直して確実に最新化する。
+#   db:rebuild(core提供)の中身:
+#     db:drop → db:create → migrate_public_schema → seed:plans/tenants
+#     → apartmentdb:create → migrate_all_schemas → initial_data:create(各tenant)
+#   = spec の before(:suite) 相当のスーパーセット。これで rspec は migrate 不要になる。
+# 実行ディレクトリ:
+#   - Rails エンジン(rx_1_core。spec/dummy がある)では spec/dummy に cd して実行する。
+#     db:rebuild 内部が prefix 無しの rake タスクを Rake::Task[...].invoke で呼ぶため、
+#     ルートからの app:db:rebuild では内部タスクが解決できず壊れる(手動運用 rdbrc と同じ理由)。
+#   - 通常アプリ(rx_1/rx_1_batch。spec/dummy が無い)ではルートで実行する。
+# どちらも prefix 無しの db:rebuild を使う。
+# ただし db:rebuild 単体は、DBが既に存在する状態だと内部の drop→create が
+# 接続キャッシュの都合で繋がらず migrate_public_schema で「DBが無い」と落ちることがある。
+# そのため db:drop db:create を前置してから db:rebuild を呼ぶ(1回のrakeに並べる)。
+# これは execute-rspec スキルの実績手順(db:drop db:create db:rebuild)と同じ。
+# rake の DB 操作は .env.test のシークレットに依存しない(接続=Settings, DB名=TEST_ENV_NUMBER)
+# ため dotenv は通さない。rspec はルートで実行するため、cd はサブシェルに閉じ込める。
+rebuild_db() {
   local env_num="$1"
-  echo "==> DB '${DB_BASE_NAME}${env_num}' が存在しないため作成します..."
-  # rake の DB 操作は .env.test のシークレットに依存しない（接続=Settings, DB名=TEST_ENV_NUMBER）
-  # ため dotenv は通さない。必要になれば $DOTENV_PREFIX を前置する。
-  TEST_ENV_NUMBER="$env_num" RAILS_ENV=test bundle exec rake db:create 2>/dev/null || true
-  echo "==> スキーマをロードしています (migrate_all_schemas)..."
-  # ridgepole方式(db/Schemafile)のため db:schema:load ではなく migrate_all_schemas を使う
-  # (public + tenant 両スキーマを構築する。タスクはengine dummy app経由の app: 名前空間)
-  TEST_ENV_NUMBER="$env_num" RAILS_ENV=test bundle exec rake app:migrate_all_schemas
-  echo "==> DB作成完了"
+  local run_dir="."
+  [ -d spec/dummy ] && run_dir="spec/dummy"
+  echo "==> DB '${DB_BASE_NAME}${env_num}' をフル再構築します (${run_dir} で db:rebuild)..."
+  (
+    cd "$run_dir"
+    TEST_ENV_NUMBER="$env_num" RAILS_ENV=test PRIMARY_SERVER=1 \
+      bundle exec rake db:drop db:create db:rebuild
+  )
+  echo "==> DB再構築完了"
 }
 
-export -f pspe_inner check_db_exists setup_db
-export DB_BASE_NAME DB_HOST DB_PORT DB_USER DB_PASSWORD DOTENV_PREFIX
+export -f pspe_inner rebuild_db
+export DB_BASE_NAME DOTENV_PREFIX
+
+# 新規確保判定:
+# slotlock run を呼ぶ前に get で「このワークスペースに既にslotが割り当て済みか」を見る。
+#   get 成功 (割り当て済み) → 再利用 = 前回も自分がこのslotを構築済み → rebuild不要
+#   get 失敗 (未割り当て)   → 今回が新規確保 → DBが残っていれば古い可能性があるので rebuild
+# get は read-only（ロックも last-used 更新もしない）ため、直後の run の割り当てに影響しない。
+# 同じワークスペースなら get で見える番号 = run で確保される番号。
+if slotlock-herdr get --scope "$SCOPE" >/dev/null 2>&1; then
+  PSPE_NEW_SLOT="0"
+else
+  PSPE_NEW_SLOT="1"
+fi
+export PSPE_NEW_SLOT
+# ユーザー指定の強制再構築フラグ(スキーマ変更後など)を子 bash へ引き継ぐ。
+export PSPE_REBUILD="${PSPE_REBUILD:-}"
 
 # slotlock-herdr が key を $HERDR_WORKSPACE_ID で埋め、slot を確保して
 # pspe_inner を実行する。rspec への引数 "$@" はそのまま渡す。
+# 子 bash にも set -eu を効かせる(親の set -eu は -c の子シェルに継承されないため)。
+# これにより rebuild_db 内の rake 失敗を握りつぶさず、rspec まで進む前に失敗を顕在化させる。
 exec slotlock-herdr run --scope "$SCOPE" --min "$MIN_SLOT" --max "$MAX_SLOTS" -- \
-  bash -c 'pspe_inner "$@"' _ "$@"
+  bash -c 'set -eu; pspe_inner "$@"' _ "$@"
