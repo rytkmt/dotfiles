@@ -23,6 +23,50 @@
 
 set -eu
 
+# pspe 自体のヘルプ(設定変更に使う環境変数の一覧)。
+# 先頭引数が --help / -h のときだけ表示して終了する(rspec には渡さない)。
+print_help() {
+  cat <<'EOF'
+pspe - rspec ラッパー (slotlock で TEST_ENV_NUMBER スロットを確保して実行)
+
+USAGE:
+  pspe [rspec への引数...]
+  pspe --help | -h
+
+rspec への引数はそのまま rspec に渡される (例: pspe spec/models/foo_spec.rb)。
+
+挙動を変える環境変数:
+  PSPE_REBUILD=1
+      再利用スロットでも DB をフル再構築してから実行する。
+      常時 NO_MIGRATE のためスキーマ(db/Schemafile)変更は自動反映されない。
+      スキーマ変更後は PSPE_REBUILD=1 pspe で強制反映する。
+      例: PSPE_REBUILD=1 pspe spec/models/foo_spec.rb
+
+  PSPE_MAX_SLOTS=<n>   (既定: 8)
+      使用するスロット番号の上限。TEST_ENV_NUMBER の最大値。
+
+  PSPE_MIN_SLOT=<n>    (既定: 2)
+      使用するスロット番号の下限。slot 1(付番なし/開発用DB)を避けるため既定は 2。
+
+  KIRO_SESSION_ID (Kiro が自動付与。手動指定は非推奨)
+      セットされていると rspec に --format RSpec::AiFormatter::Formatter を付与し、
+      AI 向けにノイズを削った構造化出力にする(トークン節約)。
+      Kiro 経由以外(人間が直接実行)では付与されず素の出力になる。
+
+その他の挙動(環境変数ではないが関連):
+  .env.test / .env.test.local があれば dotenv(overload) で読み込んでから実行する。
+  新規確保スロットでは DB を db:rebuild でフル再構築する(古いDB対策)。
+  再利用スロットでは再構築せず NO_MIGRATE=true で起動して高速化する。
+EOF
+}
+
+case "${1:-}" in
+  --help | -h)
+    print_help
+    exit 0
+    ;;
+esac
+
 MAX_SLOTS="${PSPE_MAX_SLOTS:-8}"
 MIN_SLOT="${PSPE_MIN_SLOT:-2}"
 DB_BASE_NAME="test_crossxdb"
@@ -76,8 +120,14 @@ pspe_inner() {
   # rspec-ai-formatter で AI 向けにノイズを削った構造化出力にする(トークン節約)。
   # gem 'rspec-ai-formatter' が導入済みである前提。ユーザーが別の --format を
   # 引数で足した場合は両方のフォーマッタが有効になる(RSpec は複数指定を許容)。
+  # Kiro 経由の実行時(KIRO_SESSION_ID がセット済み。Kiro が子プロセスに自動付与)
+  # のみ AI 向けフォーマッタを付与する。人間が直接叩いたときは素の出力にする。
+  local ai_format=""
+  if [ -n "${KIRO_SESSION_ID:-}" ]; then
+    ai_format="--format RSpec::AiFormatter::Formatter"
+  fi
   # shellcheck disable=SC2086
-  $DOTENV_PREFIX bundle exec rspec --format RSpec::AiFormatter::Formatter "$@"
+  $DOTENV_PREFIX bundle exec rspec $ai_format "$@"
 }
 
 # 新規確保したスロット、または PSPE_REBUILD=1 指定時に呼ぶ。

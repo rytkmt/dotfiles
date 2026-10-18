@@ -35,6 +35,14 @@ compinit -d ~/.zcompdump
 # shift-tabで候補を逆戻り
 bindkey "\e[Z" reverse-menu-complete
 
+# <M-e> でコマンドラインを $EDITOR で開いて編集
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^[e' edit-command-line
+
+# <M-m> で直前のシェル単語をコピー（クォート文字列は1語扱い）
+bindkey '^[m' copy-prev-shell-word
+
 # TODO shift-tabで候補を戻りたい
 
 if [ -f ~/.zshrc.local ]; then
@@ -63,6 +71,11 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 # 補完候補を詰めて表示
 setopt list_packed
 
+# コマンドのスペルミスを訂正提案する
+setopt correct
+# 訂正プロンプトに選択肢の凡例を表示
+SPROMPT="correct '%R' to '%r' ? [n]o/[y]es/[a]bort/[e]dit "
+
 export LSCOLORS=exfxcxdxbxegedabagacad
 if [[ $(command -v vivid) ]]; then
   export LS_COLORS="$(vivid generate catppuccin-macchiato)"
@@ -82,25 +95,6 @@ if [[ $(command -v fzf) ]]; then
   }
   zle -N fzf-history-selection
   bindkey '^R' fzf-history-selection
-
-  ## コマンド履歴からディレクトリ検索・移動
-  if [[ -n $(echo ${^fpath}/chpwd_recent_dirs(N)) && -n $(echo ${^fpath}/cdr(N)) ]]; then
-    autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
-    add-zsh-hook chpwd chpwd_recent_dirs
-    zstyle ':completion:*' recent-dirs-insert both
-    zstyle ':chpwd:*' recent-dirs-default true
-    zstyle ':chpwd:*' recent-dirs-max 1000
-    zstyle ':chpwd:*' recent-dirs-file "$HOME/.cache/chpwd-recent-dirs"
-  fi
-  function fzf-cdr () {
-    local selected_dir="$(cdr -l | sed 's/^[0-9]* *//' | fzf --reverse)"
-    if [ -n "$selected_dir" ]; then
-      BUFFER="cd ${selected_dir}"
-      zle accept-line
-    fi
-  }
-  zle -N fzf-cdr
-  bindkey '^E' fzf-cdr
 
   ## カレントディレクトリ以下のディレクトリ検索・移動
   function fzf-find-cd() {
@@ -430,4 +424,48 @@ function gwtr() {
       ;;
     *) echo 'Cancelled.' ;;
   esac
+}
+alias gwtgc='git wtgc'
+
+# ------------------------------------------------------------
+# keyhelp: よく使うキーバインドのチートシート
+#   項目は keyhelp_entries に "zsh表現|vim表現|bindkey名|説明" 形式で追記していく
+#   表示: [キー表現: zsh / vim]  [処理: bindkey名 + 説明]
+# ------------------------------------------------------------
+typeset -ga keyhelp_entries=(
+  "^A|<C-a>|beginning-of-line|行頭へ移動"
+  "^E|<C-e>|end-of-line|行末へ移動"
+  "^F|<C-f>|forward-char|1文字右へ移動"
+  "^B|<C-b>|backward-char|1文字左へ移動"
+  "^P|<C-p>|up-line-or-history|前の履歴（複数行なら上の行）へ"
+  "^N|<C-n>|down-line-or-history|次の履歴（複数行なら下の行）へ"
+
+  "^H|<C-h>|backward-delete-char|カーソル直前の1文字を削除"
+  "^W|<C-w>|backward-kill-word|カーソル直前の単語を削除"
+  "^K|<C-k>|kill-line|カーソルから行末まで削除"
+  "^U|<C-u>|kill-whole-line|行全体を削除"
+  "^Y|<C-y>|yank|直前にkillしたテキストを貼り付け"
+  "^L|<C-l>|clear_screen|画面をクリア"
+
+  "^[F|<M-f>|forward-word|次の単語の末尾へ移動"
+  "^[B|<M-b>|backward-word|前の単語の先頭へ移動"
+  "^[Q|<M-q>|push-line|入力中の行を退避し次コマンド後に復帰"
+  "^[.|<M-.>|insert-last-word|直前コマンドの最後の引数を挿入"
+  "^[,|<M-,>|_history-complete-newer|履歴から新しい方向に補完"
+
+  "^_|<C-_>|undo|直前の編集を取り消し"
+  "^[e|<M-e>|edit-command-line|コマンドラインを $EDITOR で開いて編集"
+  "^[m|<M-m>|copy-prev-shell-word|直前のシェル単語をコピー（クォートは1語扱い）"
+)
+
+function zsh_keyhelp {
+  print -P "%F{cyan}=== bindkey cheatsheet ===%f"
+  local entry zsh vim name desc keys
+  for entry in "${keyhelp_entries[@]}"; do
+    zsh="${entry%%|*}";   entry="${entry#*|}"
+    vim="${entry%%|*}";   entry="${entry#*|}"
+    name="${entry%%|*}";  desc="${entry#*|}"
+    keys="$(printf '%-5s  %s' "$zsh" "$vim")"
+    printf "  %-18s %-24s %s\n" "$keys" "$name" "$desc"
+  done
 }
