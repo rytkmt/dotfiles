@@ -1,0 +1,157 @@
+#!/usr/bin/env bash
+#
+# git-wtgc — マージされて origin から消えたブランチ(= upstream が [gone])の
+#             worktree を安全に掃除する。
+#
+#   判定基準(A案):
+#     1. そのブランチの upstream(追跡先)が origin に存在した痕跡があり、かつ現在消えている([gone])
+#        => MR がマージされてソースブランチが削除された状態とみなす
+#     2. 念のため tip コミットが「いずれかの origin 追跡ブランチに含まれる」ことを確認し、
+#        含まれないものは未push分が残るとみなして保護する
+#     3. 作業ディレクトリに未コミット変更があるものは常にスキップ
+#     4. メイン worktree / detached HEAD は対象外
+#
+#   削除時は `git worktree remove` で作業ディレクトリ+管理情報を正しく除去し、
+#   ローカルブランチも `git branch -D` で削除する。
+#
+# 使い方:
+#   git-wtgc            # dry-run(何を消すか表示のみ。既定)
+#   git-wtgc -A         # 実際に削除する(--apply と同じ)
+#   git-wtgc --apply    # 実際に削除する
+#   git-wtgc --no-fetch # fetch --prune を省略(事前に最新化済みの場合)
+#
+set -euo pipefail
+
+APPLY=0
+DO_FETCH=1
+for arg in "$@"; do
+  case "$arg" in
+    -A|--apply) APPLY=1 ;;
+    --no-fetch) DO_FETCH=0 ;;
+    -h|--help)
+      sed -n '2,30p' "$0"; exit 0 ;;
+    *) echo "unknown option: $arg" >&2; exit 2 ;;
+  esac
+done
+
+# 色(TTY のときだけ有効。パイプ/リダイレクト時は無効)
+if [ -t 1 ]; then
+  C_RESET=$'\e[0m'; C_DIM=$'\e[2m'; C_BOLD=$'\e[1m'
+  C_RED=$'\e[31m'; C_GREEN=$'\e[32m'; C_YELLOW=$'\e[33m'; C_CYAN=$'\e[36m'
+else
+  C_RESET=""; C_DIM=""; C_BOLD=""; C_RED=""; C_GREEN=""; C_YELLOW=""; C_CYAN=""
+fi
+
+# リポジトリルートで実行していなくても動くよう main worktree を基準にする
+main_wt=$(set +o pipefail; git worktree list --porcelain | awk '/^worktree /{print $2; exit}')
+cd "$main_wt"
+
+if [ "$DO_FETCH" -eq 1 ]; then
+  echo "==> git fetch origin --prune"
+  git fetch origin --prune >/dev/null 2>&1 || {
+    echo "fetch に失敗しました。ネットワーク/認証を確認してください。" >&2
+    exit 1
+  }
+fi
+
+# upstream が [gone] のブランチ集合を作る
+declare -A gone
+while IFS='|' read -r br track; do
+  [ "$track" = "[gone]" ] && gone["$br"]=1
+done < <(git for-each-ref --format='%(refname:short)|%(upstream:track)' refs/heads/)
+
+# 分類結果を溜めるバッファ: "ブランチ<TAB>備考"
+delete_rows=()
+hold_rows=()
+keep_rows=()
+
+del_paths=()
+del_branches=()
+
+# worktree を列挙
+while read -r wt ref; do
+  path="$wt"
+  name=$(basename "$path")
+
+  if [ "$path" = "$main_wt" ]; then
+    keep_rows+=("$name"$'\t'"メインworktree")
+    continue
+  fi
+  if [ "$ref" = "(detached)" ]; then
+    keep_rows+=("$name"$'\t'"detached HEAD")
+    continue
+  fi
+
+  br=${ref#refs/heads/}
+
+  # gone でなければ対象外(= まだ origin に存在する作業中ブランチ等)
+  if [ -z "${gone[$br]:-}" ]; then
+    keep_rows+=("$br"$'\t'"originに存在 or 未push(保護)")
+    continue
+  fi
+
+  # 未コミット変更があるものは保護
+  if [ -n "$(set +o pipefail; git -C "$path" status --porcelain 2>/dev/null | head -1)" ]; then
+    hold_rows+=("$br"$'\t'"作業未コミットあり(保護)")
+    continue
+  fi
+
+  # tip が何らかの origin ブランチに含まれることを最終確認
+  tip=$(git rev-parse "$br")
+  contained=$(set +o pipefail; git branch -r --contains "$tip" 2>/dev/null | grep -E '\borigin/' | grep -v HEAD | head -1 | sed 's/^ *//')
+  if [ -z "$contained" ]; then
+    hold_rows+=("$br"$'\t'"goneだがtipがoriginに不在(未push保護)")
+    continue
+  fi
+
+  delete_rows+=("$br"$'\t'"merged&removed (tip: $contained)")
+  del_paths+=("$path")
+  del_branches+=("$br")
+done < <(git worktree list --porcelain | awk '
+  /^worktree /{wt=$2}
+  /^branch /{print wt" "$2}
+  /^detached$/{print wt" (detached)"}
+')
+
+# グループ表示ヘルパー: $1=見出し色 $2=見出し $3=ブランチ色 残り=rows
+print_group() {
+  local label_color="$1" label="$2" br_color="$3"; shift 3
+  local rows=("$@")
+  [ ${#rows[@]} -eq 0 ] && return
+  printf "\n%s%s%s (%d)%s\n" "$C_BOLD" "$label_color" "$label" "${#rows[@]}" "$C_RESET"
+  local row br note
+  for row in "${rows[@]}"; do
+    br=${row%%$'\t'*}
+    note=${row#*$'\t'}
+    printf "  %s%-66s%s %s%s%s\n" "$br_color" "$br" "$C_RESET" "$C_DIM" "$note" "$C_RESET"
+  done
+}
+
+# DELETE を先頭に(最重要)、次に HOLD、最後に KEEP
+print_group "$C_RED"    "DELETE — マージ削除済み(掃除対象)" "$C_RED"    ${delete_rows[@]+"${delete_rows[@]}"}
+print_group "$C_YELLOW" "HOLD   — 保留(要確認・保護)"        "$C_YELLOW" ${hold_rows[@]+"${hold_rows[@]}"}
+print_group "$C_GREEN"  "KEEP   — 保持"                      "$C_CYAN"   ${keep_rows[@]+"${keep_rows[@]}"}
+
+echo
+n=${#del_paths[@]}
+if [ "$n" -eq 0 ]; then
+  printf "%s削除対象はありません。%s\n" "$C_GREEN" "$C_RESET"
+  exit 0
+fi
+
+if [ "$APPLY" -eq 0 ]; then
+  printf "%sDELETE 対象 %d 件 (dry-run)。実行するには: %sgit wtgc -A%s\n" \
+    "$C_BOLD" "$n" "$C_CYAN" "$C_RESET"
+  exit 0
+fi
+
+printf "%s==> %d 件を削除します%s\n" "$C_BOLD" "$n" "$C_RESET"
+for i in "${!del_paths[@]}"; do
+  p="${del_paths[$i]}"
+  b="${del_branches[$i]}"
+  printf "  %s- worktree remove:%s %s\n" "$C_DIM" "$C_RESET" "$p"
+  git worktree remove "$p"
+  printf "  %s- branch -D:%s %s%s%s\n" "$C_DIM" "$C_RESET" "$C_RED" "$b" "$C_RESET"
+  git branch -D "$b"
+done
+printf "%s完了。%s\n" "$C_GREEN" "$C_RESET"
