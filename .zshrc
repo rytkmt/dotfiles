@@ -469,3 +469,7 @@ function zsh_keyhelp {
     printf "  %-18s %-24s %s\n" "$keys" "$name" "$desc"
   done
 }
+
+# [保留] zsh-autocomplete(入力中ドロップダウン)導入試行 → Ubuntu zsh 5.9 で本体の
+#   autoload +X(複数フルパス)が壊れ初期化が完走せず断念(2026-10-19)。zsh更新 or
+#   Znap導入で再挑戦の余地あり。要件満たすだけなら fzf-tab が代替候補。

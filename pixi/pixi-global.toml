@@ -1,3 +1,4 @@
+version = 1
 [envs.python]
 channels = ["conda-forge"]
 [envs.python.dependencies]
@@ -11,7 +12,7 @@ pip = "pip"
 [envs.node]
 channels = ["conda-forge"]
 [envs.node.dependencies]
-nodejs = ">=22"
+nodejs = ">=26"
 [envs.node.exposed]
 node = "node"
 npm = "npm"
