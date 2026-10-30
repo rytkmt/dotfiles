@@ -1,7 +1,11 @@
 -- grep結果などの "path:11" / "path:11:5" を渡されたら、行番号を剥がして該当行へジャンプする
 local function open_with_line(name)
-  -- 末尾の余分な ":" も許容: path:11 / path:11: / path:11:5 / path:11:5:
-  local path, line = name:match('^(.-):(%d+):?%d*:?$')
+  -- 単一行/列: path:11 / path:11: / path:11:5 / path:11:5: （末尾の余分な ":" も許容）
+  -- 行範囲:     path:11-20 / path:11-20: （開始行へ移動）
+  local path, line = name:match('^(.-):(%d+)%-%d+:?$')
+  if not path then
+    path, line = name:match('^(.-):(%d+):?%d*:?$')
+  end
   if not path or vim.fn.filereadable(name) == 1 then
     return -- パターン外、または "path:11" 自体が実在するファイルなら何もしない
   end
@@ -21,8 +25,8 @@ local function open_with_line(name)
     vim.api.nvim_win_set_cursor(0, { math.min(tonumber(line), total), 0 })
     vim.cmd('normal! zz')
   end)
-  -- "path:11" という空バッファを掃除
-  if vim.api.nvim_buf_is_valid(bufnr) and vim.api.nvim_buf_get_name(bufnr):match(':%d+:?%d*:?$') then
+  -- "path:11" / "path:11-20" という空バッファを掃除
+  if vim.api.nvim_buf_is_valid(bufnr) and vim.api.nvim_buf_get_name(bufnr):match(':%d+[%-:]?%d*:?$') then
     pcall(vim.api.nvim_buf_delete, bufnr, { force = true })
   end
 end
