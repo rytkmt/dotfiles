@@ -128,6 +128,18 @@ return {
   spec_with_file("rytkmt/herdr-send.nvim", "source_lua", {
     dir = "~/git/herdr-send.nvim"
   }),
+  {
+    "rytkmt/kiro-skills.nvim",
+    dir = "~/git/kiro-skills.nvim",
+    dependencies = {
+      "hrsh7th/nvim-cmp",
+      "nvim-telescope/telescope.nvim",
+    },
+    config = function()
+      require("kiro_skills").setup()
+      require("telescope").load_extension("kiro_skills")
+    end,
+  },
   -- spec_with_file("coder/claudecode.nvim", "source_lua", {
   --   dependencies = { "folke/snacks.nvim", "nvim-lua/plenary.nvim" },
   -- }),
