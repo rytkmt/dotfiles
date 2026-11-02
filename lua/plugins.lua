@@ -116,6 +116,9 @@ return {
   spec_with_file("nvim-telescope/telescope.nvim", "source_lua", {
     dependencies = { "nvim-lua/plenary.nvim", "sam4llis/telescope-arglist.nvim" },
   }),
+  spec_with_file("rytkmt/emj_picker.nvim", "source_lua", {
+    dependencies = { "nvim-telescope/telescope.nvim" },
+  }),
   spec_with_file("uga-rosa/translate.nvim", "source_lua"),
   spec_with_file("stevearc/aerial.nvim", "source_lua"),
   spec_with_file("folke/snacks.nvim", "source_lua"),
@@ -128,7 +131,8 @@ return {
   -- spec_with_file("coder/claudecode.nvim", "source_lua", {
   --   dependencies = { "folke/snacks.nvim", "nvim-lua/plenary.nvim" },
   -- }),
-  spec_with_file("petertriho/nvim-scrollbar", "source_lua"),
+  -- NOTE: v2移行中。2026-11-16にmainがv2へ切り替わるので、それ以降はこのbranch指定を外してよい
+  spec_with_file("petertriho/nvim-scrollbar", "source_lua", { branch = "refactor/v2" }),
   spec_with_file("ysmb-wtsg/in-and-out.nvim", "source_lua"),
   spec_with_file("rytkmt/tempaste.nvim", "source_lua"),
   spec_with_file("j-hui/fidget.nvim", "source_lua"),

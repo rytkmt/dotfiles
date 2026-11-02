@@ -1,13 +1,8 @@
 require("scrollbar").setup({
-    handle = {
-        text = "  ",
-        blend = 30, -- Integer between 0 and 100. 0 for fully opaque and 100 to full transparent. Defaults to 30.
-        color = "#323843",
-    },
     marks = {
         Cursor = {
             text = " ",
-            priorityk= 0,
+            priority = 0,
             highlight = "Normal",
         },
     --     Search = {
@@ -38,21 +33,35 @@ require("scrollbar").setup({
             highlight = "Comment",
         },
     },
-    excluded_buftypes = {
-        "terminal",
+    exclude = {
+        buftypes = {
+            "terminal",
+        },
+        filetypes = {
+            "dropbar_menu",
+            "dropbar_menu_fzf",
+            "DressingInput",
+            "cmp_docs",
+            "cmp_menu",
+            "noice",
+            "prompt",
+            "TelescopePrompt",
+        },
     },
-    excluded_filetypes = {
-        "dropbar_menu",
-        "dropbar_menu_fzf",
-        "DressingInput",
-        "cmp_docs",
-        "cmp_menu",
-        "noice",
-        "prompt",
-        "TelescopePrompt",
+    providers = {
+        cursor = true,
+        diagnostic = true,
+        gitsigns = false, -- Requires gitsigns
+        search = false, -- native search marks
+        ale = false, -- Requires ALE
     },
-    autocmd = {
-        render = {
+    scrollbar = {
+        thumb = {
+            text = "  ",
+            blend = 0, -- Integer between 0 and 100. 0 for fully opaque and 100 to full transparent. Defaults to 30.
+            highlight = { bg = "#4a4f6a" },
+        },
+        events = {
             "BufWinEnter",
             "TabEnter",
             "TermEnter",
@@ -62,19 +71,5 @@ require("scrollbar").setup({
             "VimResized",
             "WinScrolled",
         },
-        clear = {
-            "BufWinLeave",
-            "TabLeave",
-            "TermLeave",
-            "WinLeave",
-        },
-    },
-    handlers = {
-        cursor = true,
-        diagnostic = true,
-        gitsigns = false, -- Requires gitsigns
-        handle = true,
-        search = false, -- Requires hlslens
-        ale = false, -- Requires ALE
     },
 })

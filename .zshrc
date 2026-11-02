@@ -193,6 +193,10 @@ alias cdh='cd $DOT_FILES/../lighthouse'
 alias cdg='cd $HOME/git'
 alias szr='source $HOME/.zshrc'
 
+alias ekiroa='vim $HOME/.kiro/agents/default.json'
+alias ekirosk='vim $HOME/.kiro/skills/'
+alias ekirost='vim $HOME/.kiro/steering/'
+
 function flon() {
   sed -e 's/:.*$//' | grep -v '^D' | sed -e 's/^\s\?[AMURD\?]\{1,2\}\s\+//' | sed -e 's/^.*\ ->\ //' | uniq
 }

@@ -142,10 +142,25 @@ pspe_inner() {
 #     ルートからの app:db:rebuild では内部タスクが解決できず壊れる(手動運用 rdbrc と同じ理由)。
 #   - 通常アプリ(rx_1/rx_1_batch。spec/dummy が無い)ではルートで実行する。
 # どちらも prefix 無しの db:rebuild を使う。
-# ただし db:rebuild 単体は、DBが既に存在する状態だと内部の drop→create が
-# 接続キャッシュの都合で繋がらず migrate_public_schema で「DBが無い」と落ちることがある。
-# そのため db:drop db:create を前置してから db:rebuild を呼ぶ(1回のrakeに並べる)。
-# これは execute-rspec スキルの実績手順(db:drop db:create db:rebuild)と同じ。
+#
+# drop に rake db:drop を使わない理由(重要):
+#   rake db:drop は apartment:drop を呼び、その中で Apartment.tenant_names =
+#   CmCore::Tenant.pluck を実行して CmCore::Tenant をロードする。別作業が残した
+#   「古いスキーマ」のDB(例: 新カラム追加前で enum のバッキングカラムが無い)に対して
+#   これを行うと "Undeclared attribute type for enum ... Enums must be backed by a
+#   database column" でモデルロードが落ち、drop すらできない(core の db:rebuild が持つ
+#   冒頭 migrate 回避策より手前で死ぬ)。pspe が古いDBを作り直したい状況そのもので詰まる。
+#
+#   そこで drop は rails runner から postgres 管理DBに establish_connection し、
+#   DROP DATABASE を直接発行する(モデルを一切ロードしない)。これなら古いスキーマでも
+#   確実に落とせる。接続情報は Settings 由来の connection_db_config から取得するため、
+#   pspe 側で host/user/password を知る必要はない(DB名も TEST_ENV_NUMBER から解決)。
+#
+# drop 後は DB が存在しない状態になる。db:create と db:rebuild は別の rake コマンド
+# (別プロセス)に分けて実行する。db:create db:rebuild を 1 コマンドに並べると、
+# db:create で作った直後の接続状態が db:rebuild 冒頭の migrate_public_schema に
+# 引き継がれず「DBが無い」と落ちる(同一プロセス内の接続キャッシュ都合)。
+# create を単独で確定させ、別プロセスの rebuild でクリーンな接続から始めると通る。
 # rake の DB 操作は .env.test のシークレットに依存しない(接続=Settings, DB名=TEST_ENV_NUMBER)
 # ため dotenv は通さない。rspec はルートで実行するため、cd はサブシェルに閉じ込める。
 rebuild_db() {
@@ -155,8 +170,21 @@ rebuild_db() {
   echo "==> DB '${DB_BASE_NAME}${env_num}' をフル再構築します (${run_dir} で db:rebuild)..."
   (
     cd "$run_dir"
+    # 1) 古いDBをモデル非経由で確実に落とす(古いスキーマでも apartment:drop を踏まない)。
+    TEST_ENV_NUMBER="$env_num" RAILS_ENV=test bundle exec rails runner '
+      cfg = ActiveRecord::Base.connection_db_config.configuration_hash
+      target = cfg[:database]
+      ActiveRecord::Base.establish_connection(cfg.merge(database: "postgres"))
+      conn = ActiveRecord::Base.connection
+      conn.execute("SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = #{conn.quote(target)} AND pid <> pg_backend_pid()")
+      conn.execute(%Q{DROP DATABASE IF EXISTS "#{target}"})
+    '
+    # 2) 非存在から作成(単独プロセスで確定させる)。
     TEST_ENV_NUMBER="$env_num" RAILS_ENV=test PRIMARY_SERVER=1 \
-      bundle exec rake db:drop db:create db:rebuild
+      bundle exec rake db:create
+    # 3) 別プロセスで rebuild(クリーンな接続から冒頭 migrate_public_schema を通す)。
+    TEST_ENV_NUMBER="$env_num" RAILS_ENV=test PRIMARY_SERVER=1 \
+      bundle exec rake db:rebuild
   )
   echo "==> DB再構築完了"
 }
